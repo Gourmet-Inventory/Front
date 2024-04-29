@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Login.module.css";
-import imgBack from "../../utils/assets/francisco-suarez-0EkWTSFXwCc-unsplash 1.svg"
+// import imgBack from "../../utils/assets/francisco-suarez-0EkWTSFXwCc-unsplash 1.svg"
 
 const Login = () => {
     return (

@@ -50,7 +50,23 @@ const Home = () => {
                     <img src={imgValores2} />
                     <img src={imgValores3} />
                 </div>
+
+                <div className={styles["textoValores"]}>
+                    <p>Foco na qualidade não só nos seus ingredientes, mas também na sua experiência.</p>
+                    <p>Ajudar na sua organização é nosso principal objetivo! </p>
+                    <p>Queremos que você cuide do seu sistema de forma prática e rápida!</p>
+                </div>
                 
+
+            </div>
+
+            <div className={styles["linha"]}></div>
+
+            <div className={styles["conhecaEquipe"]}>
+
+                <div className={styles["equipeTitulo"]}>
+                    <h1>CONHEÇA NOSSA EQUIPE</h1>
+                </div>
 
             </div>
 

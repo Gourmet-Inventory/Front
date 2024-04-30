@@ -70,10 +70,11 @@ html {
 
 .valores{
     display: flex;
-    height: 700px;
+    height: 900px;
     margin-left: 40px; 
     margin-right: 40px;
     flex-direction: column;
+    gap: 10px;
 }
 
 .valoresTitulo{
@@ -103,7 +104,6 @@ html {
     height: 150px;
     align-items: center;
     justify-content: space-around;
-    background-color: aqua;
 }
 
 .cardsTitulo h1{
@@ -133,8 +133,6 @@ html {
 .imgValores{
     display: flex;
     flex-direction: row;
-    height: 300px;
-    background-color: violet;
     justify-content: space-around;
     
 }
@@ -142,6 +140,39 @@ html {
 .imgValores img{
    height: 200px;
     align-self: center ;
+}
+
+.textoValores{
+    display: flex;
+    height: 250px;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.textoValores p{
+    display: flex;
+    width: 300px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #B0D2D3;
+    box-shadow: 1px 2px 7px #000000;
+}
+
+.conhecaEquipe{
+    display: flex;
+    height: 500px;
+    margin-left: 40px; 
+    margin-right: 40px;
+}
+
+.equipeTitulo{
+    display: flex;
+    height: 200px;
+    width: 100%;
+    justify-content: center;
 }
 
 

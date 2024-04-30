@@ -18,10 +18,12 @@ html {
 
 .logo{
     display: flex;
-    height: 55vh;
-    background-image: url(../../utils/assets/francisco-suarez-0EkWTSFXwCc-unsplash\ 1.svg);
+    height: 54vh;
+    background-image: url("/src/utils/assets/jonathan-borba-5E0d3lfoC1w-unsplash\ 1.png");
     justify-content: center;
+    background-size: cover;
 }
+
 
 .logo span{
     font-size: 40px;
@@ -101,6 +103,7 @@ html {
     height: 150px;
     align-items: center;
     justify-content: space-around;
+    background-color: aqua;
 }
 
 .cardsTitulo h1{
@@ -127,10 +130,24 @@ html {
     color: white;
 }
 
+.imgValores{
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    background-color: violet;
+    justify-content: space-around;
+    
+}
 
-/* @media only screen and (max-width: 800px) {
+.imgValores img{
+   height: 200px;
+    align-self: center ;
+}
+
+
+@media only screen and (max-width: 800px) {
     .titulo {
         font-size: 2rem;
         transition: font-size 0.3s, margin-left 0.3s;
     }
-}    */
+}    

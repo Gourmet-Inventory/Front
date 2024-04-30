@@ -1,15 +1,4 @@
 
-/* body,
-html {
-margin: 0;
-padding: 0;
-height: fit-content;
-width: 100%;
-background-image: url(../../utils/assets/francisco-suarez-0EkWTSFXwCc-unsplash\ 1.svg) ;
-background-size: cover;
-background-repeat: no-repeat;
-overflow:hidden;
-} */
 
 
 .form{
@@ -24,6 +13,10 @@ overflow:hidden;
     font-size: 2rem;
 }
 
+img{
+    height: 100vh;
+    width: 60%;
+}
 
 @media only screen and (max-width: 800px) {
     .titulo {

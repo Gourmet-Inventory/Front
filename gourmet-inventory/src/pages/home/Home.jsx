@@ -5,6 +5,7 @@ import NavBar from "../../components/navbar/NavBar";
 import imgValores1 from "../../utils/assets/Group 164.svg"
 import imgValores2 from "../../utils/assets/Group 165.svg"
 import imgValores3 from "../../utils/assets/Component 43.svg" 
+import imgContato from "../../utils/assets/Device.svg"
 
 const Home = () => {
     return (
@@ -86,6 +87,32 @@ const Home = () => {
                     </div>
                 </div>
 
+            </div>
+
+            <div className={styles["linha"]}></div>
+
+            <div className={styles["contato"]}>
+                <div className={styles["tituloContato"]}>
+                    <h1>CONTATO</h1>
+                    <span>Interessado? Dúvidas? Estamos a sua disposição!</span>
+                </div>
+
+                <div className={styles["corpoContato"]}>
+                    <img src={imgContato} />
+                    <div className={styles["formContato"]}>
+                        <span>Preencha os dados abaixo e aguarde nosso e-mail!</span>
+
+                        <div className={styles["dadosForm"]}>
+                        <p>Nome</p>
+                        <input type="text" />
+                        <p>Nome Empresa</p>
+                        <input type="text" />
+                        <p>E-mail</p>
+                        <input type="text" />
+                        <button>Enviar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

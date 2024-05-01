@@ -70,7 +70,7 @@ html {
 
 .valores{
     display: flex;
-    height: 900px;
+    height: 920px;
     margin-left: 40px; 
     margin-right: 40px;
     flex-direction: column;
@@ -200,22 +200,127 @@ html {
     display: flex;
     font-size: 22px;
     flex-direction: column;
-    background-color: violet;
-    height: 200px;
-    justify-content: space-around;
+    height: 600px;
     align-items: center;
-    
+    justify-content: space-around;
 }
 
 .nomeLinha1{
     display: flex;
-    gap: 300px;
+    width: 80%;
+    justify-content: space-around;
 }
 
 .nomeLinha2{
+    width: 85% ;
+    margin-left: 38px;
     display: flex;
-    gap: 300px;
+    justify-content: space-around;
 }
+
+.contato{
+    display: flex;
+    height: 830px;
+    margin-left: 40px;
+    margin-right: 40px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tituloContato{
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    gap: 20px;
+    width: 80%;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.tituloContato h1{
+    font-size: 38px;
+    letter-spacing: 17px;
+    font-weight: bolder;
+    color: black;
+}
+
+.tituloContato span{
+    font-size: 24px;
+    width: 92%;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.corpoContato{
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    align-items: center;
+    gap: 80px;
+}
+
+.corpoContato img{
+    height: 500px;
+}
+
+.formContato{
+    display: flex;
+    background-color: #37455D;
+    height: 420px;
+    width: 680px;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.formContato span{
+    display: flex;
+    height: 130px;
+    /* background-color: violet; */
+    font-size: 20px;
+    align-items: end;
+    letter-spacing: 4px;
+    text-align: center;
+    width: 90%;
+
+}
+
+.dadosForm{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+}
+
+.dadosForm input{
+    height: 30px;
+    border: none;
+    font-family: "Jost";
+    font-size: 16px;
+}
+
+.dadosForm button{
+    border: none;
+    color: #000000;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 2px;
+    background-color: #dfa053;
+    width: 30%;
+    height: 11%;
+    margin-top: 15px;
+    align-self: center;
+}
+
+.dadosForm button:hover {
+    background-color: #a77940;
+}
+
 
 
 @media only screen and (max-width: 800px) {

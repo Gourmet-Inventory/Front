@@ -10,8 +10,7 @@
     align-items: center;
     background-color: #37455D;
     position: sticky;
-    justify-content: space-between;
-   
+    
 }
 
 .navbar a{
@@ -26,6 +25,7 @@ margin: 0 2rem;
 height: 3rem;
 align-items: center;
 width: 3rem;
+margin-left: 70px;
 }
 
 .navbar button {
@@ -38,7 +38,7 @@ border-radius: 2px;
 background-color: #dfa053;
 transition: background-color 0.3s ease;
 align-items: end;
-margin-right: 1rem;
+margin-right: 5rem;
 }   
 
 .divLink{
@@ -50,4 +50,8 @@ margin-right: 1rem;
 
 .navbar button:hover {
     background-color: #a77940;
+}
+
+.navbar a:hover{
+    color: #fdbe70;
 }

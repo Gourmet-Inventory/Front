@@ -8,7 +8,6 @@ import styles from './NavBar.module.css';
                     <div className={styles["divLink"]}>
                         <a href=" ">Início</a>
                         <a href="">Valores</a>
-                        <a href="">Aplicação</a>
                         <a href="">Equipe</a>
                         <a href="">Contato</a>
                     </div>

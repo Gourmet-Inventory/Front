@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Home.module.css";
 import logo from "../../utils/assets/Possíveis Paletas (5) 1.svg";
 import NavBar from "../../components/navbar/NavBar";
-import imgValores1 from "../../utils/assets/Valor 1.svg"
-import imgValores2 from "../../utils/assets/Valor 2.svg"
-import imgValores3 from "../../utils/assets/Valor 3.svg" 
+import imgValores1 from "../../utils/assets/Group 164.svg"
+import imgValores2 from "../../utils/assets/Group 165.svg"
+import imgValores3 from "../../utils/assets/Component 43.svg" 
 
 const Home = () => {
     return (
@@ -66,6 +66,24 @@ const Home = () => {
 
                 <div className={styles["equipeTitulo"]}>
                     <h1>CONHEÇA NOSSA EQUIPE</h1>
+
+                    <p>Somos uma equipe dedicada ao serviço excepcional. Cada membro da nossa equipe traz consigo talento, 
+                        paixão e comprometimento para oferecer ótimas experiências aos nossos clientes.</p>
+
+                </div>
+
+                <div className={styles["nomeEquipe"]}>
+                    <div className={styles["nomeLinha1"]}>
+                        <span>Julya Aiko</span>
+                        <span>Kevin Wesselka</span>
+                        <span>Luan Magno</span>
+                    </div>
+
+                    <div className={styles["nomeLinha2"]}>
+                        <span>Mirella Ot</span>
+                        <span>Sarah Vitória</span>
+                        <span>Peterson Maranho</span>
+                    </div>
                 </div>
 
             </div>

@@ -159,20 +159,62 @@ html {
     font-size: 18px;
     background-color: #B0D2D3;
     box-shadow: 1px 2px 7px #000000;
+    color: black;
 }
 
 .conhecaEquipe{
     display: flex;
-    height: 500px;
+    height: 700px;
     margin-left: 40px; 
     margin-right: 40px;
+    flex-direction: column;
 }
+
 
 .equipeTitulo{
     display: flex;
-    height: 200px;
+    height: 300px;
     width: 100%;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.equipeTitulo h1{       
+    font-size: 38px;
+    letter-spacing: 17px;
+    font-weight: bolder;
+    color: black;
+}
+
+
+.equipeTitulo p{
+    font-size: 24px;
+    width: 92%;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.nomeEquipe{
+    display: flex;
+    font-size: 22px;
+    flex-direction: column;
+    background-color: violet;
+    height: 200px;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.nomeLinha1{
+    display: flex;
+    gap: 300px;
+}
+
+.nomeLinha2{
+    display: flex;
+    gap: 300px;
 }
 
 

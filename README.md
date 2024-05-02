@@ -20,6 +20,12 @@ Certifique-se de ter o Node.js e o npm instalados em sua máquina. Para iniciar 
 ## Uso
 Após a instalação das dependências, você pode iniciar o servidor de desenvolvimento executando o seguinte comando:
 - npm start
+  
+![image](https://github.com/Gourmet-Inventory/Front/assets/89167232/9017b9e6-caa9-46ff-a835-963951d80a33)
+
+ *Normalmente é pela porta 3000
+<h1>Pronto!</h1>
+
 
 
 

@@ -71,7 +71,7 @@ const Home = () => {
 
                 <div className={styles["textoValores"]}>
                     <p>Foco na qualidade não só nos seus ingredientes, mas também na sua experiência.</p>
-                    <p>Ajudar na sua organização é nosso principal objetivo! </p>
+                    <p>Ajudar na sua organização é o nosso principal objetivo! </p>
                     <p>Queremos que você cuide do seu sistema de forma prática e rápida!</p>
                 </div>
                 
@@ -114,9 +114,9 @@ const Home = () => {
                         </div>
 
                         <div className={styles["nomeLinha2"]}>
-                            <span>Mirella Ot</span>
+                            <span className={styles["nomeMirella"]}>Mirella Ot</span>
                             <span className={styles["nomeSarah"]}>Sarah Vitória</span>
-                            <span>Peterson Maranho</span>
+                            <span className={styles["nomePeterson"]}>Peterson Maranho</span>
                         </div>
                     </div>
                 </div>
@@ -151,6 +151,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+            <footer>
+                
+            </footer>
 
         </div>
         

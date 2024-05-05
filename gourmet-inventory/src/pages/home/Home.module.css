@@ -7,12 +7,12 @@ body,
 html {
     height: 100%;
     width: 100%;
-    background-color: #fffdf1 ;
     display: flex;
 }
 
 .home{
     color:#37455D ;
+    background-color: #fffdf1 ;
 }
 
 
@@ -235,7 +235,6 @@ html {
     flex-direction: column;
     height: 600px;
     align-items: center;
-    justify-content: space-around;
     gap: 20px;
     letter-spacing: 2px;
 }
@@ -246,39 +245,10 @@ html {
     flex-direction: row;
     height: 250px;
     width: 1100px;
-    gap: 120px;
-    align-items: center;
+    justify-content: space-around;
 }
 
 .imgLinha1 img{
-    height: 240px;
-}
-
-
-.nomeLinha2{
-    display: flex;
-    width: 1100px;
-    height: 50px;
-    align-items: center;
-    justify-content: space-around;
-    gap: 125px;
-    margin-left: 15px;  
-}
-
-.nomeSarah{
-    margin-left: 50px;
-}
-
-.imgLinha2{
-    display: flex;
-    flex-direction: row;
-    height: 250px;
-    width: 1100px;
-    gap: 120px;
-    align-items: center;
-}
-
-.imgLinha2 img{
     height: 240px;
 }
 
@@ -288,10 +258,41 @@ html {
     height: 50px;
     align-items: center;
     justify-content: space-around;
-    gap: 115px;
-    margin-left: 7px;
     
 }
+
+.nomeLinha2{
+    display: flex;
+    width: 1100px;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nomeSarah{
+    margin-left: 60px;
+}
+.nomePeterson{
+    margin-left: 30px;
+}
+
+.nomeMirella{
+    margin-left: 40px;
+}
+
+.imgLinha2{
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+    width: 1100px;
+    justify-content: space-around;
+}
+
+.imgLinha2 img{
+    height: 240px;
+}
+
+
 
 
 .contato{
@@ -344,7 +345,7 @@ html {
     display: flex;
     background-color: #37455D;
     height: 550px;
-    width: 780px;
+    width: 600px;
     color: white;
     flex-direction: column;
     align-items: center;

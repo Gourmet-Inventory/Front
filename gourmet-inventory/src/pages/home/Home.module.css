@@ -17,19 +17,52 @@ html {
 
 
 .logo{
+    height: 55vh;
+    position: relative;
+    display: inline-block;
+}
+
+.logo img{
+    display: block;
+    width: 100%; 
+    height: 100%;
+}
+
+.sombra {
     display: flex;
-    height: 54vh;
-    background-image: url("/src/utils/assets/jonathan-borba-5E0d3lfoC1w-unsplash\ 1.png");
-    justify-content: center;
-    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.4); 
+    align-items: center;
+}
+
+.banner{
+    display: flex;
+    height: 70%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    align-items: center;
+}
+
+.banner img{
+    height: 800px;
+    margin-left: -300px;
+}
+
+.banner span{
+    width: 500px;
+    color: #37455D;
+    font-size: 39px;
+    letter-spacing: 10px;
+    margin-left: -300px;
+    text-align: center;
+    font-weight: bold;
 }
 
 
-.logo span{
-    font-size: 40px;
-    color: #fffdf1;
-    align-self: center;
-}
 
 .tituloRodape{
     display: flex;
@@ -164,7 +197,7 @@ html {
 
 .conhecaEquipe{
     display: flex;
-    height: 700px;
+    height: 1000px;
     margin-left: 40px; 
     margin-right: 40px;
     flex-direction: column;
@@ -196,27 +229,70 @@ html {
     letter-spacing: 3px;
 }
 
-.nomeEquipe{
+.Equipe{
     display: flex;
     font-size: 22px;
     flex-direction: column;
     height: 600px;
     align-items: center;
     justify-content: space-around;
+    gap: 20px;
+    letter-spacing: 2px;
+}
+
+
+.imgLinha1{
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+    width: 1100px;
+    gap: 120px;
+    align-items: center;
+}
+
+.imgLinha1 img{
+    height: 240px;
+}
+
+
+.nomeLinha2{
+    display: flex;
+    width: 1100px;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+    gap: 125px;
+    margin-left: 15px;  
+}
+
+.nomeSarah{
+    margin-left: 50px;
+}
+
+.imgLinha2{
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+    width: 1100px;
+    gap: 120px;
+    align-items: center;
+}
+
+.imgLinha2 img{
+    height: 240px;
 }
 
 .nomeLinha1{
     display: flex;
-    width: 80%;
+    width: 1100px;
+    height: 50px;
+    align-items: center;
     justify-content: space-around;
+    gap: 115px;
+    margin-left: 7px;
+    
 }
 
-.nomeLinha2{
-    width: 85% ;
-    margin-left: 38px;
-    display: flex;
-    justify-content: space-around;
-}
 
 .contato{
     display: flex;
@@ -267,8 +343,8 @@ html {
 .formContato{
     display: flex;
     background-color: #37455D;
-    height: 420px;
-    width: 680px;
+    height: 550px;
+    width: 780px;
     color: white;
     flex-direction: column;
     align-items: center;
@@ -278,7 +354,7 @@ html {
 
 .formContato span{
     display: flex;
-    height: 130px;
+    height: 120px;
     /* background-color: violet; */
     font-size: 20px;
     align-items: end;
@@ -292,8 +368,8 @@ html {
     display: flex;
     width: 100%;
     flex-direction: column;
-    height: 100%;
     width: 90%;
+    letter-spacing: 5px;
 }
 
 .dadosForm input{
@@ -303,7 +379,7 @@ html {
     font-size: 16px;
 }
 
-.dadosForm button{
+.formContato button{
     border: none;
     color: #000000;
     letter-spacing: 2px;
@@ -311,13 +387,13 @@ html {
     font-size: 16px;
     border-radius: 2px;
     background-color: #dfa053;
-    width: 30%;
-    height: 11%;
-    margin-top: 15px;
+    width: 25%;
+    height: 8%;
+    margin-top: 18px;
     align-self: center;
 }
 
-.dadosForm button:hover {
+.formContato button:hover {
     background-color: #a77940;
 }
 

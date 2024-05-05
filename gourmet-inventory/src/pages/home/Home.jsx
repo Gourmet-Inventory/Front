@@ -6,7 +6,15 @@ import imgValores1 from "../../utils/assets/Group 164.svg"
 import imgValores2 from "../../utils/assets/Group 165.svg"
 import imgValores3 from "../../utils/assets/Component 43.svg" 
 import imgContato from "../../utils/assets/Device.svg"
-
+import imgLogo from "../../utils/assets/jonathan-borba-5E0d3lfoC1w-unsplash 1.png"
+import iconLogo from "../../utils/assets/logoHome.svg"
+import imgJulya from "../../utils/assets/Julya 1.svg"
+import imgKevin from "../../utils/assets/Kevin 1.svg"
+import imgLuan from "../../utils/assets/Luan 1.svg"
+import imgMirella from "../../utils/assets/Mirella 1.svg"
+import imgSarah from "../../utils/assets/Sarah 1.svg"
+import imgPeterson from "../../utils/assets/Peterson 1.svg"
+ 
 const Home = () => {
     return (
     <>
@@ -14,7 +22,16 @@ const Home = () => {
         <div className = {styles["home"]}>     
 
             <div className={styles["logo"]}>
-                <div className={styles["banner"]}></div>
+                <img src={imgLogo} />
+                <div className={styles["sombra"]}>
+
+                    <div className={styles["banner"]}>
+                        <img src={iconLogo}/>
+                        <span>O seu ingrediente para o estoque perfeito</span>
+                    </div>
+
+                </div>
+                
             </div>
 
             <div className={styles["tituloRodape"]}>
@@ -73,17 +90,34 @@ const Home = () => {
 
                 </div>
 
-                <div className={styles["nomeEquipe"]}>
-                    <div className={styles["nomeLinha1"]}>
-                        <span>Julya Aiko</span>
-                        <span>Kevin Wesselka</span>
-                        <span>Luan Magno</span>
+                <div className={styles["Equipe"]}>
+
+                    <div className={styles["Linha1"]}>
+                        <div className={styles["imgLinha1"]}>
+                            <img src={imgJulya}/>
+                            <img src={imgKevin}/>
+                            <img src={imgLuan}/>
+                        </div>
+
+                        <div className={styles["nomeLinha1"]}>
+                            <span>Julya Aiko</span>
+                            <span>Kevin Wesselka</span>
+                            <span>Luan Magno</span>
+                        </div>
                     </div>
 
-                    <div className={styles["nomeLinha2"]}>
-                        <span>Mirella Ot</span>
-                        <span>Sarah Vitória</span>
-                        <span>Peterson Maranho</span>
+                    <div className={styles["Linha2"]}>
+                        <div className={styles["imgLinha2"]}>
+                            <img src={imgMirella}/>
+                            <img src={imgSarah}/>
+                            <img src={imgPeterson}/>
+                        </div>
+
+                        <div className={styles["nomeLinha2"]}>
+                            <span>Mirella Ot</span>
+                            <span className={styles["nomeSarah"]}>Sarah Vitória</span>
+                            <span>Peterson Maranho</span>
+                        </div>
                     </div>
                 </div>
 
@@ -103,14 +137,17 @@ const Home = () => {
                         <span>Preencha os dados abaixo e aguarde nosso e-mail!</span>
 
                         <div className={styles["dadosForm"]}>
-                        <p>Nome</p>
+                        <p>Nome Completo:</p>
                         <input type="text" />
-                        <p>Nome Empresa</p>
+                        <p>E-mail:</p>
                         <input type="text" />
-                        <p>E-mail</p>
+                        <p>Telefone:</p>
                         <input type="text" />
+                        <p>Nome Empresa:</p>
+                        <input type="text" />
+                        </div>  
                         <button>Enviar</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

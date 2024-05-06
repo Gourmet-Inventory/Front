@@ -277,7 +277,7 @@ html {
 }
 
 .nomeMirella{
-    margin-left: 40px;
+    margin-left: 4npm0px;
 }
 
 .imgLinha2{
@@ -293,14 +293,11 @@ html {
 }
 
 
-
-
 .contato{
     display: flex;
-    height: 830px;
+    height: 890px;
     margin-left: 40px;
     margin-right: 40px;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
 }
@@ -308,10 +305,10 @@ html {
 .tituloContato{
     display: flex;
     flex-direction: column;
-    height: 250px;
+    height: 300px;
     gap: 20px;
     width: 80%;
-    justify-content: baseline;
+    justify-content: baseline; 
     align-items: center;
 }
 
@@ -332,9 +329,9 @@ html {
 .corpoContato{
     display: flex;
     flex-direction: row;
-    height: 500px;
+    height: 450px;
     align-items: center;
-    gap: 80px;
+    gap: 90px;
 }
 
 .corpoContato img{
@@ -398,6 +395,33 @@ html {
     background-color: #a77940;
 }
 
+
+footer{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    border-top: 1px solid #E59E53
+}
+
+footer span{
+    font-size: 18px;
+    letter-spacing: 4px;
+    font-weight: lighter;
+    color: #37455D;
+}
+
+
+.imgFooter{
+    display: flex;
+    width: 40%;
+    justify-self: baseline;
+    margin-left: 40px;
+}
+
+.imgFooter img{
+    height: 32px;
+}
 
 
 @media only screen and (max-width: 800px) {

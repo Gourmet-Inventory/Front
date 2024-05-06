@@ -14,6 +14,8 @@ import imgLuan from "../../utils/assets/Luan 1.svg"
 import imgMirella from "../../utils/assets/Mirella 1.svg"
 import imgSarah from "../../utils/assets/Sarah 1.svg"
 import imgPeterson from "../../utils/assets/Peterson 1.svg"
+import imgFooter from "../../utils/assets/Frame 96.svg"
+
  
 const Home = () => {
     return (
@@ -21,7 +23,8 @@ const Home = () => {
         <NavBar logoInicio={logo} />
         <div className = {styles["home"]}>     
 
-            <div className={styles["logo"]}>
+            <div className={styles["logo"]} id="logo">
+                
                 <img src={imgLogo} />
                 <div className={styles["sombra"]}>
 
@@ -153,7 +156,10 @@ const Home = () => {
             </div>
 
             <footer>
-                
+                <div className={styles["imgFooter"]}>
+                    <img src={imgFooter} />
+                </div>
+                <span>Gourmet Inventory©</span>
             </footer>
 
         </div>

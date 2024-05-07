@@ -47,7 +47,7 @@ nav span{
     border: none;
 }
 
-button{
+.formEmpresa button{
     width: 70px;
     height: 30px;
     letter-spacing: 2px;

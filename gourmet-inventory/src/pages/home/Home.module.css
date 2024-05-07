@@ -17,7 +17,8 @@ html {
 
 
 .logo{
-    height: 55vh;
+    margin-top: 10px;
+    height: 62vh;
     position: relative;
     display: inline-block;
 }
@@ -41,7 +42,7 @@ html {
 
 .banner{
     display: flex;
-    height: 70%;
+    height: 65%;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.8);
     align-items: center;

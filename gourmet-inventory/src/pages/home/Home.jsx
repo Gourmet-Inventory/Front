@@ -18,11 +18,21 @@ import imgFooter from "../../utils/assets/Frame 96.svg"
 
  
 const Home = () => {
+
+    const scrollToSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({behavior:'smooth'});
+        }
+      };
+
     return (
     <>
-        <NavBar logoInicio={logo} />
+        <NavBar logoInicio={logo} scrollToSection={scrollToSection}/>
+        
         <div className = {styles["home"]}>     
 
+            <section id="inicio">
             <div className={styles["logo"]} id="logo">
                 
                 <img src={imgLogo} />
@@ -48,9 +58,12 @@ const Home = () => {
                  </div>
 
             </div>
+            </section>
+
+            <section id="valores">
 
             <div className={styles["linha"]}></div>
-
+            
             <div className={styles["valores"]}>
 
                 <div className={styles["valoresTitulo"]}>
@@ -80,9 +93,11 @@ const Home = () => {
                 
 
             </div>
+            </section>
 
             <div className={styles["linha"]}></div>
 
+            <section id="equipe">
             <div className={styles["conhecaEquipe"]}>
 
                 <div className={styles["equipeTitulo"]}>
@@ -125,9 +140,11 @@ const Home = () => {
                 </div>
 
             </div>
+            </section>
 
             <div className={styles["linha"]}></div>
 
+            <section id="contato">
             <div className={styles["contato"]}>
                 <div className={styles["tituloContato"]}>
                     <h1>CONTATO</h1>
@@ -154,6 +171,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            </section>
 
             <footer>
                 <div className={styles["imgFooter"]}>

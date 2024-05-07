@@ -9,13 +9,23 @@
     min-height: 6vh;
     align-items: center;
     background-color: #37455D;
-    position: sticky;
-    
+    position: fixed;
 }
 
 .navbar a{
     color: #fff;
     text-decoration: none;
+}
+
+ul {
+    list-style-type: none;  
+    padding: 0; 
+    margin-left: 220px;
+}
+
+li {
+    display: inline; 
+    margin-right:140px;
 }
 
 .logoinicio {

@@ -1,0 +1,134 @@
+.bodyLogin{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #37455D;
+    font-family: "Jost";
+}
+
+.bodyLogin img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerLogin {
+    position: absolute;
+    top: 50%; /* Ajuste a posição vertical da frase conforme necessário */
+    left: 30%; /* Ajuste a posição horizontal da frase conforme necessário */
+    transform: translate(-50%, -50%); /* Centraliza a frase */
+    color: rgb(0, 0, 0); /* Cor do texto */
+    font-size: 28px; /* Tamanho da fonte */
+    text-align: center; /* Alinhamento do texto */
+    z-index: 1; /* Garante que a frase esteja acima da imagem */
+    background-color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 4px;
+    width: 350px; 
+    height: 100px;
+    align-content: auto;
+    font-weight: bold;
+}
+
+
+.form{
+    display: flex;
+    flex-direction: column;
+    background-color:#37455D ;
+    z-index: 999;
+    position: fixed;
+    width: 40%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    align-items: center;
+    color: #EAF6F5;
+}
+
+.form h1{
+    color: white;
+    text-align: center;
+    align-content: center;
+    letter-spacing: 8px;
+    height: 140px;
+    width: 100%;
+    font-size: 32px;
+    font-weight: lighter;
+}
+
+.inputForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+    width: 380px;
+
+}
+
+.inputForm input{
+    height: 40px;
+    border: none;
+    background-color: #D9D9D9;
+    color: #37455D;
+    font-family: "Jost";
+    font-size: 17px;
+}
+
+.inputForm span{
+    font-size: 18px;
+    letter-spacing: 3px;
+    font-weight: lighter;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); 
+}
+
+.senhaInput{
+    margin-top: 29px;
+}
+
+.buttonForm{
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.buttonForm a{
+    color: #E59E53;
+    letter-spacing: 2px;
+    font-weight: lighter;
+    font-size: 15   px;
+}
+
+.buttonForm button{
+    width: 150px;
+    height: 40px;
+    border: none;
+    font-size: 19px;
+    color: #37455D;
+    background-color: #E59E53;
+    letter-spacing: 4px;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.buttonForm button:hover {
+    background-color: #a77940;
+}
+
+.buttonForm a:hover{
+    color: #D9D9D9;
+}
+
+@media only screen and (max-width: 800px) {
+    .titulo {
+        font-size: 2rem;
+        transition: font-size 0.3s, margin-left 0.3s;
+    }
+}   

@@ -1,121 +1,104 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./Empresa.module.css";
 import imgLogo from "../../utils/assets/Possíveis Paletas (5) 1.svg"
-
-
-// const Tabela = () => {
-// //   // Exemplo de dados da tabela
-// //   const data = [
-// //     { id: 1, nome: 'Item 1', preco: 10 },
-// //     { id: 2, nome: 'Item 2', preco: 20 },
-// //     { id: 3, nome: 'Item 3', preco: 30 },
-// //   ];
-
-// //   // Estado para controlar a ordenação da tabela
-// //   const [sortedField, setSortedField] = useState(null);
-// //   const [ascending, setAscending] = useState(true);
-
-// //   // Função para ordenar os dados com base no campo fornecido
-// //   const sortData = (field) => {
-// //     if (sortedField === field) {
-// //       setAscending(!ascending);
-// //     } else {
-// //       setSortedField(field);
-// //       setAscending(true);
-// //     }
-// //   };
-
-// //   // Ordenação dos dados
-// //   const sortedData = [...data].sort((a, b) => {
-// //     if (sortedField) {
-// //       if (a[sortedField] < b[sortedField]) {
-// //         return ascending ? -1 : 1;
-// //       }
-// //       if (a[sortedField] > b[sortedField]) {
-// //         return ascending ? 1 : -1;
-// //       }
-// //     }
-// //     return 0;
-// //   });
-
-//   return (
-
-//     <>
-//     <div className={styles["empresa"]}>
-// //                 <nav>
-// //                     <div className={styles["imgEmpresa"]}>
-// //                         <img src={imgLogo} /> 
-// //                         <span>BACKOFFICE</span>
-// //                     </div>
-                   
-// //                 </nav>
-
-// //                 <div className={styles["formEmpresa"]}>
-// //                     <span>Clientes</span>
-// //                     <table>
-// //                         <thead>
-// //                             <tr>
-// //                                 <th>Nome Usuário</th>
-// //                                 <th>Nome Empresa</th>
-// //                             </tr>
-// //                         </thead>
-// //                     </table>
-// //                 </div>
-// //           
-//     {/* <table>
-//       <thead>
-//         <tr>
-//           <th onClick={() => sortData('nomeUsuario')}>Nome Usuário</th>
-//           <th onClick={() => sortData('nomeEmpresa')}>Nome Empresa</th>
-//           <th onClick={() => sortData('acoes')}>Ações</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         {sortedData.map(item => (
-//           <tr key={item.id}>
-//             <td>{item.nomeUsuario}</td>
-//             <td>{item.nomeEmpresa}</td>
-//             <td>{item.acoes}</td>
-//           </tr>
-//         ))}
-//       </tbody>
-//     </table> */}
-//     </div>
-//     </>
-//   );
-// };
-
-// export default Tabela;
+import api from '../../api';
+import { toast } from 'react-toastify';
 
 const Empresa = () => {
+    const [empresas, setEmpresas] = useState([]);
+
+
+    function recuperarEmpresas() {
+
+            api.get('/empresas',{
+                headers: {
+                    'Authorization': `Bearer ${localStorage.token}`
+                  }
+            }).then((response)=>{
+                console.log(response)
+                const {data} = response;
+                setEmpresas(data)
+             }).catch(() => {
+                toast.error("Erro ao recuperar as empresas!");
+             })
+    };
+
+    const handleExcluir = (idEmpresa) => {
+        if (window.confirm("Tem certeza de que deseja excluir esta empresa?")) {
+            try {
+                api.delete(`/empresas/${idEmpresa}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.token}`
+                    }
+                }).then(() => {
+                    recuperarEmpresas();
+                    toast.success("Empresa excluída com sucesso!");
+                }).catch(() => {
+                    toast.error("Erro ao excluir a empresa.");
+                });
+            } catch (error) {
+                console.error("Erro ao excluir a empresa:", error);
+            }
+        }
+    };
+
+    const handleEditar = (idEmpresa) => {
+            try {
+                api.patch(`/empresas/${idEmpresa}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.token}`
+                    }
+                }).then(() => {
+
+                    recuperarEmpresas();
+                    toast.success("Empresa atualizada com sucesso!");
+                }).catch(() => {
+                    toast.error("Erro ao excluir a empresa.");
+                });
+            } catch (error) {
+                console.error("Erro ao excluir a empresa:", error);
+        }
+    };
+    
+
+    useEffect(() => {
+        recuperarEmpresas();
+    },[])
+
     return (
-        <>
-           <div className={styles["empresa"]}>
-                <nav>
-                    <div className={styles["imgEmpresa"]}>
-                        <img src={imgLogo} /> 
-                        <span>BACKOFFICE</span>
-                    </div>
-                   
-                </nav>
-
-                <div className={styles["formEmpresa"]}>
-                    <span>Clientes</span>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nome Usuário</th>
-                                <th>Nome Empresa</th>
-
-                                    {/* <button className={styles["editar"]}>Editar</button>
-                                    <button className={styles["excluir"]}>Excluir</button> */}
-                            </tr>
-                        </thead>
-                    </table>
+        <div className={styles.empresa}>
+            <nav>
+                <div className={styles.imgEmpresa}>
+                    <img src={imgLogo} alt="Logo" /> 
+                    <span>BACKOFFICE</span>
                 </div>
-           </div>
-        </>
-    )
-};
+            </nav>
+
+            <div className={styles.formEmpresa}>
+                <span>Clientes</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id Empresa</th>
+                            <th>Nome Empresa</th>
+                            <th>Nome Usuário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {empresas.map((empresa) => (
+                            <tr key={empresa.idEmpresa}>
+                                <td>{empresa.idEmpresa}</td>
+                                <td>{empresa.cnpj}</td>
+                                <td>{empresa.responsavel.nome}</td>
+                                <td><button>Editar</button></td>
+                                <td><button className='style["excluir"]' onClick={() => handleExcluir(empresa.idEmpresa)}>Excluir</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+}
 
 export default Empresa;

@@ -1,0 +1,70 @@
+.cadastro-container {
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+nav{
+    display: flex;
+    background-color: #37455D;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    height: 9vh;
+    width: 100vw;
+    z-index: 999;
+    max-height: 12vh;
+    min-height: 6vh;
+    align-items: center;
+    position: sticky;
+    overflow: hidden;
+    color: white;
+}
+
+nav img{
+    height: 50px;
+}
+
+nav span{
+    display: flex;
+    
+}
+
+.imgEmpresa{
+    display: flex;
+    align-items: center;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type='text'] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

@@ -5,36 +5,6 @@
     flex-direction: column;
 }
 
-nav{
-    display: flex;
-    background-color: #37455D;
-    flex-direction: row;
-    top: 0;
-    left: 0;
-    height: 9vh;
-    width: 100vw;
-    z-index: 999;
-    max-height: 12vh;
-    min-height: 6vh;
-    align-items: center;
-    position: sticky;
-    overflow: hidden;
-    color: white;
-}
-
-nav img{
-    height: 50px;
-}
-
-nav span{
-    display: flex;
-    
-}
-
-.imgEmpresa{
-    display: flex;
-    align-items: center;
-}
 
 
 .formEmpresa span{
@@ -51,6 +21,7 @@ nav span{
     width: 70px;
     height: 30px;
     letter-spacing: 2px;
+    background-color: #E59E53;
     
 }
 

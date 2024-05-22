@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './NavBar.module.css';
-import home from '../../pages/home/Home'
 
     
     function NavBar({ logoInicio, scrollToSection}){

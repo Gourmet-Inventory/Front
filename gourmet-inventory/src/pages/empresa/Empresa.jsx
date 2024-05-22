@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import styles from "./Empresa.module.css";
 import imgLogo from "../../utils/assets/Possíveis Paletas (5) 1.svg"
 import api from '../../api';
+import NavBarBack from "../../components/navbarbackoffice/NavBarBack";
 import { toast } from 'react-toastify';
 
 const Empresa = () => {
@@ -9,6 +10,7 @@ const Empresa = () => {
 
 
     function recuperarEmpresas() {
+
 
             api.get('/empresas',{
                 headers: {
@@ -67,13 +69,8 @@ const Empresa = () => {
 
     return (
         <div className={styles.empresa}>
-            <nav>
-                <div className={styles.imgEmpresa}>
-                    <img src={imgLogo} alt="Logo" /> 
-                    <span>BACKOFFICE</span>
-                </div>
-            </nav>
-
+            
+            <NavBarBack LogoInicio ={imgLogo}></NavBarBack>
             <div className={styles.formEmpresa}>
                 <span>Clientes</span>
                 <table>
@@ -81,14 +78,14 @@ const Empresa = () => {
                         <tr>
                             <th>Id Empresa</th>
                             <th>Nome Empresa</th>
-                            <th>Nome Usuário</th>
+                            <th>Responsável</th>
                         </tr>
                     </thead>
                     <tbody>
                         {empresas.map((empresa) => (
                             <tr key={empresa.idEmpresa}>
                                 <td>{empresa.idEmpresa}</td>
-                                <td>{empresa.cnpj}</td>
+                                <td>{empresa.nomeFantasia}</td>
                                 <td>{empresa.responsavel.nome}</td>
                                 <td><button>Editar</button></td>
                                 <td><button className='style["excluir"]' onClick={() => handleExcluir(empresa.idEmpresa)}>Excluir</button></td>

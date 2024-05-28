@@ -1,4 +1,4 @@
-nav{
+nav {
     display: flex;
     background-color: #37455D;
     flex-direction: row;
@@ -9,27 +9,28 @@ nav{
     z-index: 999;
     max-height: 12vh;
     min-height: 6vh;
-    align-items: center;
     position: sticky;
     overflow: hidden;
     color: white;
-    justify-content: space-around;
+    align-items: center; /* Ensures items are centered vertically */
 }
 
-nav img{
-    height: 50px;
-}
 
-nav span{
+
+img {
     display: flex;
-    
+    align-items: flex-start;
 }
 
-nav button{
+nav button {
+    width: fit-content;
     background-color: #E59E53;
 }
 
-.imgEmpresa{
+.buttons {
     display: flex;
+    margin-left: auto;     
     align-items: center;
+    gap: 2rem;
+    padding-right: 2rem; 
 }

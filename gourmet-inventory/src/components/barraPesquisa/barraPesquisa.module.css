@@ -1,0 +1,37 @@
+.pesquisa{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 100px;
+    gap: 10px;
+}
+
+.pesquisa h1{
+    font-weight: lighter;
+    font-size: 35px;
+}
+
+.barraPesquisa {
+    display: flex;
+    width: 900px;
+    height: 35px;
+    background-color: #E2F7F8;
+    flex-direction: row;
+    align-items: center;
+}
+
+.barraPesquisa img{
+    height: 25px;
+}
+
+.barraPesquisa input{
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+}
+
+.barraPesquisa ::placeholder{
+    color: black;
+    font-size: 17px;
+    
+}

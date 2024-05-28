@@ -5,6 +5,7 @@ import Login from "./pages/login/Login"
 import LoginBackOffice from "./pages/loginbackoffice/LoginBackOffice";
 import Empresa from "./pages/empresa/Empresa";
 import Cadastro from "./pages/cadastroempresa/Cadastro";
+import Fornecedor from "./pages/pagFornecedor/pagFornecedor"
 
 function Rotas() {
     return (
@@ -16,6 +17,7 @@ function Rotas() {
                     <Route path="/login-backoffice" element= {<LoginBackOffice/>}/>
                     <Route path="/empresas" element={<Empresa/>}/>
                     <Route path="/empresas/cadastro" element= {<Cadastro/>}/>
+                    <Route path="/gourmet-inventory/fornecedor" element= {<Fornecedor/>}/>
                 </Routes>
             </BrowserRouter>
         </>

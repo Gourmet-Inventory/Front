@@ -1,0 +1,18 @@
+.imgConfig {
+    top: 0;
+    left: 0;
+    height: 8vh;
+    width: 100vw;
+    z-index: 999;
+    display: flex;
+    max-height: 12vh;
+    min-height: 6vh;
+    align-items: center;
+    position: fixed;
+    justify-content: end;
+}
+
+.imgConfig img{
+    height: 23px;
+    margin-right: 20px;
+}

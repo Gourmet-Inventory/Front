@@ -33,7 +33,7 @@ const Home = () => {
         <div className = {styles["home"]}>     
 
             <section id="inicio">
-            <div className={styles["logo"]} id="logo">
+            <div className={styles["logo"]}>
                 
                 <img src={imgLogo} />
                 <div className={styles["sombra"]}>

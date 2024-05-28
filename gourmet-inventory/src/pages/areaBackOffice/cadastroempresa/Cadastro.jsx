@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import styles from '../cadastroempresa/Cadastro.module.css';
-import imgLogo from '../../utils/assets/Possíveis Paletas (5) 1.svg'
+import styles from './Cadastro.module.css';
+import imgLogo from '../../../utils/assets/Possíveis Paletas (5) 1.svg'
 import { useNavigate } from 'react-router-dom';
-import api from '../../api';
+import api from '../../../api';
 import { toast } from 'react-toastify';
+import NavBarBack from "../../../components/navbarbackoffice/NavBarBack";
 
 const Cadastro = () => {
     const navigate = useNavigate();
@@ -48,12 +49,8 @@ const Cadastro = () => {
         };
 
     return (
-        <div className={styles['cadastro-container']}><nav>
-        <div className={styles.imgEmpresa}>
-            <img src={imgLogo} alt="Logo" /> 
-            <span>BACKOFFICE</span>
-        </div>
-    </nav>
+        <div className={styles['cadastro-container']}>
+            <NavBarBack LogoInicio={imgLogo}></NavBarBack>
             <h2>Cadastro</h2>
             <form>
                 <div className={styles['form-group']}>

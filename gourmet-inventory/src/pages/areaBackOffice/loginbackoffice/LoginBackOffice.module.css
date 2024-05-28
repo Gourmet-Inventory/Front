@@ -11,7 +11,7 @@
 .bodyLogin img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    
 }
 
 .bannerLogin {
@@ -25,9 +25,9 @@
     z-index: 1; /* Garante que a frase esteja acima da imagem */
     background-color: rgba(255, 255, 255, 0.7);
     letter-spacing: 4px;
-    width: 350px; 
-    height: 100px;
-    align-content: auto;
+    width: 370px; 
+    height: 120px;
+    align-content: center;
     font-weight: bold;
 }
 
@@ -61,21 +61,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 200px;
-    width: 380px;
-
+    height: 10rem;
+    width: 25rem;   
 }
 
-.inputForm input{
-    height: 40px;
+.inputs{
+    height: 7rem;
     border: none;
+    border-radius: 2px;
     background-color: #D9D9D9;
     color: #37455D;
     font-family: "Jost";
-    font-size: 17px;
+ 
 }
 
+
 .inputForm span{
+    padding-top: 1rem;
     font-size: 18px;
     letter-spacing: 3px;
     font-weight: lighter;
@@ -116,6 +118,7 @@ input:focus {
     letter-spacing: 4px;
     font-weight: lighter;
     cursor: pointer;
+    border-radius: 2px;
 }
 
 .buttonForm button:hover {

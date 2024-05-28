@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./LoginBackOffice.module.css";
-import imgBack from "../../utils/assets/francisco-suarez-0EkWTSFXwCc-unsplash 1 (1).svg";
-import api from "../../api";
+import imgBack from "../../../utils/assets/francisco-suarez-0EkWTSFXwCc-unsplash 1 (1).svg";
+import api from "../../../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -34,9 +34,9 @@ function LoginBackOffice() {
                     <div className={styles.dadosForm}>
                         <div className={styles.inputForm}>
                             <span>E-mail:</span>
-                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <span className={styles.senhaInput}>Senha:</span>
-                            <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
+                            <input className={styles.inputs}  value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <span >Senha:</span>
+                            <input className={styles.inputs} type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                         </div>
                         <div className={styles.buttonForm}>
                             <a href="/recuperar-senha">Recuperar Senha</a>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import BarraPesquisa from "../../../components/barraPesquisa/barraPesquisa";
-import ImgConfig from "../../../components/imgConfig/ImgConfig";
+import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
+import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./pagFornecedor.module.css";
 import { toast } from 'react-toastify';
 

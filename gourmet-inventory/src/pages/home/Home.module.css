@@ -297,8 +297,6 @@ html {
 .contato{
     display: flex;
     height: fit-content;
-    margin-left: 40px;
-    margin-right: 40px;
     flex-direction: column;
     align-items: center;
 }
@@ -330,9 +328,10 @@ html {
 .corpoContato{
     display: flex;
     flex-direction: row;
-    height: 450px;
+    height: fit-content;
     align-items: center;
     gap: 90px;
+    padding: 2rem;
 }
 
 .corpoContato img{
@@ -342,19 +341,18 @@ html {
 .formContato{
     display: flex;
     background-color: #37455D;
-    height: 35rem;
+    height: 30rem;
     width: 30rem;
     color: white;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
 }
 
 .formContato span{
     display: flex;
-    height: 120px;
-    /* background-color: violet; */
-    font-size: 20px;
+    font-size: 3vh;
     align-items: end;
     letter-spacing: 4px;
     text-align: center;
@@ -385,10 +383,9 @@ html {
     border-radius: 2px;
     background-color: #dfa053;
     width: 10rem;
-    height: 2rem;
+    height: 3rem;
     margin-top: 1rem;
     justify-content: center ;
-    text-align: center;
 }
 
 .formContato button:hover {

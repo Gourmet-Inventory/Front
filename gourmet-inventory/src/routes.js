@@ -5,7 +5,8 @@ import Login from "./pages/login/Login"
 import LoginBackOffice from "./pages/areaBackOffice/loginbackoffice/LoginBackOffice";
 import Empresa from "./pages/areaBackOffice/empresa/Empresa";
 import Cadastro from "./pages/areaBackOffice/cadastroempresa/Cadastro";
-import Fornecedor from "./pages/pagFornecedor/pagFornecedor"
+import Fornecedor from "./pages/pagFornecedor/pagFornecedor";
+import Alerta from "./pages/alerta/Alerta"
 import Menu from "./pages/menu/Menu"
 
 function Rotas() {
@@ -20,6 +21,7 @@ function Rotas() {
                     <Route path="/empresas/cadastro" element= {<Cadastro/>}/>
                     <Route path="/gourmet-inventory/fornecedor" element= {<Fornecedor/>}/>
                     <Route path="/gourmet-inventory/menu" element= {<Menu/>}/>
+                    <Route path="/gourmet-inventory/alertas" element= {<Alerta/>}/>
                 </Routes>
             </BrowserRouter>
         </>

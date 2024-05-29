@@ -31,7 +31,7 @@
 .menus button{
     background-color: #37455D;
     border-radius: 5px;
-    font-size: 4.5vh;
+    font-size: 5vh;
     min-width: 3rem;
     font-weight: lighter;
 }
@@ -87,9 +87,10 @@
 
  .legendaAlertas{
     display: flex;
+    width: 95%;
     border-top: #E59E53 5px solid;
-
-    height: 15.5rem;
+    background-color: #E2F7F8;
+    height: 14.5rem;
     align-items: center;
     font-size: 1rem;
     flex-direction: column;

@@ -167,7 +167,6 @@ const Home = () => {
                         <input type="text" />
                         </div>  
                         <button>Enviar</button>
-                        
                     </div>
                 </div>
             </div>

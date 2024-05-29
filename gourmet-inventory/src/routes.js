@@ -5,8 +5,6 @@ import Login from "./pages/login/Login"
 import LoginBackOffice from "./pages/areaBackOffice/loginbackoffice/LoginBackOffice";
 import Empresa from "./pages/areaBackOffice/empresa/Empresa";
 import Cadastro from "./pages/areaBackOffice/cadastroempresa/Cadastro";
-import LoginBackOffice from "./pages/loginbackoffice/LoginBackOffice";
-import Cadastro from "./pages/cadastroempresa/Cadastro";
 import Fornecedor from "./pages/pagFornecedor/pagFornecedor"
 
 function Rotas() {

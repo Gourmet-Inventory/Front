@@ -1,7 +1,12 @@
 .form{
+    
+}
+
+.tabela{
     width: 900px;
     height: 450px;
     margin-left: 100px;
+    background-color: aqua;
 }
 
 .tituloForm{
@@ -22,17 +27,4 @@
     gap: 20px;
 }
 
-.cabecalho button{
-    background-color: #E59E53;
-    border-radius: 0%;
-    width: 200px;
-    height: 65px;
-    color: black;
-    font-size: 19px;
-    margin-bottom: -25px;
-    font-weight: lighter;
-}
 
-.cabecalho button:hover{
-    background-color: #a77940;
-}

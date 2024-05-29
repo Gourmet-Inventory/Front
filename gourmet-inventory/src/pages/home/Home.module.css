@@ -11,6 +11,7 @@ html {
 }
 
 .home{
+    padding-top: 8vh;
     color:#37455D ;
     background-color: #fffdf1 ;
 }
@@ -295,9 +296,7 @@ html {
 
 .contato{
     display: flex;
-    height: 890px;
-    margin-left: 40px;
-    margin-right: 40px;
+    height: fit-content;
     flex-direction: column;
     align-items: center;
 }
@@ -305,22 +304,22 @@ html {
 .tituloContato{
     display: flex;
     flex-direction: column;
-    height: 300px;
-    gap: 20px;
+    height: 10rem;
+    gap: 1rem;
     width: 80%;
     justify-content: baseline; 
     align-items: center;
 }
 
 .tituloContato h1{
-    font-size: 38px;
+    font-size: 30px;
     letter-spacing: 17px;
     font-weight: bolder;
     color: black;
 }
 
 .tituloContato span{
-    font-size: 24px;
+    font-size: 3vh;
     width: 92%;
     text-align: center;
     letter-spacing: 3px;
@@ -329,32 +328,31 @@ html {
 .corpoContato{
     display: flex;
     flex-direction: row;
-    height: 450px;
+    height: fit-content;
     align-items: center;
     gap: 90px;
+    padding: 2rem;
 }
 
 .corpoContato img{
-    height: 500px;
+    height: 20rem;
 }
 
 .formContato{
     display: flex;
     background-color: #37455D;
-    height: 550px;
-    width: 600px;
+    height: 30rem;
+    width: 30rem;
     color: white;
     flex-direction: column;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .formContato span{
     display: flex;
-    height: 120px;
-    /* background-color: violet; */
-    font-size: 20px;
+    font-size: 3vh;
     align-items: end;
     letter-spacing: 4px;
     text-align: center;
@@ -371,7 +369,7 @@ html {
 }
 
 .dadosForm input{
-    height: 30px;
+    height: 1rem;
     border: none;
     font-family: "Jost";
     font-size: 16px;
@@ -380,15 +378,14 @@ html {
 .formContato button{
     border: none;
     color: #000000;
-    letter-spacing: 2px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 3vh;
     border-radius: 2px;
     background-color: #dfa053;
-    width: 25%;
-    height: 8%;
-    margin-top: 18px;
-    align-self: center;
+    width: 10rem;
+    height: 3rem;
+    margin-top: 1rem;
+    justify-content: center ;
 }
 
 .formContato button:hover {

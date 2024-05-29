@@ -13,15 +13,28 @@ const Alerta = () => {
             </div>
             <ImgConfig/>
 
-            <div className={styles["form"]}>
+        <div className={styles["form"]}>
+            <div className={styles["tabela"]}>
                 <div className={styles["tituloForm"]}>
                     <span>Item</span>
                     <span>Tipo de Alerta</span>
                     <span>Info</span>
                 </div>
+
+                <div className={styles["filtro"]}>
+                    <span>Filtros</span>
+                    <div className="formFiltro">
+                        <div className={styles["filtroChecagem"]}>
+
+                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
             </div>
 
-
+        </div>
         </div>
         </>
     )

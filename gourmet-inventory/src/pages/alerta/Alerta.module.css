@@ -2,38 +2,71 @@
     width: 90vw;
     height: 450px;
     margin-left: 100px;
-    background-color: aqua;
+    display: flex;
 }
 
-.tituloForm{
+.tabelaForm{
     display: flex;
-    height: 50px;
+    height: 100%;
     justify-content: space-around;
+    align-items: baseline;
+    width: 65.9vw;
+}
+
+.tabelaForm span{
+    font-size: 1.5rem;
+}
+
+.filtrosForm{
+    width: 20.5rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.tituloForm span{
-    font-size: 20px;
-}
-
-.cabecalho{
-    width: 100%;
-    display: flex;
-    align-items: end;
-    gap: 20px;
-}
-
-.cabecalho button{
-    background-color: #E59E53;
-    border-radius: 0%;
-    width: 200px;
-    height: 65px;
-    color: black;
-    font-size: 19px;
-    margin-bottom: -25px;
+.filtrosForm h1{
+    font-size: 1.5rem;
     font-weight: lighter;
 }
 
-.cabecalho button:hover{
-    background-color: #a77940;
+.filtros{
+    height: 30rem;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
 }
+
+.card{
+    width: 65%;
+    height: 5.5rem;
+    background-color: #37455D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    box-shadow: 1px 2px 7px #000000;
+}
+
+.card span{
+    font-size: 1.2rem;
+}
+
+.legenda{
+    display: flex;
+    width: 90%;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+
+.legenda img{
+    height: 2.4rem;
+}
+
+
+

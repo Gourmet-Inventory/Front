@@ -7,21 +7,24 @@ import itemAcabando from "../../utils/assets/Alerta Item Acabando.svg"
 import dataProxima from "../../utils/assets/Alerta data próxima.svg"
 import itemVazio from "../../utils/assets/Alerta Item Vazio.svg"
 import ItemAcabandoBranco from "../../utils/assets/Alerta Item Acabando Branco.svg"
+import { useNavigate } from "react-router-dom";
 
-const menu = () => {
-  return (
+
+const Menu = () => {
+  const navigate = useNavigate();
+  return (  
     <>
       <ImgConfig />
       <div className={styles["form"]}>
         <ImgConfig />
 
-        <h1>Bem vindo a NomeEmpresa!</h1>
-        <div className={styles["box"]}>
-          <div className={styles["menus"]}>
-            <div className={styles["menu"]}>
-              <button>Estoque</button>
-              <button>Dashboards</button>
-              <button>Histórico Alertas</button>
+          <h1>Bem vindo a NomeEmpresa!</h1>
+          <div className={styles["box"]}>
+            <div className={styles["menus"]}>
+              <div className={styles["menu"]}>
+                <button onClick={() => navigate('/gourmet-inventory/estoque')} >Estoque</button>
+                <button>Dashboards</button>
+                <button>Histórico Alertas</button>
             </div>
             <div className={styles["menu"]}>
               <button>Pratos</button>
@@ -63,4 +66,4 @@ const menu = () => {
   );
 };
 
-export default menu;
+export default Menu;

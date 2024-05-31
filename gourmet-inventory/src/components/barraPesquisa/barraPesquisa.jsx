@@ -9,11 +9,11 @@ const barraPesquisa = ({tituloPag}) => {
         <div className={styles["pesquisa"]}>
             <h1>{tituloPag}</h1>
            <div className={styles["barraPesquisa"]}>
-
                     <input type="text" placeholder="Pesquisar"/>
+                    <div className={styles["imgs"]}>
                     <img src={imgLupa} />
                     <img src={imgFiltro} />
-                
+                    </div>
            </div>
         </div>
         </>

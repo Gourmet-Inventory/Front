@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import ImgConfig from "../../components/imgConfig/ImgConfig";
-import styles from "./PagFornecedor.module.css";
+import styles from "./Estoque.module.css";
+import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import MenuLateral from "../../components/menuLateral/MenuLateral";
 
-const pagFornecedor = () => {
+const   Estoque = () => {
     return (
-        <>  
-        <div className={styles["body"]}>
+        <>
+        <MenuLateral/>
             <div className={styles["cabecalho"]}>
-            <BarraPesquisa tituloPag={"Fornecedor"}/>
-            <button>Cadastrar Fornecedor</button>
+            <BarraPesquisa tituloPag={"Estoque"}/>
+            <button>Cadastrar Novo Item</button>
             </div>
             <ImgConfig/>
 
@@ -22,10 +24,8 @@ const pagFornecedor = () => {
                 </div>
             </div>
 
-
-        </div>
         </>
     )
 };
 
-export default pagFornecedor;
+export default Estoque;

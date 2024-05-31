@@ -36,3 +36,64 @@
 .cabecalho button:hover{
     background-color: #a77940;
 }
+
+/* children */
+
+.cadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    width: 35vw;
+    background-color: #37455D;
+    box-shadow: 4px 4px 13px #2b2b2b;
+}
+
+ .cadastro h3{
+    font-weight: lighter;
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+.inputCadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20rem;
+}
+
+.input{
+    display: flex;
+    width: 25rem;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+
+.input input{
+    width: 17rem;
+    border-radius: 0%;
+    font-size: 1rem;
+}
+
+.cadastro button{
+    width: 11rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 0%;
+    background-color: #E59E53;
+    margin-top: 2rem;
+    color: black;
+    font-weight: lighter;
+}
+
+.cadastro button:hover{
+    background-color: #a77940;
+}

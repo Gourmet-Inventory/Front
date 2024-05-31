@@ -4,12 +4,14 @@ import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./PagFornecedor.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
 import { toast } from 'react-toastify';
+import MenuLateral from "../../components/menuLateral/MenuLateral";
 
 function PagFornecedor () {
     const[openCadastro, setOpenCadastro] = useState(false);
 
     return (
         <>  
+        <MenuLateral/>
         <div className={styles["body"]}>
             <div className={styles["cabecalho"]}>
             <BarraPesquisa tituloPag={"Fornecedor"}/>

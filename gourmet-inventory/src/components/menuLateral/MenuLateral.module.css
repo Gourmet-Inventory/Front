@@ -12,6 +12,7 @@
     z-index: 999;
     background-color: #37455D;
     box-shadow: 0px 0px 5px ;
+    cursor: pointer;
 }
 
 .sidebar .icons{
@@ -20,6 +21,35 @@
     flex-direction: column;
     padding-top: 5rem;
     align-items: center;
+}
+
+.sidebar .imgLogo{
+    align-self: flex-start;
+    display: flex;
+    width: 4.5vw;
+    justify-content: center;
+}
+
+ .imgHome{    
+    display: flex;
+    width: 2.5vw;
+}
+
+.imgBorder{
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    width: 5vw;
+}
+
+.imgBorderSelected{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    height: 10vh;
+    width: 15vw;
+    background-color: white;
 }
 
 .expanded{
@@ -39,68 +69,44 @@
     flex-direction: column;
     padding-top: 5rem;
     align-items: center;
+    justify-content: space-evenly;
 }
 
-.sidebar .imgLogo{
-    align-self: flex-start;
-    display: flex;
-    width: 4.5vw;
-    justify-content: center;
-}
-
-.expanded .imgLogo{
-    width: 10rem;
-    
-}
-
-.expanded .imgLogo{
-    align-self: flex-start;
-    display: flex;
-    width: 4.5vw;
-    justify-content: center;
-}
-
-.sidebar .imgHome{    
+.expanded .imgHome{    
+    padding-right: 4rem;
     display: flex;
     width: 2.5vw;
 }
 
-.imgBorderSelected{
+.expanded .imgLogo{
+    align-self: flex-start;
     display: flex;
+    width: 4.5vw;
     justify-content: center;
-    height: 15vh;
-    width: 5vw;
-    background-color: white;
 }
 
-.imgBorder{
+.expanded .imgBorderSelected{
     display: flex;
-    justify-content: center;
-    height: 15vh;
-    width: 5vw;
-}
-
-.expanded .imgBorder{
-    display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
     height: 10vh;
-    width: 5vw;
+    width: 15vw;
     background-color: white;
 }
 
 .expanded .imgBorder{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 2.5rem;
     height: 8vh;
     width: 15vw;
-    background-color: white;
+    color: white;
 }
 
 .expanded .iconText{
-    font-size: 3.5vh;
+    font-size: 3vh;
 }
 
 .expanded .botao{

@@ -1,5 +1,6 @@
-.form{
-    width: 90vw;
+
+.tabela{
+    width: 900px;
     height: 450px;
     margin-left: 100px;
     display: flex;
@@ -24,6 +25,7 @@
     align-items: center;
 }
 
+<<<<<<< HEAD
 .filtrosForm h1{
     font-size: 1.5rem;
     font-weight: lighter;
@@ -70,3 +72,17 @@
 
 
 
+=======
+.tituloForm span{
+    font-size: 20px;
+}
+
+.cabecalho{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+
+>>>>>>> 0c4e56fd8f3670d5971a0b509f4c7bff045fff32

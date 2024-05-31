@@ -1,0 +1,108 @@
+
+*{
+    transition: width 0.3s ease;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 5vw;
+    position: fixed ;
+    z-index: 999;
+    background-color: #37455D;
+    box-shadow: 0px 0px 5px ;
+}
+
+.sidebar .icons{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    align-items: center;
+}
+
+.expanded{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 15vw;
+    position: fixed ;
+    z-index: 999;
+    background-color: #37455D;
+    box-shadow: 0px 0px 5px ;
+}
+
+.expanded .icons{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    align-items: center;
+}
+
+.sidebar .imgLogo{
+    align-self: flex-start;
+    display: flex;
+    width: 4.5vw;
+    justify-content: center;
+}
+
+.expanded .imgLogo{
+    width: 10rem;
+    
+}
+
+.expanded .imgLogo{
+    align-self: flex-start;
+    display: flex;
+    width: 4.5vw;
+    justify-content: center;
+}
+
+.sidebar .imgHome{    
+    display: flex;
+    width: 2.5vw;
+}
+
+.imgBorderSelected{
+    display: flex;
+    justify-content: center;
+    height: 15vh;
+    width: 5vw;
+    background-color: white;
+}
+
+.imgBorder{
+    display: flex;
+    justify-content: center;
+    height: 15vh;
+    width: 5vw;
+}
+
+.expanded .imgBorder{
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    width: 5vw;
+    background-color: white;
+}
+
+.expanded .imgBorder{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    height: 8vh;
+    width: 15vw;
+    background-color: white;
+}
+
+.expanded .iconText{
+    font-size: 3.5vh;
+}
+
+.expanded .botao{
+    height: 10vh;
+}

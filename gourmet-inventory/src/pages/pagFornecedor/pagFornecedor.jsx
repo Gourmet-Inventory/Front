@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import ImgConfig from "../../components/imgConfig/ImgConfig";
-import styles from "./pagFornecedor.module.css";
+import styles from "./PagFornecedor.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
 import { toast } from 'react-toastify';
 

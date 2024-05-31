@@ -90,7 +90,7 @@
     width: 95%;
     border-top: #E59E53 5px solid;
     background-color: #E2F7F8;
-    height: 14.5rem;
+    height: fit-content;
     align-items: center;
     font-size: 1rem;
     flex-direction: column;

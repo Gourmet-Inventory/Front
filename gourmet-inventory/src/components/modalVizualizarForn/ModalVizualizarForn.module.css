@@ -20,6 +20,7 @@
     width: 30vw;
     background-color: #37455D;
     box-shadow: 4px 4px 13px #2b2b2b;
+    border: 3px solid #37455D;
 }
 
 .form img{
@@ -74,35 +75,65 @@
     justify-content: center;
 }
 
-.botao{
+
+
+/* children */
+
+.editar{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 4.3rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    width: 35vw;
+    background-color: #37455D;
+    box-shadow: 4px 4px 13px #2b2b2b;
 }
 
-.botao button{
-    height: 3rem;
-    width: 8rem;
-    border-radius: 0%;
-    font-size: 1.3rem;
+ .editar h3{
+    font-weight: lighter;
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+.inputEditar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20rem;
+}
+
+.input{
+    display: flex;
+    width: 25rem;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
     font-weight: lighter;
 }
 
-#editar{
+.input input{
+    width: 17rem;
+    border-radius: 0%;
+    font-size: 1rem;
+}
+
+.editar button{
+    width: 11rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 0%;
     background-color: #E59E53;
+    margin-top: 2rem;
     color: black;
+    font-weight: lighter;
 }
 
-#editar:hover{
+.editar button:hover{
     background-color: #a77940;
-}
-
-#excluir{
-    background-color: #ED5656;
-}
-
-#excluir:hover{
-    background-color: #af4040;
 }

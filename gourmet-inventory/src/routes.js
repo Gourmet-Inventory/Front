@@ -9,6 +9,7 @@ import Fornecedor from "./pages/pagFornecedor/pagFornecedor";
 import Alerta from "./pages/alerta/Alerta";
 import Menu from "./pages/menu/Menu";
 import Estoque from "./pages/estoqueIngrediente/Estoque";
+import Funcionarios from "./pages/pagFuncionarios/PagFuncionarios"
     
 function Rotas() {
     return (
@@ -24,6 +25,8 @@ function Rotas() {
                     <Route path="/gourmet-inventory/menu" element= {<Menu/>}/>
                     <Route path="/gourmet-inventory/alertas" element= {<Alerta/>}/>
                     <Route path="/gourmet-inventory/estoque" element= {<Estoque/>}/>
+                    <Route path="/gourmet-inventory/funcionarios" element= {<Funcionarios/>}/>
+                    <Route path="/gourmet-inventory/crud" element= {<Funcionarios/>}/>
                 </Routes>
             </BrowserRouter>
         </>

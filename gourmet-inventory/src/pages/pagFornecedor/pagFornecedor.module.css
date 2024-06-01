@@ -28,7 +28,7 @@
     background-color: #E59E53;
     border-radius: 0%;
     width: 200px;
-    height: 65px;
+    height: 4.5rem;
     color: black;
     font-size: 19px;
     margin-bottom: -25px;
@@ -42,7 +42,7 @@
 /* table */
 
 .tabelaForn{
-    background-color: #37455D;
+
     width: 72.5vw;
     display: flex;
 }
@@ -51,16 +51,18 @@
     width: 100%;
     border-collapse: collapse;
     cursor: pointer;
-}
-
-.tabelaForn table:hover{
-    background-color: #263041;
+ 
 }
 
 .tabelaForn tr {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    background-color: #37455D;
+}
+
+.tabelaForn tr:hover{
+    background-color: #263041;
 }
   
 .tabelaForn td {
@@ -72,6 +74,19 @@
     flex: 1; /* Faz com que todas as células tenham o mesmo tamanho */
     padding: 1rem; /* Espaçamento interno das células */
 }
+
+/* toast */
+  
+  .toast-button-yes {
+    background-color: green;
+    color: white;
+  }
+  
+  .toast-button-no {
+    background-color: red;
+    color: white;
+  }
+  
 
 /* children */
 
@@ -134,6 +149,10 @@
     background-color: #a77940;
 }
 
+
+
+/*  */
+
 .dadosForn{
     display: flex;
     flex-direction: column;
@@ -141,4 +160,57 @@
     color: black;
     width: 80%;
     font-size: 1.3rem;
+    height: 13rem;
+}
+
+.botao button{
+    width: 11rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 0%;
+    background-color: #E59E53;
+    margin-top: 2rem;
+    color: black;
+    font-weight: lighter;
+}
+
+.botao button:hover{
+    background-color: #a77940;
+}
+
+.formVizualizar{
+    height: 100%;
+}
+
+.botao{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    height: 4.3rem;
+}
+
+.botao button{
+    height: 3rem;
+    width: 8rem;
+    border-radius: 0%;
+    font-size: 1.3rem;
+    font-weight: lighter;
+}
+
+#editar{
+    background-color: #E59E53;
+    color: black;
+}
+
+#editar:hover{
+    background-color: #a77940;
+}
+
+#excluir{
+    background-color: #ED5656;
+}
+
+#excluir:hover{
+    background-color: #af4040;
 }

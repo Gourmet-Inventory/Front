@@ -5,7 +5,7 @@ import Editar from "../modalCadastroForn/ModalCadastro"
 
 function ModalVizualizarForn({isOpen, setModalOpen, children, titulo}) {
     const[openEditar, setOpenEditar] = useState(false);
-    
+
     if(isOpen){
         return (
             <>
@@ -31,10 +31,7 @@ function ModalVizualizarForn({isOpen, setModalOpen, children, titulo}) {
                         {children}
                         </div>
 
-                        <div className={styles["botao"]}>
-                            <button id={styles["editar"]} onClick={() => setOpenEditar(true)}>Editar</button>
-                            <button id={styles["excluir"]}>Excluir</button>
-                        </div>
+                        
                     </div>
 
                     
@@ -42,7 +39,32 @@ function ModalVizualizarForn({isOpen, setModalOpen, children, titulo}) {
 
                     <Editar isOpen={openEditar} setModalOpen={() => setOpenEditar(!openEditar)}>
                         {/* children */}
-                            
+                        <div className={styles["editar"]}>
+                                <h3>Editar Fornecedor</h3>
+                            <div className={styles["inputEditar"]}>
+                                <div className={styles["input"]}>
+                                    <span>Nome</span>
+                                    <input type="text" />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Logradouro</span>
+                                    <input type="text" />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Numeração</span>
+                                    <input type="text" />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Telefone</span>
+                                    <input type="text" />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Categoria</span>
+                                    <input type="text" />
+                                </div>
+                            </div>
+                            <button>Salvar</button>
+                        </div>
                     
                     </Editar>
                 </div>

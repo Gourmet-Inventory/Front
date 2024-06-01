@@ -133,3 +133,12 @@
 .cadastro button:hover{
     background-color: #a77940;
 }
+
+.dadosForn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: black;
+    width: 80%;
+    font-size: 1.3rem;
+}

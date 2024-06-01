@@ -84,34 +84,14 @@ function PagFornecedor () {
                     </div>
            </ModalCadastro>
 
-           <ModalVizualizar  isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
+           <ModalVizualizar  isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={"Fornecedor Luiz fernando"}>
                 {/* children */}
-                {/* <div className={styles["cadastro"]}>
-                <h3>Cadastrar Fornecedor</h3>
-                        <div className={styles["inputCadastro"]}>
-                            <div className={styles["input"]}>
-                                <span>Nome</span>
-                                <input type="text" />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Logradouro</span>
-                                <input type="text" />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Numeração</span>
-                                <input type="text" />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Telefone</span>
-                                <input type="text" />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Categoria</span>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <button>Cadastrar</button>
-                    </div> */}
+                <div className={styles["dadosForn"]}>
+                    <span>Logradouro:</span>
+                    <span>Numeração:</span>
+                    <span>Telefone:</span>
+                    <span>Categoria:</span>
+                </div>
             </ModalVizualizar>
 
         </div>

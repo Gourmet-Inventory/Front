@@ -12,49 +12,6 @@ import MenuLateral from "../../components/menuLateral/MenuLateral";
 const Alerta = () => {
     return (
         <>  
-<<<<<<< HEAD
-        <div className={styles["body"]}>
-            <div className={styles["cabecalho"]}>
-            <BarraPesquisa tituloPag={"Históricos Alertas"}/>
-            </div>
-            <ImgConfig/>
-
-            <div className={styles["form"]}>
-                <div className={styles["tabelaForm"]}>
-                    <span>Item</span>
-                    <span>Tipo de Alerta</span>
-                    <span>Info</span>
-                </div>
-                <div className={styles["filtrosForm"]}>
-                    <h1>Filtros</h1>
-                    <div className={styles["filtros"]}>
-                        <div className={styles["card"]}>
-                            <span>Dia de Checagem</span>
-                            <div className={styles["legenda"]}>
-                                <img src={diaChecagem}/>
-                                <span>0</span>
-                            </div>
-                        </div>
-                        <div className={styles["card"]}>
-                            <span>Estoque Vazio</span>
-                            <div className={styles["legenda"]}>
-                                <img src={itemVazio}/>
-                                <span>0</span>
-                            </div>
-                        </div>
-                        <div className={styles["card"]}>
-                            <span>Data Próxima</span>
-                            <div className={styles["legenda"]}>
-                                <img src={dataProxima}/>
-                                <span>0</span>
-                            </div>
-                        </div>
-                        <div className={styles["card"]}>
-                            <span>Estoque Acabando</span>
-                            <div className={styles["legenda"]}>
-                                <img src={ItemAcabando}/>
-                                <span>0</span>
-=======
         <MenuLateral/>
             <div className={styles.body}>
                 <div className={styles.cabecalho}>
@@ -101,18 +58,11 @@ const Alerta = () => {
                                         <span>0</span>
                                     </div>
                                 </div>
->>>>>>> main
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-
-        </div>
-        
-=======
->>>>>>> main
         </>
     );
 };

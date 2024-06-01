@@ -3,6 +3,7 @@ import styles from './MenuLateral.module.css'
 import { useLocation,useNavigate } from 'react-router-dom';
 
 import logo from "../../utils/assets/Possíveis Paletas (5) 1.svg";
+import logoExpanded from "../../utils/assets/IconesSidebar/imgBox.svg";
 
 import homeImg from "../../utils/assets/IconesSidebar/home.svg"
 import homeImgSelected from "../../utils/assets/IconesSidebar/homeSelected.svg"
@@ -16,11 +17,18 @@ import estoqueImgSelected from "../../utils/assets/IconesSidebar/macaSelected.sv
 import fornecedorImg from "../../utils/assets/IconesSidebar/fornecedor.svg"
 import fornecedorImgSelected from "../../utils/assets/IconesSidebar/fornecedorSelected.svg"
 
+import saidaImg from "../../utils/assets/IconesSidebar/saida.svg";
+import saidaImgSelected from "../../utils/assets/IconesSidebar/saidaSelected.svg";
+
+import alertaImg from "../../utils/assets/IconesSidebar/alerta.svg";
+import alertaImgSelected from "../../utils/assets/IconesSidebar/alertaSelected.svg";
+
 
 
 function MenuLateral() {
     const [isExpanded, setIsExpanded] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
 
     const toggleOverlay = () => {
@@ -32,38 +40,48 @@ function MenuLateral() {
     };
 
     return (
-        <div 
-            className={`${styles.sidebar} ${isExpanded ? styles.expanded : ''}`}
-            onClick={toggleOverlay} 
-        >
-            <img className={styles["imgLogo"]} src={logo} alt="Logo" onClick={toggleOverlay} />
+        <div className={`${styles.sidebar} ${isExpanded ? styles.expanded : ''}`} onClick={toggleOverlay}>
+            <img 
+                className={styles.imgLogo} 
+                src={!isExpanded ? logo : ''} 
+                alt="Logo" 
+                onClick={toggleOverlay} 
+            />
+            {isExpanded && (
+                <span className={styles.nomeEmpresa}>
+                    Nome empresa
+                    <img className={styles['imgBox']} src={logoExpanded} />
+                </span>
+            )}
             <div className={styles["icons"]}>
-                <span className={getClassName('/gourmet-inventory/menu')}>
+                <span className={getClassName('/gourmet-inventory/menu')} >
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/menu' ? homeImgSelected : homeImg} alt="Home Selected" />
-                    {isExpanded && <span className={styles.iconText}>Menu Início</span>}
+                    {isExpanded && <span className={styles.iconText} >Menu Início</span>}
                 </span>
                 <span className={getClassName('/gourmet-inventory/estoque')}>
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/estoque' ? estoqueImgSelected : estoqueImg} alt="Estoque" />
-                    {isExpanded && <span className={styles.iconText}>Estoque</span>}
+                    {isExpanded && <span className={styles.iconText} >Estoque</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/Pratos')}>
-                    <img className={styles.imgHome} src={pratosImg} alt="Pratos" />
+                <span className={getClassName('/gourmet-inventory/pratos')}>
+                    <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/pratos' ? pratosImgSelected : pratosImg} alt="Pratos" />
                     {isExpanded && <span className={styles.iconText}>Pratos</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/Saida')}>
-                    <img className={styles.imgHome} src={homeImg} alt="Home" />
+                <span className={getClassName('/gourmet-inventory/saida')}>
+                <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/saida' ? saidaImgSelected : saidaImg} alt="Saída" />
                     {isExpanded && <span className={styles.iconText}>Saída</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/Fornecedor')}>
-                    <img className={styles.imgHome} src={fornecedorImg} alt="Fornecedor" />
+                <span className={getClassName('/gourmet-inventory/fornecedor')}>
+                <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/fornecedor' ? fornecedorImgSelected : fornecedorImg} alt="Fornecedor" />
                     {isExpanded && <span className={styles.iconText}>Fornecedor</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/Alertas')}>
-                    <img className={styles.imgHome} src={homeImg} alt="Home" />
+                <span className={getClassName('/gourmet-inventory/alertas')}>
+                <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/alertas' ? alertaImgSelected : alertaImg} alt="Alertas" />
                     {isExpanded && <span className={styles.iconText}>Alertas</span>}
                 </span>
             </div>
-            <button className={`${isExpanded ? styles.botao : ''}`}>Sair</button>
+            {isExpanded && (
+                <button className={styles.botao}>Sair</button>
+            )}
         </div>
     );
 };

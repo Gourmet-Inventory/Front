@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import ImgConfig from "../../components/imgConfig/ImgConfig";
-import CardFornecedor from "../../components/cardFornecedor/cardFornecedor";
 import styles from "./pagFornecedor.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
 import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualizarForn"
 import { toast } from 'react-toastify';
+import MenuLateral from "../../components/menuLateral/MenuLateral";
 
 function PagFornecedor () {
     const[openCadastro, setOpenCadastro] = useState(false);
@@ -13,6 +13,7 @@ function PagFornecedor () {
 
     return (
         <>  
+        <MenuLateral/>
         <div className={styles["body"]}>
             <div className={styles["cabecalho"]}>
             <BarraPesquisa tituloPag={"Fornecedor"}/>

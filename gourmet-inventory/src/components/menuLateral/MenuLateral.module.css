@@ -63,26 +63,40 @@
     box-shadow: 0px 0px 5px ;
 }
 
+
+
 .expanded .icons{
-    height: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    padding-top: 5rem;
+    padding-top: 1rem;
+    justify-content: space-around;
+}
+
+.expanded .nomeEmpresa{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-size:4vh ;
+    border-bottom: 1px white solid;
+    height: 8rem;
     align-items: center;
-    justify-content: space-evenly;
+
 }
 
 .expanded .imgHome{    
-    padding-right: 4rem;
+    justify-self: start;
     display: flex;
     width: 2.5vw;
 }
 
 .expanded .imgLogo{
-    align-self: flex-start;
+    display: none;
+}
+
+.expanded .imgBox{
     display: flex;
-    width: 4.5vw;
-    justify-content: center;
+    width: 7vw;
 }
 
 .expanded .imgBorderSelected{
@@ -100,7 +114,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 8vh;
+    height: 10vh;
     width: 15vw;
     color: white;
 }
@@ -110,5 +124,8 @@
 }
 
 .expanded .botao{
-    height: 10vh;
+    height: 5vh;
+    width: 7vw;
+    background-color: #E59E53;
 }
+

@@ -17,19 +17,12 @@ const Alerta = () => {
             </div>
             <ImgConfig/>
 
-<<<<<<< HEAD
             <div className={styles["form"]}>
                 <div className={styles["tabelaForm"]}>
-=======
-        <div className={styles["form"]}>
-            <div className={styles["tabela"]}>
-                <div className={styles["tituloForm"]}>
->>>>>>> 0c4e56fd8f3670d5971a0b509f4c7bff045fff32
                     <span>Item</span>
                     <span>Tipo de Alerta</span>
                     <span>Info</span>
                 </div>
-<<<<<<< HEAD
                 <div className={styles["filtrosForm"]}>
                     <h1>Filtros</h1>
                     <div className={styles["filtros"]}>
@@ -61,24 +54,12 @@ const Alerta = () => {
                                 <span>0</span>
                             </div>
                         </div>
-=======
-
-                <div className={styles["filtro"]}>
-                    <span>Filtros</span>
-                    <div className="formFiltro">
-                        <div className={styles["filtroChecagem"]}>
-
-                        </div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
->>>>>>> 0c4e56fd8f3670d5971a0b509f4c7bff045fff32
                     </div>
                 </div>
             </div>
 
         </div>
-        </div>
+        
         </>
     )
 };

@@ -5,7 +5,7 @@ import Login from "./pages/login/Login"
 import LoginBackOffice from "./pages/areaBackOffice/loginbackoffice/LoginBackOffice";
 import Empresa from "./pages/areaBackOffice/empresa/Empresa";
 import Cadastro from "./pages/areaBackOffice/cadastroempresa/Cadastro";
-import Fornecedor from "./pages/pagFornecedor/PagFornecedor";
+import Fornecedor from "./pages/pagFornecedor/pagFornecedor";
 import Alerta from "./pages/alerta/Alerta";
 import Menu from "./pages/menu/Menu";
 import Estoque from "./pages/estoqueIngrediente/Estoque";

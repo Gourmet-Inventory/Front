@@ -1,7 +1,8 @@
 .form{
-    width: 900px;
+    width: 72.5vw;
     height: 450px;
     margin-left: 100px;
+    flex-direction: column;
 }
 
 .tituloForm{
@@ -9,6 +10,7 @@
     height: 50px;
     justify-content: space-around;
     align-items: center;
+   
 }
 
 .tituloForm span{
@@ -35,6 +37,40 @@
 
 .cabecalho button:hover{
     background-color: #a77940;
+}
+
+/* table */
+
+.tabelaForn{
+    background-color: #37455D;
+    width: 72.5vw;
+    display: flex;
+}
+
+.tabelaForn table{
+    width: 100%;
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+.tabelaForn table:hover{
+    background-color: #263041;
+}
+
+.tabelaForn tr {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+  
+.tabelaForn td {
+    display: flex;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: lighter;
+    justify-content: center; /* Centraliza o conteúdo dentro das células */
+    flex: 1; /* Faz com que todas as células tenham o mesmo tamanho */
+    padding: 1rem; /* Espaçamento interno das células */
 }
 
 /* children */

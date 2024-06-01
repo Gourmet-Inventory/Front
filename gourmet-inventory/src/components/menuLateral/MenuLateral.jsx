@@ -3,6 +3,7 @@ import styles from './MenuLateral.module.css'
 import { useLocation,useNavigate } from 'react-router-dom';
 
 import logo from "../../utils/assets/Possíveis Paletas (5) 1.svg";
+import logoExpanded from "../../utils/assets/IconesSidebar/imgBox.svg";
 
 import homeImg from "../../utils/assets/IconesSidebar/home.svg"
 import homeImgSelected from "../../utils/assets/IconesSidebar/homeSelected.svg"
@@ -22,6 +23,8 @@ import saidaImgSelected from "../../utils/assets/IconesSidebar/saidaSelected.svg
 import alertaImg from "../../utils/assets/IconesSidebar/alerta.svg";
 import alertaImgSelected from "../../utils/assets/IconesSidebar/alertaSelected.svg";
 
+
+
 function MenuLateral() {
     const [isExpanded, setIsExpanded] = useState(false);
     const location = useLocation();
@@ -38,7 +41,18 @@ function MenuLateral() {
 
     return (
         <div className={`${styles.sidebar} ${isExpanded ? styles.expanded : ''}`} onClick={toggleOverlay}>
-            <img className={styles["imgLogo"]} src={logo} alt="Logo"  />
+            <img 
+                className={styles.imgLogo} 
+                src={!isExpanded ? logo : ''} 
+                alt="Logo" 
+                onClick={toggleOverlay} 
+            />
+            {isExpanded && (
+                <span className={styles.nomeEmpresa}>
+                    Nome empresa
+                    <img className={styles['imgBox']} src={logoExpanded} />
+                </span>
+            )}
             <div className={styles["icons"]}>
                 <span className={getClassName('/gourmet-inventory/menu')} >
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/menu' ? homeImgSelected : homeImg} alt="Home Selected" />
@@ -65,7 +79,9 @@ function MenuLateral() {
                     {isExpanded && <span className={styles.iconText}>Alertas</span>}
                 </span>
             </div>
-            <button className={`${isExpanded ? styles.botao : ''}`}>Sair</button>
+            {isExpanded && (
+                <button className={styles.botao}>Sair</button>
+            )}
         </div>
     );
 };

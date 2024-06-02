@@ -1,0 +1,240 @@
+.form{
+    width: 72.5vw;
+    height: 450px;
+    margin-left: 100px;
+    flex-direction: column;
+}
+
+/* voltar botão */
+.voltar{
+    width: 10vw;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.voltar button{
+    width: 8rem;
+    height: 6vh;
+    padding-bottom: 2rem;
+    color: black;
+    font-weight: lighter;
+    background-color: #E59E53;
+    border-radius: 0%;
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+}
+
+.voltar button:hover{
+    background-color: #a77940;
+}
+
+/*  */
+
+.tituloForm{
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+
+.tituloForm span{
+    font-size: 20px;
+}
+
+.cabecalho{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+.cabecalho button{
+    background-color: #E59E53;
+    border-radius: 0%;
+    width: 200px;
+    height: 4.5rem;
+    color: black;
+    font-size: 19px;
+    font-weight: lighter;
+}
+
+.cabecalho button:hover{
+    background-color: #a77940;
+}
+
+/* table */
+
+.tabelaForn{
+
+    width: 72.5vw;
+    display: flex;
+}
+
+.tabelaForn table{
+    width: 100%;
+    border-collapse: collapse;
+    cursor: pointer;
+ 
+}
+
+.tabelaForn tr {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #37455D;
+}
+
+.tabelaForn tr:hover{
+    background-color: #263041;
+}
+  
+.tabelaForn td {
+    display: flex;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: lighter;
+    justify-content: center; /* Centraliza o conteúdo dentro das células */
+    flex: 1; /* Faz com que todas as células tenham o mesmo tamanho */
+    padding: 1rem; /* Espaçamento interno das células */
+}
+
+/* toast */
+  
+  .toast-button-yes {
+    background-color: green;
+    color: white;
+  }
+  
+  .toast-button-no {
+    background-color: red;
+    color: white;
+  }
+  
+
+/* children */
+
+.cadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    width: 35vw;
+    background-color: #37455D;
+    box-shadow: 4px 4px 13px #2b2b2b;
+}
+
+ .cadastro h3{
+    font-weight: lighter;
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+.inputCadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20rem;
+}
+
+.input{
+    display: flex;
+    width: 25rem;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+
+.input input{
+    width: 17rem;
+    border-radius: 0%;
+    font-size: 1rem;
+}
+
+.cadastro button{
+    width: 11rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 0%;
+    background-color: #E59E53;
+    margin-top: 2rem;
+    color: black;
+    font-weight: lighter;
+}
+
+.cadastro button:hover{
+    background-color: #a77940;
+}
+
+
+
+/*  */
+
+.dadosForn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: black;
+    width: 80%;
+    font-size: 1.3rem;
+    height: 13rem;
+}
+
+.botao button{
+    width: 11rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 0%;
+    background-color: #E59E53;
+    margin-top: 2rem;
+    color: black;
+    font-weight: lighter;
+}
+
+.botao button:hover{
+    background-color: #a77940;
+}
+
+.formVizualizar{
+    height: 100%;
+}
+
+.botao{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    height: 4.3rem;
+}
+
+.botao button{
+    height: 3rem;
+    width: 8rem;
+    border-radius: 0%;
+    font-size: 1.3rem;
+    font-weight: lighter;
+}
+
+#editar{
+    background-color: #E59E53;
+    color: black;
+}
+
+#editar:hover{
+    background-color: #a77940;
+}
+
+#excluir{
+    background-color: #ED5656;
+}
+
+#excluir:hover{
+    background-color: #af4040;
+}

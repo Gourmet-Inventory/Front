@@ -26,7 +26,6 @@ function Rotas() {
                     <Route path="/gourmet-inventory/alertas" element= {<Alerta/>}/>
                     <Route path="/gourmet-inventory/estoque" element= {<Estoque/>}/>
                     <Route path="/gourmet-inventory/funcionarios" element= {<Funcionarios/>}/>
-                    <Route path="/gourmet-inventory/crud" element= {<Funcionarios/>}/>
                 </Routes>
             </BrowserRouter>
         </>

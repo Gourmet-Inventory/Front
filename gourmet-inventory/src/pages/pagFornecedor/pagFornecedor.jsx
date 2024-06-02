@@ -165,7 +165,7 @@ function PagFornecedor() {
                             <div className={styles["input"]}>
                                 <span>Telefone</span>
                                 <input
-                                    type="number"
+                                    type="text"
                                     value={telefone}
                                     onChange={(e) => setTelefone(e.target.value)}
                                 />

@@ -1,0 +1,139 @@
+.form{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60vh;
+    width: 30vw;
+    background-color: #37455D;
+    box-shadow: 4px 4px 13px #2b2b2b;
+    border: 3px solid #37455D;
+}
+
+.form img{
+    cursor: pointer;
+    z-index: 1001;
+    height: 1.2rem;
+}
+
+.tituloForn{
+    width: 80%;
+    display: flex;
+    justify-content: end;
+}
+
+.imagem{
+    height: 100%;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.titulo{
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #37455D;
+    gap: 2rem;
+}
+
+.titulo h3{
+    font-weight: lighter;
+    letter-spacing: 1px;
+}
+
+.corpo{
+    height: 100%;    
+    width: 100%;
+    background-color: #EAF6F5;
+}
+
+.dados{
+    height: 15.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* children */
+
+.editar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    width: 35vw;
+    background-color: #37455D;
+    box-shadow: 4px 4px 13px #2b2b2b;
+}
+
+ .editar h3{
+    font-weight: lighter;
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+.inputEditar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20rem;
+}
+
+.input{
+    display: flex;
+    width: 25rem;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+
+.input input{
+    width: 17rem;
+    border-radius: 0%;
+    font-size: 1rem;
+}
+
+.editar button{
+    width: 11rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 0%;
+    background-color: #E59E53;
+    margin-top: 2rem;
+    color: black;
+    font-weight: lighter;
+}
+
+.editar button:hover{
+    background-color: #a77940;
+}

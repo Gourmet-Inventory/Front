@@ -3,6 +3,7 @@ import styles from "./ModalCadastro.module.css";
 import fechar from "../../utils/assets/Fechar.svg"
 
 function ModalCadastro({isOpen, setModalOpen, children}) {
+    
 
     if(isOpen){
         return (

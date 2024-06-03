@@ -5,6 +5,31 @@
     flex-direction: column;
 }
 
+/* voltar botão */
+.voltar{
+    width: 10vw;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.voltar button{
+    width: 8rem;
+    height: 6vh;
+    padding-bottom: 2rem;
+    color: black;
+    font-weight: lighter;
+    background-color: #E59E53;
+    border-radius: 0%;
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+}
+
+.voltar button:hover{
+    background-color: #a77940;
+}
+
+/*  */
+
 .tituloForm{
     display: flex;
     height: 50px;
@@ -31,7 +56,6 @@
     height: 4.5rem;
     color: black;
     font-size: 19px;
-    margin-bottom: -25px;
     font-weight: lighter;
 }
 

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
-import ImgConfig from "../../components/imgConfig/ImgConfig";
-import styles from "./pagFornecedor.module.css";
+import styles from "./PagFuncionarios.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
 import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualizarForn";
 import { toast } from 'react-toastify';
-import MenuLateral from "../../components/menuLateral/MenuLateral";
-import 'react-toastify/dist/ReactToastify.css'; // Certifique-se de importar o CSS do react-toastify
 
-function PagFornecedor() {
+
+function PagFuncionario() {
     const [data, setData] = useState([]);
     const [dataEdit, setDataEdit] = useState({});
     const [viewData, setViewData] = useState({});
@@ -16,10 +14,11 @@ function PagFornecedor() {
     const [openVizualizar, setOpenVizualizar] = useState(false);
 
     const [nome, setNome] = useState("");
-    const [logradouro, setLogradouro] = useState("");
-    const [numeracao, setNumeracao] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [cargo, setCargo] = useState("");
     const [telefone, setTelefone] = useState("");
-    const [categoria, setCategoria] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
 
     useEffect(() => {
         const db_costumer = localStorage.getItem("cad_cliente")
@@ -29,43 +28,43 @@ function PagFornecedor() {
     }, []);
 
     const handleSave = () => {
-        if (!nome || !logradouro || !numeracao || !telefone || !categoria) {
+        if (!nome || !cpf || !cargo || !telefone || !email || !senha) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        if (telefoneAlreadyExists()) {
-            return toast.error("Telefone já existe!");
+        if (cpfAlreadyExists()) {
+            return toast.error("CPF já existe!");
         }
 
         const newDataArray = dataEdit.index !== undefined
-            ? data.map((item, index) => index === dataEdit.index ? { nome, logradouro, numeracao, telefone, categoria } : item)
-            : [...data, { nome, logradouro, numeracao, telefone, categoria }];
+            ? data.map((item, index) => index === dataEdit.index ? { nome, cpf, cargo, telefone, email, senha } : item)
+            : [...data, { nome, cpf, cargo, telefone, email, senha }];
 
         localStorage.setItem("cad_cliente", JSON.stringify(newDataArray));
         setData(newDataArray);
         setOpenCadastro(false);
     };
 
-    const telefoneAlreadyExists = () => {
-        if (dataEdit.telefone !== telefone && data?.length) {
-            return data.find((item) => item.telefone === telefone);
+    const cpfAlreadyExists = () => {
+        if (dataEdit.cpf !== cpf && data?.length) {
+            return data.find((item) => item.cpf === cpf);
         }
         return false;
     };
 
-    const handleRemove = (telefone) => {
-        const newArray = data.filter((item) => item.telefone !== telefone);
+    const handleRemove = (cpf) => {
+        const newArray = data.filter((item) => item.cpf !== cpf);
         setData(newArray);
         localStorage.setItem("cad_cliente", JSON.stringify(newArray));
         setOpenVizualizar(false);  // Fecha o modal após exclusão
     };
 
-    const confirmRemove = (telefone) => {
+    const confirmRemove = (cpf) => {
         toast(
             ({ closeToast }) => (
                 <div>
                     <p>Tem certeza que deseja excluir este item?</p>
-                    <button className={styles["toast-button-yes"]} onClick={() => { handleRemove(telefone); closeToast(); }}>Sim</button>
+                    <button className={styles["toast-button-yes"]} onClick={() => { handleRemove(cpf); closeToast(); }}>Sim</button>
                     <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
                 </div>
             ),
@@ -81,10 +80,11 @@ function PagFornecedor() {
     const handleEdit = (item, index) => {
         setDataEdit({ ...item, index });
         setNome(item.nome);
-        setLogradouro(item.logradouro);
-        setNumeracao(item.numeracao);
+        setCpf(item.cpf);
+        setCargo(item.cargo);
         setTelefone(item.telefone);
-        setCategoria(item.categoria);
+        setEmail(item.email);
+        setSenha(item.senha);
         setOpenCadastro(true);
         setOpenVizualizar(false);  // Fecha o modal de visualização ao abrir o de edição
     };
@@ -100,18 +100,21 @@ function PagFornecedor() {
 
     return (
         <>
-            <MenuLateral />
             <div className={styles["body"]}>
-                <div className={styles["cabecalho"]}>
-                    <BarraPesquisa tituloPag={"Fornecedor"} />
-                    <button onClick={() => { setDataEdit({}); setNome(""); setLogradouro(""); setNumeracao(""); setTelefone(""); setCategoria(""); setOpenCadastro(true); }}>Cadastrar Fornecedor</button>
+                <div className={styles["voltar"]}>
+                    <button>Voltar</button>
                 </div>
-                <ImgConfig />
+                <div className={styles["cabecalho"]}>
+                    <BarraPesquisa tituloPag={"Área Funcionários"} />
+                    <button onClick={() => { setDataEdit({}); setNome(""); setCpf(""); setCargo(""); setTelefone(""); setEmail(""); setSenha(""); setOpenCadastro(true); }}>Cadastrar Funcionário</button>
+                </div>
+                
 
                 <div className={styles["form"]}>
                     <div className={styles["tituloForm"]}>
                         <span>Nome</span>
-                        <span>Categoria</span>
+                        <span>E-mail</span>
+                        <span>Cargo</span>
                         <span>Telefone</span>
                     </div>
                     <div className={styles["tabelaForn"]}>
@@ -125,7 +128,8 @@ function PagFornecedor() {
                                 {data.map((item, index) => (
                                     <tr key={index} onClick={() => handleView(item, index)} style={rowStyle}>
                                         <td>{item.nome}</td>
-                                        <td>{item.categoria}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.cargo}</td>
                                         <td>{item.telefone}</td>
                                     </tr>
                                 ))}
@@ -136,7 +140,7 @@ function PagFornecedor() {
 
                 <ModalCadastro isOpen={openCadastro} setModalOpen={() => setOpenCadastro(!openCadastro)}>
                     <div className={styles["cadastro"]}>
-                        <h3>{dataEdit.index !== undefined ? "Editar Fornecedor" : "Cadastrar Fornecedor"}</h3>
+                        <h3>{dataEdit.index !== undefined ? "Editar Funcionário" : "Novo Funcionário"}</h3>
                         <div className={styles["inputCadastro"]}>
                             <div className={styles["input"]}>
                                 <span>Nome</span>
@@ -147,19 +151,19 @@ function PagFornecedor() {
                                 />
                             </div>
                             <div className={styles["input"]}>
-                                <span>Logradouro</span>
+                                <span>CPF</span>
                                 <input
                                     type="text"
-                                    value={logradouro}
-                                    onChange={(e) => setLogradouro(e.target.value)}
+                                    value={cpf}
+                                    onChange={(e) => setCpf(e.target.value)}
                                 />
                             </div>
                             <div className={styles["input"]}>
-                                <span>Numeração</span>
+                                <span>Cargo</span>
                                 <input
-                                    type="number"
-                                    value={numeracao}
-                                    onChange={(e) => setNumeracao(e.target.value)}
+                                    type="text"
+                                    value={cargo}
+                                    onChange={(e) => setCargo(e.target.value)}
                                 />
                             </div>
                             <div className={styles["input"]}>
@@ -171,11 +175,19 @@ function PagFornecedor() {
                                 />
                             </div>
                             <div className={styles["input"]}>
-                                <span>Categoria</span>
+                                <span>E-mail</span>
                                 <input
                                     type="text"
-                                    value={categoria}
-                                    onChange={(e) => setCategoria(e.target.value)}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                            <div className={styles["input"]}>
+                                <span>Senha</span>
+                                <input
+                                    type="password"
+                                    value={senha}
+                                    onChange={(e) => setSenha(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -186,15 +198,14 @@ function PagFornecedor() {
                 <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nome}`}>
                     <div className={styles["formVizualizar"]}>
                     <div className={styles["dadosForn"]}>
-                        <span>Logradouro: {viewData.logradouro}</span>
-                        <span>Numeração: {viewData.numeracao}</span>
+                        <span>Cargo: {viewData.cargo}</span>
                         <span>Telefone: {viewData.telefone}</span>
-                        <span>Categoria: {viewData.categoria}</span>
+                        <span>E-mail: {viewData.email}</span>
                     </div>
 
                     <div className={styles["botao"]}>
                         <button id={styles["editar"]} onClick={() => handleEdit(viewData, viewData.index)}>Editar</button>
-                        <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.telefone)}>Excluir</button>
+                        <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.cpf)}>Excluir</button>
                     </div>
                     </div>
                 </ModalVizualizar>
@@ -203,4 +214,4 @@ function PagFornecedor() {
     );
 }
 
-export default PagFornecedor;
+export default PagFuncionario;

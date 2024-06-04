@@ -32,7 +32,8 @@
 .tituloForn{
     width: 80%;
     display: flex;
-    justify-content: end;
+    justify-content: baseline;
+    margin-left: 1rem;
 }
 
 .imagem{

@@ -24,7 +24,8 @@ input{
 
 button{
     font-family: "Jost";
-    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
 ::placeholder{

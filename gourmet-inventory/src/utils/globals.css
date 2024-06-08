@@ -28,6 +28,10 @@ button{
     cursor: pointer;
 }
 
+button:hover{
+    background-color: #a77940;
+}
+
 ::placeholder{
     font-family: "Jost";
 }

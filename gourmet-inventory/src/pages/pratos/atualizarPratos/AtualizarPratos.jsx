@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./CadastrarPratos.module.css";
+import styles from "./AtualizarPratos.module.css";
 import {toast } from 'react-toastify';
 import imgUpload from "../../../utils/assets/Group 191.svg";
 
-function CadastrarPratos() {
+function AtualizarPratos() {
 
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ function CadastrarPratos() {
             <div className={styles["cabecalho"]}>
                 <button onClick={handleBack}>Voltar</button>
                 <div className={styles["titulo"]}>
-                    <h1>Cadastrar Prato</h1>
+                    <h1>Atualizar Prato</h1>
                 </div>
             </div>
             <div className={styles["corpo"]}>
@@ -75,7 +75,7 @@ function CadastrarPratos() {
                     <div className={styles["ingredientes"]}>
 
                     </div>
-                    <button id={styles["botao-cadastrar-pratos"]}>Cadastrar</button>
+                    <button id={styles["botao-cadastrar-pratos"]}>Atualizar</button>
                 </div>
             </div>
             
@@ -84,4 +84,4 @@ function CadastrarPratos() {
     );
 }
 
-export default CadastrarPratos;
+export default AtualizarPratos;

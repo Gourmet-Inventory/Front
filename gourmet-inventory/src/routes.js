@@ -13,6 +13,7 @@ import Funcionarios from "./pages/pagFuncionarios/PagFuncionarios"
 import Pratos from "./pages/pratos/pagPratos/PagPratos"
 import CadastroPratos from "./pages/pratos/cadastrarPratos/CadastrarPratos"
 import AtualizarPratos from "./pages/pratos/atualizarPratos/AtualizarPratos"
+import Saida from "./pages/saida//Saida"
     
 function Rotas() {
     return (
@@ -32,6 +33,7 @@ function Rotas() {
                     <Route path="/gourmet-inventory/pratos" element= {<Pratos/>}/>
                     <Route path="/gourmet-inventory/cadastrar-pratos" element= {<CadastroPratos/>}/>
                     <Route path="/gourmet-inventory/atualizar-pratos" element= {<AtualizarPratos/>}/>
+                    <Route path="/gourmet-inventory/saida-pratos" element= {<Saida/>}/>
                 </Routes>
             </BrowserRouter>
         </>

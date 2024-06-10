@@ -12,7 +12,7 @@
 
 .barraPesquisa {
     display: flex;
-    width: 75vw;
+    width: 70vw;
     height: 35px;
     background-color: #E2F7F8;
     flex-direction: row;

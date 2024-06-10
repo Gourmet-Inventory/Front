@@ -6,10 +6,11 @@ import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
 import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualizarForn";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
-import 'react-toastify/dist/ReactToastify.css'; // Certifique-se de importar o CSS do react-toastify
+import 'react-toastify/dist/ReactToastify.css';
 
 function PagFornecedor() {
     const [data, setData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     const [dataEdit, setDataEdit] = useState({});
     const [viewData, setViewData] = useState({});
     const [openCadastro, setOpenCadastro] = useState(false);
@@ -26,6 +27,7 @@ function PagFornecedor() {
             ? JSON.parse(localStorage.getItem("cad_cliente"))
             : [];
         setData(db_costumer);
+        setFilteredData(db_costumer); // Inicializa com todos os dados
     }, []);
 
     const handleSave = () => {
@@ -43,6 +45,7 @@ function PagFornecedor() {
 
         localStorage.setItem("cad_cliente", JSON.stringify(newDataArray));
         setData(newDataArray);
+        setFilteredData(newDataArray); // Atualiza a lista filtrada
         setOpenCadastro(false);
     };
 
@@ -56,8 +59,9 @@ function PagFornecedor() {
     const handleRemove = (telefone) => {
         const newArray = data.filter((item) => item.telefone !== telefone);
         setData(newArray);
+        setFilteredData(newArray); // Atualiza a lista filtrada
         localStorage.setItem("cad_cliente", JSON.stringify(newArray));
-        setOpenVizualizar(false);  // Fecha o modal após exclusão
+        setOpenVizualizar(false);
     };
 
     const confirmRemove = (telefone) => {
@@ -86,12 +90,23 @@ function PagFornecedor() {
         setTelefone(item.telefone);
         setCategoria(item.categoria);
         setOpenCadastro(true);
-        setOpenVizualizar(false);  // Fecha o modal de visualização ao abrir o de edição
+        setOpenVizualizar(false);
     };
 
     const handleView = (item, index) => {
         setViewData({ ...item, index });
         setOpenVizualizar(true);
+    };
+
+    const handleSearch = (searchTerm) => {
+        if (searchTerm === "") {
+            setFilteredData(data); // Se a pesquisa estiver vazia, mostra todos os dados
+        } else {
+            const filtered = data.filter(item =>
+                item.nome.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setFilteredData(filtered);
+        }
     };
 
     const rowStyle = {
@@ -103,7 +118,7 @@ function PagFornecedor() {
             <MenuLateral />
             <div className={styles["body"]}>
                 <div className={styles["cabecalho"]}>
-                    <BarraPesquisa tituloPag={"Fornecedor"} />
+                    <BarraPesquisa tituloPag={"Fornecedor"} onSearch={handleSearch} />
                     <button onClick={() => { setDataEdit({}); setNome(""); setLogradouro(""); setNumeracao(""); setTelefone(""); setCategoria(""); setOpenCadastro(true); }}>Cadastrar Fornecedor</button>
                 </div>
                 <ImgConfig />
@@ -118,11 +133,11 @@ function PagFornecedor() {
                         <table>
                             <thead>
                                 <tr>
-                                    
+                                   
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.map((item, index) => (
+                                {filteredData.map((item, index) => (
                                     <tr key={index} onClick={() => handleView(item, index)} style={rowStyle}>
                                         <td>{item.nome}</td>
                                         <td>{item.categoria}</td>
@@ -185,17 +200,17 @@ function PagFornecedor() {
 
                 <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nome}`}>
                     <div className={styles["formVizualizar"]}>
-                    <div className={styles["dadosForn"]}>
-                        <span>Logradouro: {viewData.logradouro}</span>
-                        <span>Numeração: {viewData.numeracao}</span>
-                        <span>Telefone: {viewData.telefone}</span>
-                        <span>Categoria: {viewData.categoria}</span>
-                    </div>
+                        <div className={styles["dadosForn"]}>
+                            <span>Logradouro: {viewData.logradouro}</span>
+                            <span>Numeração: {viewData.numeracao}</span>
+                            <span>Telefone: {viewData.telefone}</span>
+                            <span>Categoria: {viewData.categoria}</span>
+                        </div>
 
-                    <div className={styles["botao"]}>
-                        <button id={styles["editar"]} onClick={() => handleEdit(viewData, viewData.index)}>Editar</button>
-                        <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.telefone)}>Excluir</button>
-                    </div>
+                        <div className={styles["botao"]}>
+                            <button id={styles["editar"]} onClick={() => handleEdit(viewData, viewData.index)}>Editar</button>
+                            <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.telefone)}>Excluir</button>
+                        </div>
                     </div>
                 </ModalVizualizar>
             </div>

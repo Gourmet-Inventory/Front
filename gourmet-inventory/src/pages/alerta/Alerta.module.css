@@ -1,22 +1,240 @@
-
-.tabela{
-    width: 900px;
-    height: 450px;
-    margin-left: 100px;
-    display: flex;
-}
-
 .tabelaForm{
     display: flex;
-    height: 100%;
-    justify-content: space-around;
-    align-items: baseline;
-    width: 65.9vw;
+    width: 100vw;
+    height: 75vh;
+    margin-left: 6rem;
 }
 
-.tabelaForm span{
-    font-size: 1.5rem;
+
+.tabelaAlertas{
+    width: 71%;
 }
+
+.tituloForm{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+/* table */
+
+.tabela{
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 100%;
+}
+
+.tabela table{
+    width: 100%;
+    border-collapse: collapse;
+    cursor: pointer;
+ 
+}
+
+.tabela img{
+    width: 2.5rem;
+    margin-left: 2rem;
+}
+
+#imgfechar{
+    width: 1.5rem;
+    margin-right: 1rem;
+}
+
+
+.tabela tr {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #37455D;
+}
+
+.tabela tr:hover{
+    background-color: #263041;
+}
+  
+.tabela td {
+    display: flex;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: lighter;
+    justify-content: center; /* Centraliza o conteúdo dentro das células */
+    flex: 1; /* Faz com que todas as células tenham o mesmo tamanho */
+    padding: 1rem; /* Espaçamento interno das células */
+}
+
+/* children */
+
+.tituloModal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 13%;
+    background-color: #B0D2D3;
+    box-shadow: 2px 3px 3px #0000002f;
+}
+
+.tituloIngrediente span{
+    color: #37455D;
+    font-size: 1.3rem;
+}
+
+.tituloIngrediente{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+}
+
+#titulo{
+    font-size: 1.6rem;
+}
+
+.tituloModal img{
+    cursor: pointer;
+    z-index: 1001;
+    height: 1.2rem;
+}
+
+.tituloModal img:hover{
+    background-color: #37455D;
+}
+
+.corpoModal{
+    display: flex;
+    width: 100%;
+    height: 87%; 
+}
+
+.legendaModal{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    background-color: #37455D;
+}
+
+.legendasIngred{
+    width: 90%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 1.1rem;
+    justify-content: space-evenly;
+}
+
+
+.dadosModal{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+}
+
+.dadosIngred{
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    justify-content: space-evenly;
+}
+
+/* modal 2 */
+
+.tituloModalManipulado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 13%;
+    background-color: #37455D;
+    box-shadow: 2px 3px 3px #0000002f;
+}
+
+.tituloModalManipulado img{
+    cursor: pointer;
+    z-index: 1001;
+    height: 1.2rem;
+}
+
+.tituloIngrediente2 span{
+    color: white;
+    font-size: 1.3rem;
+}
+
+.tituloIngrediente2{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+}
+
+#titulo2{
+    font-size: 1.6rem;
+}
+
+.tituloModal2 img{
+    cursor: pointer;
+    z-index: 1001;
+    height: 1.2rem;
+}   
+
+.corpoModal2{
+    display: flex;
+    width: 100%;
+    height: 87%; 
+}
+
+.legendaModal2{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    background-color: #B0D2D3;
+}
+
+.legendasIngred2{
+    width: 90%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    justify-content: space-evenly;
+}
+
+
+.dadosModal2{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+}
+
+.dadosIngred2{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    justify-content: space-evenly;
+}
+
+.ingredientesModal{
+    display: flex;
+    align-self: center;
+    height: 31%;
+    width: 98%;
+    border: 1px solid #8ea7a8;
+}
+
+/*  */
 
 .filtrosForm{
     width: 20.5rem;
@@ -31,7 +249,7 @@
 }
 
 .filtros{
-    height: 30rem;
+    height: 100%;
     width: 100%;
     align-items: center;
     display: flex;

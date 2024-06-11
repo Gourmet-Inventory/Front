@@ -22,21 +22,31 @@ function Saida() {
                 </div>
                 <ImgConfig />
 
-                <div className={styles["form"]}>
-                    <div className={styles["card"]}>
-                        <div className={styles["imgCard"]}>
-                            <img src={exemplo}/>
-                        </div>
-                        <div className={styles["infoCard"]}>
-                            <span>Nome: </span>
-                            <span>Categoria: </span>
-                            <span>Tempo de Preparo: </span>
-                            <button>Adicionar</button>
-                        </div>
-                    </div> 
-                </div>
+                <div className={styles["formPratos"]}>
+                    <div className={styles["form"]}>
+                        <div className={styles["card"]}>
+                            <div className={styles["imgCard"]}>
+                                <img src={exemplo}/>
+                            </div>
+                            <div className={styles["infoCard"]}>
+                                <span>Nome: </span>
+                                <span>Categoria: </span>
+                                <span>Tempo de Preparo: </span>
+                                <button>Adicionar</button>
+                            </div>
+                        </div> 
+                    </div>
 
-                <div className={styles[""]}></div>
+                    <div className={styles["saidaPratos"]}>
+                        <div className={styles["saida"]}>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                
+
                 
             </div>
         </>

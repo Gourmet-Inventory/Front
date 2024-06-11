@@ -204,6 +204,7 @@
 
 .ingredientes{
     display: flex;
+    justify-content: center;
     height: 45%;
     width: 80%;
     border: 0.5px solid rgba(0, 0, 0, 0.548);

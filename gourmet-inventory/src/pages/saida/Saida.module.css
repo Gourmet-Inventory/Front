@@ -1,11 +1,16 @@
+.formPratos{
+    display: flex;
+    width: 95vw;
+    height: 77vh;
+    background-color: aqua;
+    margin-left: 6rem;
+}
+
 .form{
     width: 67.5vw;
     height: 72vh;
-    margin-left: 6rem;
     flex-direction: column;
-    background-color: violet;
     padding: 1rem;
-    position: fixed;
 }
 
 .cabecalho{
@@ -61,4 +66,10 @@
 
 .infoCard button:hover{
     background-color: #a77940;
+}
+
+.saidaPratos{
+    width: 23vw;
+    height: 100%;
+    background-color: yellow;
 }

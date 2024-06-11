@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styles from "./AtualizarPratos.module.css";
 import {toast } from 'react-toastify';
 import imgUpload from "../../../utils/assets/Group 191.svg";
+import AlergicoSelector from "../../../components/alergicoSelector/AlergicoSelector";
+import CardIngrediente from "../../../components/cardIngrediente/CardIngrediente";
+import imgDeletar from "../../../utils/assets/Fechar.svg"
 
 function AtualizarPratos() {
 
@@ -40,9 +43,7 @@ function AtualizarPratos() {
                             </div>
                             <span>Alérgicos:</span>
                             <div className={styles["selected"]}>
-                                <select name="alergicos">
-                                    <option value=""></option>
-                                </select>
+                                <AlergicoSelector/>
                             </div>
                             <span>Descrição:</span>
                             <div className={styles["inputDescrição"]}>
@@ -73,7 +74,7 @@ function AtualizarPratos() {
                        
                     </div>
                     <div className={styles["ingredientes"]}>
-
+                        <CardIngrediente valor={"200"} medida={"gr"} ingrediente={"Cebola"} imgDeletar={imgDeletar}/>
                     </div>
                     <button id={styles["botao-cadastrar-pratos"]}>Atualizar</button>
                 </div>

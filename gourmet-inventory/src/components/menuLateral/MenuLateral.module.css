@@ -48,7 +48,7 @@
     justify-content:space-evenly;
     align-items: center;
     height: 10vh;
-    width: 15vw;
+    width: 5vw;
     background-color: white;
 }
 
@@ -81,12 +81,9 @@
     border-bottom: 1px white solid;
     height: 8rem;
     align-items: center;
-
 }
 
-.expanded .imgHome{    
-    justify-self: start;
-    display: flex;
+.expanded .imgHome{
     width: 2.5vw;
 }
 
@@ -118,6 +115,7 @@
     width: 15vw;
     color: white;
 }
+
 
 .expanded .iconText{
     font-size: 3vh;

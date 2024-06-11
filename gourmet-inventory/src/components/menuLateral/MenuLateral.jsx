@@ -30,13 +30,12 @@ function MenuLateral() {
     const location = useLocation();
     const navigate = useNavigate();
     
+    const [nome, setNome] = useState('');
+
     useEffect(() => {
-        const storedData = localStorage.getItem('nomeFantasia');
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
-            if (parsedData.empresa && parsedData.empresa.nomeEmpresa) {
-                setNomeEmpresa(parsedData.empresa.nomeEmpresa);
-            }
+       const nomeGuardado = localStorage.getItem('empresaNome');
+        if(nomeGuardado){
+            setNome(nomeGuardado)
         }
     }, []);
 
@@ -64,34 +63,34 @@ function MenuLateral() {
             
             {isExpanded && (
                 <span className={styles.nomeEmpresa}>
-                    {nomeEmpresa}
+                    <p>{nome}</p>
                     <img className={styles['imgBox']} src={logoExpanded} />
                 </span>
             )}
             <div className={styles["icons"]}>
-                <span className={getClassName('/gourmet-inventory/menu')} >
+                <span className={getClassName('/gourmet-inventory/menu')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/menu')}  >
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/menu' ? homeImgSelected : homeImg} alt="Home Selected" />
-                    {isExpanded && <span className={styles.iconText} >Menu Início</span>}
+                    {isExpanded && <span className={styles.iconText}>Menu Início</span>}
                 </span>
                 <span className={getClassName('/gourmet-inventory/estoque')}>
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/estoque' ? estoqueImgSelected : estoqueImg} alt="Estoque" />
-                    {isExpanded && <span className={styles.iconText} >Estoque</span>}
+                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/estoque')} >Estoque </span> }
                 </span>
                 <span className={getClassName('/gourmet-inventory/pratos')}>
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/pratos' ? pratosImgSelected : pratosImg} alt="Pratos" />
-                    {isExpanded && <span className={styles.iconText}>Pratos</span>}
+                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/pratos')}>Pratos</span>}
                 </span>
                 <span className={getClassName('/gourmet-inventory/saida')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/saida' ? saidaImgSelected : saidaImg} alt="Saída" />
-                    {isExpanded && <span className={styles.iconText}>Saída</span>}
+                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/saida-pratos')}>Saída</span>}
                 </span>
                 <span className={getClassName('/gourmet-inventory/fornecedor')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/fornecedor' ? fornecedorImgSelected : fornecedorImg} alt="Fornecedor" />
-                    {isExpanded && <span className={styles.iconText}>Fornecedor</span>}
+                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/fornecedor')}>Fornecedor</span>}
                 </span>
                 <span className={getClassName('/gourmet-inventory/alertas')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/alertas' ? alertaImgSelected : alertaImg} alt="Alertas" />
-                    {isExpanded && <span className={styles.iconText}>Alertas</span>}
+                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/alertas')}>Alertas</span>}
                 </span>
             </div>
         </div>

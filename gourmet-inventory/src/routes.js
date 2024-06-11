@@ -8,7 +8,7 @@ import Cadastro from "./pages/areaBackOffice/cadastroempresa/Cadastro";
 import Fornecedor from "./pages/pagFornecedor/pagFornecedor";
 import Alerta from "./pages/alerta/Alerta";
 import Menu from "./pages/menu/Menu";
-import Estoque from "./pages/estoqueIngrediente/Estoque";
+import Estoque from "./pages/estoqueIngrediente/estoque/Estoque";
 import Funcionarios from "./pages/pagFuncionarios/PagFuncionarios"
 import Pratos from "./pages/pratos/pagPratos/PagPratos"
 import CadastroPratos from "./pages/pratos/cadastrarPratos/CadastrarPratos"

@@ -12,13 +12,22 @@ import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const navigate = useNavigate();
+  const [nome, setNome] = useState('');
+
+  useEffect(() => {
+     const nomeGuardado = localStorage.getItem('empresaNome');
+      if(nomeGuardado){
+          setNome(nomeGuardado)
+      }
+  }, []);
+
   return (  
     <>
       <ImgConfig />
       <div className={styles["form"]}>
         <ImgConfig />
 
-          <h1>Bem vindo a NomeEmpresa!</h1>
+          <h1>Bem vindo ao estoque de {nome}</h1>
           <div className={styles["box"]}>
             <div className={styles["menus"]}>
               <div className={styles["menu"]}>
@@ -27,7 +36,7 @@ const Menu = () => {
             </div>
             <div className={styles["menu"]}>
               <button onClick={() => navigate('/gourmet-inventory/estoque')}>Pratos</button>
-              <button>Saída</button>
+              <button onClick={() => navigate('/gourmet-inventory/saida-pratos')}>Saída</button>
               <button onClick={() => navigate('/gourmet-inventory/fornecedor')}>Fornecedores</button>
             </div>
           </div>

@@ -54,7 +54,6 @@ const Empresa = () => {
                         <p>Nome: {selectedEmpresa.nomeFantasia}</p>
                         <p>CNPJ: {selectedEmpresa.cnpj}</p>
                         <p>Telefone: {selectedEmpresa.telefone}</p>
-                        <p>Responsável: {selectedEmpresa.responsavel.nome}</p>
                     </div>
                 )}
             </Modal>
@@ -66,7 +65,6 @@ const Empresa = () => {
                             <tr>
                                 <th>Id Empresa</th>
                                 <th>Nome Empresa</th>
-                                <th>Responsável</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -77,7 +75,6 @@ const Empresa = () => {
                                 <tr key={empresa.idEmpresa}>
                                     <td>{empresa.idEmpresa}</td>
                                     <td>{empresa.nomeFantasia}</td>
-                                    <td>{empresa.responsavel.nome}</td>
                                     <td><button className={styles.editar} onClick={() => toggleModal(empresa)}>Ver Mais</button></td>
                                     <td><button className={styles.editar}>Editar</button></td>
                                     <td><button className={styles.excluir} onClick={() => handleExcluir(empresa.idEmpresa)}>Excluir</button></td>

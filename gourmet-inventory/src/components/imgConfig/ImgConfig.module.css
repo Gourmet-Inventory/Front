@@ -1,9 +1,9 @@
 .imgConfig {
     top: 0;
-    left: 0;
+    left: 89vw;
     height: 8vh;
-    width: 100vw;
-    z-index: 999;
+    width: 12vw;
+    z-index: 998;
     display: flex;
     max-height: 12vh;
     min-height: 6vh;

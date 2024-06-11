@@ -20,8 +20,6 @@ const BarraPesquisa = ({ tituloPag }) => {
                     <input
                         type="text"
                         placeholder="Pesquisar"
-                        // value={searchTerm}
-                        // onChange={handleSearchChange}
                     />
                     <div className={styles["imgs"]}>
                         <img src={imgLupa} alt="Lupa" />

@@ -11,23 +11,20 @@ const Cadastro = () => {
     const [nomeFantasia, setNomeFantasia] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [responsavelId, setResponsavelId] = useState('');
 
 
     const handleSubmit = () => {
         const empresaAdd = {
             nomeFantasia,
             cnpj,
-            telefone,
-            responsavelId
+            telefone
         };
-        console.log('Dados enviados:', { nomeFantasia, cnpj, telefone, responsavelId });
+        console.log('Dados enviados:', { nomeFantasia, cnpj, telefone});
 
         api.post('/empresas',{
             nomeFantasia,
             cnpj,
             telefone,
-            responsavelId
         },{
             headers:{
                 'Authorization': `Bearer ${localStorage.token}`
@@ -81,17 +78,10 @@ const Cadastro = () => {
                         onChange={(e) => handleInputChange(e, setTelefone)}
                     />
                 </div>
-                <div className={styles['form-group']}>
-                    <label htmlFor="responsavelId">ID do Responsável:</label>
-                    <input
-                        type="text"
-                        id="responsavelId"
-                        value={responsavelId}
-                        onChange={(e) => handleInputChange(e, setResponsavelId)}
-                    />
-                </div>
+                <div className={styles['botoes']}>
                 <button onClick={handleSubmit}>Cadastrar</button>
                 <button onClick={handleBack}>Cancelar</button>
+                </div>
             </form>
         </div>
     );

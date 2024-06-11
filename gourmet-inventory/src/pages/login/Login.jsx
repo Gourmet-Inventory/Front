@@ -11,13 +11,18 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [nomeEmpresa, setNomeEmpresa] = useState('');
 
     const handleSave = async () => {
         try {
             const response = await api.post('/usuarios/login', {email,senha});
             const token = response.data.token;
+            const nomeEmpresa = response.data.empresa.nomeFantasia;
+            localStorage.setItem('loginResponse', JSON.stringify(response.data));
+            localStorage.setNomeEmpresa('nomeEmpresa', nomeEmpresa);
+        if (token) {
             localStorage.setItem('token', token);
-            localStorage.setItem('email', email);
+        }
             navigate('/gourmet-inventory/menu');
         } catch (error) {
             toast.error('Erro ao fazer login. Verifique suas credenciais e tente novamente.');

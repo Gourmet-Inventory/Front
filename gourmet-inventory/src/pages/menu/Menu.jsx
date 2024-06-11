@@ -27,7 +27,7 @@ const Menu = () => {
             </div>
             <div className={styles["menu"]}>
               <button onClick={() => navigate('/gourmet-inventory/estoque')}>Pratos</button>
-              <button>Saída</button>
+              <button onClick={() => navigate('/gourmet-inventory/saida-pratos')}>Saída</button>
               <button onClick={() => navigate('/gourmet-inventory/fornecedor')}>Fornecedores</button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import styles from './MenuLateral.module.css'
 import { useLocation,useNavigate } from 'react-router-dom';
 
@@ -29,6 +29,18 @@ function MenuLateral() {
     const [isExpanded, setIsExpanded] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    
+    useEffect(() => {
+        const storedData = localStorage.getItem('nomeFantasia');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            if (parsedData.empresa && parsedData.empresa.nomeEmpresa) {
+                setNomeEmpresa(parsedData.empresa.nomeEmpresa);
+            }
+        }
+    }, []);
+
+
 
 
     const toggleOverlay = () => {
@@ -39,6 +51,8 @@ function MenuLateral() {
         return location.pathname === path ?  styles.imgBorderSelected : styles.imgBorder;
     };
 
+    
+
     return (
         <div className={`${styles.sidebar} ${isExpanded ? styles.expanded : ''}`} onClick={toggleOverlay}>
             <img 
@@ -47,9 +61,10 @@ function MenuLateral() {
                 alt="Logo" 
                 onClick={toggleOverlay} 
             />
+            
             {isExpanded && (
                 <span className={styles.nomeEmpresa}>
-                    Nome empresa
+                    {nomeEmpresa}
                     <img className={styles['imgBox']} src={logoExpanded} />
                 </span>
             )}
@@ -79,9 +94,6 @@ function MenuLateral() {
                     {isExpanded && <span className={styles.iconText}>Alertas</span>}
                 </span>
             </div>
-            {isExpanded && (
-                <button className={styles.botao}>Sair</button>
-            )}
         </div>
     );
 };

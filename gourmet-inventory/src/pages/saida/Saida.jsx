@@ -17,7 +17,7 @@ function Saida() {
 
     return (
         <> 
-            {/* <MenuLateral/> */}
+            <MenuLateral/>
             <div className={styles["body"]}>
                 <div className={styles["cabecalho"]}>
                     <BarraPesquisa tituloPag={"Saída"}/>

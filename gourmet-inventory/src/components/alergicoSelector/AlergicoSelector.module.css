@@ -2,12 +2,11 @@
     display: flex;
     justify-content: center;
     width: 30rem;
-    height: 5rem;
 }
 
 .alergicos select{
-    width: 100%;
-    height: 2.5rem;
+    width: 96%;
+    height: 2.3rem;
     font-size: 1rem;
 }
 

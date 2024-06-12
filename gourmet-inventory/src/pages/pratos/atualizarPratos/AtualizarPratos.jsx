@@ -8,6 +8,7 @@ import CardIngrediente from "../../../components/cardIngrediente/CardIngrediente
 import imgDeletar from "../../../utils/assets/Fechar.svg";
 
 function AtualizarPratos() {
+        
     const [nome, setNome] = useState("");
     const [preco, setPreco] = useState("");
     const [alergicos, setAlergicos] = useState([]);

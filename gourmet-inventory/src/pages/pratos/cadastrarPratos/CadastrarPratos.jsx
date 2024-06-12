@@ -168,11 +168,11 @@ function CadastrarPratos() {
                 </div>
                 <div className={styles["medidas"]}>
                     <h1>Ingredientes</h1>
-                    <div className={styles["formMedidas"]}>
-                        <div className={styles["input"]}>
+                    <div className={styles["input"]} id={styles["ingredienteMedida"]}>
                             <span>Ingrediente:</span>
                             <input type="text" value={ingrediente} onChange={(e) => setIngrediente(e.target.value)} />
-                        </div>
+                    </div>
+                    <div className={styles["formMedidas"]}>
                         <div className={styles["input"]}>
                             <span>Valor Medida:</span>
                             <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} />

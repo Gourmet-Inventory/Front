@@ -13,11 +13,23 @@ function PagPratos() {
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [viewPrato, setViewPrato] = useState({ nome: '', categoria: '', preco: '', alergicos: [], descricao: '', ingredientes: [] });
 
+    const [nome, setNome] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [preco, setPreco] = useState("");
+    const [categoria, setCategoria] = useState("");
+    const [alergicos, setAlergicos] = useState([]);
+    const [ingrediente, setIngrediente] = useState("");
+    const [valorMedida, setValorMedida] = useState("");
+    const [tipoMedida, setTipoMedida] = useState("");
+    const [ingredientes, setIngredientes] = useState([]);
+    const [dataEdit, setDataEdit] = useState({});
+    const [viewData, setViewData] = useState({});
+
     const navigate = useNavigate();
 
     useEffect(() => {
         // Recuperar pratos da API ao carregar a página
-        api.get('/pratos', {
+        api.get(`/pratos/${localStorage.empresaId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         })
         .then(response => {
@@ -35,6 +47,7 @@ function PagPratos() {
     const handleEditar = (prato) => {
         navigate("/gourmet-inventory/atualizar-pratos", { state: { prato } }); // Ajuste o caminho conforme necessário
     };
+
 
     const confirmRemove = (nome) => {
         toast(
@@ -54,6 +67,21 @@ function PagPratos() {
         );
     };
 
+    const handleEdit = (prato) => {
+        setDataEdit(prato);
+        setNome(prato.nome);
+        setDescricao(prato.descricao);
+        setPreco(prato.preco);
+        setCategoria(prato.categoria);
+        setAlergicos(prato.alergicos);
+        setIngredientes(prato.ingredientes);
+    };
+
+    const handleView = (prato) => {
+        setViewData(prato);
+        setOpenVizualizar(true);
+    };
+
     return (
         <> 
             <MenuLateral />
@@ -65,6 +93,7 @@ function PagPratos() {
                 <ImgConfig />
 
                 <div className={styles["form"]}>
+                    {console.log(pratos)}
                     {pratos.map(prato => (
                         <div className={styles["card"]} key={prato.id}>
                             <div className={styles["imgCard"]}>
@@ -76,6 +105,7 @@ function PagPratos() {
                                 <span>Descrição: {prato.descricao}</span>
                                 <span>Preço: {prato.preco}</span>
                                 <span>Categoria: {prato.categoria}</span>
+                                <button onClick={handleView}>Ver Mais</button>
                                 {/* Adicione mais detalhes do prato conforme necessário */}
                             </div>
                         </div>

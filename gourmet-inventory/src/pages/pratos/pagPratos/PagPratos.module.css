@@ -1,6 +1,6 @@
 .form{
-    width: 67.3vw;
-    height: 72vh;
+    width: 70vw;
+    height: 80vh;
     margin-left: 100px;
     /* flex-direction: column; */
     background-color: violet;
@@ -9,23 +9,24 @@
     overflow-y: scroll;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .cabecalho{
     width: 100%;
     display: flex;
     align-items: end;
-    gap: 20px;
 }
 
 .cabecalho button{
     background-color: #E59E53;
     border-radius: 0%;
-    width: 200px;
+    width: 15rem;
     height: 4.5rem;
     color: black;
-    font-size: 19px;
-    margin-bottom: -25px;
+    font-size: 1.4rem;
+    margin-bottom: -2rem;
+    margin-right: 6rem;
     font-weight: lighter;
 }
 

@@ -11,13 +11,24 @@ import api from "../../../api";
 function PagPratos() {
     const [pratos, setPratos] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
-    const [viewPrato, setViewPrato] = useState({ nome: '', categoria: '', preco: '', alergicos: [], descricao: '', ingredientes: [] });
+    const [viewData, setViewData] = useState({ nome: '', categoria: '', preco: '', alergicos: [], descricao: '', ingredientes: [] });
+
+    const [nome, setNome] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [preco, setPreco] = useState("");
+    const [categoria, setCategoria] = useState("");
+    const [alergicos, setAlergicos] = useState([]);
+    const [ingrediente, setIngrediente] = useState("");
+    const [valorMedida, setValorMedida] = useState("");
+    const [tipoMedida, setTipoMedida] = useState("");
+    const [ingredientes, setIngredientes] = useState([]);
+    const [dataEdit, setDataEdit] = useState({});
 
     const navigate = useNavigate();
 
     useEffect(() => {
         // Recuperar pratos da API ao carregar a página
-        api.get('/pratos', {
+        api.get(`/pratos/${localStorage.empresaId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         })
         .then(response => {
@@ -41,7 +52,7 @@ function PagPratos() {
             ({ closeToast }) => (
                 <div>
                     <p>Tem certeza que deseja excluir este prato?</p>
-                    <button className={styles["toast-button-yes"]}>Sim</button>
+                    <button className={styles["toast-button-yes"]} onClick={() => handleDelete(nome, closeToast)}>Sim</button>
                     <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
                 </div>
             ),
@@ -52,6 +63,36 @@ function PagPratos() {
                 draggable: false,
             }
         );
+    };
+
+    const handleEdit = (prato) => {
+        setDataEdit(prato);
+        setNome(prato.nome);
+        setDescricao(prato.descricao);
+        setPreco(prato.preco);
+        setCategoria(prato.categoria);
+        setAlergicos(prato.alergicos);
+        setIngredientes(prato.ingredientes);
+    };
+
+    const handleView = (prato) => {
+        setViewData(prato);
+        setOpenVizualizar(true);
+    };
+
+    const handleDelete = (nome, closeToast) => {
+        api.delete(`/pratos/${localStorage.empresaId}/${nome}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
+        })
+        .then(() => {
+            setPratos(pratos.filter(prato => prato.nome !== nome));
+            closeToast();
+            setOpenVizualizar(false);
+            toast.success("Prato excluído com sucesso!");
+        })
+        .catch(() => {
+            toast.error("Erro ao excluir prato.");
+        });
     };
 
     return (
@@ -65,46 +106,48 @@ function PagPratos() {
                 <ImgConfig />
 
                 <div className={styles["form"]}>
+                    {console.log(pratos)}
                     {pratos.map(prato => (
                         <div className={styles["card"]} key={prato.id}>
                             <div className={styles["imgCard"]}>
                                 {/* Aqui você pode colocar a imagem do prato, se tiver */}
-                                <img src={prato.imagem} alt={prato.nome} />
+                                {/* <img src={prato.imagem} alt={prato.nome} /> */}
                             </div>
                             <div className={styles["infoCard"]}>
                                 <span>Nome: {prato.nome}</span>
                                 <span>Descrição: {prato.descricao}</span>
                                 <span>Preço: {prato.preco}</span>
                                 <span>Categoria: {prato.categoria}</span>
+                                <button onClick={() => handleView(prato)}>Ver Mais</button>
                                 {/* Adicione mais detalhes do prato conforme necessário */}
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {viewPrato && (
+                {viewData && (
                     <ModalPratos
                         isOpen={openVizualizar}
                         setModalOpen={() => setOpenVizualizar(!openVizualizar)}
-                        tituloModal={viewPrato.nome}
-                        categoriaModal={`Categoria: ${viewPrato.categoria}`}
+                        tituloModal={viewData.nome}
+                        categoriaModal={`Categoria: ${viewData.categoria}`}
                     >
                         <div className={styles["corpoVizualizar"]}>
                             <div className={styles["corpoModal"]}>
                                 <div className={styles["descricaoModal"]}>
                                     <div className={styles["imgDescricao"]}>
-                                        <img src={ImgConfig} alt={viewPrato.nome} />
+                                        <img src={viewData.imagem} alt={viewData.nome} />
                                     </div>
                                     <div className={styles["textDescricao"]}>
-                                        <span>Preço: {viewPrato.preco}</span>
-                                        <span>Alérgicos: {viewPrato.alergicos?.join(", ")}</span>
-                                        <span>Descrição: {viewPrato.descricao}</span>
+                                        <span>Preço: {viewData.preco}</span>
+                                        <span>Alérgicos: {viewData.alergicos?.join(", ")}</span>
+                                        <span>Descrição: {viewData.descricao}</span>
                                     </div>
                                 </div>
                                 <div className={styles["ingredientesModal"]}>
                                     <h2>Ingredientes</h2>
                                     <div className={styles["ingredientes"]}>
-                                        {viewPrato.ingredientes?.map((ing, index) => (
+                                        {viewData.ingredientes?.map((ing, index) => (
                                             <div key={index}>
                                                 {ing.ingrediente}: {ing.valorMedida} {ing.tipoMedida}
                                             </div>
@@ -114,8 +157,8 @@ function PagPratos() {
                             </div>
 
                             <div className={styles["buttonModal"]}>
-                                <button id={styles["editar"]} onClick={() => handleEditar(viewPrato)}>Editar</button>
-                                <button id={styles["excluir"]} onClick={() => confirmRemove(viewPrato.nome)}>Excluir</button>
+                                <button id={styles["editar"]} onClick={() => handleEditar(viewData)}>Editar</button>
+                                <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.nome)}>Excluir</button>
                             </div>
                         </div>
                     </ModalPratos>

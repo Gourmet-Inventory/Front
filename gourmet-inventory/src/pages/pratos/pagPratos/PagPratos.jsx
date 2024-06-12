@@ -5,24 +5,27 @@ import ImgConfig from "../../../components/imgConfig/ImgConfig";
 import styles from "./PagPratos.module.css";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../../components/menuLateral/MenuLateral";
-import exemplo from "../../../utils/assets/prato-com-legumes-ilustracao-em-vetor-comida-saudavel-design-700-126717843 4.svg";
-import imgUpload from "../../../utils/assets/Group 191.svg";
-import ModalPratos from "../../../components/modalPratos/ModalPratos";
+import ModalPratos from "../../../components/modalPratos/ModalPratos"
+import api from "../../../api";
 
 function PagPratos() {
-    const [pratos, setPratos] = useState([{}]);
-    const [filteredPratos, setFilteredPratos] = useState([]);
+    const [pratos, setPratos] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [viewPrato, setViewPrato] = useState({ nome: '', categoria: '', preco: '', alergicos: [], descricao: '', ingredientes: [] });
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const db_pratos = localStorage.getItem("cad_pratos")
-            ? JSON.parse(localStorage.getItem("cad_pratos"))
-            : [];
-        setPratos(db_pratos);
-        setFilteredPratos(db_pratos); // Inicializa com todos os dados
+        // Recuperar pratos da API ao carregar a página
+        api.get('/pratos', {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
+        })
+        .then(response => {
+            setPratos(response.data);
+        })
+        .catch(() => {
+           
+        });
     }, []);
 
     const handleCadastro = () => {
@@ -33,25 +36,12 @@ function PagPratos() {
         navigate("/gourmet-inventory/atualizar-pratos", { state: { prato } }); // Ajuste o caminho conforme necessário
     };
 
-    const handleView = (prato) => {
-        setViewPrato(prato);
-        setOpenVizualizar(true);
-    };
-
-    const handleRemove = (nome) => {
-        const newArray = pratos.filter((item) => item.nome !== nome);
-        setPratos(newArray);
-        setFilteredPratos(newArray); // Atualiza a lista filtrada
-        localStorage.setItem("cad_pratos", JSON.stringify(newArray));
-        setOpenVizualizar(false);
-    };
-
     const confirmRemove = (nome) => {
         toast(
             ({ closeToast }) => (
                 <div>
                     <p>Tem certeza que deseja excluir este prato?</p>
-                    <button className={styles["toast-button-yes"]} onClick={() => { handleRemove(nome); closeToast(); }}>Sim</button>
+                    <button className={styles["toast-button-yes"]}>Sim</button>
                     <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
                 </div>
             ),
@@ -75,20 +65,23 @@ function PagPratos() {
                 <ImgConfig />
 
                 <div className={styles["form"]}>
-                    {filteredPratos.map((prato, index) => (
-                        <div className={styles["card"]} key={index}>
+                    {pratos.map(prato => (
+                        <div className={styles["card"]} key={prato.id}>
                             <div className={styles["imgCard"]}>
-                                <img src={exemplo} alt={prato.nome} />
+                                {/* Aqui você pode colocar a imagem do prato, se tiver */}
+                                <img src={prato.imagem} alt={prato.nome} />
                             </div>
                             <div className={styles["infoCard"]}>
                                 <span>Nome: {prato.nome}</span>
+                                <span>Descrição: {prato.descricao}</span>
+                                <span>Preço: {prato.preco}</span>
                                 <span>Categoria: {prato.categoria}</span>
-                                <span>Tempo de Preparo: {prato.tempoPreparo}</span>
-                                <button onClick={() => handleView(prato)}>Ver Mais</button>
+                                {/* Adicione mais detalhes do prato conforme necessário */}
                             </div>
                         </div>
                     ))}
                 </div>
+
                 {viewPrato && (
                     <ModalPratos
                         isOpen={openVizualizar}
@@ -100,7 +93,7 @@ function PagPratos() {
                             <div className={styles["corpoModal"]}>
                                 <div className={styles["descricaoModal"]}>
                                     <div className={styles["imgDescricao"]}>
-                                        <img src={exemplo} alt={viewPrato.nome} />
+                                        <img src={ImgConfig} alt={viewPrato.nome} />
                                     </div>
                                     <div className={styles["textDescricao"]}>
                                         <span>Preço: {viewPrato.preco}</span>

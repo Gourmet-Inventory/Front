@@ -15,7 +15,7 @@ function PagFornecedor() {
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [dataEdit, setDataEdit] = useState({});
     const [viewData, setViewData] = useState({});
-    
+
     const [nomeFornecedor, setNomeFornecedor] = useState("");
     const [cnpj, setCnpj] = useState("");
     const [logradouro, setLogradouro] = useState("");
@@ -34,7 +34,7 @@ function PagFornecedor() {
             console.log("Resposta da API:", response.data);  // Adicione este log
             setFornecedores(response.data);
         }).catch(() => {
-            toast.error("Erro ao recuperar os fornecedores!");
+            // Adicione sua lógica de tratamento de erro aqui
         });
     };
 
@@ -98,7 +98,6 @@ function PagFornecedor() {
         setTelefone("");
         setCategoria("");
     };
-    
 
     const handleEdit = (fornecedor) => {
         setDataEdit(fornecedor);

@@ -1,52 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import styles from "./AlergicoSelector.module.css"
+import React, { useState } from 'react';
+import styles from "./AlergicoSelector.module.css";
 
-const AlergicoSelector = () => {
-    const [alergicos, setAlergicos] = useState([]);
-    const [selectedAlergico, setSelectedAlergico] = useState('');
-    const [selectedAlergicos, setSelectedAlergicos] = useState([]);
+const options = [
+    "LATICINIOS",
+    "NOZES",
+    "OVOS",
+    "SOJA",
+    "FEIJAO",
+    "TRIGO_GLUTEN",
+    "FRUTOS_DO_MAR",
+    "SULFITOS",
+    "MILHO",
+    "AMENDOIM",
+    "GLUTEN",
+    "GORDURA",
+    "CARNE",
+    "ALIMENTOS_PROCESSADOS",
+    "ALIMENTOS_GMO",
+    "ALIMENTOS_ENLATADOS",
+    "SODIO",
+    "LACTOSE",
+    "VEGANO",
+    "VEGETARIANO",
+    "ACUCAR",
+    "ALIMENTOS_REFINADOS"
+];
 
-    useEffect(() => {
-        axios.get('/alergicos')
-            .then(response => {
-                setAlergicos(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the alergicos!', error);
-            });
-    }, []);
+const AlergicoSelect = () => {
+    const [selectedOption, setSelectedOption] = useState('');
 
-    const handleAddAlergico = () => {
-        if (selectedAlergico && !selectedAlergicos.includes(selectedAlergico)) {
-            setSelectedAlergicos([...selectedAlergicos, selectedAlergico]);
-        }
-    };
-
-    const handleRemoveAlergico = (alergico) => {
-        setSelectedAlergicos(selectedAlergicos.filter(a => a !== alergico));
+    const handleChange = (event) => {
+        setSelectedOption(event.target.value);
     };
 
     return (
-        <div className={styles["alergicos"]}>
-            <select value={selectedAlergico} onChange={(e) => setSelectedAlergico(e.target.value)}>
+        <div>
+            <div className={styles["alergicos"]}>
+            <select id="alergicos" value={selectedOption} onChange={handleChange}>
                 <option value="">Selecione um alérgico</option>
-                {alergicos.map(alergico => (
-                    <option key={alergico} value={alergico}>{alergico}</option>
+                {options.map((option, index) => (
+                    <option key={index} value={option}>
+                        {option.replace(/_/g, ' ')}
+                    </option>
                 ))}
             </select>
-            <button onClick={handleAddAlergico}>Adicionar</button>
-
-            <div className={styles[""]}>
-                {selectedAlergicos.map(alergico => (
-                    <span key={alergico} style={{ margin: '5px', padding: '5px', border: '1px solid black', borderRadius: '5px' }}>
-                        {alergico}
-                        <button onClick={() => handleRemoveAlergico(alergico)} style={{ marginLeft: '5px' }}>Remover</button>
-                    </span>
-                ))}
             </div>
+            {selectedOption && (
+                <div>
+                    <p>Você selecionou: {selectedOption.replace(/_/g, ' ')}</p>
+                </div>
+            )}
         </div>
     );
 };
 
-export default AlergicoSelector;
+export default AlergicoSelect;

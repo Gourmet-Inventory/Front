@@ -41,6 +41,8 @@ nav span{
     display: flex;
     flex-direction: column;
     align-self: center;
+    font-size: 2vw;
+    padding: 1rem;
 }
 
 label {
@@ -49,22 +51,31 @@ label {
 }
 
 input[type='text'] {
-    width: 100%;
+    width: 80%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: 3vh;
 }
 
 form button {
-    width: 50%;
+    width: 10vw;
     padding: 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 2vw;
 }
 
 form button:hover {
     background-color: #0056b3;
+}
+
+.botoes{
+    display: flex;
+    width: 80%;
+    padding-left:2rem;
+    justify-content: space-evenly;
 }

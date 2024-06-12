@@ -2,7 +2,6 @@
     display: flex;
     width: 95vw;
     height: 77vh;
-    background-color: aqua;
     margin-left: 6rem;
 }
 
@@ -69,7 +68,70 @@
 }
 
 .saidaPratos{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 23vw;
     height: 100%;
-    background-color: yellow;
+    color: white;
+}
+
+.saida{
+    width: 90%;
+    height: 85%;
+    background-color: #37455D;
+}
+
+.tituloSaida{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 8%;
+}
+
+.tituloSaida button{
+    background-color: #E59E53;
+    color: #37455D;
+}
+
+.corpoSaida{
+    display: flex;
+    flex-direction: column;
+    height: 92%;
+    border-top: #E59E53 3px solid;
+}
+
+#buttonSaida{
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    background-color: #E59E53;
+    width: 50%;
+    height: 3rem;
+}
+
+#buttonSaida:hover{
+    background-color: #a77940;
+}
+
+.cardSaida{
+    width: 90%;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 2rem;
+    font-size: 1.2rem;
+}
+
+.cardSaida img{
+    width: 1rem;
+    cursor: pointer;
+}
+
+.quantPrato{
+    width: 3rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 1.3rem;
 }

@@ -24,12 +24,12 @@ const Menu = () => {
               <div className={styles["menu"]}>
                 <button onClick={() => navigate('/gourmet-inventory/estoque')} >Estoque</button>
                 <button onClick={() => navigate('/gourmet-inventory/alertas')}>Histórico Alertas</button>
-            </div>
-            <div className={styles["menu"]}>
-              <button onClick={() => navigate('/gourmet-inventory/estoque')}>Pratos</button>
-              <button>Saída</button>
-              <button onClick={() => navigate('/gourmet-inventory/fornecedor')}>Fornecedores</button>
-            </div>
+              </div>
+              <div className={styles["menu"]}>
+                <button onClick={() => navigate('/gourmet-inventory/pratos')}>Pratos</button>
+                <button onClick={() => navigate('/gourmet-inventory/saida-pratos')}>Saída</button>
+                <button onClick={() => navigate('/gourmet-inventory/fornecedor')}>Fornecedores</button>
+              </div>
           </div>
           <div className={styles["menuAvisos"]}>
             <div className={styles["alertasDisparados"]}>

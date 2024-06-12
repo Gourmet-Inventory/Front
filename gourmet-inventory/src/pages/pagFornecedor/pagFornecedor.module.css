@@ -3,6 +3,7 @@
     height: 450px;
     margin-left: 100px;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .tituloForm{
@@ -43,7 +44,7 @@
 
 .tabelaForn{
 
-    width: 72.5vw;
+    width: 70vw;
     display: flex;
 }
 

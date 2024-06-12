@@ -204,11 +204,13 @@
 
 .ingredientes{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     height: 45%;
     width: 80%;
     border: 0.5px solid rgba(0, 0, 0, 0.548);
     box-shadow: 2px 3px 3px #2b2b2b67;
+    overflow-y: scroll;
 }
 
 #botao-cadastrar-pratos{

@@ -59,9 +59,9 @@ body{
     height: 80vh;
     justify-content: center;
     row-gap: 1rem;
-    border: 1px solid;
+    gap: 2px;
     border-radius: 2px;
     justify-content: center;
     align-items: flex-start;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.5);
 }

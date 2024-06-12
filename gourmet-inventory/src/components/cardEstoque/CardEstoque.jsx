@@ -2,36 +2,24 @@ import React from "react";
 import styles from "./CardEstoque.module.css";
 
 const CardEstoque = ({
-    idEstoque,nome, categoria,dtAviso,valorTotal,
+    nome, categoria,dtAviso,valorTotal,manipulado, onOpenModal
 }) =>{
     return (
         <div className={styles['main-container']}>
-          <div className={styles['data-aviso']}>
-            <p className={styles['data-aviso-1']}>
-              Data de Aviso
+        <div className={styles['rectangle']} >
+            <p className={styles['molho-de-tomate-2']}>
+              {nome}
             </p>
-            <span className={styles['aviso']}> {dtAviso}</span>
+            <p className={styles['categoria-molhos']}>Categoria: {categoria}</p>
           </div>
-          <div className={styles['quantidade-kg']}>
-            <span className={styles['text-3']}>
-              Quantidade
-              <br />
-            </span>
-            <span className={styles['text-4']}>3 Kg</span>
+          <div className={styles['dados']}>
+            <p className={styles['titulo']}>Data de Aviso</p>
+            <p className={styles['aviso']}> {dtAviso}</p>
+            <p className={styles['titulo']}>Quantidade</p>
+            <p className={styles['aviso']}>{valorTotal}</p>
+          <button onClick={onOpenModal} className={styles['Button']}>Ver Mais</button>
           </div>
-          <button className={styles['Button']}>
-            <span className={styles['text-5']} >Ver Mais</span>
-          </button>
-          <div className={styles['section-2']} />
-          <div className={styles['rectangle']} />
-          <div className={styles['molho-de-tomate']}>
-            <span className={styles['molho-de-tomate-2']}>
-              Molho de tomate
-              <br />
-            </span>
-            <span className={styles['categoria-molhos']}>Categoria: Molhos</span>
           </div>
-        </div>
       );
 };
-export default CardEstoque;
+export default CardEstoque; 

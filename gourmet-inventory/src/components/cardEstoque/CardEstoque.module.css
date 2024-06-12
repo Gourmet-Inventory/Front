@@ -20,7 +20,6 @@ button {
   height: 19rem;
   background-color: white;
   border: solid 3px #37455d;
-  margin: 0 auto;
   border-radius: 3px;
   display: flex;
   flex-direction: column;

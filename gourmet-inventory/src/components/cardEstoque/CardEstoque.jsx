@@ -2,35 +2,34 @@ import React from "react";
 import styles from "./CardEstoque.module.css";
 
 const CardEstoque = ({
-    nome, categoria,dtAviso,valorTotal,
+    idEstoque,nome, categoria,dtAviso,valorTotal,
 }) =>{
     return (
-        <div className='main-container'>
-          <div className='data-aviso'>
-            <span className='data-aviso-1'>
+        <div className={styles['main-container']}>
+          <div className={styles['data-aviso']}>
+            <p className={styles['data-aviso-1']}>
               Data de Aviso
-              <br />
-            </span>
-            <span className='aviso'> {dtAviso}</span>
+            </p>
+            <span className={styles['aviso']}> {dtAviso}</span>
           </div>
-          <div className='quantidade-kg'>
-            <span className='text-3'>
+          <div className={styles['quantidade-kg']}>
+            <span className={styles['text-3']}>
               Quantidade
               <br />
             </span>
-            <span className='text-4'>3 Kg</span>
+            <span className={styles['text-4']}>3 Kg</span>
           </div>
-          <button className='Button'>
-            <span className='text-5'>Ver Mais</span>
+          <button className={styles['Button']}>
+            <span className={styles['text-5']} >Ver Mais</span>
           </button>
-          <div className='section-2' />
-          <div className='rectangle' />
-          <div className='molho-de-tomate'>
-            <span className='molho-de-tomate-2'>
+          <div className={styles['section-2']} />
+          <div className={styles['rectangle']} />
+          <div className={styles['molho-de-tomate']}>
+            <span className={styles['molho-de-tomate-2']}>
               Molho de tomate
               <br />
             </span>
-            <span className='categoria-molhos'>Categoria: Molhos</span>
+            <span className={styles['categoria-molhos']}>Categoria: Molhos</span>
           </div>
         </div>
       );

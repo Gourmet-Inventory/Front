@@ -8,16 +8,28 @@ import MenuLateral from "../../../components/menuLateral/MenuLateral";
 import CardEstoque from "../../../components/cardEstoque/CardEstoque";
 
 const   Estoque = () => {
+    const navigate = useNavigate();
+
     return (
         < >
         <MenuLateral/>
             <div className={styles["cabecalho"]}>
             <BarraPesquisa tituloPag={"Estoque"}/>
             <ImgConfig/>
-            <button>Cadastrar Novo Item</button>
+            <button onClick={()=> navigate('/gourmet-inventory/estoque-cadastro-manipulado')} >Cadastrar Novo Item</button>
             </div>
             <div className={styles["area"]}>
-                <CardEstoque/>
+            <div className={styles["card"]}>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+            <CardEstoque/>
+                    </div> 
             </div>
             
         </>

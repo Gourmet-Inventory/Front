@@ -16,11 +16,12 @@ button {
 }
 
 .main-container {
-  position: relative;
-  width: 240px;
+  width: 18vw;
   height: 276px;
+  background-color: white;
+  border: solid 3px #37455d;
   margin: 0 auto;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 .data-aviso {
   position: relative;

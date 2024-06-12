@@ -67,12 +67,13 @@
 }
 
 .inputs{
-    height: 7rem;
+    height: 7vh;
     border: none;
     border-radius: 2px;
     background-color: #D9D9D9;
     color: #37455D;
     font-family: "Jost";
+    font-size: large;
 }
 
 .inputForm span{

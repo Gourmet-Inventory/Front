@@ -49,7 +49,7 @@ const   Estoque = () => {
                     onOpenModal = {() => openVizualizar(data)} 
                     />
                 ))}
-            <CardEstoque nome="molho de tomate" categoria="penis" dtAviso="012323" valorTotal="300gr"/>
+            <CardEstoque nome="molho de tomate" categoria="molho" dtAviso="012323" valorTotal="300gr"/>
     
                     </div> 
             </div>

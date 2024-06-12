@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import styles from "./PagFuncionarios.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
@@ -13,12 +14,18 @@ function PagFuncionario() {
     const [openCadastro, setOpenCadastro] = useState(false);
     const [openVizualizar, setOpenVizualizar] = useState(false);
 
+    const navigate = useNavigate();
+
     const [nome, setNome] = useState("");
     const [cpf, setCpf] = useState("");
     const [cargo, setCargo] = useState("");
     const [telefone, setTelefone] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+
+    const handleBack = () => {
+        navigate("/gourmet-inventory/menu"); // Ajuste o caminho conforme necessário
+    };
 
     useEffect(() => {
         const db_costumer = localStorage.getItem("cad_cliente")
@@ -102,7 +109,7 @@ function PagFuncionario() {
         <>
             <div className={styles["body"]}>
                 <div className={styles["voltar"]}>
-                    <button>Voltar</button>
+                    <button onClick={handleBack}>Voltar</button>
                 </div>
                 <div className={styles["cabecalho"]}>
                     <BarraPesquisa tituloPag={"Área Funcionários"} />

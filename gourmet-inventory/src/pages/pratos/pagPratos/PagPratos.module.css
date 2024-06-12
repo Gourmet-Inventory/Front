@@ -1,11 +1,14 @@
 .form{
-    width: 72vw;
+    width: 67.3vw;
     height: 72vh;
     margin-left: 100px;
-    flex-direction: column;
+    /* flex-direction: column; */
     background-color: violet;
     padding: 1rem;
     position: fixed;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: space-around;
 }
 
 .cabecalho{
@@ -38,6 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .imgCard{

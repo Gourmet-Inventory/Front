@@ -3,6 +3,7 @@
     height: 450px;
     margin-left: 100px;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .tituloForm{
@@ -42,16 +43,14 @@
 /* table */
 
 .tabelaForn{
-
-    width: 72.5vw;
+    overflow-y: scroll;
+    width: 70vw;
     display: flex;
 }
 
 .tabelaForn table{
     width: 100%;
     border-collapse: collapse;
-    cursor: pointer;
- 
 }
 
 .tabelaForn tr {
@@ -59,10 +58,12 @@
     justify-content: space-around;
     width: 100%;
     background-color: #37455D;
+    cursor: pointer;
+    margin-top: 0.5rem;
 }
 
 .tabelaForn tr:hover{
-    background-color: #263041;
+    background-color: #242e3f;
 }
   
 .tabelaForn td {
@@ -74,6 +75,7 @@
     flex: 1; /* Faz com que todas as células tenham o mesmo tamanho */
     padding: 1rem; /* Espaçamento interno das células */
 }
+
 
 /* toast */
   

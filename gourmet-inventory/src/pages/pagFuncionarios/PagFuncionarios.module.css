@@ -1,8 +1,9 @@
 .form{
-    width: 72.5vw;
+    width: 71.5vw;
     height: 450px;
     margin-left: 100px;
-    flex-direction: column;
+    flex-direction: column; 
+    overflow-y: scroll;
 }
 
 /* voltar botão */
@@ -67,7 +68,7 @@
 
 .tabelaForn{
 
-    width: 72.5vw;
+    width: 69.5vw;
     display: flex;
 }
 

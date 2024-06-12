@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
+import api from '../../api';
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./pagFornecedor.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
@@ -9,108 +10,109 @@ import MenuLateral from "../../components/menuLateral/MenuLateral";
 import 'react-toastify/dist/ReactToastify.css';
 
 function PagFornecedor() {
-    const [data, setData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [dataEdit, setDataEdit] = useState({});
-    const [viewData, setViewData] = useState({});
+    const [fornecedores, setFornecedores] = useState([]);
     const [openCadastro, setOpenCadastro] = useState(false);
     const [openVizualizar, setOpenVizualizar] = useState(false);
+    const [dataEdit, setDataEdit] = useState({});
+    const [viewData, setViewData] = useState({});
 
-    const [nome, setNome] = useState("");
+    const [nomeFornecedor, setNomeFornecedor] = useState("");
+    const [cnpj, setCnpj] = useState("");
     const [logradouro, setLogradouro] = useState("");
-    const [numeracao, setNumeracao] = useState("");
+    const [numeracaoLogradouro, setNumeracaoLogradouro] = useState("");
     const [telefone, setTelefone] = useState("");
     const [categoria, setCategoria] = useState("");
 
     useEffect(() => {
-        const db_costumer = localStorage.getItem("cad_cliente")
-            ? JSON.parse(localStorage.getItem("cad_cliente"))
-            : [];
-        setData(db_costumer);
-        setFilteredData(db_costumer); // Inicializa com todos os dados
+        recuperarFornecedores();
     }, []);
 
+    const recuperarFornecedores = () => {
+        api.get('/fornecedores', {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
+        }).then(response => {
+            console.log("Resposta da API:", response.data);  // Adicione este log
+            setFornecedores(response.data);
+        }).catch(() => {
+            // Adicione sua lógica de tratamento de erro aqui
+        });
+    };
+
+    const handleExcluir = (idFornecedor) => {
+        if (window.confirm("Tem certeza de que deseja excluir este fornecedor?")) {
+            api.delete(`/fornecedores/${idFornecedor}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                recuperarFornecedores();
+                toast.success("Fornecedor excluído com sucesso!");
+            }).catch(() => {
+                toast.error("Erro ao excluir o fornecedor.");
+            });
+        }
+    };
+
     const handleSave = () => {
-        if (!nome || !logradouro || !numeracao || !telefone || !categoria) {
+        if (!nomeFornecedor || !cnpj || !logradouro || !numeracaoLogradouro || !telefone || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        if (telefoneAlreadyExists()) {
-            return toast.error("Telefone já existe!");
-        }
+        const fornecedor = { nomeFornecedor, cnpj, logradouro, numeracaoLogradouro, telefone, categoria };
 
-        const newDataArray = dataEdit.index !== undefined
-            ? data.map((item, index) => index === dataEdit.index ? { nome, logradouro, numeracao, telefone, categoria } : item)
-            : [...data, { nome, logradouro, numeracao, telefone, categoria }];
-
-        localStorage.setItem("cad_cliente", JSON.stringify(newDataArray));
-        setData(newDataArray);
-        setFilteredData(newDataArray); // Atualiza a lista filtrada
-        setOpenCadastro(false);
-    };
-
-    const telefoneAlreadyExists = () => {
-        if (dataEdit.telefone !== telefone && data?.length) {
-            return data.find((item) => item.telefone === telefone);
-        }
-        return false;
-    };
-
-    const handleRemove = (telefone) => {
-        const newArray = data.filter((item) => item.telefone !== telefone);
-        setData(newArray);
-        setFilteredData(newArray); // Atualiza a lista filtrada
-        localStorage.setItem("cad_cliente", JSON.stringify(newArray));
-        setOpenVizualizar(false);
-    };
-
-    const confirmRemove = (telefone) => {
-        toast(
-            ({ closeToast }) => (
-                <div>
-                    <p>Tem certeza que deseja excluir este item?</p>
-                    <button className={styles["toast-button-yes"]} onClick={() => { handleRemove(telefone); closeToast(); }}>Sim</button>
-                    <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
-                </div>
-            ),
-            {
-                position: "top-center",
-                autoClose: false,
-                closeOnClick: false,
-                draggable: false,
-            }
-        );
-    };
-
-    const handleEdit = (item, index) => {
-        setDataEdit({ ...item, index });
-        setNome(item.nome);
-        setLogradouro(item.logradouro);
-        setNumeracao(item.numeracao);
-        setTelefone(item.telefone);
-        setCategoria(item.categoria);
-        setOpenCadastro(true);
-        setOpenVizualizar(false);
-    };
-
-    const handleView = (item, index) => {
-        setViewData({ ...item, index });
-        setOpenVizualizar(true);
-    };
-
-    const handleSearch = (searchTerm) => {
-        if (searchTerm === "") {
-            setFilteredData(data); // Se a pesquisa estiver vazia, mostra todos os dados
+        if (dataEdit.idFornecedor) {
+            api.patch(`/fornecedores/${dataEdit.idFornecedor}`, fornecedor, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Fornecedor atualizado com sucesso!");
+                recuperarFornecedores();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao atualizar o fornecedor.");
+            });
         } else {
-            const filtered = data.filter(item =>
-                item.nome.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setFilteredData(filtered);
+            api.post('/fornecedores', fornecedor, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Fornecedor cadastrado com sucesso!");
+                recuperarFornecedores();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao cadastrar o fornecedor.");
+            });
         }
     };
 
-    const rowStyle = {
-        marginBottom: '10px',
+    const handleCadastrar = () => {
+        // Limpar os dados editados
+        setDataEdit({});
+        // Limpar os campos do formulário
+        limparCampos();
+        // Abrir o modal de cadastro
+        setOpenCadastro(true);
+    };
+
+    const limparCampos = () => {
+        setNomeFornecedor("");
+        setCnpj("");
+        setLogradouro("");
+        setNumeracaoLogradouro("");
+        setTelefone("");
+        setCategoria("");
+    };
+
+    const handleEdit = (fornecedor) => {
+        setDataEdit(fornecedor);
+        setNomeFornecedor(fornecedor.nomeFornecedor);
+        setCnpj(fornecedor.cnpj);
+        setLogradouro(fornecedor.logradouro);
+        setNumeracaoLogradouro(fornecedor.numeracaoLogradouro);
+        setTelefone(fornecedor.telefone);
+        setCategoria(fornecedor.categoria);
+        setOpenCadastro(true);
+    };
+
+    const handleView = (fornecedor) => {
+        setViewData(fornecedor);
+        setOpenVizualizar(true);
     };
 
     return (
@@ -118,11 +120,10 @@ function PagFornecedor() {
             <MenuLateral />
             <div className={styles["body"]}>
                 <div className={styles["cabecalho"]}>
-                    <BarraPesquisa tituloPag={"Fornecedor"} onSearch={handleSearch} />
-                    <button onClick={() => { setDataEdit({}); setNome(""); setLogradouro(""); setNumeracao(""); setTelefone(""); setCategoria(""); setOpenCadastro(true); }}>Cadastrar Fornecedor</button>
+                    <BarraPesquisa tituloPag={"Fornecedor"} />
+                    <button onClick={handleCadastrar}>Cadastrar Fornecedor</button>
                 </div>
                 <ImgConfig />
-
                 <div className={styles["form"]}>
                     <div className={styles["tituloForm"]}>
                         <span>Nome</span>
@@ -133,89 +134,102 @@ function PagFornecedor() {
                         <table>
                             <thead>
                                 <tr>
-                                   
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredData.map((item, index) => (
-                                    <tr key={index} onClick={() => handleView(item, index)} style={rowStyle}>
-                                        <td>{item.nome}</td>
-                                        <td>{item.categoria}</td>
-                                        <td>{item.telefone}</td>
-                                    </tr>
-                                ))}
+                            {Array.isArray(fornecedores) && fornecedores.map(fornecedor => (
+                                <tr key={fornecedor.idFornecedor} onClick={() => handleView(fornecedor)}>
+                                    <td>{fornecedor.nomeFornecedor}</td>
+                                    <td>{fornecedor.categoria}</td>
+                                    <td>{fornecedor.telefone}</td>
+                                </tr>
+                            ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <ModalCadastro isOpen={openCadastro} setModalOpen={() => setOpenCadastro(!openCadastro)}>
-                    <div className={styles["cadastro"]}>
-                        <h3>{dataEdit.index !== undefined ? "Editar Fornecedor" : "Cadastrar Fornecedor"}</h3>
-                        <div className={styles["inputCadastro"]}>
-                            <div className={styles["input"]}>
-                                <span>Nome</span>
-                                <input
-                                    type="text"
-                                    value={nome}
-                                    onChange={(e) => setNome(e.target.value)}
-                                />
+                {openCadastro && (
+                    <ModalCadastro isOpen={openCadastro} setModalOpen={() => setOpenCadastro(!openCadastro)}>
+                        <div className={styles["cadastro"]}>
+                            <h3>{dataEdit.idFornecedor ? "Editar Fornecedor" : "Cadastrar Fornecedor"}</h3>
+                            <div className={styles["inputCadastro"]}>
+                                <div className={styles["input"]}>
+                                    <span>Nome</span>
+                                    <input
+                                        type="text"
+                                        value={nomeFornecedor}
+                                        onChange={(e) => setNomeFornecedor(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>CNPJ</span>
+                                    <input
+                                        type="text"
+                                        value={cnpj}
+                                        onChange={(e) => setCnpj(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Logradouro</span>
+                                    <input
+                                        type="text"
+                                        value={logradouro}
+                                        onChange={(e) => setLogradouro(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Numeração</span>
+                                    <input
+                                        type="text"
+                                        value={numeracaoLogradouro}
+                                        onChange={(e) => setNumeracaoLogradouro(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Telefone</span>
+                                    <input
+                                        type="text"
+                                        value={telefone}
+                                        onChange={(e) => setTelefone(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Categoria</span>
+                                    <input
+                                        type="text"
+                                        value={categoria}
+                                        onChange={(e) => setCategoria(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className={styles["input"]}>
-                                <span>Logradouro</span>
-                                <input
-                                    type="text"
-                                    value={logradouro}
-                                    onChange={(e) => setLogradouro(e.target.value)}
-                                />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Numeração</span>
-                                <input
-                                    type="number"
-                                    value={numeracao}
-                                    onChange={(e) => setNumeracao(e.target.value)}
-                                />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Telefone</span>
-                                <input
-                                    type="text"
-                                    value={telefone}
-                                    onChange={(e) => setTelefone(e.target.value)}
-                                />
-                            </div>
-                            <div className={styles["input"]}>
-                                <span>Categoria</span>
-                                <input
-                                    type="text"
-                                    value={categoria}
-                                    onChange={(e) => setCategoria(e.target.value)}
-                                />
-                            </div>
+                            <button onClick={handleSave}>{dataEdit.idFornecedor ? "Salvar" : "Cadastrar"}</button>
                         </div>
-                        <button onClick={handleSave}>{dataEdit.index !== undefined ? "Salvar" : "Cadastrar"}</button>
-                    </div>
-                </ModalCadastro>
+                    </ModalCadastro>
+                )}
 
-                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nome}`}>
-                    <div className={styles["formVizualizar"]}>
-                        <div className={styles["dadosForn"]}>
-                            <span>Logradouro: {viewData.logradouro}</span>
-                            <span>Numeração: {viewData.numeracao}</span>
-                            <span>Telefone: {viewData.telefone}</span>
-                            <span>Categoria: {viewData.categoria}</span>
+                {openVizualizar && (
+                    <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nomeFornecedor}`}>
+                        <div className={styles["formVizualizar"]}>
+                            <div className={styles["dadosForn"]}>
+                                <span>CNPJ: {viewData.cnpj}</span>
+                                <span>Logradouro: {viewData.logradouro}</span>
+                                <span>Numeração: {viewData.numeracaoLogradouro} </span>                           
+                                <span>Telefone: {viewData.telefone}</span>
+                                <span>Categoria: {viewData.categoria}</span>
+                            </div>
+                            <div className={styles["botao"]}>
+                                <button id={styles["editar"]} onClick={() => handleEdit(viewData)}>Editar</button>
+                                <button id={styles["excluir"]} onClick={() => handleExcluir(viewData.idFornecedor)}>Excluir</button>
+                            </div>
                         </div>
-
-                        <div className={styles["botao"]}>
-                            <button id={styles["editar"]} onClick={() => handleEdit(viewData, viewData.index)}>Editar</button>
-                            <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.telefone)}>Excluir</button>
-                        </div>
-                    </div>
-                </ModalVizualizar>
+                    </ModalVizualizar>
+                )}
             </div>
         </>
     );
 }
 
 export default PagFornecedor;
+

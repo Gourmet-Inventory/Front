@@ -21,6 +21,11 @@ input{
     font-family: "Jost";
 }
 
+select{
+    font-family: "Jost";
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 button{
     font-family: "Jost";

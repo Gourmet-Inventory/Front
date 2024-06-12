@@ -6,61 +6,80 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../../components/menuLateral/MenuLateral";
 import CardEstoque from "../../../components/cardEstoque/CardEstoque";
-import ModalAlertas from "../../../components/modalAlertas/modalAlertas"
-import api from "../../../api"
-import fechar from "../../../utils/assets/Fechar.svg"
+import ModalAlertas from "../../../components/modalAlertas/modalAlertas";
+import api from "../../../api";
+import fechar from "../../../utils/assets/Fechar.svg";
 
-const   Estoque = () => {
-    const [cardsEstoqueData, sercardsEstoqueData] = useState();
+const Estoque = () => {
+    const [cardsEstoqueData, setCardsEstoqueData] = useState([]);
     const navigate = useNavigate();
     const [openVizualizar, setOpenVizualizar] = useState(false);
+    const [selectedData, setSelectedData] = useState(null);
 
-    function recuperarValorCard(){
-        api.get(`/estoque-ingrediente/${localStorage.empresaId}`,{
-            headers: { 'Authorization': `Bearer ${localStorage.token}`}
+    function recuperarValorCard() {
+        api.get(`/estoque-ingrediente/${localStorage.empresaId}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then((response) => {
-            console.log(response)
-            const {data} = response;
-            sercardsEstoqueData(data)
+            console.log(response);
+            const { data } = response;
+            setCardsEstoqueData(data);
         }).catch(() => {
-            toast.error("Erro ao buscar estoque!")
-        })
+            toast.error("Erro ao buscar estoque!");
+        });
     }
-    useEffect(()=>{
-        recuperarValorCard()
-    },[])
+
+    useEffect(() => {
+        recuperarValorCard();
+    }, []);
+
+    const handleOpenModal = (data) => {
+        setSelectedData(data);
+        setOpenVizualizar(true);
+    };
+
     return (
-        < >
-        <MenuLateral/>
+        <>
+            <MenuLateral />
             <div className={styles["cabecalho"]}>
-            <BarraPesquisa tituloPag={"Estoque"}/>
-            <ImgConfig/>
-            <button onClick={()=> navigate('/gourmet-inventory/estoque-cadastro-manipulado')} >Cadastrar Novo Item</button>
+                <BarraPesquisa tituloPag={"Estoque"} />
+                <ImgConfig />
+                <button onClick={() => navigate('/gourmet-inventory/estoque-cadastro-manipulado')}>Cadastrar Novo Item</button>
             </div>
             <div className={styles["area"]}>
-            <div className={styles["card"]}>
-                {cardsEstoqueData && cardsEstoqueData.map((data,index) => (
-                    <CardEstoque
-                    key={data.idItem}
-                    nome={data.nome}
-                    categoria={data.categoria}
-                    dtAviso={data.dtaAviso}
-                    valorTotal={data.valorTotal}
-                    manipulado={data.manipulado}
-                    onOpenModal = {() => setOpenVizualizar(data)} 
+                <div className={styles["card"]}>
+                    {cardsEstoqueData && cardsEstoqueData.map((data) => (
+                        <CardEstoque
+                            key={data.idItem}
+                            nome={data.nome}
+                            categoria={data.categoria}
+                            dtAviso={data.dtaAviso}
+                            valorTotal={data.valorTotal}
+                            manipulado={data.manipulado}
+                            onOpenModal={handleOpenModal}
+                            data={data}
+                        />
+                    ))}
+                    <CardEstoque 
+                        nome="molho de tomate" 
+                        categoria="molho" 
+                        dtAviso="012323" 
+                        valorTotal="300gr" 
+                        onOpenModal={handleOpenModal}
+                        data={{nome: "molho de tomate", categoria: "molho", dtAviso: "012323", valorTotal: "300gr"}} 
                     />
                 ))}
             <CardEstoque nome="Molho de tomate" categoria="Molho" dtAviso="2024-02-20" valorTotal="300gr"/>
     
-                    </div> 
+                    </div>
+                </div>
             </div>
-            <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
-                            {/* tipo modal 1 */}
-                            <div className={styles["tituloModal"]}>
-                                {}
+            {selectedData && (
+                <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
+                    {/* tipo modal 1 */}
+                    <div className={styles["tituloModal"]}>
                                 <div className={styles["tituloIngrediente"]}>
-                                    <span id={styles["titulo"]}>{}</span>
-                                    <span>categoria: Grãos</span>
+                                    <span id={styles["titulo"]}>{selectedData.nome}</span>
+                                    <span>categoria: {selectedData.categoria}</span>
                                 </div>
                                 <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
                             </div>
@@ -71,72 +90,60 @@ const   Estoque = () => {
                                     <span>Lote:</span>
                                     <span>Data de Checagem:</span>
                                     <span>Quantidade Total</span>
-                                    <span>Quantidade / Peso unitário:</span>
+                                    <span>Quantidade Unitária </span>
+                                    <span>Peso unitário:</span>
                                     <span>Medida:</span>
                                     <span>Local de armazenamento:</span>
-                                    <span>Dados nutricionais:</span>
                                     </div>
                                 </div>
                                 <div className={styles["dadosModal"]}>
                                 <div className={styles["dadosIngred"]}>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                                <span>{selectedData.lote}</span>
+                                <span>{selectedData.dtaAviso}</span>
+                                <span>{selectedData.valorTotal}</span>
+                                <span>{selectedData.Unidades}</span>
+                                <span>{selectedData.valorMedida}</span>
+                                <span>{selectedData.tipoMedida}</span>
+                                <span>{selectedData.localArmazenamento}</span>
                                 </div>
                                 </div>
                             </div>
 
-                            
-
-                        </ModalAlertas >
-
-
-                        <ModalAlertas>
-                            
-                            {/* tipo modal 2 */}
-
-                            <div className={styles["tituloModalManipulado"]}>
-                                <div className={styles["tituloIngrediente2"]}>
-                                    <span id={styles["titulo2"]}>Arroz</span>
-                                    <span>categoria: Grãos</span>
-                                </div>
-                                <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
+                    {/* <div className={styles["tituloModal"]}>
+                        <div className={styles["tituloIngrediente"]}>
+                            <span id={styles["titulo"]}>{selectedData.nome}</span>
+                            <span>categoria: {selectedData.categoria}</span>
+                        </div>
+                        <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar" />
+                    </div>
+                    <div className={styles["corpoModal"]}>
+                        <div className={styles["legendaModal"]}>
+                            <div className={styles["legendasIngred"]}>
+                                <span>Lote:</span>
+                                <span>Data de Checagem:</span>
+                                <span>Quantidade Total</span>
+                                <span>Quantidade / Peso unitário:</span>
+                                <span>Medida:</span>
+                                <span>Local de armazenamento:</span>
+                                <span>Dados nutricionais:</span>
                             </div>
-                            
-                            <div className={styles["corpoModal2"]}>
-                                <div className={styles["legendaModal2"]}>
-                                    <div className={styles["legendasIngred2"]}>
-                                    <span>Lote:</span>
-                                    <span>Data de Validade:</span>
-                                    <span>Quantidade Total</span>
-                                    <span>Medida:</span>
-                                    <span>Local de armazenamento:</span>
-                                    <span>Ingredientes:</span>
-                                    </div>
-                                </div>
-                                <div className={styles["dadosModal2"]}>
-                                <div className={styles["dadosIngred2"]}>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div className={styles["ingredientesModal"]}>
-
-                                    </div>
-                                </div>
-                                </div>
+                        </div>
+                        <div className={styles["dadosModal"]}>
+                            <div className={styles["dadosIngred"]}>
+                                <span>{selectedData.lote}</span>
+                                <span>{selectedData.dataChecagem}</span>
+                                <span>{selectedData.quantidadeTotal}</span>
+                                <span>{selectedData.quantidadePesoUnitario}</span>
+                                <span>{selectedData.medida}</span>
+                                <span>{selectedData.localArmazenamento}</span>
+                                <span>{selectedData.dadosNutricionais}</span>
                             </div>
-                        
-
-                        </ModalAlertas>
-
+                        </div> */}
+                    {/* </div> */}
+                </ModalAlertas>
+            )}
         </>
-    )
+    );
 };
 
 export default Estoque;

@@ -15,4 +15,5 @@
 .imgConfig img{
     height: 23px;
     margin-right: 20px;
+    cursor: pointer;
 }

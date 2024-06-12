@@ -1,6 +1,7 @@
     import React, { useState, useEffect } from "react";
     import { useNavigate } from "react-router-dom";
     import { toast } from 'react-toastify';
+    import api from '../../../api';
     import styles from "./CadastrarPratos.module.css";
     import imgUpload from "../../../utils/assets/Group 191.svg";
     import AlergicoSelector from "../../../components/alergicoSelector/AlergicoSelector";
@@ -8,12 +9,12 @@
     import imgDeletar from "../../../utils/assets/Fechar.svg";
 
     function CadastrarPratos() {
+        // const [pratos, setPratos] = useState([]);
         const [nome, setNome] = useState("");
         const [preco, setPreco] = useState("");
         const [alergicos, setAlergicos] = useState([]);
         const [descricao, setDescricao] = useState("");
         const [ingredientes, setIngredientes] = useState([]);
-        const [ingrediente, setIngrediente] = useState("");
         const [valorMedida, setValorMedida] = useState("");
         const [tipoMedida, setTipoMedida] = useState("");
 

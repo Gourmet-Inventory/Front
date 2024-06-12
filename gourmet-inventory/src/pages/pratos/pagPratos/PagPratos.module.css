@@ -3,7 +3,6 @@
     height: 80vh;
     margin-left: 100px;
     /* flex-direction: column; */
-    background-color: violet;
     padding: 1rem;
     position: fixed;
     overflow-y: scroll;
@@ -47,7 +46,7 @@
 
 .imgCard{
     display: flex;
-    height: 60%;
+    height: 10%;
     width: 100%;
     border-radius: 2%;
 }
@@ -58,10 +57,13 @@
 }
 
 .infoCard{
-    height: 40%;
+    justify-content: space-around;
+    height: 80%;
     width: 85%;
     display: flex;
     flex-direction: column;
+    border: 2px solid white;
+    padding: 1rem;
 }
 
 .infoCard span{

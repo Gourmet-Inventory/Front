@@ -1,7 +1,6 @@
 body{
     height: 100%;
     overflow: hidden;
-    width: calc(100% - 5vw);
     display: flex;
     flex-direction: column;
 }
@@ -45,9 +44,24 @@ body{
 }   
 
 .area{
-    padding-left: 5.6vw;
     display: flex;
     width: 100%;
-    height: 100%;
-    background-color: pink;
+    height: fit-content;
+    padding: 1rem;
+}
+.card{
+    display: flex;
+    margin-left: 5vw;
+    overflow-y: auto;
+    flex-wrap:wrap;
+    padding:1vw;
+    width: 80%;
+    height: 80vh;
+    justify-content: center;
+    row-gap: 1rem;
+    gap: 2px;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: flex-start;
+    box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.5);
 }

@@ -14,6 +14,8 @@ import Pratos from "./pages/pratos/pagPratos/PagPratos"
 import CadastroPratos from "./pages/pratos/cadastrarPratos/CadastrarPratos"
 import AtualizarPratos from "./pages/pratos/atualizarPratos/AtualizarPratos"
 import Saida from "./pages/saida//Saida"
+import EstoqueCadastroManipulado from "./pages/estoqueIngrediente/estoqueCadastroManipulado/EstoqueCadastroManipulado";
+import EstoqueAtualizarManipulado from "./pages/estoqueIngrediente/estoqueAtualizarManipulado/EstoqueAtualizarManipulado";
     
 function Rotas() {
     return (
@@ -34,6 +36,8 @@ function Rotas() {
                     <Route path="/gourmet-inventory/cadastrar-pratos" element= {<CadastroPratos/>}/>
                     <Route path="/gourmet-inventory/atualizar-pratos" element= {<AtualizarPratos/>}/>
                     <Route path="/gourmet-inventory/saida-pratos" element= {<Saida/>}/>
+                    <Route path="/gourmet-inventory/estoque-cadastro-manipulado" element={<EstoqueCadastroManipulado/>}/>
+                    <Route path="/gourmet-inventory/estoque-atualizar-manipulado" element={<EstoqueCadastroManipulado/>}/>
                 </Routes>
             </BrowserRouter>
         </>

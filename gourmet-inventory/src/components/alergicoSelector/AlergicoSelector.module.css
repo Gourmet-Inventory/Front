@@ -1,0 +1,17 @@
+.alergicos{
+    display: flex;
+    justify-content: center;
+    width: 30rem;
+}
+
+.alergicos select{
+    width: 96%;
+    height: 2.3rem;
+    font-size: 1rem;
+}
+
+.alergicos button{
+    background-color: #E59E53;
+    font-size: 1rem;
+}
+

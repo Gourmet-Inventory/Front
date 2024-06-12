@@ -1,20 +1,24 @@
 .form{
-    width: 72.5vw;
+    width: 71.5vw;
     height: 450px;
     margin-left: 100px;
-    flex-direction: column;
+    flex-direction: column; 
+    overflow-y: scroll;
 }
 
 /* voltar botão */
 .voltar{
-    width: 10vw;
+    display: flex;
+    width: 12vw;
+    height: 3rem;
     margin-left: 1rem;
     margin-top: 1rem;
+    align-items: center;
 }
 
 .voltar button{
     width: 8rem;
-    height: 6vh;
+    height: 2rem;
     padding-bottom: 2rem;
     color: black;
     font-weight: lighter;
@@ -46,7 +50,6 @@
     width: 100%;
     display: flex;
     align-items: end;
-    gap: 20px;
 }
 
 .cabecalho button{
@@ -57,6 +60,7 @@
     color: black;
     font-size: 19px;
     font-weight: lighter;
+    margin-right: 5rem;
 }
 
 .cabecalho button:hover{
@@ -67,7 +71,7 @@
 
 .tabelaForn{
 
-    width: 72.5vw;
+    width: 69.5vw;
     display: flex;
 }
 
@@ -102,11 +106,17 @@
 /* toast */
   
   .toast-button-yes {
+    height: 2rem;
+    width: 3rem;
+    font-size: 1rem;
     background-color: green;
     color: white;
   }
   
   .toast-button-no {
+    height: 2rem;
+    width: 3rem;
+    font-size: 1rem;
     background-color: red;
     color: white;
   }
@@ -129,6 +139,9 @@
 }
 
  .cadastro h3{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    height: 3.5rem;
     font-weight: lighter;
     color: white;
     font-size: 1.5rem;
@@ -153,7 +166,10 @@
 }
 
 .input input{
-    width: 17rem;
+    width: 70%;
+    font-size: 1rem;
+    height: 2.3rem;
+    border: none;
     border-radius: 0%;
     font-size: 1rem;
 }

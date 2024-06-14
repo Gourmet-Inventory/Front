@@ -5,7 +5,7 @@ import ImgConfig from "../../../components/imgConfig/ImgConfig";
 import styles from "./PagPratos.module.css";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../../components/menuLateral/MenuLateral";
-import ModalPratos from "../../../components/modalPratos/ModalPratos"
+import ModalPratos from "../../../components/modalPratos/ModalPratos";
 import api from "../../../api";
 
 function PagPratos() {
@@ -13,46 +13,40 @@ function PagPratos() {
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [viewData, setViewData] = useState({ nome: '', categoria: '', preco: '', alergicos: [], descricao: '', ingredientes: [] });
 
-    const [nome, setNome] = useState("");
-    const [descricao, setDescricao] = useState("");
-    const [preco, setPreco] = useState("");
-    const [categoria, setCategoria] = useState("");
-    const [alergicos, setAlergicos] = useState([]);
-    const [ingrediente, setIngrediente] = useState("");
-    const [valorMedida, setValorMedida] = useState("");
-    const [tipoMedida, setTipoMedida] = useState("");
-    const [ingredientes, setIngredientes] = useState([]);
-    const [dataEdit, setDataEdit] = useState({});
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Recuperar pratos da API ao carregar a página
         api.get(`/pratos/${localStorage.empresaId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         })
         .then(response => {
-            setPratos(response.data);
+            if (Array.isArray(response.data)) {
+                setPratos(response.data);
+            } else {
+                console.error('A resposta da API não é um array:', response.data);
+                setPratos([]);
+            }
         })
-        .catch(() => {
-           
+        .catch(error => {
+            console.error('Erro ao buscar pratos:', error);
+            setPratos([]);
         });
     }, []);
 
     const handleCadastro = () => {
-        navigate("/gourmet-inventory/cadastrar-pratos"); // Ajuste o caminho conforme necessário
+        navigate("/gourmet-inventory/cadastrar-pratos");
     };
 
     const handleEditar = (prato) => {
-        navigate("/gourmet-inventory/atualizar-pratos", { state: { prato } }); // Ajuste o caminho conforme necessário
+        navigate("/gourmet-inventory/atualizar-pratos", { state: { prato } });
     };
 
-    const confirmRemove = (nome) => {
+    const confirmRemove = (id) => {
         toast(
             ({ closeToast }) => (
                 <div>
                     <p>Tem certeza que deseja excluir este prato?</p>
-                    <button className={styles["toast-button-yes"]} onClick={() => handleDelete(nome, closeToast)}>Sim</button>
+                    <button className={styles["toast-button-yes"]} onClick={() => handleDelete(id, closeToast)}>Sim</button>
                     <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
                 </div>
             ),
@@ -65,38 +59,33 @@ function PagPratos() {
         );
     };
 
-    const handleEdit = (prato) => {
-        setDataEdit(prato);
-        setNome(prato.nome);
-        setDescricao(prato.descricao);
-        setPreco(prato.preco);
-        setCategoria(prato.categoria);
-        setAlergicos(prato.alergicos);
-        setIngredientes(prato.ingredientes);
-    };
-
     const handleView = (prato) => {
         setViewData(prato);
         setOpenVizualizar(true);
     };
 
-    const handleDelete = (nome, closeToast) => {
-        api.delete(`/pratos/${localStorage.empresaId}/${nome}`, {
-            headers: { 'Authorization': `Bearer ${localStorage.token}` }
-        })
-        .then(() => {
-            setPratos(pratos.filter(prato => prato.nome !== nome));
-            closeToast();
-            setOpenVizualizar(false);
-            toast.success("Prato excluído com sucesso!");
-        })
-        .catch(() => {
-            toast.error("Erro ao excluir prato.");
-        });
+    const handleDelete = (id, closeToast) => {
+        if (id) {
+            api.delete(`/pratos/${localStorage.empresaId}/${id}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            })
+            .then(() => {
+                setPratos(pratos.filter(prato => prato.id !== id));
+                closeToast();
+                setOpenVizualizar(false);
+                toast.success("Prato excluído com sucesso!");
+            })
+            .catch(error => {
+                console.error('Erro ao excluir prato:', error);
+                toast.error("Erro ao excluir prato.");
+            });
+        } else {
+            toast.error("ID do prato é inválido.");
+        }
     };
 
     return (
-        <> 
+        <>
             <MenuLateral />
             <div className={styles["body"]}>
                 <div className={styles["cabecalho"]}>
@@ -106,7 +95,6 @@ function PagPratos() {
                 <ImgConfig />
 
                 <div className={styles["form"]}>
-                    {console.log(pratos)}
                     {pratos.map(prato => (
                         <div className={styles["card"]} key={prato.id}>
                             <div className={styles["imgCard"]}>
@@ -119,7 +107,6 @@ function PagPratos() {
                                 <span>Preço: {prato.preco}</span>
                                 <span>Categoria: {prato.categoria}</span>
                                 <button onClick={() => handleView(prato)}>Ver Mais</button>
-                                {/* Adicione mais detalhes do prato conforme necessário */}
                             </div>
                         </div>
                     ))}
@@ -158,7 +145,7 @@ function PagPratos() {
 
                             <div className={styles["buttonModal"]}>
                                 <button id={styles["editar"]} onClick={() => handleEditar(viewData)}>Editar</button>
-                                <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.nome)}>Excluir</button>
+                                <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.id)}>Excluir</button>
                             </div>
                         </div>
                     </ModalPratos>

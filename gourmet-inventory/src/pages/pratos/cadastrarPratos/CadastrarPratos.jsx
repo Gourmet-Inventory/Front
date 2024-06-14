@@ -20,24 +20,23 @@ function CadastrarPratos() {
     const [tipoMedida, setTipoMedida] = useState("");
     const [ingredientes, setIngredientes] = useState([]);
     const [dataEdit, setDataEdit] = useState({});
-    const [viewData, setViewData] = useState({});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         recuperarPratos();
     }, []);
 
     const recuperarPratos = () => {
-        api.get('/pratos', {
+        api.get(`/pratos/${localStorage.empresaId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(response => {
             console.log("Resposta da API:", response.data);
             setPratos(response.data);
         }).catch(() => {
-           
+            toast.error("Erro ao recuperar pratos.");
         });
     };
-
-    const navigate = useNavigate();
 
     const handleExcluir = (id) => {
         if (window.confirm("Tem certeza de que deseja excluir este prato?")) {
@@ -160,7 +159,7 @@ function CadastrarPratos() {
                                 </div>
                                 <span>Descrição:</span>
                                 <div className={styles["inputDescricao"]}>
-                                    <input type="text" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+                                    <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                                 </div>
                             </div>
                         </div>
@@ -200,7 +199,7 @@ function CadastrarPratos() {
                     </button>
                 </div>
             </div>
-            <div className={styles["listaPratos"]}>
+            {/* <div className={styles["listaPratos"]}>
                 <h2>Lista de Pratos</h2>
                 {pratos.map(prato => (
                     <div key={prato.id} className={styles["prato"]}>
@@ -212,7 +211,7 @@ function CadastrarPratos() {
                         <button onClick={() => handleExcluir(prato.id)}>Excluir</button>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }

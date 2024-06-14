@@ -1,108 +1,126 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
+import api from '../../api';
+import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./PagFuncionarios.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
 import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualizarForn";
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-function PagFuncionario() {
-    const [data, setData] = useState([]);
-    const [dataEdit, setDataEdit] = useState({});
-    const [viewData, setViewData] = useState({});
+function PagFornecedor() {
+    const [funcionarios, setFuncionarios] = useState([]);
     const [openCadastro, setOpenCadastro] = useState(false);
     const [openVizualizar, setOpenVizualizar] = useState(false);
+    const [dataEdit, setDataEdit] = useState({});
+    const [viewData, setViewData] = useState({});
 
-    const navigate = useNavigate();
 
     const [nome, setNome] = useState("");
-    const [cpf, setCpf] = useState("");
     const [cargo, setCargo] = useState("");
-    const [telefone, setTelefone] = useState("");
+    const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
+    const [celular, setCelular] = useState("");
     const [senha, setSenha] = useState("");
+
+    const navigate = useNavigate();
 
     const handleBack = () => {
         navigate("/gourmet-inventory/menu"); // Ajuste o caminho conforme necessário
     };
 
     useEffect(() => {
-        const db_costumer = localStorage.getItem("cad_cliente")
-            ? JSON.parse(localStorage.getItem("cad_cliente"))
-            : [];
-        setData(db_costumer);
+        recuperarFuncionarios();
     }, []);
 
+    const recuperarFuncionarios = () => {
+        api.get(`/usuarios/${localStorage.empresaId}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
+        }).then(response => {
+            console.log("Resposta da API:", response.data);  // Adicione este log
+            setFuncionarios(response.data);
+        }).catch(() => {
+            toast.error("Erro ao recuperar os funcionários.");
+        });
+    };
+
+    const handleExcluir = (idUsuario) => {
+        if (window.confirm("Tem certeza de que deseja excluir este fornecedor?")) {
+            api.delete(`/usuarios/${idUsuario}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                recuperarFuncionarios();
+                toast.success("Usuário excluído com sucesso!");
+            }).catch(() => {
+                toast.error("Erro ao excluir o usuário.");
+            });
+        }
+    };
+
     const handleSave = () => {
-        if (!nome || !cpf || !cargo || !telefone || !email || !senha) {
+        if (!nome || !cargo || !cpf || !email || !celular || !senha) {
             return toast.error("Todos os campos são obrigatórios!");
         }
-
-        if (cpfAlreadyExists()) {
-            return toast.error("CPF já existe!");
+        
+        const usuario = { nome, cargo, cpf, email, celular, senha };
+        
+        if (dataEdit.idUsuario) {
+            api.patch(`/usuarios/${dataEdit.idUsuario}`, usuario, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Usuário atualizado com sucesso!");
+                recuperarFuncionarios();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao atualizar o usuário.");
+            });
+        } else {
+            api.post(`/usuarios/${localStorage.empresaId}`, usuario, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Usuário cadastrado com sucesso!");
+                recuperarFuncionarios();
+                setOpenCadastro(false);
+            }).catch(() => {
+                console.log(usuario)
+                toast.error("Erro ao cadastrar o usuário.");
+            });
         }
-
-        const newDataArray = dataEdit.index !== undefined
-            ? data.map((item, index) => index === dataEdit.index ? { nome, cpf, cargo, telefone, email, senha } : item)
-            : [...data, { nome, cpf, cargo, telefone, email, senha }];
-
-        localStorage.setItem("cad_cliente", JSON.stringify(newDataArray));
-        setData(newDataArray);
-        setOpenCadastro(false);
     };
 
-    const cpfAlreadyExists = () => {
-        if (dataEdit.cpf !== cpf && data?.length) {
-            return data.find((item) => item.cpf === cpf);
-        }
-        return false;
-    };
-
-    const handleRemove = (cpf) => {
-        const newArray = data.filter((item) => item.cpf !== cpf);
-        setData(newArray);
-        localStorage.setItem("cad_cliente", JSON.stringify(newArray));
-        setOpenVizualizar(false);  // Fecha o modal após exclusão
-    };
-
-    const confirmRemove = (cpf) => {
-        toast(
-            ({ closeToast }) => (
-                <div>
-                    <p>Tem certeza que deseja excluir este item?</p>
-                    <button className={styles["toast-button-yes"]} onClick={() => { handleRemove(cpf); closeToast(); }}>Sim</button>
-                    <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
-                </div>
-            ),
-            {
-                position: "top-center",
-                autoClose: false,
-                closeOnClick: false,
-                draggable: false,
-            }
-        );
-    };
-
-    const handleEdit = (item, index) => {
-        setDataEdit({ ...item, index });
-        setNome(item.nome);
-        setCpf(item.cpf);
-        setCargo(item.cargo);
-        setTelefone(item.telefone);
-        setEmail(item.email);
-        setSenha(item.senha);
+    const handleCadastrar = () => {
+        // Limpar os dados editados
+        setDataEdit({});
+        // Limpar os campos do formulário
+        limparCampos();
+        // Abrir o modal de cadastro
         setOpenCadastro(true);
-        setOpenVizualizar(false);  // Fecha o modal de visualização ao abrir o de edição
     };
 
-    const handleView = (item, index) => {
-        setViewData({ ...item, index });
+    const limparCampos = () => {
+        setNome("");
+        setCargo("");
+        setCpf("");
+        setEmail("");
+        setCelular("");
+        setSenha("");
+    };
+
+    const handleEdit = (usuario) => {
+        setDataEdit(usuario);
+        setNome(usuario.nome);
+        setCargo(usuario.cargo);
+        setCpf(usuario.cpf);
+        setEmail(usuario.email);
+        setCelular(usuario.celular);
+        setSenha(usuario.senha);
+        setOpenCadastro(true);
+    };
+
+    const handleView = (usuario) => {
+        setViewData(usuario);
         setOpenVizualizar(true);
-    };
-
-    const rowStyle = {
-        marginBottom: '10px',
     };
 
     return (
@@ -113,10 +131,9 @@ function PagFuncionario() {
                 </div>
                 <div className={styles["cabecalho"]}>
                     <BarraPesquisa tituloPag={"Área Funcionários"} />
-                    <button onClick={() => { setDataEdit({}); setNome(""); setCpf(""); setCargo(""); setTelefone(""); setEmail(""); setSenha(""); setOpenCadastro(true); }}>Cadastrar Funcionário</button>
+                    <button onClick={handleCadastrar}>Cadastrar Funcionário</button>
                 </div>
-                
-
+                <ImgConfig />
                 <div className={styles["form"]}>
                     <div className={styles["tituloForm"]}>
                         <span>Nome</span>
@@ -127,17 +144,15 @@ function PagFuncionario() {
                     <div className={styles["tabelaForn"]}>
                         <table>
                             <thead>
-                                <tr>
-                                    
-                                </tr>
+                                <tr></tr>
                             </thead>
                             <tbody>
-                                {data.map((item, index) => (
-                                    <tr key={index} onClick={() => handleView(item, index)} style={rowStyle}>
-                                        <td>{item.nome}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.cargo}</td>
-                                        <td>{item.telefone}</td>
+                                {Array.isArray(funcionarios) && funcionarios.map(usuario => (
+                                    <tr key={usuario.idUsuario} onClick={() => handleView(usuario)}>
+                                        <td>{usuario.nome}</td>
+                                        <td>{usuario.email}</td>
+                                        <td>{usuario.cargo}</td>
+                                        <td>{usuario.celular}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -147,7 +162,7 @@ function PagFuncionario() {
 
                 <ModalCadastro isOpen={openCadastro} setModalOpen={() => setOpenCadastro(!openCadastro)}>
                     <div className={styles["cadastro"]}>
-                        <h3>{dataEdit.index !== undefined ? "Editar Funcionário" : "Novo Funcionário"}</h3>
+                        <h3>{dataEdit.idUsuario ? "Editar Funcionário" : "Novo Funcionário"}</h3>
                         <div className={styles["inputCadastro"]}>
                             <div className={styles["input"]}>
                                 <span>Nome</span>
@@ -174,11 +189,11 @@ function PagFuncionario() {
                                 />
                             </div>
                             <div className={styles["input"]}>
-                                <span>Telefone</span>
+                                <span>Celular</span>
                                 <input
                                     type="text"
-                                    value={telefone}
-                                    onChange={(e) => setTelefone(e.target.value)}
+                                    value={celular}
+                                    onChange={(e) => setCelular(e.target.value)}
                                 />
                             </div>
                             <div className={styles["input"]}>
@@ -198,22 +213,22 @@ function PagFuncionario() {
                                 />
                             </div>
                         </div>
-                        <button onClick={handleSave}>{dataEdit.index !== undefined ? "Salvar" : "Cadastrar"}</button>
+                        <button onClick={handleSave}>{dataEdit.idUsuario ? "Salvar" : "Cadastrar"}</button>
                     </div>
                 </ModalCadastro>
 
-                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nome}`}>
+                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Funcionário ${viewData.nome}`}>
                     <div className={styles["formVizualizar"]}>
-                    <div className={styles["dadosForn"]}>
-                        <span>Cargo: {viewData.cargo}</span>
-                        <span>Telefone: {viewData.telefone}</span>
-                        <span>E-mail: {viewData.email}</span>
-                    </div>
+                        <div className={styles["dadosForn"]}>
+                            <span>Cargo: {viewData.cargo}</span>
+                            <span>Telefone: {viewData.celular}</span>
+                            <span>E-mail: {viewData.email}</span>
+                        </div>
 
-                    <div className={styles["botao"]}>
-                        <button id={styles["editar"]} onClick={() => handleEdit(viewData, viewData.index)}>Editar</button>
-                        <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.cpf)}>Excluir</button>
-                    </div>
+                        <div className={styles["botao"]}>
+                            <button id={styles["editar"]} onClick={() => handleEdit(viewData)}>Editar</button>
+                            <button id={styles["excluir"]} onClick={() => handleExcluir(viewData.idUsuario)}>Excluir</button>
+                        </div>
                     </div>
                 </ModalVizualizar>
             </div>
@@ -221,4 +236,4 @@ function PagFuncionario() {
     );
 }
 
-export default PagFuncionario;
+export default PagFornecedor;

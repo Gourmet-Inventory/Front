@@ -59,87 +59,42 @@ const Estoque = () => {
                             data={data}
                         />
                     ))}
-                    <CardEstoque 
-                        nome="molho de tomate" 
-                        categoria="molho" 
-                        dtAviso="012323" 
-                        valorTotal="300gr" 
-                        onOpenModal={handleOpenModal}
-                        data={{nome: "molho de tomate", categoria: "molho", dtAviso: "012323", valorTotal: "300gr"}} 
-                    />
-                ))}
-            <CardEstoque nome="Molho de tomate" categoria="Molho" dtAviso="2024-02-20" valorTotal="300gr"/>
-    
-                    </div>
                 </div>
             </div>
             {selectedData && (
                 <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
-                    {/* tipo modal 1 */}
                     <div className={styles["tituloModal"]}>
-                                <div className={styles["tituloIngrediente"]}>
-                                    <span id={styles["titulo"]}>{selectedData.nome}</span>
-                                    <span>categoria: {selectedData.categoria}</span>
-                                </div>
-                                <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
-                            </div>
-                            
-                            <div className={styles["corpoModal"]}>
-                                <div className={styles["legendaModal"]}>
-                                    <div className={styles["legendasIngred"]}>
-                                    <span>Lote:</span>
-                                    <span>Data de Checagem:</span>
-                                    <span>Quantidade Total</span>
-                                    <span>Quantidade Unitária </span>
-                                    <span>Peso unitário:</span>
-                                    <span>Medida:</span>
-                                    <span>Local de armazenamento:</span>
-                                    </div>
-                                </div>
-                                <div className={styles["dadosModal"]}>
-                                <div className={styles["dadosIngred"]}>
-                                <span>{selectedData.lote}</span>
-                                <span>{selectedData.dtaAviso}</span>
-                                <span>{selectedData.valorTotal}</span>
-                                <span>{selectedData.Unidades}</span>
-                                <span>{selectedData.valorMedida}</span>
-                                <span>{selectedData.tipoMedida}</span>
-                                <span>{selectedData.localArmazenamento}</span>
-                                </div>
-                                </div>
-                            </div>
-
-                    {/* <div className={styles["tituloModal"]}>
                         <div className={styles["tituloIngrediente"]}>
                             <span id={styles["titulo"]}>{selectedData.nome}</span>
                             <span>categoria: {selectedData.categoria}</span>
                         </div>
-                        <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar" />
+                        <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
                     </div>
+                    
                     <div className={styles["corpoModal"]}>
                         <div className={styles["legendaModal"]}>
                             <div className={styles["legendasIngred"]}>
                                 <span>Lote:</span>
                                 <span>Data de Checagem:</span>
-                                <span>Quantidade Total</span>
-                                <span>Quantidade / Peso unitário:</span>
+                                <span>Quantidade Total:</span>
+                                <span>Quantidade Unitária:</span>
+                                <span>Peso unitário:</span>
                                 <span>Medida:</span>
                                 <span>Local de armazenamento:</span>
-                                <span>Dados nutricionais:</span>
                             </div>
                         </div>
                         <div className={styles["dadosModal"]}>
                             <div className={styles["dadosIngred"]}>
                                 <span>{selectedData.lote}</span>
-                                <span>{selectedData.dataChecagem}</span>
-                                <span>{selectedData.quantidadeTotal}</span>
-                                <span>{selectedData.quantidadePesoUnitario}</span>
-                                <span>{selectedData.medida}</span>
+                                <span>{selectedData.dtaAviso}</span>
+                                <span>{selectedData.valorTotal}</span>
+                                <span>{selectedData.unidades}</span>
+                                <span>{selectedData.valorMedida}</span>
+                                <span>{selectedData.tipoMedida}</span>
                                 <span>{selectedData.localArmazenamento}</span>
-                                <span>{selectedData.dadosNutricionais}</span>
                             </div>
-                        </div> */}
-                    {/* </div> */}
+                        </div>
+                    </div>
                 </ModalAlertas>
             )}
         </>

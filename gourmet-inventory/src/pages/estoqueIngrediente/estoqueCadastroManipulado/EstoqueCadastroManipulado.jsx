@@ -2,70 +2,93 @@ import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import styles from "./EstoqueCadastroManipulado.module.css";
 import { useNavigate } from "react-router-dom";
-
+import api from "../../../api";
 const EstoqueCadastroManipulado = () => {
-    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        lote: '',
+        nome: '',
+        categoria: '',
+        tipoMedida: '',
+        unidades: 0,
+        valorMedida: 0.0,
+        localArmazenamento: '',
+        dtaCadastro: '',
+        dtaAviso: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        
+        const dtaCadastro = new Date(formData.dtaCadastro).toISOString().split('T')[0];
+        const dtaAviso = new Date(formData.dtaAviso).toISOString().split('T')[0];
+
+        const dataToSubmit = {
+            ...formData,
+            dtaCadastro,
+            dtaAviso
+        };
+
+        api.post(`/estoque-ingrediente/${localStorage.empresaId}`,{
+          headers: { 'Authorization': `Bearer ${localStorage.token}`}
+        }, dataToSubmit)
+            .then(response => {
+                console.log('Dados enviados com sucesso:', response.data);
+            })
+            .catch(error => {
+              toast.error("Item não cadastrado, algo deu inválido!")
+                console.error('Erro ao enviar dados:', error);
+            });
+    };
+
     return (
-        <div className={styles['main-container']}>
-        <div className={styles['titulo']}>
-        <button onClick={()=> navigate('/gourmet-inventory/estoque') } className={styles['botao']}>Voltar</button>
-          <p className={styles['cadastrar-item-manipulado']}>
-            Cadastrar Item Manipulado
-          </p>
-          
-        </div>
-        <div className={styles['flex-row']}>
-          <span className={styles['ingredientes']}>Ingredientes</span>
-          <div className={styles['rectangle']}>
-            <span className={styles['lot']}>Lote:</span>
-            <input className={styles['frame']} />
-            <div className={styles['datas']}>
-            <span className={styles['production-date']}>Data de Produção:</span>
-            <input className={styles['frame']}/>
-            <span className={styles['expiration-date']}>Data de Validade:</span>
-            <input type="date" className={styles['frame']} />
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Lote:</label>
+                <input type="text" name="lote" value={formData.lote} onChange={handleChange} />
             </div>
-            <span className={styles['total-quantity']}>Quantidade Total:</span>
-            <div className={styles['frame']} />
-            <span className='tipo-medida'>Tipo Medida:</span>
-            <div className={styles['flex-row-bee']}>
-              <div className={styles['frame-4']} />
-              <button className={styles['frame-5']}>
-                <div className={styles['frame-6']}>
-                  <div className={styles['group']} />
-                </div>
-              </button>
+            <div>
+                <label>Nome:</label>
+                <input type="text" name="nome" value={formData.nome} onChange={handleChange} />
             </div>
-            <span className={styles['local-armazenamento']}>Local de armazenamento:</span>
-            <div className={styles['frame-7']} />
-          </div>
-          <div className={styles['frame-8']} />
-          <span className={styles['valor-medida']}>
-            Valor <br />
-            Medida:
-          </span>
-          <span className={styles['tipo-medida-9']}>
-            Tipo <br />
-            Medida:
-          </span>
-          <div className={styles['frame-a']} />
-          <div className={styles['frame-b']}>
-            <div className={styles['frame-c']}>
-              <div className={styles['group-d']} />
+            <div>
+                <label>Categoria:</label>
+                <input type="text" name="categoria" value={formData.categoria} onChange={handleChange} />
             </div>
-          </div>
-          <button className={styles['button']}>
-            <span className={styles['add-item']}>+</span>
-          </button>
-          <span className={styles['number']}>100</span>
-          <div className={styles['frame-e']} />
-          <button className={styles['button-f']}>
-            <span className={styles['add-item-10']}>Cadastrar</span>
-          </button>
-        </div>
-        <button className={styles['rectangle-11']} />
-      </div>
+            <div>
+                <label>Tipo Medida:</label>
+                <input type="text" name="tipoMedida" value={formData.tipoMedida} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Unidades:</label>
+                <input type="number" name="unidades" value={formData.unidades} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Valor Medida:</label>
+                <input type="number" name="valorMedida" value={formData.valorMedida} step="0.01" onChange={handleChange} />
+            </div>
+            <div>
+                <label>Local Armazenamento:</label>
+                <input type="text" name="localArmazenamento" value={formData.localArmazenamento} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Data Cadastro:</label>
+                <input type="date" name="dtaCadastro" value={formData.dtaCadastro} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Data Aviso:</label>
+                <input type="date" name="dtaAviso" value={formData.dtaAviso} onChange={handleChange} />
+            </div>
+            <button onClick={()=>handleSubmit} type="submit">Salvar</button>
+        </form>
     );
 };
-
 export default EstoqueCadastroManipulado;

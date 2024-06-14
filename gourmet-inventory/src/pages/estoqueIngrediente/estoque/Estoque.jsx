@@ -69,6 +69,10 @@ const Estoque = () => {
                         onOpenModal={handleOpenModal}
                         data={{nome: "molho de tomate", categoria: "molho", dtAviso: "012323", valorTotal: "300gr"}} 
                     />
+                ))}
+            <CardEstoque nome="Molho de tomate" categoria="Molho" dtAviso="2024-02-20" valorTotal="300gr"/>
+    
+                    </div>
                 </div>
             </div>
 

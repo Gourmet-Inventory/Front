@@ -7,12 +7,14 @@ import { toast } from 'react-toastify';
 import MenuLateral from "../../../components/menuLateral/MenuLateral";
 import CardEstoque from "../../../components/cardEstoque/CardEstoque";
 import ModalAlertas from "../../../components/modalAlertas/modalAlertas";
+import ModalEstoque from "../../../components/modalEstoque/ModalEstoque";
 import api from "../../../api";
 import fechar from "../../../utils/assets/Fechar.svg";
 
 const Estoque = () => {
     const [cardsEstoqueData, setCardsEstoqueData] = useState([]);
     const navigate = useNavigate();
+    const [openCadastro, setOpenCadastro] = useState(false);
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
 
@@ -43,7 +45,7 @@ const Estoque = () => {
             <div className={styles["cabecalho"]}>
                 <BarraPesquisa tituloPag={"Estoque"} />
                 <ImgConfig />
-                <button onClick={() => navigate('/gourmet-inventory/estoque-cadastro-manipulado')}>Cadastrar Novo Item</button>
+                <button onClick={() => setOpenCadastro(true)}>Cadastrar Novo Item</button>
             </div>
             <div className={styles["area"]}>
                 <div className={styles["card"]}>
@@ -69,6 +71,74 @@ const Estoque = () => {
                     />
                 </div>
             </div>
+
+            <ModalEstoque isOpen={openCadastro} setModalOpen={() => setOpenCadastro(!openCadastro)}>
+                    {/* children */}
+                    <div className={styles["tituloModal"]}>
+                        <div className={styles["tituloIngrediente"]}>
+                            <span id={styles["titulo"]}>Cadastro Item</span>
+                        </div>
+                        <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
+                    </div>
+
+                    <div className={styles["corpoItem"]}>
+                        <div className={styles["legendaItem"]}>
+                            <div className={styles["itens"]}>
+                                <div className={styles["legenda"]}>
+                                    <span>Lote:</span>
+                                    <p>*</p>
+                                </div>   
+                                <div className={styles["legenda"]}>
+                                    <span>Nome:</span>
+                                    <p>*</p>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Categoria: </span>
+                                    <p>*</p>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Tipo Medida: </span>
+                                    <p>*</p>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Valor Medida: </span>
+                                    <p>*</p>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Quantidade Unitária: </span>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Local Armazenamento: </span>
+                                    <p>*</p>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Data Cadastro: </span>
+                                    <p>*</p>
+                                </div>
+                                <div className={styles["legenda"]}>
+                                    <span>Data de Aviso: </span>
+                                    <p>*</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles["dadosItem"]}>
+                            <div className={styles["dados"]}>
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                            <input type="text" />
+                           </div>
+                        </div>
+                        
+                    </div>
+            </ModalEstoque>
+
             {selectedData && (
                 <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
                     {/* tipo modal 1 */}

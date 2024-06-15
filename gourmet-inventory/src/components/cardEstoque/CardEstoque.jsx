@@ -15,7 +15,7 @@ const CardEstoque = ({ nome, categoria, dtAviso, valorTotal, manipulado, onOpenM
                 <p className={styles['aviso']}>{valorTotal}</p>
                 <button onClick={() => onOpenModal(data)} className={styles['Button']}>Ver Mais</button>
             </div>
-        </div>
+        </div>  
     );
 };
 

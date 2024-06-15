@@ -1,5 +1,5 @@
 
-.main-container {
+/* .main-container {
   overflow: hidden;
 }
 
@@ -24,19 +24,19 @@ button {
   display: flex;
   flex-direction: column;
 
-}
+} */
 
-.dados{
+/* .dados{
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 
-.titulo {
+/* .titulo {
   color: #37455d;
   font-size: 20px;
   font-weight: 400;
@@ -61,8 +61,8 @@ button {
   border: none;
   border-radius: 2px;
   font-size: 3vh;
-}
-.text-5 {
+} */
+/* .text-5 {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -78,9 +78,9 @@ button {
   text-align: center;
   white-space: nowrap;
   z-index: 6;
-}
+} */
 
-.rectangle {
+/* .rectangle {
   width:100%;
   height: 12vh;
   background: #37455d;
@@ -101,4 +101,4 @@ button {
   color: #ffffff;
   font-family: Jost, var(--default-font-family);
   font-size: 20px;
-}
+} */

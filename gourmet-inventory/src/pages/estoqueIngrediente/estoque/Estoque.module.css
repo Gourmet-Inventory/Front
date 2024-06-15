@@ -65,39 +65,221 @@ body{
     box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.5);
 }
 
+/* children card */
+
+/* .main-container {
+    overflow: hidden;
+  } */
+  
+  .main-container,
+  .main-container * {
+    box-sizing: border-box;
+  }
+  
+  input,
+  select,
+  textarea,
+  button {
+    outline: 0;
+  }
+  
+  .main-container {
+    width: 15rem;
+    height: 19rem;
+    background-color: white;
+    border: solid 3px #37455d;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+  
+  }
+  
+  .dados{
+    width: 100%;
+    height: 72%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dados span{
+    height: 0.5rem;
+  }
+  
+  
+  .titulo {
+    color: #37455d;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    height: 0.5rem;
+
+  }
+  .aviso {
+    color: #000000;
+    font-family: Jost, var(--default-font-family);
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .dados button{
+    height: 2.5rem;
+    width: 8rem;
+    font-size: 1.3rem;
+    color: #000000;
+    background-color: #E59E53;
+    border-radius: 0%;
+  }
+
+  .dados button:hover{
+    background-color: #a77940;
+  }
+  
+  
+  .rectangle {
+    width:100%;
+    height: 28%;
+    background: #37455d;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .molho-de-tomate-2 {
+    color: #ffffff;
+    font-family: Jost, var(--default-font-family);
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .categoria-molhos {
+    color: #ffffff;
+    font-family: Jost, var(--default-font-family);
+    font-size: 1.1rem;
+  }
+  
+
+
 /* children Cadastro */
+.tituloModal2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    background-color: #B0D2D3;
+    box-shadow: 2px 3px 3px #0000002f;
+}
+
+.tituloIngrediente2 span{
+    color: #37455D;
+    font-size: 1.3rem;
+}
+
+.tituloModal2 img{
+    cursor: pointer;
+    z-index: 1001;
+    height: 1.2rem;
+}
+
+.tituloModal2 img:hover{
+    background-color: #37455D;
+}
+
+.tituloIngrediente2{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+}
 
 .corpoItem{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 87%;
-    background-color: aqua;
+    height: 90%;
+    align-items: center;
+}
+
+.cadastroItens{
+    display: flex;
+    width: 100%;
+    height: 30rem;
+    align-items: center;
 }
 
 .legendaItem{
     display: flex;
     width: 40%;
-    height: 100%;
-    background-color: violet;
+    height: 85%;
+    justify-content: center;
 }
 
 .legenda{
     display: flex;
     width: 100%;
+    height: 2rem;   
 }
 
-.dadosItem{
-    width: 60%;
-    height: 100%;
+#obrigatorio{
+    color: red;
 }
+
 
 .itens{
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
+    width: 90%;
+    height: 100%;
+    justify-content: space-around;
 }
 
+.dadosItem{
+    display: flex;
+    width: 60%;
+    height: 85%;
+}
+
+.dados{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.dados input{
+    height: 1.8rem;
+    width: 90%;
+    border-radius: 0%;
+    border: 1px solid black;
+    font-size: 1.1rem;
+}
+
+.botaoItem{
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.botaoItem button{
+    height: 3rem;
+    width: 10rem;
+    border-radius: 0%;
+    font-size: 1.5rem;
+    color: black;
+    background-color: #E59E53;
+}
+
+
+
 /* children */
+
 .tituloModal{
     display: flex;
     justify-content: center;
@@ -137,7 +319,7 @@ body{
 .corpoModal{
     display: flex;
     width: 100%;
-    height: 87%; 
+    height: 75%; 
 }
 
 .legendaModal{
@@ -155,7 +337,7 @@ body{
     flex-direction: column;
     color: white;
     font-size: 1.1rem;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 
@@ -172,6 +354,39 @@ body{
     display: flex;
     flex-direction: column;
     font-size: 1.1rem;
-    justify-content: space-evenly;
+    justify-content: space-around;
     color: black;
+}
+
+.botoesModal{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 4rem;
+    border-top: 2px solid black;
+}
+
+.botoesModal button{
+    width: 8rem;
+    height: 3rem;
+    border-radius: 0%;
+    font-size: 1.4rem;
+}
+
+#editar{
+    background-color: #E59E53;
+}
+
+#editar:hover{
+    background-color: #a77940;
+}
+
+#excluir{
+    color: white;
+    background-color: #ED5656;
+}
+
+#excluir:hover{
+    background-color: #af4040;
 }

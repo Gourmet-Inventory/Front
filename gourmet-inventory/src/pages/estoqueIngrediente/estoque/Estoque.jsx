@@ -247,6 +247,7 @@ const Estoque = () => {
                             <div className={styles.tituloIngrediente}>
                                 <span id={styles.titulo}>{selectedData.nome}</span>
                                 <span>Categoria: {selectedData.categoria}</span>
+
                             </div>
                             <img src={fechar} onClick={() => setOpenVisualizar(false)} alt="Fechar" />
                         </div>

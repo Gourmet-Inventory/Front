@@ -7,43 +7,27 @@ import imgUpload from "../../../utils/assets/Group 191.svg";
 import AlergicoSelector from "../../../components/alergicoSelector/AlergicoSelector";
 import CardIngrediente from "../../../components/cardIngrediente/CardIngrediente";
 import imgDeletar from "../../../utils/assets/Fechar.svg";
+import SelectIngredientes from "../../../components/selectIngrediente/SelectIngrediente";
 
 function CadastrarPratos() {
-    const [pratos, setPratos] = useState([]);
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [preco, setPreco] = useState("");
     const [categoria, setCategoria] = useState("");
     const [alergicos, setAlergicos] = useState([]);
-    const [ingrediente, setIngrediente] = useState("");
+    const [receitaPrato, setReceitaPrato] = useState([]);
+    const [idItem, setIdItem] = useState("");
     const [valorMedida, setValorMedida] = useState("");
     const [tipoMedida, setTipoMedida] = useState("");
-    const [ingredientes, setIngredientes] = useState([]);
     const [dataEdit, setDataEdit] = useState({});
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        recuperarPratos();
-    }, []);
-
-    const recuperarPratos = () => {
-        api.get(`/pratos/${localStorage.empresaId}`, {
-            headers: { 'Authorization': `Bearer ${localStorage.token}` }
-        }).then(response => {
-            console.log("Resposta da API:", response.data);
-            setPratos(response.data);
-        }).catch(() => {
-            toast.error("Erro ao recuperar pratos.");
-        });
-    };
 
     const handleExcluir = (id) => {
         if (window.confirm("Tem certeza de que deseja excluir este prato?")) {
             api.delete(`/pratos/${id}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
-                recuperarPratos();
                 toast.success("Prato excluído com sucesso!");
             }).catch(() => {
                 toast.error("Erro ao excluir o prato.");
@@ -56,15 +40,24 @@ function CadastrarPratos() {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        const prato = { nome, descricao, preco, categoria, alergicos, ingredientes };
+        const prato = {
+            nome,
+            descricao,
+            preco,
+            categoria,
+            alergicos,
+            receitaPrato: receitaPrato.map(ingrediente => ({
+                idItem: ingrediente.idItem,
+                tipoMedida: ingrediente.tipoMedida,
+                valorMedida: ingrediente.valorMedida,
+            }))
+        };
 
         if (dataEdit.id) {
             api.put(`/pratos/${dataEdit.id}`, prato, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Prato atualizado com sucesso!");
-                recuperarPratos();
-                clearForm();
             }).catch(() => {
                 toast.error("Erro ao atualizar o prato.");
             });
@@ -73,25 +66,12 @@ function CadastrarPratos() {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Prato cadastrado com sucesso!");
-                recuperarPratos();
-                clearForm();
+                handleBack();
             }).catch(() => {
+                console.log(prato)
                 toast.error("Erro ao cadastrar o prato.");
             });
         }
-    };
-
-    const clearForm = () => {
-        setNome("");
-        setDescricao("");
-        setPreco("");
-        setCategoria("");
-        setAlergicos([]);
-        setIngredientes([]);
-        setIngrediente("");
-        setValorMedida("");
-        setTipoMedida("");
-        setDataEdit({});
     };
 
     const handleEdit = (prato) => {
@@ -101,23 +81,26 @@ function CadastrarPratos() {
         setPreco(prato.preco);
         setCategoria(prato.categoria);
         setAlergicos(prato.alergicos);
-        setIngredientes(prato.ingredientes);
+        setReceitaPrato(prato.receitaPrato);
     };
 
     const handleAddIngrediente = () => {
-        if (!ingrediente || !valorMedida || !tipoMedida) {
+        if (!idItem || !valorMedida || !tipoMedida) {
             return toast.error("Todos os campos de ingredientes são obrigatórios!");
         }
-
-        setIngredientes([...ingredientes, { ingrediente, valorMedida, tipoMedida }]);
-        setIngrediente("");
+        const novoIngrediente = {
+            idItem: idItem,
+            valorMedida: valorMedida,
+            tipoMedida: tipoMedida
+        };
+        setReceitaPrato(prevIngredientes => [...prevIngredientes, novoIngrediente]);
+        setIdItem("");
         setValorMedida("");
         setTipoMedida("");
     };
 
-    const handleDeleteIngrediente = (index) => {
-        const newIngredientes = ingredientes.filter((_, i) => i !== index);
-        setIngredientes(newIngredientes);
+    const handleSelectIngrediente = (ingrediente) => {
+        setIdItem(ingrediente.idItem);
     };
 
     const handleBack = () => {
@@ -168,8 +151,8 @@ function CadastrarPratos() {
                 <div className={styles["medidas"]}>
                     <h1>Ingredientes</h1>
                     <div className={styles["input"]} id={styles["ingredienteMedida"]}>
-                            <span>Ingrediente:</span>
-                            <input type="text" value={ingrediente} onChange={(e) => setIngrediente(e.target.value)} />
+                        <span>Ingrediente:</span>
+                        <SelectIngredientes onSelect={handleSelectIngrediente} />
                     </div>
                     <div className={styles["formMedidas"]}>
                         <div className={styles["input"]}>
@@ -183,14 +166,13 @@ function CadastrarPratos() {
                         <button onClick={handleAddIngrediente}>Adicionar Ingrediente</button>
                     </div>
                     <div className={styles["ingredientes"]}>
-                        {ingredientes.map((ing, index) => (
+                        {receitaPrato.map((ing, index) => (
                             <CardIngrediente
                                 key={index}
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
-                                ingrediente={ing.ingrediente}
+                                ingrediente={ing.estoqueIngrediente}
                                 imgDeletar={imgDeletar}
-                                onDelete={() => handleDeleteIngrediente(index)}
                             />
                         ))}
                     </div>
@@ -199,19 +181,6 @@ function CadastrarPratos() {
                     </button>
                 </div>
             </div>
-            {/* <div className={styles["listaPratos"]}>
-                <h2>Lista de Pratos</h2>
-                {pratos.map(prato => (
-                    <div key={prato.id} className={styles["prato"]}>
-                        <h3>{prato.nome}</h3>
-                        <p>{prato.descricao}</p>
-                        <p>{prato.preco}</p>
-                        <p>{prato.categoria}</p>
-                        <button onClick={() => handleEdit(prato)}>Editar</button>
-                        <button onClick={() => handleExcluir(prato.id)}>Excluir</button>
-                    </div>
-                ))}
-            </div> */}
         </div>
     );
 }

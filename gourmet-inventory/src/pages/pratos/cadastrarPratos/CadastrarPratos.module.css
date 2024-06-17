@@ -98,13 +98,15 @@
 }
 
 .input{
+    
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .input input{
-    width: 90%;
+    width: 95%;
+    font-size: 1rem;
     height: 2.3rem;
 }
 
@@ -116,7 +118,7 @@
 }
 
 .selected select{
-    width: 92%;
+    width: 100%;
     border: none;
     height: 100%;
 }
@@ -163,7 +165,8 @@
 }
 
 #ingredienteMedida{
-    width: 80%;
+    display: flex;
+    width: 100%;
     height: 5rem;
     align-items: center;
     font-size: 1.4rem;
@@ -173,6 +176,11 @@
     font-size: 1.2rem;
     border: 0.5px solid rgba(0, 0, 0, 0.548);
     box-shadow: 2px 3px 3px #2b2b2b67;
+}
+#ingredienteMedida span{
+    display: flex;
+    font-size: 1.2rem;
+    margin-right: 1vw;
 }
 
 .formMedidas{
@@ -199,9 +207,7 @@
     gap: 1.5rem;
 }
 
-.input input{
-    font-size: 1rem;
-}
+
 
 .tipoMedida select{
     border-radius: 0%;

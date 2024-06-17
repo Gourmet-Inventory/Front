@@ -15,12 +15,15 @@ function PagPratos() {
 
     const navigate = useNavigate();
 
+    
+
     useEffect(() => {
         api.get(`/pratos/${localStorage.empresaId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         })
         .then(response => {
             if (Array.isArray(response.data)) {
+                console.log(response.data)
                 setPratos(response.data);
             } else {
                 console.error('A resposta da API não é um array:', response.data);

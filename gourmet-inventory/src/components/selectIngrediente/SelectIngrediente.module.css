@@ -1,0 +1,36 @@
+.select-ingredientes-container {
+    position: relative;
+    width: 30vw; /* Ajuste conforme necessário */
+}
+
+.select-ingredientes-input {
+    width: 10vw;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+.suggestions-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 2vw;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: white;
+    max-height: 150px; /* Ajuste conforme necessário */
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}

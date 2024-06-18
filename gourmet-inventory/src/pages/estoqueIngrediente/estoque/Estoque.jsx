@@ -46,36 +46,37 @@ const Estoque = () => {
     };
 
     const handleSave = () => {
-        if (!lote || !nome || !categoria || !tipoMedida || !valorMedida || !localArmazenamento || !dtaCadastro || !dtaAviso) {
-            return toast.error("Todos os campos são obrigatórios!");
-        }
-    
-        const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, unidades, localArmazenamento, dtaCadastro, dtaAviso };
-    
-        if (dataEdit.idItem) {
-            // Editar item existente
-            api.put(`/estoque-ingrediente/${dataEdit.idItem}`, item, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
-                toast.success("Item atualizado com sucesso!");
-                recuperarItens();
-                setOpenCadastro(false);
-            }).catch(() => {
-                toast.error("Erro ao atualizar o item.");
-            });
-        } else {
-            // Criar novo item
-            api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
-                toast.success("Item cadastrado com sucesso!");
-                recuperarItens();
-                setOpenCadastro(false);
-            }).catch(() => {
-                toast.error("Erro ao cadastrar o item.");
-            });
-        }
-    };
+            if (!lote || !nome || !categoria || !tipoMedida || !valorMedida || !localArmazenamento || !dtaCadastro || !dtaAviso) {
+                return toast.error("Todos os campos são obrigatórios!");
+            }
+        
+            const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, unidades, localArmazenamento, dtaCadastro, dtaAviso };
+        
+            if (dataEdit.idItem) {
+                // Editar item existente
+                api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
+                    headers: { 'Authorization': `Bearer ${localStorage.token}` }
+                }).then(() => {
+                    toast.success("Item atualizado com sucesso!");
+                    console.log(item);
+                    recuperarItens();
+                    setOpenCadastro(false);
+                }).catch(() => {
+                    toast.error("Erro ao atualizar o item.");
+                });
+            } else {
+                // Criar novo item
+                api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
+                    headers: { 'Authorization': `Bearer ${localStorage.token}` }
+                }).then(() => {
+                    toast.success("Item cadastrado com sucesso!");
+                    recuperarItens();
+                    setOpenCadastro(false);
+                }).catch(() => {
+                    toast.error("Erro ao cadastrar o item.");
+                });
+            }
+        };
     const handleCadastrar = () => {
         setDataEdit({});
         limparCampos();
@@ -116,7 +117,7 @@ const Estoque = () => {
 
     const handleExcluir = (idItem) => {
         if (window.confirm("Tem certeza de que deseja excluir este item?")) {
-            api.delete(`/estoque-ingrediente/${idItem}`, {
+            api.delete(`/estoque-ingrediente/deletar-item/${idItem}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 recuperarItens();

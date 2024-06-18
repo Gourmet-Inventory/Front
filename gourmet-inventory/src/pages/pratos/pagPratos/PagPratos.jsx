@@ -94,6 +94,7 @@ function PagPratos() {
                 <div className={styles["cabecalho"]}>
                     <BarraPesquisa tituloPag={"Pratos"} />
                     <button onClick={handleCadastro}>Cadastrar Pratos</button>
+                    <button>Relatório</button>
                 </div>
                 <ImgConfig />
 

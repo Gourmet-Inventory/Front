@@ -174,7 +174,7 @@ function CadastrarPratos() {
                                 key={index}
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
-                                ingrediente={ing.estoqueIngrediente}
+                                ingrediente={ing.idItem}
                                 imgDeletar={imgDeletar}
                             />
                         ))}

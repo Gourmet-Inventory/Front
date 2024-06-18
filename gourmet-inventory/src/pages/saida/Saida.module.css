@@ -6,9 +6,9 @@
 }
 
 .form{
+    display: flex;
     width: 67.5vw;
     height: 72vh;
-    flex-direction: column;
     padding: 1rem;
 }
 

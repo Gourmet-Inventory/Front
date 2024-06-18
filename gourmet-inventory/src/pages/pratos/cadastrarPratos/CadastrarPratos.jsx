@@ -161,7 +161,10 @@ function CadastrarPratos() {
                         </div>
                         <div className={styles["input"]}>
                             <span>Tipo Medida:</span>
-                            <input type="text" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)} />
+                            <select value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
+                                <option value="GRAMAS">Gramas(gr)</option>
+                                <option value="UNIDADE">Unidade</option>
+                                </select>
                         </div>
                         <button onClick={handleAddIngrediente}>Adicionar Ingrediente</button>
                     </div>

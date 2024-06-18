@@ -18,7 +18,7 @@ function CadastrarPratos() {
     const [receitaPrato, setReceitaPrato] = useState([]);
     const [idItem, setIdItem] = useState("");
     const [valorMedida, setValorMedida] = useState("");
-    const [tipoMedida, setTipoMedida] = useState("");
+    const [tipoMedida, setTipoMedida] = useState("GRAMAS");
     const [dataEdit, setDataEdit] = useState({});
 
     const navigate = useNavigate();

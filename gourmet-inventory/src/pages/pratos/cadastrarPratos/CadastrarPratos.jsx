@@ -18,7 +18,7 @@ function CadastrarPratos() {
     const [receitaPrato, setReceitaPrato] = useState([]);
     const [idItem, setIdItem] = useState("");
     const [valorMedida, setValorMedida] = useState("");
-    const [tipoMedida, setTipoMedida] = useState("");
+    const [tipoMedida, setTipoMedida] = useState("GRAMAS");
     const [dataEdit, setDataEdit] = useState({});
 
     const navigate = useNavigate();
@@ -161,7 +161,10 @@ function CadastrarPratos() {
                         </div>
                         <div className={styles["input"]}>
                             <span>Tipo Medida:</span>
-                            <input type="text" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)} />
+                            <select value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
+                                <option value="GRAMAS">Gramas(gr)</option>
+                                <option value="UNIDADE">Unidade</option>
+                                </select>
                         </div>
                         <button onClick={handleAddIngrediente}>Adicionar Ingrediente</button>
                     </div>
@@ -171,7 +174,7 @@ function CadastrarPratos() {
                                 key={index}
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
-                                ingrediente={ing.estoqueIngrediente}
+                                ingrediente={ing.idItem}
                                 imgDeletar={imgDeletar}
                             />
                         ))}

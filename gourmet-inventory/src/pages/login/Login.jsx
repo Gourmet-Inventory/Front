@@ -20,7 +20,7 @@ const Login = () => {
             const nome = response.data.nome;
             const cargo = response.data.cargo;
             const empresaNome = response.data.empresa.nomeFantasia;
-            const empresaId = response.data.empresa.id;
+            const empresaId = response.data.empresa.idEmpresa;
 
             localStorage.setItem('token', token);
             localStorage.setItem('idUsuario', idUsuario);

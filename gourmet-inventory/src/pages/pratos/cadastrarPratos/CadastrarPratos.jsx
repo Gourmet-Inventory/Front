@@ -118,10 +118,10 @@ function CadastrarPratos() {
             <div className={styles["corpo"]}>
                 <div className={styles["form"]}>
                     <div className={styles["formCadastro"]}>
-                        <div className={styles["imgCadastro"]}>
+                        {/* <div className={styles["imgCadastro"]}>
                             <img src={imgUpload} alt="Upload" />
                             <button>Adicionar Foto</button>
-                        </div>
+                        </div> */}
                         <div className={styles["infoCadastro"]}>
                             <div className={styles["dadosCadastro"]}>
                                 <span>Nome:</span>

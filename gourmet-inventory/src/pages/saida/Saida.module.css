@@ -6,7 +6,7 @@
 }
 
 .form{
-    width: 69.5vw;
+    width: 67.5vw;
     height: 72vh;
     flex-direction: column;
     padding: 1rem;
@@ -104,12 +104,27 @@
     border-top: #E59E53 3px solid;
 }
 
+.botoes{
+    display: flex;
+    gap: 2rem;
+}
+
 #buttonSaida{
     margin-top: 1rem;
     font-size: 1.2rem;
     background-color: #E59E53;
     width: 50%;
     height: 3rem;
+    color: black;
+}
+
+#buttonRelatorio{
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    background-color: #E59E53;
+    width: 8rem;
+    height: 3rem;
+    color: black;
 }
 
 #buttonSaida:hover{

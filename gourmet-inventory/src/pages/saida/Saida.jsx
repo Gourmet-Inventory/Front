@@ -58,7 +58,10 @@ function Saida() {
                                 </div>
                             </div>
                         </div>
-                        <button id={styles["buttonSaida"]} onClick={() => {setOpenVizualizar(true); }}>Finalizar</button>
+                        <div className={styles["botoes"]}>
+                            <button id={styles["buttonSaida"]} onClick={() => {setOpenVizualizar(true); }}>Finalizar</button>
+                            <button id={styles["buttonRelatorio"]} onClick={() => {setOpenVizualizar(true); }}>Relatório</button>
+                        </div>
                     </div>
 
                 <ModalSaida isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} tituloModal={"Revisão"}/>

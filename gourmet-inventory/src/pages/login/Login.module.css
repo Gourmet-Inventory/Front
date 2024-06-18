@@ -10,7 +10,7 @@
 
 .bodyLogin img{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
 }
 
@@ -44,6 +44,7 @@
     right: 0;
     align-items: center;
     color: #EAF6F5;
+    overflow-y: hidden;
 }
 
 .form h1{

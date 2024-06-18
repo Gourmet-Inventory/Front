@@ -1,3 +1,7 @@
+.body{
+    overflow-y: hidden;
+}
+
 .tituloForm{
     display: flex;
     height: 50px;

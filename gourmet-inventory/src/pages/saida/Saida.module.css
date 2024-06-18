@@ -3,6 +3,7 @@
     width: 95vw;
     height: 77vh;
     margin-left: 6rem;
+    overflow-y: hidden;
 }
 
 .form{

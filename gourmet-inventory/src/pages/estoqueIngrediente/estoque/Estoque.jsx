@@ -145,7 +145,7 @@ const Estoque = () => {
     };
 
     return (
-        <>
+        <div className={styles["body"]}>
             <MenuLateral />
             <div className={styles.cabecalho}>
                 <BarraPesquisa tituloPag="Estoque" />
@@ -289,7 +289,7 @@ const Estoque = () => {
                     </ModalAlertas>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 

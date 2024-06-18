@@ -20,13 +20,13 @@
 .cabecalho button{
     background-color: #E59E53;
     border-radius: 0%;
-    width: 15rem;
+    width: 10rem;
     height: 4.5rem;
     color: black;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: -2rem;
-    margin-right: 6rem;
     font-weight: lighter;
+    margin-right: 1rem;
 }
 
 .cabecalho button:hover{

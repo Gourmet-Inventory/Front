@@ -36,11 +36,16 @@
     height: auto;
 }
 
-button{
+.menu button{
     border-radius: 5px;
     font-size: 2rem;
     background-color: #37455D;
     color: white;
+}
+
+.menu button:hover{
+    background-color: #E59E53;
+    color: black;
 }
 
 .menus :first-child button{

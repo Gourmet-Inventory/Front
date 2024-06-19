@@ -1,11 +1,14 @@
 .alergicos{
     display: flex;
     justify-content: center;
-    width:43vw;
+    width:41vw;
+    height: 2rem;
 }
 
 .alergicos select{
-    width: 96%;
+    height: 2rem;
+    border-radius: 2px;
+    width: 100%;
     height: 2.3rem;
     font-size: 1rem;
 }
@@ -14,4 +17,3 @@
     background-color: #E59E53;
     font-size: 1rem;
 }
-

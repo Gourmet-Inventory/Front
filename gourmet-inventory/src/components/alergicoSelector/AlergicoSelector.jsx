@@ -46,7 +46,7 @@ const AlergicoSelect = () => {
             </select>
             </div>
             {selectedOption && (
-                <div>
+                <div className={styles["div"]}>
                     <p>Você selecionou: {selectedOption.replace(/_/g, ' ')}</p>
                 </div>
             )}

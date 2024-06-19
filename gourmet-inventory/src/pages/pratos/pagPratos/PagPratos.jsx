@@ -11,29 +11,37 @@ import api from "../../../api";
 function PagPratos() {
     const [pratos, setPratos] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
-    const [viewData, setViewData] = useState({ nome: '', categoria: '', preco: '', alergicos: [], descricao: '', ingredientes: [] });
+    const [viewData, setViewData] = useState({
+        idPrato: '',
+        nome: '',
+        descricao: '',
+        preco: '',
+        alergicosRestricoes: [],
+        categoria: '',
+        receitaPrato: []
+    });
 
     const navigate = useNavigate();
 
-    
-
-    useEffect(() => {
-        api.get(`/pratos/${localStorage.empresaId}`, {
-            headers: { 'Authorization': `Bearer ${localStorage.token}` }
-        })
-        .then(response => {
+    const getPratos = async () => {
+        try {
+            const response = await api.get(`/pratos/${localStorage.empresaId}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            });
             if (Array.isArray(response.data)) {
-                console.log(response.data)
                 setPratos(response.data);
             } else {
                 console.error('A resposta da API não é um array:', response.data);
                 setPratos([]);
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Erro ao buscar pratos:', error);
-            setPratos([]);
-        });
+            toast.error("Erro ao buscar pratos.");
+        }
+    };
+
+    useEffect(() => {
+        getPratos();
     }, []);
 
     const handleCadastro = () => {
@@ -41,7 +49,7 @@ function PagPratos() {
     };
 
     const handleEditar = (prato) => {
-        navigate("/gourmet-inventory/atualizar-pratos", { state: { prato } });
+        navigate("/gourmet-inventory/cadastrar-pratos", { state: { prato } });
     };
 
     const confirmRemove = (id) => {
@@ -69,13 +77,14 @@ function PagPratos() {
 
     const handleDelete = (id, closeToast) => {
         if (id) {
-            api.delete(`/pratos/${localStorage.empresaId}/${id}`, {
+            api.delete(`/pratos/${id}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             })
             .then(() => {
-                setPratos(pratos.filter(prato => prato.id !== id));
+                setPratos(pratos.filter(prato => prato.idPrato !== id));
                 closeToast();
                 setOpenVizualizar(false);
+                getPratos();
                 toast.success("Prato excluído com sucesso!");
             })
             .catch(error => {
@@ -100,18 +109,16 @@ function PagPratos() {
 
                 <div className={styles["form"]}>
                     {pratos.map(prato => (
-                        <div className={styles["card"]} key={prato.id}>
-                            <div className={styles["imgCard"]}>
-                                {/* Aqui você pode colocar a imagem do prato, se tiver */}
-                                {/* <img src={prato.imagem} alt={prato.nome} /> */}
-                            </div>
-                            <div className={styles["infoCard"]}>
-                                <span>Nome: {prato.nome}</span>
-                                <span>Descrição: {prato.descricao}</span>
-                                <span>Preço: {prato.preco}</span>
+                        <div className={styles["card"]} key={prato.idPrato}>
+                                <div className={styles["nome"]}>
+                                <span className={styles["titulo"]}> {prato.nome}</span>
                                 <span>Categoria: {prato.categoria}</span>
+                                </div>
+                                <div className={styles["dados"]}>
+                                <span>Descrição: {prato.descricao}</span>
+                                <span>Preço:R$  {prato.preco}</span>
+                                </div>
                                 <button onClick={() => handleView(prato)}>Ver Mais</button>
-                            </div>
                         </div>
                     ))}
                 </div>
@@ -125,21 +132,18 @@ function PagPratos() {
                         <div className={styles["corpoVizualizar"]}>
                             <div className={styles["corpoModal"]}>
                                 <div className={styles["descricaoModal"]}>
-                                    <div className={styles["imgDescricao"]}>
-                                        <img src={viewData.imagem} alt={viewData.nome} />
-                                    </div>
                                     <div className={styles["textDescricao"]}>
-                                        <span>Preço: {viewData.preco}</span>
-                                        <span>Alérgicos: {viewData.alergicos?.join(", ")}</span>
+                                        <span>Preço: {viewData.preco},00</span>
+                                        <span>Alérgicos: {viewData.alergicosRestricoes?.join(", ")}</span>
                                         <span>Descrição: {viewData.descricao}</span>
                                     </div>
                                 </div>
                                 <div className={styles["ingredientesModal"]}>
                                     <h2>Ingredientes</h2>
                                     <div className={styles["ingredientes"]}>
-                                        {viewData.ingredientes?.map((ing, index) => (
+                                        {viewData.receitaPrato?.map((item, index) => (
                                             <div key={index}>
-                                                {ing.ingrediente}: {ing.valorMedida} {ing.tipoMedida}
+                                                - {item.estoqueIngrediente.nome}: {item.valorMedida} {item.tipoMedida}
                                             </div>
                                         ))}
                                     </div>
@@ -148,7 +152,7 @@ function PagPratos() {
 
                             <div className={styles["buttonModal"]}>
                                 <button id={styles["editar"]} onClick={() => handleEditar(viewData)}>Editar</button>
-                                <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.id)}>Excluir</button>
+                                <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.idPrato)}>Excluir</button>
                             </div>
                         </div>
                     </ModalPratos>

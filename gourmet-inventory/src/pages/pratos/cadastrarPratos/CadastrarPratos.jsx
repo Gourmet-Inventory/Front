@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
 import api from '../../../api';
 import styles from "./CadastrarPratos.module.css";
@@ -22,6 +22,20 @@ function CadastrarPratos() {
     const [dataEdit, setDataEdit] = useState({});
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state && location.state.prato) {
+            const prato = location.state.prato;
+            setDataEdit(prato);
+            setNome(prato.nome);
+            setDescricao(prato.descricao);
+            setPreco(prato.preco);
+            setCategoria(prato.categoria);
+            setAlergicos(prato.alergicos);
+            setReceitaPrato(prato.receitaPrato);
+        }
+    }, [location.state]);
 
     const handleExcluir = (id) => {
         if (window.confirm("Tem certeza de que deseja excluir este prato?")) {
@@ -68,20 +82,9 @@ function CadastrarPratos() {
                 toast.success("Prato cadastrado com sucesso!");
                 handleBack();
             }).catch(() => {
-                console.log(prato)
                 toast.error("Erro ao cadastrar o prato.");
             });
         }
-    };
-
-    const handleEdit = (prato) => {
-        setDataEdit(prato);
-        setNome(prato.nome);
-        setDescricao(prato.descricao);
-        setPreco(prato.preco);
-        setCategoria(prato.categoria);
-        setAlergicos(prato.alergicos);
-        setReceitaPrato(prato.receitaPrato);
     };
 
     const handleAddIngrediente = () => {
@@ -96,11 +99,16 @@ function CadastrarPratos() {
         setReceitaPrato(prevIngredientes => [...prevIngredientes, novoIngrediente]);
         setIdItem("");
         setValorMedida("");
-        setTipoMedida("");
+        setTipoMedida("GRAMAS"); // Reinicializa o tipo de medida para Gramas
     };
 
     const handleSelectIngrediente = (ingrediente) => {
         setIdItem(ingrediente.idItem);
+    };
+
+    const handleRemoveIngrediente = (idItemToRemove) => {
+        const novaReceita = receitaPrato.filter(ingrediente => ingrediente.idItem !== idItemToRemove);
+        setReceitaPrato(novaReceita);
     };
 
     const handleBack = () => {
@@ -112,16 +120,12 @@ function CadastrarPratos() {
             <div className={styles["cabecalho"]}>
                 <button onClick={handleBack}>Voltar</button>
                 <div className={styles["titulo"]}>
-                    <h1>Cadastrar Prato</h1>
+                    <h1>{dataEdit.id ? "Editar Prato" : "Cadastrar Prato"}</h1>
                 </div>
             </div>
             <div className={styles["corpo"]}>
                 <div className={styles["form"]}>
                     <div className={styles["formCadastro"]}>
-                        {/* <div className={styles["imgCadastro"]}>
-                            <img src={imgUpload} alt="Upload" />
-                            <button>Adicionar Foto</button>
-                        </div> */}
                         <div className={styles["infoCadastro"]}>
                             <div className={styles["dadosCadastro"]}>
                                 <span>Nome:</span>
@@ -140,8 +144,8 @@ function CadastrarPratos() {
                                 <div className={styles["selected"]}>
                                     <AlergicoSelector selected={alergicos} onSelect={setAlergicos} />
                                 </div>
-                                <span>Descrição:</span>
                                 <div className={styles["inputDescricao"]}>
+                                    <span>Descrição:</span>
                                     <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                                 </div>
                             </div>
@@ -162,10 +166,9 @@ function CadastrarPratos() {
                         <div className={styles["input1"]}>
                             <span>Tipo Medida:</span>
                             <select value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
-                                <option value="" defaultChecked >Selecione uma medida</option>
-                                <option value="GRAMAS">Gramas(gr)</option>
+                                <option value="GRAMAS">Gramas (gr)</option>
                                 <option value="UNIDADE">Unidade</option>
-                                </select>
+                            </select>
                         </div>
                         <button onClick={handleAddIngrediente}>Adicionar Ingrediente</button>
                     </div>
@@ -175,7 +178,8 @@ function CadastrarPratos() {
                                 key={index}
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
-                                ingrediente={ing.idItem}
+                                ingrediente={ing.idItem} // Ajustar para o que representa o nome do ingrediente
+                                onDelete={() => handleRemoveIngrediente(ing.idItem)}
                                 imgDeletar={imgDeletar}
                             />
                         ))}

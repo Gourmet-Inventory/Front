@@ -104,6 +104,13 @@
     height: 0.5rem;
   }
   
+  .dados select{
+    width: 23.5rem;
+    border-radius: 0%;
+    height: 2rem;
+    border: 1px solid black;
+    font-size: 1.1rem;
+  }
   
   .titulo {
     color: #37455d;

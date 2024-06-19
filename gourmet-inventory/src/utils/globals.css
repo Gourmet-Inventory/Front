@@ -5,6 +5,7 @@
 
 html {
     scroll-behavior: smooth;
+   
 }
 
 body {
@@ -15,7 +16,6 @@ body {
     color: #000000;
     font-family: "Jost"; 
     overflow-x: hidden;
-   
 }
 
 input{

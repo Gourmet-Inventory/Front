@@ -46,37 +46,38 @@ const Estoque = () => {
     };
 
     const handleSave = () => {
-            if (!lote || !nome || !categoria || !tipoMedida || !valorMedida || !localArmazenamento || !dtaCadastro || !dtaAviso) {
-                return toast.error("Todos os campos são obrigatórios!");
-            }
-        
-            const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, unidades, localArmazenamento, dtaCadastro, dtaAviso };
-        
-            if (dataEdit.idItem) {
-                // Editar item existente
-                api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
-                    headers: { 'Authorization': `Bearer ${localStorage.token}` }
-                }).then(() => {
-                    toast.success("Item atualizado com sucesso!");
-                    console.log(item);
-                    recuperarItens();
-                    setOpenCadastro(false);
-                }).catch(() => {
-                    toast.error("Erro ao atualizar o item.");
-                });
-            } else {
-                // Criar novo item
-                api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
-                    headers: { 'Authorization': `Bearer ${localStorage.token}` }
-                }).then(() => {
-                    toast.success("Item cadastrado com sucesso!");
-                    recuperarItens();
-                    setOpenCadastro(false);
-                }).catch(() => {
-                    toast.error("Erro ao cadastrar o item.");
-                });
-            }
-        };
+        if (!lote || !nome || !categoria || !tipoMedida || !valorMedida || !localArmazenamento || !dtaCadastro || !dtaAviso) {
+            return toast.error("Todos os campos são obrigatórios!");
+        }
+
+        const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, unidades, localArmazenamento, dtaCadastro, dtaAviso };
+
+        if (dataEdit.idItem) {
+            // Editar item existente
+            api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Item atualizado com sucesso!");
+                console.log(item);
+                recuperarItens();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao atualizar o item.");
+            });
+        } else {
+            // Criar novo item
+            api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Item cadastrado com sucesso!");
+                recuperarItens();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao cadastrar o item.");
+            });
+        }
+    };
+
     const handleCadastrar = () => {
         setDataEdit({});
         limparCampos();
@@ -144,7 +145,7 @@ const Estoque = () => {
     };
 
     return (
-        <>
+        <div className={styles["body"]}>
             <MenuLateral />
             <div className={styles.cabecalho}>
                 <BarraPesquisa tituloPag="Estoque" />
@@ -225,7 +226,11 @@ const Estoque = () => {
                                         <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} />
                                         <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
                                         <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} />
-                                        <input type="text" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)} />
+                                        <select id="tipoMedida" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
+                                            <option value="">Selecione o tipo de medida</option> 
+                                            <option value="GRAMAS">GRAMAS</option>    
+                                            <option value="UNIDADE">UNIDADE</option>        
+                                        </select>
                                         <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} />
                                         <input type="text" value={unidades} onChange={(e) => setUnidades(e.target.value)} placeholder="Opcional (cadastro de mais de um item)" />
                                         <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} />
@@ -284,9 +289,8 @@ const Estoque = () => {
                     </ModalAlertas>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 
 export default Estoque;
-

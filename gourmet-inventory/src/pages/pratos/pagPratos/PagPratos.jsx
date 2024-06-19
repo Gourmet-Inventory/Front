@@ -115,7 +115,6 @@ function PagPratos() {
                         </div>
                     ))}
                 </div>
-
                 {viewData && (
                     <ModalPratos
                         isOpen={openVizualizar}

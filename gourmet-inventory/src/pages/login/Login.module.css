@@ -6,6 +6,7 @@
     overflow-y: hidden;
     background-color: #37455D;
     font-family: "Jost";
+    overflow-y: hidden;
 }
 
 .bodyLogin img{
@@ -44,6 +45,7 @@
     right: 0;
     align-items: center;
     color: #EAF6F5;
+    overflow-y: hidden;
 }
 
 .form h1{

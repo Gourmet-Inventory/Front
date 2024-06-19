@@ -3,6 +3,7 @@
     width: 100vw;
     height: 100vh;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 .form h1{
@@ -116,9 +117,6 @@
     font-size: 3.5vh;
 }
 
-.legendaAlertas span{
-    
-}
 
 .imgLinha1{
     display: flex;

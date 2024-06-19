@@ -36,7 +36,7 @@ function CadastrarPratos() {
     };
 
     const handleSave = () => {
-        if (!nome || !descricao || !preco || !categoria) {
+        if (!nome || !preco || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 

@@ -3,12 +3,13 @@
     width: 95vw;
     height: 77vh;
     margin-left: 6rem;
+    overflow-y: hidden;
 }
 
 .form{
+    display: flex;
     width: 67.5vw;
     height: 72vh;
-    flex-direction: column;
     padding: 1rem;
 }
 

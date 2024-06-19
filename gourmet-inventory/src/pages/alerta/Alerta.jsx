@@ -29,9 +29,6 @@ const Alerta = () => {
                     if (!areArraysEqual(response.data, previousItens)) {
                         toast.success("Alertas carregados com sucesso!");
                         setPreviousItens(response.data);
-                    } else {
-                        toast.info("Nenhum novo alerta encontrado.");
-                    }
                 } else {
                     console.error('A resposta da API não é um array:', response.data);
                     setItens([]);

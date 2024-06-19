@@ -14,33 +14,54 @@ import api from "../../api";
 
 const Alerta = () => {
     const [itens, setItens] = useState([]);
+    const [previousItens, setPreviousItens] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
     useEffect(() => {
-        api.get(`/alerta/${localStorage.empresaId}`, {
-            headers: { 'Authorization': `Bearer ${localStorage.token}` }
-        })
-        .then(response => {
-            if (Array.isArray(response.data)) {
-                setItens(response.data);
-                if (response.data.length > 0) {
-                    toast.success("Alertas carregados com sucesso!");
+        const fetchAlertas = () => {
+            api.get(`/alerta/${localStorage.empresaId}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            })
+            .then(response => {
+                if (Array.isArray(response.data)) {
+                    setItens(response.data);
+                    if (!areArraysEqual(response.data, previousItens)) {
+                        toast.success("Alertas carregados com sucesso!");
+                        setPreviousItens(response.data);
+                    } else {
+                        toast.info("Nenhum novo alerta encontrado.");
+                    }
                 } else {
-                    toast.info("Nenhum alerta encontrado.");
+                    console.error('A resposta da API não é um array:', response.data);
+                    setItens([]);
+                    toast.error("Erro ao carregar alertas.");
                 }
-            } else {
-                console.error('A resposta da API não é um array:', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao buscar alertas:', error);
                 setItens([]);
-                toast.error("Erro ao carregar alertas.");
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar alertas:', error);
-            setItens([]);
-            toast.error("Erro ao buscar alertas.");
+                toast.error("Erro ao buscar alertas.");
+            });
+        };
+
+        fetchAlertas();
+        const intervalId = setInterval(fetchAlertas, 10000);
+
+        return () => clearInterval(intervalId);
+    }, [previousItens]);
+
+    const areArraysEqual = (arr1, arr2) => {
+        if (arr1.length !== arr2.length) return false;
+        return arr1.every((item, index) => {
+            return (
+                item.idAlerta === arr2[index].idAlerta &&
+                item.nomeIngrediente === arr2[index].nomeIngrediente &&
+                item.tipoAlerta === arr2[index].tipoAlerta &&
+                item.data === arr2[index].data
+            );
         });
-    }, []);
+    };
 
     const handleDelete = (idAlerta, e) => {
         e.stopPropagation();

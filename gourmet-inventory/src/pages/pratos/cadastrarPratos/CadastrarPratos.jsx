@@ -118,10 +118,10 @@ function CadastrarPratos() {
             <div className={styles["corpo"]}>
                 <div className={styles["form"]}>
                     <div className={styles["formCadastro"]}>
-                        <div className={styles["imgCadastro"]}>
+                        {/* <div className={styles["imgCadastro"]}>
                             <img src={imgUpload} alt="Upload" />
                             <button>Adicionar Foto</button>
-                        </div>
+                        </div> */}
                         <div className={styles["infoCadastro"]}>
                             <div className={styles["dadosCadastro"]}>
                                 <span>Nome:</span>
@@ -150,18 +150,19 @@ function CadastrarPratos() {
                 </div>
                 <div className={styles["medidas"]}>
                     <h1>Ingredientes</h1>
-                    <div className={styles["input"]} id={styles["ingredienteMedida"]}>
+                    <div className={styles["input1"]} id={styles["ingredienteMedida"]}>
                         <span>Ingrediente:</span>
                         <SelectIngredientes onSelect={handleSelectIngrediente} />
                     </div>
                     <div className={styles["formMedidas"]}>
-                        <div className={styles["input"]}>
+                        <div className={styles["input1"]}>
                             <span>Valor Medida:</span>
                             <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} />
                         </div>
-                        <div className={styles["input"]}>
+                        <div className={styles["input1"]}>
                             <span>Tipo Medida:</span>
                             <select value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
+                                <option value="" defaultChecked >Selecione uma medida</option>
                                 <option value="GRAMAS">Gramas(gr)</option>
                                 <option value="UNIDADE">Unidade</option>
                                 </select>

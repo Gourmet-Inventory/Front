@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import diaChecagem from "../../utils/assets/Alerta data de verificar.svg";
@@ -10,10 +10,58 @@ import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
 import fechar from "../../utils/assets/Fechar.svg";
 import ModalAlertas from "../../components/modalAlertas/modalAlertas";
+import api from "../../api";
 
 const Alerta = () => {
+    const [itens, setItens] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
-    
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    useEffect(() => {
+        api.get(`/alerta/${localStorage.empresaId}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
+        })
+        .then(response => {
+            if (Array.isArray(response.data)) {
+                setItens(response.data);
+                if (response.data.length > 0) {
+                    toast.success("Alertas carregados com sucesso!");
+                } else {
+                    toast.info("Nenhum alerta encontrado.");
+                }
+            } else {
+                console.error('A resposta da API não é um array:', response.data);
+                setItens([]);
+                toast.error("Erro ao carregar alertas.");
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar alertas:', error);
+            setItens([]);
+            toast.error("Erro ao buscar alertas.");
+        });
+    }, []);
+
+    const handleDelete = (idAlerta, e) => {
+        e.stopPropagation();
+        api.delete(`/alerta/${idAlerta}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.token}` }
+        })
+        .then(response => {
+            setItens(itens.filter(item => item.idAlerta !== idAlerta));
+            toast.success("Alerta excluído com sucesso!");
+        })
+        .catch(error => {
+            console.error('Erro ao excluir alerta:', error);
+            toast.error("Erro ao excluir alerta.");
+        });
+    };
+
+    const handleView = (item) => {
+        setSelectedItem(item);
+        setOpenVizualizar(true);
+    };
+
     return (
         <>  
             <MenuLateral/>
@@ -30,65 +78,78 @@ const Alerta = () => {
                                 <span>Item</span>
                                 <span>Tipo de Alerta</span>
                                 <span>Info</span>
+                                <span>Ação</span>
                             </div>
                             <div className={styles["tabela"]}>
                                 <table>
                                     <thead>
                                         <tr>
-                                            
+                                            <th>Imagem</th>
+                                            <th>Item</th>
+                                            <th>Tipo de Alerta</th>
+                                            <th>Info</th>
+                                            <th>Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr onClick={() => setOpenVizualizar(true)}>
-                                            <img src={diaChecagem} alt="Dia de Checagem"/>
-                                            <td>Molho de tomate</td>
-                                            <td>Dia de checagem</td>
-                                            <td>16/04/2024</td>
-                                            <img src={fechar} id={styles["imgfechar"]} alt="Fechar"/>
-                                        </tr>
+                                        {itens.map((item, index) => (
+                                            <tr key={index} onClick={() => handleView(item)}>
+                                                <td><img src={diaChecagem} alt="Dia de Checagem"/></td>
+                                                <td>{item.nomeIngrediente}</td>
+                                                <td>{item.tipoAlerta}</td>
+                                                <td>{item.data}</td>
+                                                <td>
+                                                    <img 
+                                                        src={fechar} 
+                                                        id={styles["imgfechar"]} 
+                                                        alt="Fechar"
+                                                        onClick={(e) => handleDelete(item.idAlerta, e)} 
+                                                    />
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
-                            {/* tipo modal 1 */}
-                            <div className={styles["tituloModal"]}>
-                                <div className={styles["tituloIngrediente"]}>
-                                    <span id={styles["titulo"]}>Arroz</span>
-                                    <span>categoria: Grãos</span>
+                        {openVizualizar && selectedItem && (
+                            <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
+                                {/* tipo modal 1 */}
+                                <div className={styles["tituloModal"]}>
+                                    <div className={styles["tituloIngrediente"]}>
+                                        <span id={styles["titulo"]}>{selectedItem.nomeIngrediente}</span>
+                                        <span>categoria: {selectedItem.categoria}</span>
+                                    </div>
+                                    <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
                                 </div>
-                                <img src={fechar} onClick={() => setOpenVizualizar(false)} alt="Fechar"/>
-                            </div>
-                            
-                            <div className={styles["corpoModal"]}>
-                                <div className={styles["legendaModal"]}>
-                                    <div className={styles["legendasIngred"]}>
-                                    <span>Lote:</span>
-                                    <span>Data de Checagem:</span>
-                                    <span>Quantidade Total</span>
-                                    <span>Quantidade / Peso unitário:</span>
-                                    <span>Medida:</span>
-                                    <span>Local de armazenamento:</span>
-                                    <span>Dados nutricionais:</span>
+                                
+                                <div className={styles["corpoModal"]}>
+                                    <div className={styles["legendaModal"]}>
+                                        <div className={styles["legendasIngred"]}>
+                                            <span>Lote:</span>
+                                            <span>Data de Checagem:</span>
+                                            <span>Quantidade Total</span>
+                                            <span>Quantidade / Peso unitário:</span>
+                                            <span>Medida:</span>
+                                            <span>Local de armazenamento:</span>
+                                            <span>Dados nutricionais:</span>
+                                        </div>
+                                    </div>
+                                    <div className={styles["dadosModal"]}>
+                                        <div className={styles["dadosIngred"]}>
+                                            <span>{selectedItem.lote}</span>
+                                            <span>{selectedItem.dataChecagem}</span>
+                                            <span>{selectedItem.quantidadeTotal}</span>
+                                            <span>{selectedItem.quantidadePesoUnitario}</span>
+                                            <span>{selectedItem.medida}</span>
+                                            <span>{selectedItem.localArmazenamento}</span>
+                                            <span>{selectedItem.dadosNutricionais}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className={styles["dadosModal"]}>
-                                <div className={styles["dadosIngred"]}>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                </div>
-                            </div>
-
-                            
-
-                        </ModalAlertas >
+                            </ModalAlertas>
+                        )}
                     
                     </div>
                 </div>

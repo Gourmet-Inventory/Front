@@ -223,18 +223,18 @@ const Estoque = () => {
                                 </div>
                                 <div className={styles.dadosItem}>
                                     <div className={styles.dados}>
-                                        <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} />
-                                        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
-                                        <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} />
+                                        <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} placeholder="Lote 1"/>
+                                        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Farinha"/>
+                                        <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} placeholder="Cereais"/>
                                         <select id="tipoMedida" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
                                             <option value="">Selecione o tipo de medida</option> 
                                             <option value="GRAMAS">GRAMAS</option>    
                                             <option value="UNIDADE">UNIDADE</option>        
                                         </select>
-                                        <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} />
+                                        <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} placeholder="10"/>
                                         <input type="text" value={unidades} onChange={(e) => setUnidades(e.target.value)} placeholder="Opcional (cadastro de mais de um item)" />
-                                        <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} />
-                                        <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)} />
+                                        <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} placeholder="Geladeira"/>
+                                        <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)}/>
                                         <input type="date" value={dtaAviso} onChange={(e) => setDtaAviso(e.target.value)} />
                                     </div>
                                 </div>

@@ -1,14 +1,18 @@
 .form{
     width: 70vw;
-    height: 80vh;
+    height: 75vh;
     margin-left: 100px;
-    /* flex-direction: column; */
     padding: 1rem;
     position: fixed;
     overflow-y: scroll;
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    margin-top: 1vh;
+    gap: 1rem;
+}
+
+.titulo{
+    font-size: 3vh;
 }
 
 .cabecalho{
@@ -34,14 +38,14 @@
 }
 
 .card{
-    width: 23%;
-    height: 63%;
-    border-radius: 2%;
+    padding: 1rem;
+    width: 15vw;
+    height: fit-content;
+    border-radius: 2px;
     background-color: #37455D;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
 }
 
 .imgCard{
@@ -56,21 +60,26 @@
     height: 100%;
 }
 
-.infoCard{
-    justify-content: space-around;
-    height: 80%;
-    width: 85%;
+.nome{
+    border-radius: 2px;
     display: flex;
     flex-direction: column;
-    border: 2px solid white;
-    padding: 1rem;
-}
-
-.infoCard span{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    background-color: #E59E53;
     color: white;
 }
 
-.infoCard button{
+.dados{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.card button{
     font-size: 1.1rem;
     align-self: center;
     margin-top: 0.5rem;
@@ -144,6 +153,8 @@
     width: 90%;
     height: 70%;
     border: 0.5px solid #B0D2D3;
+    padding: 1rem;
+    overflow: scroll;
 }
 
 .buttonModal{

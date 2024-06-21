@@ -38,13 +38,24 @@ function Saida() {
         });
     }, []);
 
+    const formatDate = (dateStr) => {
+        const [year, month, day] = dateStr.split('-');
+        return `${day}-${month}-${year}`;
+    };
+
     const gerarRelatorio = () => {
         const idPratoList = modalPratos.map(prato => prato.idPrato);
         if (!dataRelatorio) {
             toast.error("Por favor, selecione uma data.");
             return;
         }
-        api.post(`/relatorio/gerar?data=${dataRelatorio}`, idPratoList, {
+        const formattedDate = formatDate(dataRelatorio);
+
+        console.log("URL:", `/relatorio/gerar/${formattedDate}`);
+        console.log("Data:", formattedDate);
+        console.log("Pratos:", idPratoList);
+
+        api.post(`/relatorio/gerar/${formattedDate}`, idPratoList, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(response => {
             if (response.status === 200) {

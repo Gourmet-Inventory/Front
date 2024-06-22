@@ -98,6 +98,10 @@ function Saida() {
         setOpenVizualizar(true);
     };
 
+    const toggleOpenVizualizar = () => {
+        setOpenVizualizar(!openVizualizar);
+    };
+
     return (
         <>
             <MenuLateral/>
@@ -151,7 +155,7 @@ function Saida() {
 
                     <ModalSaida
                         isOpen={openVizualizar}
-                        setOpenVizualizar={() => setOpenVizualizar(!openVizualizar)}
+                        setOpenVizualizar={toggleOpenVizualizar}
                     >
                         <div className={styles["modal"]}>
                             <div className={styles["tituloModal"]}>

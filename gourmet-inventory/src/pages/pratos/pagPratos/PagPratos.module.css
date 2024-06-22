@@ -16,21 +16,21 @@
 }
 
 .cabecalho{
-    width: 100%;
+    width: 94%;
     display: flex;
     align-items: end;
+    gap: 1rem;
 }
 
 .cabecalho button{
     background-color: #E59E53;
     border-radius: 0%;
-    width: 10rem;
+    width: 11rem;
     height: 4.5rem;
     color: black;
     font-size: 1.3rem;
     margin-bottom: -2rem;
     font-weight: lighter;
-    margin-right: 1rem;
 }
 
 .cabecalho button:hover{

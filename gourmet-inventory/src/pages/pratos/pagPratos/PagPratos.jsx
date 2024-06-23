@@ -21,6 +21,7 @@ function PagPratos() {
         receitaPrato: []
     });
 
+
     const navigate = useNavigate();
 
     const getPratos = async () => {
@@ -96,6 +97,32 @@ function PagPratos() {
         }
     };
 
+    const handleRelatorio = async () => {
+        try {
+            const response = await api.get(`/consulta-nutricao-api/${localStorage.empresaId}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` },
+                responseType: 'arraybuffer' // Important for handling binary data
+            });
+
+            if (response.status === 200) {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'nutrition_data.xlsx');
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+
+                toast.success("Relatório gerado com sucesso!");
+            } else {
+                toast.error("Erro ao gerar relatório.");
+            }
+        } catch (error) {
+            console.error('Erro ao gerar relatório:', error);
+            toast.error("Erro ao gerar relatório.");
+        }
+    };
+
     return (
         <>
             <MenuLateral />
@@ -103,7 +130,7 @@ function PagPratos() {
                 <div className={styles["cabecalho"]}>
                     <BarraPesquisa tituloPag={"Pratos"} />
                     <button onClick={handleCadastro}>Cadastrar Pratos</button>
-                    <button>Relatório</button>
+                    <button onClick={handleRelatorio}>Relatório</button>
                 </div>
                 <ImgConfig />
 

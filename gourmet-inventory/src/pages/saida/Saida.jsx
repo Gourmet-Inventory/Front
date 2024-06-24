@@ -59,9 +59,16 @@ function Saida() {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(response => {
             if (response.status === 200) {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `${formattedDate}.txt`);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
                 
-                toast.success("Relatório gerado com sucesso!");
-                limparLista();  // Limpa a lista de pratos selecionados
+                toast.success("Relatório TXT gerado e baixado com sucesso!");
+            
             } else {
                 toast.error("Erro ao gerar relatório.");
             }

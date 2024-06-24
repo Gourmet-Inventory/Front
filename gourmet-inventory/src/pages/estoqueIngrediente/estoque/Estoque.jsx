@@ -109,6 +109,7 @@ const Estoque = () => {
         setDtaCadastro(item.dtaCadastro);
         setDtaAviso(item.dtaAviso);
         setOpenCadastro(true);
+        setOpenVisualizar(false); 
     };
 
     const handleView = (item) => {

@@ -14,7 +14,7 @@ function CadastrarPratos() {
     const [descricao, setDescricao] = useState("");
     const [preco, setPreco] = useState("");
     const [categoria, setCategoria] = useState("");
-    const [alergicos, setAlergicos] = useState([]);
+    const [alergicosRestricoes, setalergicosRestricoes] = useState([]);
     const [receitaPrato, setReceitaPrato] = useState([]);
     const [idItem, setIdItem] = useState("");
     const [estoqueNome, setEstoqueNome] = useState("");
@@ -33,7 +33,7 @@ function CadastrarPratos() {
             setDescricao(prato.descricao);
             setPreco(prato.preco);
             setCategoria(prato.categoria);
-            setAlergicos(prato.alergicos);
+            setalergicosRestricoes(prato.alergicosRestricoes);
             setReceitaPrato(prato.receitaPrato.map(ingrediente => ({
                 idItem: ingrediente.idItem || ingrediente.estoqueIngrediente.idItem,
                 nome: ingrediente.nome || ingrediente.estoqueIngrediente.nome,
@@ -65,7 +65,7 @@ function CadastrarPratos() {
             descricao,
             preco,
             categoria,
-            alergicos,
+            alergicosRestricoes,
             receitaPrato: receitaPrato.map(ingrediente => ({
                 idItem: ingrediente.idItem,
                 tipoMedida: ingrediente.tipoMedida,
@@ -139,19 +139,19 @@ function CadastrarPratos() {
                             <div className={styles["dadosCadastro"]}>
                                 <span>Nome:</span>
                                 <div className={styles["input"]}>
-                                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+                                    <input type="text" value={nome} placeholder="Nome do Prato" onChange={(e) => setNome(e.target.value)} />
                                 </div>
                                 <span>Preço:</span>
                                 <div className={styles["input"]}>
-                                    <input value={preco} onChange={(e) => setPreco(e.target.value)} />
+                                    <input value={preco}  placeholder="20.00" onChange={(e) => setPreco(e.target.value)} />
                                 </div>
                                 <span>Categoria:</span>
                                 <div className={styles["input"]}>
-                                    <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} />
+                                    <input type="text" value={categoria} placeholder="Crie suas próprias categorias!" onChange={(e) => setCategoria(e.target.value)} />
                                 </div>
                                 <span>Alérgicos:</span>
                                 <div className={styles["selected"]}>
-                                    <AlergicoSelector selected={alergicos} onSelect={setAlergicos} />
+                                    <AlergicoSelector selected={alergicosRestricoes} onSelect={setalergicosRestricoes} />
                                 </div>
                                 <div className={styles["inputDescricao"]}>
                                     <span>Descrição:</span>

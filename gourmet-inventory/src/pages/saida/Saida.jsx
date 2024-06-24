@@ -59,6 +59,7 @@ function Saida() {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(response => {
             if (response.status === 200) {
+                
                 toast.success("Relatório gerado com sucesso!");
                 limparLista();  // Limpa a lista de pratos selecionados
             } else {

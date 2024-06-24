@@ -76,6 +76,7 @@ function CadastrarPratos() {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Prato atualizado com sucesso!");
+                handleBack();
             }).catch(() => {
                 toast.error("Erro ao atualizar o prato.");
             });

@@ -60,6 +60,7 @@ function Saida() {
         }).then(response => {
             if (response.status === 200) {
                 toast.success("Relatório gerado com sucesso!");
+                limparLista();  // Limpa a lista de pratos selecionados
             } else {
                 toast.error("Erro ao gerar relatório.");
             }
@@ -67,6 +68,7 @@ function Saida() {
             console.error('Erro ao gerar relatório:', error);
             toast.error("Erro ao gerar relatório.");
         });
+        setOpenVizualizar(false);
     };
 
     const adicionarPrato = (prato) => {

@@ -15,6 +15,7 @@ const SelectIngredientes = ({ onSelect }) => {
                     headers: { 'Authorization': `Bearer ${localStorage.token}` }
                 });
                 const data = response.data;
+                console.log(data)
                 setOptions(data);
                 setOptionsFiltradas(data);
             } catch (error) {

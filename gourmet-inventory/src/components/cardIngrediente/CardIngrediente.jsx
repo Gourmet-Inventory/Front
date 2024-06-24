@@ -9,7 +9,7 @@ const CardIngrediente = ({ id, valor, medida, ingrediente, imgDeletar, onDelete 
 
     return (
         <div className={styles["card"]}>
-            <span>{valor} {medida} - {ingrediente}</span>
+            <span>{ingrediente} - {valor} {medida}  </span>
             <img src={imgDeletar} alt="Delete" onClick={handleDelete} className={styles["delete-icon"]} />
         </div>
     );

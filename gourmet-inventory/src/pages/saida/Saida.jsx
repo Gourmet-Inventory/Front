@@ -149,7 +149,7 @@ function Saida() {
                         </div>
                         <div className={styles["botoes"]}>
                             <button id={styles["buttonSaida"]} onClick={finalizar}>Finalizar</button>
-                            <button id={styles["buttonRelatorio"]} onClick={finalizar}>Relatório</button>
+                           
                         </div>
                     </div>
 

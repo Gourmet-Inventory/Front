@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./alert.module.css";
 
-const Alert = ({ imgAlerta, ingrediente }) => {
+const Alert = ({ imgAlerta, ingrediente, onClick }) => {
   return (
     <>
-      <div className={styles["card"]}>
+      <div className={styles["card"]} onClick={onClick}>
         <div className={styles["img"]}>
           <img src={imgAlerta} />
         </div>

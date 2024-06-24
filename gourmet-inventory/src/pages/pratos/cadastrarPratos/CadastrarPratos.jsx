@@ -185,7 +185,7 @@ function CadastrarPratos() {
                         ))}
                     </div>
                     <button id={styles["botao-cadastrar-pratos"]} onClick={handleSave}>
-                        {dataEdit.id ? "Atualizar" : "Cadastrar"}
+                        {dataEdit.idItem ? "Atualizar" : "Cadastrar"}
                     </button>
                 </div>
             </div>

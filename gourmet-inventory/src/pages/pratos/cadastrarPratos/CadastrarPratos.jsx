@@ -120,7 +120,7 @@ function CadastrarPratos() {
             <div className={styles["cabecalho"]}>
                 <button onClick={handleBack}>Voltar</button>
                 <div className={styles["titulo"]}>
-                    <h1>{dataEdit.id ? "Editar Prato" : "Cadastrar Prato"}</h1>
+                    <h1>{dataEdit.idItem ? "Editar Prato" : "Cadastrar Prato"}</h1>
                 </div>
             </div>
             <div className={styles["corpo"]}>

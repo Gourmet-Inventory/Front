@@ -17,6 +17,7 @@ function CadastrarPratos() {
     const [alergicos, setAlergicos] = useState([]);
     const [receitaPrato, setReceitaPrato] = useState([]);
     const [idItem, setIdItem] = useState("");
+    const [estoqueNome, setEstoqueNome] = useState("");
     const [valorMedida, setValorMedida] = useState("");
     const [tipoMedida, setTipoMedida] = useState("GRAMAS");
     const [dataEdit, setDataEdit] = useState({});
@@ -35,6 +36,7 @@ function CadastrarPratos() {
             setAlergicos(prato.alergicos);
             setReceitaPrato(prato.receitaPrato.map(ingrediente => ({
                 idItem: ingrediente.idItem || ingrediente.estoqueIngrediente.idItem,
+                nome: ingrediente.nome || ingrediente.estoqueIngrediente.nome,
                 valorMedida: ingrediente.valorMedida,
                 tipoMedida: ingrediente.tipoMedida,
             })))
@@ -98,6 +100,7 @@ function CadastrarPratos() {
         }
         const novoIngrediente = {
             idItem: idItem,
+            nome: estoqueNome,
             valorMedida: valorMedida,
             tipoMedida: tipoMedida
         };
@@ -109,6 +112,7 @@ function CadastrarPratos() {
 
     const handleSelectIngrediente = (ingrediente) => {
         setIdItem(ingrediente.idItem);
+        setEstoqueNome(ingrediente.nome);
     };
 
     const handleRemoveIngrediente = (idItemToRemove) => {
@@ -139,7 +143,7 @@ function CadastrarPratos() {
                                 </div>
                                 <span>Preço:</span>
                                 <div className={styles["input"]}>
-                                    <input type="text" value={preco} onChange={(e) => setPreco(e.target.value)} />
+                                    <input value={preco} onChange={(e) => setPreco(e.target.value)} />
                                 </div>
                                 <span>Categoria:</span>
                                 <div className={styles["input"]}>
@@ -181,9 +185,10 @@ function CadastrarPratos() {
                         {receitaPrato.map((ing, index) => (
                             <CardIngrediente
                                 key={index}
+                                id={ing.idItem}
+                                ingrediente={ing.nome }
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
-                                ingrediente={ing.idItem }
                                 onDelete={() => handleRemoveIngrediente(ing.idItem)}
                                 imgDeletar={imgDeletar}
                             />

@@ -164,7 +164,7 @@ const Estoque = () => {
                                 <span className={styles['titulo']}>Data de Aviso</span>
                                 <span className={styles['aviso']}>{item.dtaAviso}</span>
                                 <span className={styles['titulo']}>Quantidade</span>
-                                <span className={styles['aviso']}>{item.valorTotal}</span>
+                                <span className={styles['aviso']}>{item.valorMedida} {item.tipoMedida}</span>
                                 <button onClick={() => handleView(item)} className={styles['Button']}>Ver Mais</button>
                             </div>
                         </div>

@@ -33,7 +33,11 @@ function CadastrarPratos() {
             setPreco(prato.preco);
             setCategoria(prato.categoria);
             setAlergicos(prato.alergicos);
-            setReceitaPrato(prato.receitaPrato);
+            setReceitaPrato(prato.receitaPrato.map(ingrediente => ({
+                idItem: ingrediente.idItem || ingrediente.estoqueIngrediente.idItem,
+                valorMedida: ingrediente.valorMedida,
+                tipoMedida: ingrediente.tipoMedida,
+            })))
         }
     }, [location.state]);
 
@@ -67,8 +71,8 @@ function CadastrarPratos() {
             }))
         };
 
-        if (dataEdit.id) {
-            api.put(`/pratos/${dataEdit.id}`, prato, {
+        if (dataEdit.idPrato) {
+            api.put(`/pratos/${dataEdit.idPrato}`, prato, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Prato atualizado com sucesso!");
@@ -120,7 +124,7 @@ function CadastrarPratos() {
             <div className={styles["cabecalho"]}>
                 <button onClick={handleBack}>Voltar</button>
                 <div className={styles["titulo"]}>
-                    <h1>{dataEdit.idItem ? "Editar Prato" : "Cadastrar Prato"}</h1>
+                    <h1>{dataEdit.idPrato ? "Editar Prato" : "Cadastrar Prato"}</h1>
                 </div>
             </div>
             <div className={styles["corpo"]}>
@@ -178,14 +182,14 @@ function CadastrarPratos() {
                                 key={index}
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
-                                ingrediente={ing.idItem} // Ajustar para o que representa o nome do ingrediente
+                                ingrediente={ing.idItem }
                                 onDelete={() => handleRemoveIngrediente(ing.idItem)}
                                 imgDeletar={imgDeletar}
                             />
                         ))}
                     </div>
                     <button id={styles["botao-cadastrar-pratos"]} onClick={handleSave}>
-                        {dataEdit.idItem ? "Atualizar" : "Cadastrar"}
+                        {dataEdit.idPrato ? "Atualizar" : "Cadastrar"}
                     </button>
                 </div>
             </div>

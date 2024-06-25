@@ -24,7 +24,8 @@ const Estoque = () => {
     const [categoria, setCategoria] = useState("");
     const [tipoMedida, setTipoMedida] = useState("");
     const [valorMedida, setValorMedida] = useState("");
-    const [unidades, setUnidades] = useState("");
+    const [valorTotal, setValorTotal] = useState(""); 
+    const [unitario, setUnitario] = useState("");
     const [localArmazenamento, setLocalArmazenamento] = useState("");
     const [dtaCadastro, setDtaCadastro] = useState("");
     const [dtaAviso, setDtaAviso] = useState("");
@@ -50,7 +51,7 @@ const Estoque = () => {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, unidades, localArmazenamento, dtaCadastro, dtaAviso };
+        const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, valorTotal, unitario, localArmazenamento, dtaCadastro, dtaAviso };
 
         if (dataEdit.idItem) {
             // Editar item existente
@@ -90,7 +91,7 @@ const Estoque = () => {
         setCategoria("");
         setTipoMedida("");
         setValorMedida("");
-        setUnidades("");
+        setUnitario("");
         setLocalArmazenamento("");
         setDtaCadastro("");
         setDtaAviso("");
@@ -104,7 +105,7 @@ const Estoque = () => {
         setCategoria(item.categoria);
         setTipoMedida(item.tipoMedida);
         setValorMedida(item.valorMedida);
-        setUnidades(item.unidades);
+        setUnitario(item.unitario);
         setLocalArmazenamento(item.localArmazenamento);
         setDtaCadastro(item.dtaCadastro);
         setDtaAviso(item.dtaAviso);
@@ -165,7 +166,7 @@ const Estoque = () => {
                                 <span className={styles['titulo']}>Data de Aviso</span>
                                 <span className={styles['aviso']}>{item.dtaAviso}</span>
                                 <span className={styles['titulo']}>Quantidade</span>
-                                <span className={styles['aviso']}>{item.valorMedida} {item.tipoMedida}</span>
+                                <span className={styles['aviso']}>{item.valorTotal} - {item.tipoMedida}</span>
                                 <button onClick={() => handleView(item)} className={styles['Button']}>Ver Mais</button>
                             </div>
                         </div>
@@ -233,7 +234,7 @@ const Estoque = () => {
                                             <option value="UNIDADE">UNIDADE</option>        
                                         </select>
                                         <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} placeholder="10"/>
-                                        <input type="text" value={unidades} onChange={(e) => setUnidades(e.target.value)} placeholder="Opcional (cadastro de mais de um item)" />
+                                        <input type="text" value={unitario} onChange={(e) => setUnitario(e.target.value)} placeholder="Opcional (cadastro de mais de um item)" />
                                         <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} placeholder="Geladeira"/>
                                         <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)}/>
                                         <input type="date" value={dtaAviso} onChange={(e) => setDtaAviso(e.target.value)} />
@@ -266,6 +267,7 @@ const Estoque = () => {
                                     <span>Tipo Medida:</span>
                                     <span>Quantidade Unitária:</span>
                                     <span>Valor Medida:</span>
+                                    <span>Valor Total:</span>
                                     <span>Local Armazenamento:</span>
                                     <span>Data Cadastro:</span>
                                     <span>Data Aviso:</span>
@@ -275,8 +277,9 @@ const Estoque = () => {
                                 <div className={styles.dadosIngred}>
                                     <span>{selectedData.lote}</span>
                                     <span>{selectedData.tipoMedida}</span>
-                                    <span>{selectedData.unidades}</span>
+                                    <span>{selectedData.unitario}</span>
                                     <span>{selectedData.valorMedida}</span>
+                                    <span>{selectedData.valorTotal}</span>
                                     <span>{selectedData.localArmazenamento}</span>
                                     <span>{selectedData.dtaCadastro}</span>
                                     <span>{selectedData.dtaAviso}</span>

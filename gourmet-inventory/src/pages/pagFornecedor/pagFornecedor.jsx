@@ -18,7 +18,12 @@ function PagFornecedor() {
 
     const [nomeFornecedor, setNomeFornecedor] = useState("");
     const [cnpj, setCnpj] = useState("");
+    const [cep, setCep] = useState("");
     const [logradouro, setLogradouro] = useState("");
+    const [complemento, setComplemento] = useState("");
+    const [bairro, setBairro] = useState("");
+    const [localidade, setLocalidade] = useState("");
+    const [uf, setUf] = useState("");
     const [numeracaoLogradouro, setNumeracaoLogradouro] = useState("");
     const [telefone, setTelefone] = useState("");
     const [categoria, setCategoria] = useState("");
@@ -52,11 +57,11 @@ function PagFornecedor() {
     };
 
     const handleSave = () => {
-        if (!nomeFornecedor || !cnpj || !logradouro || !numeracaoLogradouro || !telefone || !categoria) {
+        if (!nomeFornecedor || !cnpj || !cep || !logradouro || !bairro || !localidade || !uf || !numeracaoLogradouro || !telefone || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        const fornecedor = { nomeFornecedor, cnpj, logradouro, numeracaoLogradouro, telefone, categoria };
+        const fornecedor = { nomeFornecedor, cnpj, cep, logradouro, complemento, bairro, localidade, uf, numeracaoLogradouro, telefone, categoria };
 
         if (dataEdit.idFornecedor) {
             api.patch(`/fornecedores/${dataEdit.idFornecedor}`, fornecedor, {
@@ -93,7 +98,12 @@ function PagFornecedor() {
     const limparCampos = () => {
         setNomeFornecedor("");
         setCnpj("");
+        setCep("");
         setLogradouro("");
+        setComplemento("");
+        setBairro("");
+        setLocalidade("");
+        setUf("");
         setNumeracaoLogradouro("");
         setTelefone("");
         setCategoria("");
@@ -103,7 +113,12 @@ function PagFornecedor() {
         setDataEdit(fornecedor);
         setNomeFornecedor(fornecedor.nomeFornecedor);
         setCnpj(fornecedor.cnpj);
+        setCep(fornecedor.cep);
         setLogradouro(fornecedor.logradouro);
+        setComplemento(fornecedor.complemento);
+        setBairro(fornecedor.bairro);
+        setLocalidade(fornecedor.localidade);
+        setUf(fornecedor.uf);
         setNumeracaoLogradouro(fornecedor.numeracaoLogradouro);
         setTelefone(fornecedor.telefone);
         setCategoria(fornecedor.categoria);
@@ -172,6 +187,14 @@ function PagFornecedor() {
                                     />
                                 </div>
                                 <div className={styles["input"]}>
+                                    <span>CEP</span>
+                                    <input
+                                        type="text"
+                                        value={cep}
+                                        onChange={(e) => setCep(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
                                     <span>Logradouro</span>
                                     <input
                                         type="text"
@@ -179,6 +202,40 @@ function PagFornecedor() {
                                         onChange={(e) => setLogradouro(e.target.value)}
                                     />
                                 </div>
+                                
+                                <div className={styles["input"]}>
+                                    <span>Complemento</span>
+                                    <input
+                                        type="text"
+                                        value={complemento}
+                                        onChange={(e) => setComplemento(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Bairro</span>
+                                    <input
+                                        type="text"
+                                        value={bairro}
+                                        onChange={(e) => setBairro(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Localidade</span>
+                                    <input
+                                        type="text"
+                                        value={localidade}
+                                        onChange={(e) => setLocalidade(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>UF</span>
+                                    <input
+                                        type="text"
+                                        value={uf}
+                                        onChange={(e) => setUf(e.target.value)}
+                                    />
+                                </div>
+
                                 <div className={styles["input"]}>
                                     <span>Numeração</span>
                                     <input

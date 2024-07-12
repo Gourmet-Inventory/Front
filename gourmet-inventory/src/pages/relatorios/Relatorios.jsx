@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
+import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa"
 import api from '../../api';
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./Relatorios.module.css";
@@ -11,9 +11,10 @@ function Relatorios() {
 
     return (
         <>
-            <MenuLateral />
+           <MenuLateral/>
             <div className={styles["body"]}>
                  <BarraPesquisa tituloPag={"Relatórios"}/>
+                 
             
             </div>
         </>

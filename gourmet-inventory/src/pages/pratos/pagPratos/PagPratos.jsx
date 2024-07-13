@@ -128,7 +128,7 @@ function PagPratos() {
             <MenuLateral />
             <div className={styles["body"]}>
                 <div className={styles["cabecalho"]}>
-                    <BarraPesquisa tituloPag={"Pratos"} />
+                    <BarraPesquisa tituloPag={"Relatórios"} />
                     <button onClick={handleCadastro}>Cadastrar Pratos</button>
                     <button onClick={handleRelatorio}>Relatório</button>
                 </div>

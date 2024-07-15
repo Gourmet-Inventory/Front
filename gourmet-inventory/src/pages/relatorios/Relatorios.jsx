@@ -14,7 +14,7 @@ function Relatorios() {
            <MenuLateral/>
             <div className={styles["body"]}>
                  <BarraPesquisa tituloPag={"Relatórios"}/>
-                 
+                
             
             </div>
         </>

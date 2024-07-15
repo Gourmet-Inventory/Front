@@ -26,7 +26,7 @@
     gap: 1rem;
 }
 
-/* Botão no cabeçalho 
+/* Botão no cabeçalho */
 .cabecalho button {
     background-color: #E59E53;
     border-radius: 0%;
@@ -42,7 +42,7 @@
     background-color: #a77940;
 }
 
-/* Card de relatório 
+/* Card de relatório */
 .card {
     padding: 1rem;
     width: 15vw;
@@ -52,7 +52,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}*/
+}
 
 .imgCard {
     display: flex;
@@ -243,34 +243,3 @@
     background-color: #af4040;
 }
 
-/* Container principal que organiza o layout */
-.container {
-    display: flex;
-    margin-left: 100px;
-    gap: 2rem;
-}
-
-/* Container para o filtro de data */
-.filterContainer {
-    width: 30%;
-    padding: 1rem;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-}
-
-/* Estilo do cabeçalho dos filtros */
-.filterContainer h3 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Estilo para os labels dos filtros */
-.filterContainer label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-/* Container para a lista de relatórios */
-.relatoriosList {
-    width: 70%;
-}

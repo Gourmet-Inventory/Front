@@ -8,8 +8,10 @@ import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
 import ModalRelatorios from "../../components/modalRelatorio/ModalRelatorio";
 import 'react-toastify/dist/ReactToastify.css';
+import Saida from "../saida/Saida";
 
 const Relatorios = () => {
+    const [pratos, setPratos] = useState([]);
     const [relatorios, setRelatorios] = useState([]);
     const [filteredRelatorios, setFilteredRelatorios] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
@@ -231,14 +233,13 @@ const Relatorios = () => {
                                                 <div className={styles.dados}>
                                                     <span>Descrição: {relatorio.descricao}</span>
                                                     <span>Data de Criação: {relatorio.dataCriacao}</span>
-
                                                 </div>
+
                                             </div>
-                                            
                                         ))}
                                     </div>
                                 ))}
-                                 <button onClick={handleExtrairRelatorio}>Extrair</button>
+                                <button onClick={handleExtrair}>Extrair</button>
                             </div>
                             <div className={styles.resumoRelatorios}>
                                 <h3>Relatórios saída de todos os pratos deste Mês</h3>
@@ -255,25 +256,51 @@ const Relatorios = () => {
                                                     <span>Descrição: {relatorio.descricao}</span>
                                                     <span>Data de Criação: {relatorio.dataCriacao}</span>
                                                 </div>
-                                               
+                                          
                                             </div>
                                         ))}
                                     </div>
+                               
                                 ))}
-                                 <button onClick={handleExtrair}>Extrair</button>
+                                         <button onClick={handleExtrair}>Extrair</button>
                             </div>
                         </div>
                     </div>
                     <div className={styles.extrairRelatorios}>
-                        <button onClick={handleExtrair}>Extrair</button>
+                        <button onClick={handleExtrair}>Extrair Relatórios</button>
                     </div>
     
                     {openVizualizar && (
-                        <ModalRelatorios
-                            isOpen={openVizualizar}
-                            onRequestClose={() => setOpenVizualizar(false)}
-                            data={viewData}
-                        />
+                       <ModalRelatorios
+                       isOpen={openVizualizar}
+                       setModalOpen={() => setOpenVizualizar(!openVizualizar)}
+                       tituloModal="Relatório"
+                       dataModal="20/10/2024"
+                   >
+                       <div className={styles["corpoVizualizar"]}>
+                           <div className={styles.dadosModal}>
+                            <div className={styles.tituloDadosModal}>
+
+                            <h3>Quant:  </h3>
+                            <h3>Prato: </h3>
+
+                            </div>
+                            <div className={styles.resumoDadosModal}>
+                            
+                            <h3>15 {pratos}</h3>
+                            <h3> sopa{pratos.nome}</h3>
+                            
+                            </div>
+                            </div>
+                              
+                           
+
+                           <div className={styles["buttonModal"]}>
+                               <button id={styles["extrair"]} onClick={() => handleEditar(viewData)}>Extrair</button>
+                               <button id={styles["excluir"]} onClick={() => confirmRemove(viewData.idRelatorio)}>Excluir</button>
+                           </div>
+                       </div>
+                   </ModalRelatorios>
                     )}
                 </div>
             </>

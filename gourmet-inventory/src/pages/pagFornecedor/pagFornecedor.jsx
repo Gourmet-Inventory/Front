@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import api from '../../api';
+import axios from 'axios';
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./pagFornecedor.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
@@ -57,7 +58,7 @@ function PagFornecedor() {
     };
 
     const handleSave = () => {
-        if (!nomeFornecedor || !cnpj || !cep || !logradouro || !bairro || !localidade || !uf || !numeracaoLogradouro || !telefone || !categoria) {
+        if (!nomeFornecedor || !cnpj || !cep || !numeracaoLogradouro || !telefone || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
@@ -130,6 +131,25 @@ function PagFornecedor() {
         setOpenVizualizar(true);
     };
 
+    const handleCepChange = async (e) => {
+        const novoCep = e.target.value;
+        setCep(novoCep);
+
+        if (novoCep.length === 8) {
+            try {
+                const response = await axios.get(`https://viacep.com.br/ws/${novoCep}/json/`);
+                const data = response.data;
+                setLogradouro(data.logradouro || "");
+                setComplemento(data.complemento || "");
+                setBairro(data.bairro || "");
+                setLocalidade(data.localidade || "");
+                setUf(data.uf || "");
+            } catch (error) {
+                console.error("Erro ao buscar o CEP: ", error);
+            }
+        }
+    };
+
     return (
         <>
             <MenuLateral />
@@ -191,7 +211,7 @@ function PagFornecedor() {
                                     <input
                                         type="text"
                                         value={cep}
-                                        onChange={(e) => setCep(e.target.value)}
+                                        onChange={handleCepChange}
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -289,4 +309,3 @@ function PagFornecedor() {
 }
 
 export default PagFornecedor;
-

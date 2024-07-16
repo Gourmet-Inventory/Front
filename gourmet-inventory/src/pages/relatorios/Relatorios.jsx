@@ -159,100 +159,125 @@ const Relatorios = () => {
 
     const groupedRelatorios = groupByMonth(relatorios);
 
-    return (
-        <>
-            <MenuLateral />
-            <div className={styles.body}>
-                <div className={styles.cabecalho}>
-                    <BarraPesquisa
-                        tituloPag="Relatórios"
-                        onSearch={(startDate, endDate) => filterRelatorios(relatorios, startDate, endDate)}
-                    />
-                </div>
-                <ImgConfig />
-                <div className={styles.filterContainer}>
-                    <h3>Filtro de Data</h3>
-                    <label>
-                        De:
-                        <input
-                            type="date"
-                            name="startDate"
-                            value={dateFilter.startDate}
-                            onChange={handleDateFilterChange}
+    
+        return (
+            <>
+                <MenuLateral />
+                <div className={styles.body}>
+                    <div className={styles.cabecalho}>
+                        <BarraPesquisa
+                            tituloPag="Relatórios"
+                            onSearch={(startDate, endDate) => filterRelatorios(relatorios, startDate, endDate)}
                         />
-                    </label>
-                    <label>
-                        Até:
-                        <input
-                            type="date"
-                            name="endDate"
-                            value={dateFilter.endDate}
-                            onChange={handleDateFilterChange}
-                        />
-                    </label>
-                </div>
-                <div className={styles.form}>
-                    {filteredRelatorios.map(relatorio => (
-                        <div className={styles.card} key={relatorio.idRelatorio}>
-                            <div className={styles.nome}>
-                                <span className={styles.titulo}>{relatorio.nome}</span>
-                                <span>Categoria: {relatorio.categoria}</span>
-                            </div>
-                            <div className={styles.dados}>
-                                <span>Descrição: {relatorio.descricao}</span>
-                                <span>Data de Criação: {relatorio.dataCriacao}</span>
-                            </div>
-                            <button onClick={() => handleView(relatorio)}>Ver Mais</button>
-                        </div>
-                    ))}
-                </div>
-                <div className={styles.filterContainer}>
-                    <h3>Relatórios por Mês</h3>
-                    {Object.keys(groupedRelatorios).map(monthYear => (
-                        <div className={styles.monthCard} key={monthYear}>
-                            <h4>{monthYear}</h4>
-                            {groupedRelatorios[monthYear].map(relatorio => (
+                    </div>
+    
+                    <div className={styles.containerForm}>
+                        <div className={styles.form}>
+                            {/* {filteredRelatorios.map(relatorio => (
                                 <div className={styles.card} key={relatorio.idRelatorio}>
                                     <div className={styles.nome}>
-                                        <span className={styles.titulo}>{relatorio.nome}</span>
-                                        <span>Categoria: {relatorio.categoria}</span>
+                                        <span className={styles.titulo}>{relatorio.dataCriacao}</span>
+                    
                                     </div>
-                                    <div className={styles.dados}>
-                                        <span>Descrição: {relatorio.descricao}</span>
-                                        <span>Data de Criação: {relatorio.dataCriacao}</span>
+                                    <button onClick={() => handleView(relatorio)}>Ver Mais</button>
+                                </div>
+                            ))} */}
+                            {Array(24).fill().map((_, idx) => (
+                                <div className={styles.card} key={idx}>
+                                    <div className={styles.nome}>
+                                        <span className={styles.titulo}>20/10/2004</span>
                                     </div>
-                                    <button onClick={handleExtrairRelatorio}>Extrair</button>
+                                    <button onClick={() => handleView({ idRelatorio: idx, nome: `Relatório ${idx}`, descricao: 'Descrição do relatório', dataCriacao: '20/10/2004' })}>Ver Mais</button> 
+                                    
+                                
                                 </div>
                             ))}
                         </div>
-                    ))}
-                </div>
-                {viewData && (
-                    <ModalRelatorios
-                        isOpen={openVizualizar}
-                        setModalOpen={() => setOpenVizualizar(!openVizualizar)}
-                        tituloModal={viewData.nome}
-                        categoriaModal={`Categoria: ${viewData.categoria}`}
-                    >
-                        <div className={styles.corpoVizualizar}>
-                            <div className={styles.corpoModal}>
-                                <div className={styles.descricaoModal}>
-                                    <div className={styles.textDescricao}>
-                                        <span>Data de Criação: {viewData.dataCriacao}</span>
-                                        <span>Descrição: {viewData.descricao}</span>
-                                    </div>
-                                </div>
+    
+                        <div className={styles.filters}>
+                            <div className={styles.filterContainer}>
+                                <h3>Filtro de Data</h3>
+                                <label>
+                                    De:
+                                    <input
+                                        type="date"
+                                        name="startDate"
+                                        value={dateFilter.startDate}
+                                        onChange={handleDateFilterChange}
+                                    />
+                                </label>
+                                <label>
+                                    Até:
+                                    <input
+                                        type="date"
+                                        name="endDate"
+                                        value={dateFilter.endDate}
+                                        onChange={handleDateFilterChange}
+                                    />
+                                </label>
+                                <button onClick={() => filterRelatorios(relatorios, dateFilter.startDate, dateFilter.endDate)}>Filtrar</button>
                             </div>
-                            <div className={styles.buttonModal}>
-                                <button id={styles.editar} onClick={() => handleEditar(viewData)}>Editar</button>
-                                <button id={styles.excluir} onClick={() => confirmRemove(viewData.idRelatorio)}>Excluir</button>
+                            <div className={styles.resumoRelatorios}>
+                                <h3>Relatórios alertas disparados deste Mês</h3>
+                                {Object.keys(groupedRelatorios).map(monthYear => (
+                                    <div className={styles.monthCard} key={monthYear}>
+                                        <h4>{monthYear}</h4>
+                                        {groupedRelatorios[monthYear].map(relatorio => (
+                                            <div className={styles.card} key={relatorio.idRelatorio}>
+                                                <div className={styles.nome}>
+                                                    <span className={styles.titulo}>{relatorio.nome}</span>
+                                                    <span>Categoria: {relatorio.categoria}</span>
+                                                </div>
+                                                <div className={styles.dados}>
+                                                    <span>Descrição: {relatorio.descricao}</span>
+                                                    <span>Data de Criação: {relatorio.dataCriacao}</span>
+
+                                                </div>
+                                            </div>
+                                            
+                                        ))}
+                                    </div>
+                                ))}
+                                 <button onClick={handleExtrairRelatorio}>Extrair</button>
+                            </div>
+                            <div className={styles.resumoRelatorios}>
+                                <h3>Relatórios saída de todos os pratos deste Mês</h3>
+                                {Object.keys(groupedRelatorios).map(monthYear => (
+                                    <div className={styles.monthCard} key={monthYear}>
+                                        <h4>{monthYear}</h4>
+                                        {groupedRelatorios[monthYear].map(relatorio => (
+                                            <div className={styles.card} key={relatorio.idRelatorio}>
+                                                <div className={styles.nome}>
+                                                    <span className={styles.titulo}>{relatorio.nome}</span>
+                                                    <span>Categoria: {relatorio.categoria}</span>
+                                                </div>
+                                                <div className={styles.dados}>
+                                                    <span>Descrição: {relatorio.descricao}</span>
+                                                    <span>Data de Criação: {relatorio.dataCriacao}</span>
+                                                </div>
+                                               
+                                            </div>
+                                        ))}
+                                    </div>
+                                ))}
+                                 <button onClick={handleExtrair}>Extrair</button>
                             </div>
                         </div>
-                    </ModalRelatorios>
-                )}
-            </div>
-        </>
-    );
-};
-
-export default Relatorios;
+                    </div>
+                    <div className={styles.extrairRelatorios}>
+                        <button onClick={handleExtrair}>Extrair</button>
+                    </div>
+    
+                    {openVizualizar && (
+                        <ModalRelatorios
+                            isOpen={openVizualizar}
+                            onRequestClose={() => setOpenVizualizar(false)}
+                            data={viewData}
+                        />
+                    )}
+                </div>
+            </>
+        );
+    };
+    
+    export default Relatorios;

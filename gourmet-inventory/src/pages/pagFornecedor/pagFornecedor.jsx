@@ -9,6 +9,7 @@ import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualiza
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function PagFornecedor() {
     const [fornecedores, setFornecedores] = useState([]);
@@ -45,16 +46,41 @@ function PagFornecedor() {
     };
 
     const handleExcluir = (idFornecedor) => {
-        if (window.confirm("Tem certeza de que deseja excluir este fornecedor?")) {
-            api.delete(`/fornecedores/${idFornecedor}`, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
-                recuperarFornecedores();
-                toast.success("Fornecedor excluído com sucesso!");
-            }).catch(() => {
-                toast.error("Erro ao excluir o fornecedor.");
-            });
-        }
+        const confirmToast = () => {
+            const onConfirm = () => {
+                api.delete(`/fornecedores/${idFornecedor}`, {
+                    headers: { 'Authorization': `Bearer ${localStorage.token}` }
+                }).then(() => {
+                    recuperarFornecedores();
+                    toast.dismiss();
+                    toast.success("Fornecedor excluído com sucesso!");
+                }).catch(() => {
+                    toast.dismiss();
+                    toast.error("Erro ao excluir o fornecedor.");
+                });
+            };
+
+            const onCancel = () => {
+                toast.dismiss();
+            };
+
+            return (
+                <div>
+                    Tem certeza de que deseja excluir este fornecedor?
+                    <div>
+                        <button onClick={onConfirm} id={styles["excluirSim"]}>Sim</button>
+                        <button onClick={onCancel} id={styles["excluirNao"]}>Não</button>
+                    </div>
+                </div>
+            );
+        };
+
+        toast(confirmToast, {
+            position: "top-center",
+            autoClose: false,
+            closeOnClick: false,
+            draggable: false
+        });
     };
 
     const handleSave = () => {
@@ -124,6 +150,7 @@ function PagFornecedor() {
         setTelefone(fornecedor.telefone);
         setCategoria(fornecedor.categoria);
         setOpenCadastro(true);
+        setOpenVizualizar(false);
     };
 
     const handleView = (fornecedor) => {
@@ -196,6 +223,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={nomeFornecedor}
                                         onChange={(e) => setNomeFornecedor(e.target.value)}
+                                        placeholder="Fornecedor X"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -204,6 +232,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={cnpj}
                                         onChange={(e) => setCnpj(e.target.value)}
+                                        placeholder="XXXXXXXX0001XX"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -212,6 +241,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={cep}
                                         onChange={handleCepChange}
+                                        placeholder="00000000"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -220,6 +250,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={logradouro}
                                         onChange={(e) => setLogradouro(e.target.value)}
+                                        placeholder="Rua X"
                                     />
                                 </div>
                                 
@@ -229,6 +260,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={complemento}
                                         onChange={(e) => setComplemento(e.target.value)}
+                                        placeholder="Opcional"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -237,6 +269,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={bairro}
                                         onChange={(e) => setBairro(e.target.value)}
+                                        placeholder="Bairro X"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -245,6 +278,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={localidade}
                                         onChange={(e) => setLocalidade(e.target.value)}
+                                        placeholder="São Paulo"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -253,6 +287,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={uf}
                                         onChange={(e) => setUf(e.target.value)}
+                                        placeholder="SP"
                                     />
                                 </div>
 
@@ -262,6 +297,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={numeracaoLogradouro}
                                         onChange={(e) => setNumeracaoLogradouro(e.target.value)}
+                                        placeholder="10"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -270,6 +306,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={telefone}
                                         onChange={(e) => setTelefone(e.target.value)}
+                                        placeholder="00000000000"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -278,6 +315,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={categoria}
                                         onChange={(e) => setCategoria(e.target.value)}
+                                        placeholder="Laticínios"
                                     />
                                 </div>
                             </div>
@@ -290,11 +328,16 @@ function PagFornecedor() {
                     <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nomeFornecedor}`}>
                         <div className={styles["formVizualizar"]}>
                             <div className={styles["dadosForn"]}>
-                                <span>CNPJ: {viewData.cnpj}</span>
-                                <span>Logradouro: {viewData.logradouro}</span>
-                                <span>Numeração: {viewData.numeracaoLogradouro} </span>                           
-                                <span>Telefone: {viewData.telefone}</span>
-                                <span>Categoria: {viewData.categoria}</span>
+                                <span><span id={styles["tituloModal"]}>CNPJ:</span> {viewData.cnpj}</span>
+                                <span><span id={styles["tituloModal"]}>CEP:</span>  {viewData.cep}</span>
+                                <span><span id={styles["tituloModal"]}>Logradouro:</span>  {viewData.logradouro}</span>
+                                <span><span id={styles["tituloModal"]}>Complemento:</span>  {viewData.complemento}</span>
+                                <span><span id={styles["tituloModal"]}>Bairro:</span>  {viewData.bairro}</span>
+                                <span><span id={styles["tituloModal"]}>Localidade:</span>  {viewData.localidade}</span>
+                                <span><span id={styles["tituloModal"]}>UF:</span>  {viewData.uf}</span>
+                                <span><span id={styles["tituloModal"]}>Numeração:</span>  {viewData.numeracaoLogradouro} </span>                           
+                                <span><span id={styles["tituloModal"]}>Telefone:</span>  {viewData.telefone}</span>
+                                <span><span id={styles["tituloModal"]}>Categoria:</span>  {viewData.categoria}</span>
                             </div>
                             <div className={styles["botao"]}>
                                 <button id={styles["editar"]} onClick={() => handleEdit(viewData)}>Editar</button>
@@ -303,6 +346,8 @@ function PagFornecedor() {
                         </div>
                     </ModalVizualizar>
                 )}
+
+                <ToastContainer />
             </div>
         </>
     );

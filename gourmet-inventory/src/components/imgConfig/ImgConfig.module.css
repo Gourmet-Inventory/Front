@@ -17,3 +17,18 @@
     margin-right: 20px;
     cursor: pointer;
 }
+
+/* toast */
+
+#excluirSim{
+    color: white;
+    background-color: green;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#excluirNao{
+    color: white;
+    background-color: #ED5656;
+    margin-top: 0.5rem;
+}

@@ -1,9 +1,10 @@
 .form{
-    width: 72.5vw;
-    height: 450px;
+    width: 72vw;
+    height: 30rem;
     margin-left: 100px;
     flex-direction: column;
     overflow-y: scroll;
+    box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.5);
 }
 
 .tituloForm{
@@ -45,7 +46,7 @@
 
 .tabelaForn{
     overflow-y: scroll;
-    width: 70vw;
+    width: 100%;
     display: flex;
 }
 
@@ -57,10 +58,11 @@
 .tabelaForn tr {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 97%;
     background-color: #37455D;
     cursor: pointer;
     margin-top: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .tabelaForn tr:hover{
@@ -101,7 +103,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 80vh;
+    height: 85vh;
     width: 35vw;
     background-color: #37455D;
     box-shadow: 4px 4px 13px #2b2b2b;
@@ -111,8 +113,7 @@
     font-weight: lighter;
     color: white;
     font-size: 1.5rem;
-    margin-top: 1rem;
-    height: 3.5rem;
+    height: 2rem;
 }
 
 
@@ -120,7 +121,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 20rem;
+    height: 25rem;
 }
 
 .input{
@@ -129,7 +130,7 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: lighter;
 }
 
@@ -137,18 +138,19 @@
     width: 70%;
     border-radius: 0%;
     font-size: 1rem;
-    height: 2.3rem;
+    height: 1.6rem;
+    border: none;
 }
 
 .cadastro button{
-    width: 11rem;
-    height: 3.5rem;
+    width: 9rem;
+    height: 2.5rem;
     font-size: 1.2rem;
     border-radius: 0%;
     background-color: #E59E53;
-    margin-top: 2rem;
     color: black;
     font-weight: lighter;
+    margin-top: 0.7rem;
 }
 
 .cadastro button:hover{
@@ -164,18 +166,17 @@
     flex-direction: column;
     justify-content: space-around;
     color: black;
-    width: 80%;
-    font-size: 1.3rem;
-    height: 13rem;
+    width: 22rem;
+    font-size: 1.2rem;
+    height: 22rem;
 }
 
 .botao button{
-    width: 11rem;
-    height: 3.5rem;
+    width: 8rem;
+    height: 2.8rem;
     font-size: 1.2rem;
     border-radius: 0%;
     background-color: #E59E53;
-    margin-top: 2rem;
     color: black;
     font-weight: lighter;
 }
@@ -191,17 +192,13 @@
 .botao{
     display: flex;
     align-items: center;
+    justify-content: space-around;
     width: 100%;
-    gap: 2rem;
-    height: 4.3rem;
+    height: 4rem;
 }
 
-.botao button{
-    height: 3rem;
-    width: 8rem;
-    border-radius: 0%;
-    font-size: 1.3rem;
-    font-weight: lighter;
+#tituloModal{
+    font-weight: bold;
 }
 
 #editar{
@@ -219,4 +216,19 @@
 
 #excluir:hover{
     background-color: #af4040;
+}
+
+/* toast */
+
+#excluirSim{
+    color: white;
+    background-color: green;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#excluirNao{
+    color: white;
+    background-color: #ED5656;
+    margin-top: 0.5rem;
 }

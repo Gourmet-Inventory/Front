@@ -23,7 +23,6 @@ const BarraPesquisa = ({ tituloPag }) => {
                     />
                     <div className={styles["imgs"]}>
                         <img src={imgLupa} alt="Lupa" />
-                        <img src={imgFiltro} alt="Filtro" />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import api from '../../api';
+import axios from 'axios';
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./pagFornecedor.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
@@ -8,6 +9,7 @@ import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualiza
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function PagFornecedor() {
     const [fornecedores, setFornecedores] = useState([]);
@@ -18,7 +20,12 @@ function PagFornecedor() {
 
     const [nomeFornecedor, setNomeFornecedor] = useState("");
     const [cnpj, setCnpj] = useState("");
+    const [cep, setCep] = useState("");
     const [logradouro, setLogradouro] = useState("");
+    const [complemento, setComplemento] = useState("");
+    const [bairro, setBairro] = useState("");
+    const [localidade, setLocalidade] = useState("");
+    const [uf, setUf] = useState("");
     const [numeracaoLogradouro, setNumeracaoLogradouro] = useState("");
     const [telefone, setTelefone] = useState("");
     const [categoria, setCategoria] = useState("");
@@ -39,24 +46,49 @@ function PagFornecedor() {
     };
 
     const handleExcluir = (idFornecedor) => {
-        if (window.confirm("Tem certeza de que deseja excluir este fornecedor?")) {
-            api.delete(`/fornecedores/${idFornecedor}`, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
-                recuperarFornecedores();
-                toast.success("Fornecedor excluído com sucesso!");
-            }).catch(() => {
-                toast.error("Erro ao excluir o fornecedor.");
-            });
-        }
+        const confirmToast = () => {
+            const onConfirm = () => {
+                api.delete(`/fornecedores/${idFornecedor}`, {
+                    headers: { 'Authorization': `Bearer ${localStorage.token}` }
+                }).then(() => {
+                    recuperarFornecedores();
+                    toast.dismiss();
+                    toast.success("Fornecedor excluído com sucesso!");
+                }).catch(() => {
+                    toast.dismiss();
+                    toast.error("Erro ao excluir o fornecedor.");
+                });
+            };
+
+            const onCancel = () => {
+                toast.dismiss();
+            };
+
+            return (
+                <div>
+                    Tem certeza de que deseja excluir este fornecedor?
+                    <div>
+                        <button onClick={onConfirm} id={styles["excluirSim"]}>Sim</button>
+                        <button onClick={onCancel} id={styles["excluirNao"]}>Não</button>
+                    </div>
+                </div>
+            );
+        };
+
+        toast(confirmToast, {
+            position: "top-center",
+            autoClose: false,
+            closeOnClick: false,
+            draggable: false
+        });
     };
 
     const handleSave = () => {
-        if (!nomeFornecedor || !cnpj || !logradouro || !numeracaoLogradouro || !telefone || !categoria) {
+        if (!nomeFornecedor || !cnpj || !cep || !numeracaoLogradouro || !telefone || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        const fornecedor = { nomeFornecedor, cnpj, logradouro, numeracaoLogradouro, telefone, categoria };
+        const fornecedor = { nomeFornecedor, cnpj, cep, logradouro, complemento, bairro, localidade, uf, numeracaoLogradouro, telefone, categoria };
 
         if (dataEdit.idFornecedor) {
             api.patch(`/fornecedores/${dataEdit.idFornecedor}`, fornecedor, {
@@ -93,7 +125,12 @@ function PagFornecedor() {
     const limparCampos = () => {
         setNomeFornecedor("");
         setCnpj("");
+        setCep("");
         setLogradouro("");
+        setComplemento("");
+        setBairro("");
+        setLocalidade("");
+        setUf("");
         setNumeracaoLogradouro("");
         setTelefone("");
         setCategoria("");
@@ -103,16 +140,41 @@ function PagFornecedor() {
         setDataEdit(fornecedor);
         setNomeFornecedor(fornecedor.nomeFornecedor);
         setCnpj(fornecedor.cnpj);
+        setCep(fornecedor.cep);
         setLogradouro(fornecedor.logradouro);
+        setComplemento(fornecedor.complemento);
+        setBairro(fornecedor.bairro);
+        setLocalidade(fornecedor.localidade);
+        setUf(fornecedor.uf);
         setNumeracaoLogradouro(fornecedor.numeracaoLogradouro);
         setTelefone(fornecedor.telefone);
         setCategoria(fornecedor.categoria);
         setOpenCadastro(true);
+        setOpenVizualizar(false);
     };
 
     const handleView = (fornecedor) => {
         setViewData(fornecedor);
         setOpenVizualizar(true);
+    };
+
+    const handleCepChange = async (e) => {
+        const novoCep = e.target.value;
+        setCep(novoCep);
+
+        if (novoCep.length === 8) {
+            try {
+                const response = await axios.get(`https://viacep.com.br/ws/${novoCep}/json/`);
+                const data = response.data;
+                setLogradouro(data.logradouro || "");
+                setComplemento(data.complemento || "");
+                setBairro(data.bairro || "");
+                setLocalidade(data.localidade || "");
+                setUf(data.uf || "");
+            } catch (error) {
+                console.error("Erro ao buscar o CEP: ", error);
+            }
+        }
     };
 
     return (
@@ -161,6 +223,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={nomeFornecedor}
                                         onChange={(e) => setNomeFornecedor(e.target.value)}
+                                        placeholder="Fornecedor X"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -169,6 +232,16 @@ function PagFornecedor() {
                                         type="text"
                                         value={cnpj}
                                         onChange={(e) => setCnpj(e.target.value)}
+                                        placeholder="XXXXXXXX0001XX"
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>CEP</span>
+                                    <input
+                                        type="text"
+                                        value={cep}
+                                        onChange={handleCepChange}
+                                        placeholder="00000000"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -177,14 +250,54 @@ function PagFornecedor() {
                                         type="text"
                                         value={logradouro}
                                         onChange={(e) => setLogradouro(e.target.value)}
+                                        placeholder="Rua X"
                                     />
                                 </div>
+                                
+                                <div className={styles["input"]}>
+                                    <span>Complemento</span>
+                                    <input
+                                        type="text"
+                                        value={complemento}
+                                        onChange={(e) => setComplemento(e.target.value)}
+                                        placeholder="Opcional"
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Bairro</span>
+                                    <input
+                                        type="text"
+                                        value={bairro}
+                                        onChange={(e) => setBairro(e.target.value)}
+                                        placeholder="Bairro X"
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>Localidade</span>
+                                    <input
+                                        type="text"
+                                        value={localidade}
+                                        onChange={(e) => setLocalidade(e.target.value)}
+                                        placeholder="São Paulo"
+                                    />
+                                </div>
+                                <div className={styles["input"]}>
+                                    <span>UF</span>
+                                    <input
+                                        type="text"
+                                        value={uf}
+                                        onChange={(e) => setUf(e.target.value)}
+                                        placeholder="SP"
+                                    />
+                                </div>
+
                                 <div className={styles["input"]}>
                                     <span>Numeração</span>
                                     <input
                                         type="text"
                                         value={numeracaoLogradouro}
                                         onChange={(e) => setNumeracaoLogradouro(e.target.value)}
+                                        placeholder="10"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -193,6 +306,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={telefone}
                                         onChange={(e) => setTelefone(e.target.value)}
+                                        placeholder="00000000000"
                                     />
                                 </div>
                                 <div className={styles["input"]}>
@@ -201,6 +315,7 @@ function PagFornecedor() {
                                         type="text"
                                         value={categoria}
                                         onChange={(e) => setCategoria(e.target.value)}
+                                        placeholder="Laticínios"
                                     />
                                 </div>
                             </div>
@@ -213,11 +328,16 @@ function PagFornecedor() {
                     <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Fornecedor ${viewData.nomeFornecedor}`}>
                         <div className={styles["formVizualizar"]}>
                             <div className={styles["dadosForn"]}>
-                                <span>CNPJ: {viewData.cnpj}</span>
-                                <span>Logradouro: {viewData.logradouro}</span>
-                                <span>Numeração: {viewData.numeracaoLogradouro} </span>                           
-                                <span>Telefone: {viewData.telefone}</span>
-                                <span>Categoria: {viewData.categoria}</span>
+                                <span><span id={styles["tituloModal"]}>CNPJ:</span> {viewData.cnpj}</span>
+                                <span><span id={styles["tituloModal"]}>CEP:</span>  {viewData.cep}</span>
+                                <span><span id={styles["tituloModal"]}>Logradouro:</span>  {viewData.logradouro}</span>
+                                <span><span id={styles["tituloModal"]}>Complemento:</span>  {viewData.complemento}</span>
+                                <span><span id={styles["tituloModal"]}>Bairro:</span>  {viewData.bairro}</span>
+                                <span><span id={styles["tituloModal"]}>Localidade:</span>  {viewData.localidade}</span>
+                                <span><span id={styles["tituloModal"]}>UF:</span>  {viewData.uf}</span>
+                                <span><span id={styles["tituloModal"]}>Numeração:</span>  {viewData.numeracaoLogradouro} </span>                           
+                                <span><span id={styles["tituloModal"]}>Telefone:</span>  {viewData.telefone}</span>
+                                <span><span id={styles["tituloModal"]}>Categoria:</span>  {viewData.categoria}</span>
                             </div>
                             <div className={styles["botao"]}>
                                 <button id={styles["editar"]} onClick={() => handleEdit(viewData)}>Editar</button>
@@ -226,10 +346,11 @@ function PagFornecedor() {
                         </div>
                     </ModalVizualizar>
                 )}
+
+                <ToastContainer />
             </div>
         </>
     );
 }
 
 export default PagFornecedor;
-

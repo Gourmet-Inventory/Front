@@ -42,7 +42,7 @@ const Estoque = () => {
             setItens(response.data);
             recuperarValorCard();
         }).catch(() => {
-            toast.error("Erro ao buscar estoque!");
+            
         });
     };
 
@@ -124,6 +124,7 @@ const Estoque = () => {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 recuperarItens();
+                setOpenVisualizar(false);
                 toast.success("Item excluído com sucesso!");
             }).catch(() => {
                 toast.error("Erro ao excluir o item.");

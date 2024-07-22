@@ -266,9 +266,7 @@ const Relatorios = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.extrairRelatorios}>
-                        <button onClick={handleExtrair}>Extrair Relatórios</button>
-                    </div>
+                    
     
                     {openVizualizar && (
                        <ModalRelatorios

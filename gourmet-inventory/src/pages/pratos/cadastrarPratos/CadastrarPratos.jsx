@@ -170,7 +170,7 @@ function CadastrarPratos() {
                     <div className={styles["formMedidas"]}>
                         <div className={styles["input1"]}>
                             <span>Valor Medida:</span>
-                            <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} />
+                            <input type="number" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} />
                         </div>
                         <div className={styles["input1"]}>
                             <span>Tipo Medida:</span>

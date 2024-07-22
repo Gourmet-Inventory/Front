@@ -18,6 +18,7 @@
         const [openVizualizar, setOpenVizualizar] = useState(false);
         const [modalPratos, setModalPratos] = useState([]);
         const [dataRelatorio, setDataRelatorio] = useState("");
+    
         
 
         const navigate = useNavigate();
@@ -52,28 +53,21 @@
                 return;
             }
             const formattedDate = formatDate(dataRelatorio);
-            const requestBody = { idPratoList, descontarEstoque };
+            const requestBody = {idPratoList, descontarEstoque };
             console.log("URL:", `/relatorio/gerar/${formattedDate}`);
             console.log("Data:", formattedDate);
             console.log("Pratos:", idPratoList);
             console.log("Check:", descontarEstoque);
+            console.log(requestBody)
 
             api.post(`/relatorio/gerar/${formattedDate}`,requestBody, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(response => {
-                if (response.status === 200) {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', `${formattedDate}.txt`);
-                    document.body.appendChild(link);
-                    link.click();
-                    link.parentNode.removeChild(link);
-                    
-                    toast.success("Relatório TXT gerado e baixado com sucesso!");
+                if (response.status === 200) { 
+                    toast.success("Saída salva com sucesso!");
                 
                 } else {
-                    toast.error("Erro ao gerar relatório.");
+                    toast.error("Erro ao salvar saída.");
                 }
             }).catch(error => {
                 console.log(requestBody)

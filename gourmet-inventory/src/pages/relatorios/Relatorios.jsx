@@ -162,7 +162,7 @@ const Relatorios = () => {
                         </div>
                         <div className={styles.resumoRelatorios}>
                             <h3>Relatórios alertas disparados deste Mês</h3>
-                            <button onClick={handleExtrair}>Extrair</button>
+                            <button onClick={() => setOpenVizualizarMes(true)}>Extrair</button>
                         </div>
                         <div className={styles.resumoRelatorios}>
                             <h3>Relatórios saída de todos os pratos deste Mês</h3>

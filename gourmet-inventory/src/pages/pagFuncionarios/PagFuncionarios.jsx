@@ -9,13 +9,12 @@ import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualiza
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function PagFornecedor() {
+function PagFuncionarios() {
     const [funcionarios, setFuncionarios] = useState([]);
     const [openCadastro, setOpenCadastro] = useState(false);
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [dataEdit, setDataEdit] = useState({});
     const [viewData, setViewData] = useState({});
-
 
     const [nome, setNome] = useState("");
     const [cargo, setCargo] = useState("");
@@ -23,6 +22,7 @@ function PagFornecedor() {
     const [email, setEmail] = useState("");
     const [celular, setCelular] = useState("");
     const [senha, setSenha] = useState("");
+    
 
     const navigate = useNavigate();
 
@@ -59,12 +59,21 @@ function PagFornecedor() {
     };
 
     const handleSave = () => {
-        if (!nome || !cargo || !cpf || !email || !celular || !senha) {
+        if (!nome || !cargo || !email || !celular || !senha) {
             return toast.error("Todos os campos são obrigatórios!");
         }
-        
-        const usuario = { nome, cargo, cpf, email, celular, senha };
-        
+
+        const idEmpresa = Number(localStorage.getItem("empresaId"));
+        const usuario = {
+            nome,
+            cargo,
+            cpf,
+            email,
+            celular,
+            senha,
+            idEmpresa: idEmpresa // Adiciona o empresaId ao objeto
+        };
+
         if (dataEdit.idUsuario) {
             api.patch(`/usuarios/${dataEdit.idUsuario}`, usuario, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
@@ -76,7 +85,8 @@ function PagFornecedor() {
                 toast.error("Erro ao atualizar o usuário.");
             });
         } else {
-            api.post(`/usuarios/${localStorage.empresaId}`, usuario, {
+            console.log(usuario);
+            api.post(`/usuarios`, usuario, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Usuário cadastrado com sucesso!");
@@ -90,11 +100,8 @@ function PagFornecedor() {
     };
 
     const handleCadastrar = () => {
-        // Limpar os dados editados
         setDataEdit({});
-        // Limpar os campos do formulário
         limparCampos();
-        // Abrir o modal de cadastro
         setOpenCadastro(true);
     };
 
@@ -120,6 +127,7 @@ function PagFornecedor() {
 
     const handleView = (usuario) => {
         setViewData(usuario);
+        console.log("usuario", usuario)
         setOpenVizualizar(true);
     };
 
@@ -213,22 +221,22 @@ function PagFornecedor() {
                                 />
                             </div>
                         </div>
-                        <button onClick={handleSave}>{dataEdit.idUsuario ? "Salvar" : "Cadastrar"}</button>
+                        <button onClick={handleSave}>Salvar</button>
                     </div>
                 </ModalCadastro>
 
-                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={`Funcionário ${viewData.nome}`}>
-                    <div className={styles["formVizualizar"]}>
-                        <div className={styles["dadosForn"]}>
-                            <span>Cargo: {viewData.cargo}</span>
-                            <span>Telefone: {viewData.celular}</span>
-                            <span>E-mail: {viewData.email}</span>
+                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
+                    <div className={styles["view"]}>
+                        <h3>Visualizar Funcionário</h3>
+                        <div className={styles["dados"]}>
+                            <span><strong>Nome:</strong> {viewData.nome}</span>
+                            <span><strong>CPF:</strong> {viewData.cpf}</span>
+                            <span><strong>Cargo:</strong> {viewData.cargo}</span>
+                            <span><strong>Celular:</strong> {viewData.celular}</span>
+                            <span><strong>E-mail:</strong> {viewData.email}</span>
                         </div>
-
-                        <div className={styles["botao"]}>
-                            <button id={styles["editar"]} onClick={() => handleEdit(viewData)}>Editar</button>
-                            <button id={styles["excluir"]} onClick={() => handleExcluir(viewData.idUsuario)}>Excluir</button>
-                        </div>
+                        <button onClick={() => handleEdit(viewData, viewData.idUsuario)}>Editar</button>
+                        <button onClick={() => handleExcluir(viewData.idUsuario)}>Excluir</button>
                     </div>
                 </ModalVizualizar>
             </div>
@@ -236,4 +244,4 @@ function PagFornecedor() {
     );
 }
 
-export default PagFornecedor;
+export default PagFuncionarios;

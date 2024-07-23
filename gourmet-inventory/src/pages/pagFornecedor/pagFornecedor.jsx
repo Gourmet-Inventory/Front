@@ -50,17 +50,41 @@ function PagFornecedor() {
 
   const handleExcluir = (idFornecedor) => {
    
-        api
-          .delete(`/fornecedores/${idFornecedor}`, {
-            headers: { Authorization: `Bearer ${localStorage.token}` },
-          })
-          .then(() => {
-            recuperarFornecedores();
-            
-          })
-          .catch(() => {
-            
+    const confirmToast = () => {
+      const onConfirm = () => {
+          api.delete(`/fornecedores/${idFornecedor}`, {
+              headers: { 'Authorization': `Bearer ${localStorage.token}` }
+          }).then(() => {
+              recuperarFornecedores();
+              toast.dismiss();
+              toast.success("Fornecedor excluído com sucesso!");
+          }).catch(() => {
+              toast.dismiss();
+              toast.error("Erro ao excluir o fornecedor.");
           });
+      };
+
+      const onCancel = () => {
+          toast.dismiss();
+      };
+
+      return (
+          <div>
+              Tem certeza de que deseja excluir este fornecedor?
+              <div>
+                  <button onClick={onConfirm} id={styles["excluirSim"]}>Sim</button>
+                  <button onClick={onCancel} id={styles["excluirNao"]}>Não</button>
+              </div>
+          </div>
+      );
+  };
+
+  toast(confirmToast, {
+      position: "top-center",
+      autoClose: false,
+      closeOnClick: false,
+      draggable: false
+  });
       
 
 
@@ -349,7 +373,7 @@ function PagFornecedor() {
                 <button id={styles['editar']} onClick={() => handleEdit(viewData)}>
                   Editar
                 </button>
-                <button id={styles['excluir']} onClick={() => handleExcluir(viewData.idFornecedor)}>
+                <button id={styles['excluir']} onClick={() => handleExcluir(localStorage?.getItem("idUsuario"))}>
                   Excluir
                 </button>
               </div>

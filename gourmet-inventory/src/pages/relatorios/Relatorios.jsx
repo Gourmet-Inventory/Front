@@ -165,6 +165,7 @@ const Relatorios = () => {
         return (
             <>
                 <MenuLateral />
+                <ImgConfig/>
                 <div className={styles.body}>
                     <div className={styles.cabecalho}>
                         <BarraPesquisa

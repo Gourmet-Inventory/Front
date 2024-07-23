@@ -148,9 +148,7 @@ function PagFuncionarios() {
                     </div>
                     <div className={styles["tabelaForn"]}>
                         <table>
-                            <thead>
-                                <tr></tr>
-                            </thead>
+                            
                             <tbody>
                                 {Array.isArray(funcionarios) && funcionarios.map(usuario => (
                                     <tr key={usuario.idUsuario} onClick={() => handleView(usuario)}>

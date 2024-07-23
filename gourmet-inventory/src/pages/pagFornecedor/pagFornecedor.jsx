@@ -58,6 +58,7 @@ function PagFornecedor() {
               recuperarFornecedores();
               toast.dismiss();
               toast.success("Fornecedor excluído com sucesso!");
+              setOpenVizualizar(false);
           }).catch(() => {
               toast.dismiss();
               toast.error("Erro ao excluir o fornecedor.");
@@ -374,7 +375,7 @@ function PagFornecedor() {
                 <button id={styles['editar']} onClick={() => handleEdit(viewData)}>
                   Editar
                 </button>
-                <button id={styles['excluir']} onClick={() => handleExcluir(localStorage?.getItem("idUsuario"))}>
+                <button id={styles['excluir']} onClick={() => handleExcluir(viewData.idFornecedor)}>
                   Excluir
                 </button>
               </div>

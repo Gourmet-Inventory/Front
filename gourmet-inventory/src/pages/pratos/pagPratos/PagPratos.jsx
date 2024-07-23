@@ -37,7 +37,6 @@ function PagPratos() {
             }
         } catch (error) {
             console.error('Erro ao buscar pratos:', error);
-            toast.error("Erro ao buscar pratos.");
         }
     };
 

@@ -16,7 +16,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 60vh;
+    height: 75vh;
     width: 30vw;
     background-color: #37455D;
     box-shadow: 4px 4px 13px #2b2b2b;
@@ -74,6 +74,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    
 }
 
 

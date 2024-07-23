@@ -1,18 +1,18 @@
 .card{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 18rem;
-    width: 90%;
-    background-color: aqua;
+    width: 98%;
     height: 2.5rem;
-    margin-top: 1rem;
-    background-color: #37455D;
+    margin-top: 2vh;
+    justify-content: space-between;
+    background-color:#37455D ;
 }
 
 .card span{
     color: white;
     font-size: 1.2rem;
+    margin-left: 1vw;
 }
 
 .card img{

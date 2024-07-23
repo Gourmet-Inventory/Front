@@ -33,7 +33,7 @@
 .menu{
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     height: auto;
 }
 
@@ -49,16 +49,15 @@
     color: black;
 }
 
-.menus :first-child button{
-    width: 48%;
-    height: 25vh;
+.menus button{
+    width: 31%;
+    height: 28vh;
     margin-bottom: 3%;
+    gap: 2vh;
+    justify-content: space-between;
+    
 }
 
-.menus :last-child button{
-    width: 31%;
-    height: 20vh;
-}
 
 
 .menuAvisos{

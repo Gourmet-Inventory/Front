@@ -23,6 +23,9 @@ import saidaImgSelected from "../../utils/assets/IconesSidebar/saidaSelected.svg
 import alertaImg from "../../utils/assets/IconesSidebar/alerta.svg";
 import alertaImgSelected from "../../utils/assets/IconesSidebar/alertaSelected.svg";
 
+import relatorioImg from "../../utils/assets/IconesSidebar/relatorio.svg";
+import relatorioSelected from "../../utils/assets/IconesSidebar/relatorioSelected.svg";
+
 
 
 function MenuLateral() {
@@ -91,6 +94,10 @@ function MenuLateral() {
                 <span className={getClassName('/gourmet-inventory/alertas')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/alertas' ? alertaImgSelected : alertaImg} alt="Alertas" />
                     {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/alertas')}>Alertas</span>}
+                </span>
+                <span className={getClassName('/gourmet-inventory/relatorios')}>
+                <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/relatorios' ? relatorioSelected : relatorioImg} alt="Alertas" />
+                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/relatorios')}>Relatórios</span>}
                 </span>
             </div>
         </div>

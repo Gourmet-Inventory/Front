@@ -14,13 +14,12 @@
 
 /* Título dentro do formulário */
 .titulo {
-    font-size:20px;
-
-    
+    font-size:20px;   
 }
 .body{
     width: 100%;
     overflow-y: hidden;
+    
 }
 
 /* Cabeçalho da página */
@@ -76,7 +75,7 @@
 
 .containerForm{
     width: 100%;
-    height: 80vh;
+    height: 79vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -130,20 +129,15 @@
 /* Informações e filtros na barra lateral */
 
 .resumoRelatorios{
-
-    margin-left: 100px;
     width: 18vw;
-    height: 09vw;
+    height: 7.5rem;
     border: 2.3px black solid;
     background-color: #E2F7F8;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     margin: 14px;
     padding: 7px;
-   
-
+    flex-direction: column;
+    text-align: center;
 }
 
 
@@ -152,7 +146,6 @@
 
     font-size: 1.1rem;
     align-self: center;
-    margin-top: 0.5rem;
     width: 7rem;
     font-weight: lighter;
     background-color: #37455D;
@@ -164,12 +157,11 @@
 .resumoRelatorios h3{
 
     color: black;
-    
     font-family: "jost";
     font-weight: lighter;
-    font-size: 25px;
+    font-size: 1.3rem;
     align-items: center;
-
+    height: 3rem;
 
 }
 
@@ -230,7 +222,6 @@ width: fit-content;
 font-family: "jost";
 font-weight: lighter;
 font-size: 2.5vh;
-
 
 }
 
@@ -431,5 +422,8 @@ font-size: 2.5vh;
 }
 
 
+.pratoNome {
+    margin: 5px 0;
+}
 
 

@@ -37,36 +37,7 @@ function ModalVizualizarForn({isOpen, setModalOpen, children, titulo}) {
                     
                     </div>
 
-                    <Editar isOpen={openEditar} setModalOpen={() => setOpenEditar(!openEditar)}>
-                        {/* children */}
-                        <div className={styles["editar"]}>
-                                <h3>Editar Fornecedor</h3>
-                            <div className={styles["inputEditar"]}>
-                                <div className={styles["input"]}>
-                                    <span>Nome</span>
-                                    <input type="text" />
-                                </div>
-                                <div className={styles["input"]}>
-                                    <span>Logradouro</span>
-                                    <input type="text" />
-                                </div>
-                                <div className={styles["input"]}>
-                                    <span>Numeração</span>
-                                    <input type="text" />
-                                </div>
-                                <div className={styles["input"]}>
-                                    <span>Telefone</span>
-                                    <input type="text" />
-                                </div>
-                                <div className={styles["input"]}>
-                                    <span>Categoria</span>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <button>Salvar</button>
-                        </div>
                     
-                    </Editar>
                 </div>
             </>
         )

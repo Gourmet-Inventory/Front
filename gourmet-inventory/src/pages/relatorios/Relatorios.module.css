@@ -321,6 +321,15 @@ font-size: 2.5vh;
     overflow: scroll;
 }
 
+.pratoNome{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    color: white;
+    height: 8rem;
+    width: 15rem;
+}
+
 .buttonModal {
     display: flex;
     width: 100%;
@@ -372,7 +381,6 @@ font-size: 2.5vh;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-self: center;
     height: 60vh;
     width: 20vw;
@@ -388,7 +396,7 @@ font-size: 2.5vh;
     flex-direction: row;
     border-bottom: #E59E53 3px solid;
     width: auto;
-    height: 5vh;
+    height: 3.5rem;
     justify-content: space-around;
 
 
@@ -407,18 +415,15 @@ font-size: 2.5vh;
 }
 
 .resumoDadosModal{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-   
-  
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    overflow-y: scroll;
 }
 
 .resumoDadosModal h3{
     display: flex;
-   
-    align-self: end;
-  
 }
 
 
@@ -427,3 +432,17 @@ font-size: 2.5vh;
 }
 
 
+/* toast */
+
+#excluirSim{
+    color: white;
+    background-color: green;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#excluirNao{
+    color: white;
+    background-color: #ED5656;
+    margin-top: 0.5rem;
+}

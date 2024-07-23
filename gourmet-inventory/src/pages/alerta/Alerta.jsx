@@ -24,11 +24,12 @@ const Alerta = () => {
                 const response = await api.get(`/alerta/${localStorage.empresaId}`, {
                     headers: { 'Authorization': `Bearer ${localStorage.token}` }
                 });
-                
+
                 if (Array.isArray(response.data)) {
-                    setItens(response.data);
+                    const sortedData = response.data.sort((a, b) => new Date(a.estoqueIngrediente.dtaAviso) - new Date(b.estoqueIngrediente.dtaAviso));
+                    setItens(sortedData);
                     if (!shownMessages.has("Alertas carregados com sucesso!")) {
-                        toast.success("Alertas carregados com sucesso!");
+              
                         setShownMessages(prev => new Set(prev).add("Alertas carregados com sucesso!"));
                     }
                 } else {

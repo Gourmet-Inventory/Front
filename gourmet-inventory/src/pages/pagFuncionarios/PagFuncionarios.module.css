@@ -1,6 +1,10 @@
+.body{
+    overflow-y: hidden;
+}
+
 .form{
     width: 71.5vw;
-    height: 450px;
+    height: 25rem;
     margin-left: 100px;
     flex-direction: column; 
     overflow-y: scroll;
@@ -196,47 +200,40 @@
 .dadosForn{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
     color: black;
-    width: 80%;
+    width: 100%;
     font-size: 1.3rem;
-    height: 13rem;
-}
-
-.botao button{
-    width: 11rem;
-    height: 3.5rem;
-    font-size: 1.2rem;
-    border-radius: 0%;
-    background-color: #E59E53;
-    margin-top: 2rem;
-    color: black;
-    font-weight: lighter;
-}
-
-.botao button:hover{
-    background-color: #a77940;
-}
-
-.formVizualizar{
     height: 100%;
 }
 
-.botao{
+.dados{
     display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 2rem;
-    height: 4.3rem;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 90%;
+    height: 18rem;
 }
 
 .botao button{
     height: 3rem;
     width: 8rem;
-    border-radius: 0%;
     font-size: 1.3rem;
+    border-radius: 0%;
     font-weight: lighter;
 }
+
+
+
+.botao{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 2rem;
+    height: 25%;    
+}
+
 
 #editar{
     background-color: #E59E53;
@@ -249,8 +246,11 @@
 
 #excluir{
     background-color: #ED5656;
+    color: white;
 }
 
 #excluir:hover{
     background-color: #af4040;
 }
+
+

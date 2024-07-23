@@ -85,7 +85,9 @@
         const desfazerAdicao = () => {
             if (historicoAdicoes.length > 0) {
                 const ultimoPratoAdicionado = historicoAdicoes[historicoAdicoes.length - 1];
-                const novosPratosSelecionados = pratosSelecionados.filter((prato, index) => index !== pratosSelecionados.lastIndexOf(ultimoPratoAdicionado));
+                const novosPratosSelecionados = pratosSelecionados.filter(
+                    (prato, index) => index !== pratosSelecionados.lastIndexOf(ultimoPratoAdicionado)
+                );
                 setPratosSelecionados(novosPratosSelecionados);
                 setHistoricoAdicoes(historicoAdicoes.slice(0, -1));
             }

@@ -7,14 +7,16 @@ import styles from "./Relatorios.module.css";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
 import ModalRelatorios from "../../components/modalRelatorio/ModalRelatorio";
+import ModalMes from "../../components/modalMes/ModalMes";
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const Relatorios = () => {
     const [pratos, setPratos] = useState([]);
     const [relatorios, setRelatorios] = useState([]);
     const [filteredRelatorios, setFilteredRelatorios] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
+    const [openVizualizarMes, setOpenVizualizarMes] = useState(false);
+    const [modalEndpoint, setModalEndpoint] = useState('');
     const [viewData, setViewData] = useState({
         idRelatorio: '',
         dataCriacao: '',
@@ -45,13 +47,58 @@ const Relatorios = () => {
             });
     };
 
+    const handleExtract = async () => {
+        try {
+            const response = await api.get(`/relatorio/ingredientes/${viewData.idRelatorio}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` },
+                responseType: 'arraybuffer' 
+            });
+    
+            if (response.status === 200) {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'ingredientes.csv'); // Nome do arquivo atualizado
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+    
+                toast.success("Relatório gerado com sucesso!");
+            } else {
+                toast.error("Erro ao gerar relatório.");
+            }
+        } catch (error) {
+            console.error('Erro ao gerar relatório:', error);
+            toast.error("Erro ao gerar relatório.");
+        }
+    };
+
     const confirmRemove = (id) => {
+        toast(
+            ({ closeToast }) => (
+                <div>
+                    <p>Tem certeza que deseja excluir este relatório?</p>
+                    <button className={styles["toast-button-yes"]} onClick={() => handleDelete(id, closeToast)}>Sim</button>
+                    <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
+                </div>
+            ),
+            {
+                position: "top-center",
+                autoClose: false,
+                closeOnClick: false,
+                draggable: false,
+            }
+        );
+    };
+
+    const handleDelete = (id, closeToast) => {
         api.delete(`/relatorio/${id}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` },
         })
             .then(() => {
                 recuperarRelatorios();
                 toast.success("Relatório deletado com sucesso.");
+                closeToast();
             })
             .catch(() => {
                 toast.error("Erro ao deletar relatório.");
@@ -66,6 +113,10 @@ const Relatorios = () => {
         setFilteredRelatorios(filtered);
     };
 
+    useEffect(() => {
+        filterRelatorios(relatorios, dateFilter.startDate, dateFilter.endDate);
+    }, [dateFilter, relatorios]);
+
     const handleDateFilterChange = (e) => {
         const { name, value } = e.target;
         setDateFilter(prevState => ({
@@ -74,13 +125,17 @@ const Relatorios = () => {
         }));
     };
 
+    const handleOpenModalMes = (endpoint) => {
+        console.log(endpoint)
+        setModalEndpoint(endpoint);
+        setOpenVizualizarMes(true);
+    };
+
+    
+
     const handleView = (relatorio) => {
         setViewData(relatorio);
         setOpenVizualizar(true);
-    };
-
-    const handleExtrair = (relatorio) => {
-        // Lógica para extrair os relatórios
     };
 
     const groupedRelatorios = groupByMonth(relatorios);
@@ -88,6 +143,7 @@ const Relatorios = () => {
     return (
         <>
             <MenuLateral />
+            <ImgConfig />
             <div className={styles.body}>
                 <div className={styles.cabecalho}>
                     <BarraPesquisa
@@ -133,24 +189,7 @@ const Relatorios = () => {
                         </div>
                         <div className={styles.resumoRelatorios}>
                             <h3>Relatórios alertas disparados deste Mês</h3>
-                            {/* {Object.keys(groupedRelatorios).map(monthYear => (
-                                <div className={styles.monthCard} key={monthYear}>
-                                    <h4>{monthYear}</h4>
-                                    {groupedRelatorios[monthYear].map(relatorio => (
-                                        <div className={styles.card} key={relatorio.idRelatorio}>
-                                            <div className={styles.nome}>
-                                                <span className={styles.titulo}>{relatorio.nome}</span>
-                                                <span>Categoria: {relatorio.categoria}</span>
-                                            </div>
-                                            <div className={styles.dados}>
-                                                <span>Descrição: {relatorio.descricao}</span>
-                                                <span>Data de Criação: {relatorio.dataCriacao}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ))} */}
-                            <button onClick={handleExtrair}>Extrair</button>
+                            <button onClick={() => handleOpenModalMes('/RelatorioEstoque')}>Extrair</button>
                         </div>
                         <div className={styles.resumoRelatorios}>
                             <h3>Relatórios saída de todos os pratos deste Mês</h3>
@@ -171,10 +210,13 @@ const Relatorios = () => {
                                     ))}
                                 </div>
                             ))} */}
-                            <button onClick={handleExtrair}>Extrair</button>
+                            <button onClick={() => handleOpenModalMes('/RelatorioSaidaMes')}>Extrair</button>
                         </div>
                     </div>
                 </div>
+
+                <ModalMes isOpen={openVizualizarMes} setModalOpen={() => setOpenVizualizarMes(!openVizualizarMes)} endpoint={modalEndpoint} titulo={"Visualizar Funcionário"}>
+                </ModalMes>
 
                 {openVizualizar && (
                     <ModalRelatorios
@@ -200,13 +242,12 @@ const Relatorios = () => {
                                 </div>
                             </div>
                             <div className={styles.buttonModal}>
-                                <button id={styles.extrair} onClick={() => handleExtrair(viewData)}>Extrair</button>
+                                <button id={styles.extrair} onClick={() => handleExtract(viewData.idRelatorio)} >Extrair</button>
                                 <button id={styles.excluir} onClick={() => confirmRemove(viewData.idRelatorio)}>Excluir</button>
                             </div>
                         </div>
                     </ModalRelatorios>
                 )}
-
             </div>
         </>
     );

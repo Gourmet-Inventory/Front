@@ -16,6 +16,7 @@ const Relatorios = () => {
     const [filteredRelatorios, setFilteredRelatorios] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [openVizualizarMes, setOpenVizualizarMes] = useState(false);
+    const [modalEndpoint, setModalEndpoint] = useState('');
     const [viewData, setViewData] = useState({
         idRelatorio: '',
         dataCriacao: '',
@@ -44,6 +45,32 @@ const Relatorios = () => {
             .catch((error) => {
                 toast.error("Erro ao recuperar relatórios.");
             });
+    };
+
+    const handleExtract = async () => {
+        try {
+            const response = await api.get(`/relatorio/ingredientes/${viewData.idRelatorio}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` },
+                responseType: 'arraybuffer' 
+            });
+    
+            if (response.status === 200) {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'ingredientes.csv'); // Nome do arquivo atualizado
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+    
+                toast.success("Relatório gerado com sucesso!");
+            } else {
+                toast.error("Erro ao gerar relatório.");
+            }
+        } catch (error) {
+            console.error('Erro ao gerar relatório:', error);
+            toast.error("Erro ao gerar relatório.");
+        }
     };
 
     const confirmRemove = (id) => {
@@ -98,13 +125,13 @@ const Relatorios = () => {
         }));
     };
 
-    const handleExtrair = () => {
-        navigate("/gourmet-inventory/extrair-relatorios");
+    const handleOpenModalMes = (endpoint) => {
+        console.log(endpoint)
+        setModalEndpoint(endpoint);
+        setOpenVizualizarMes(true);
     };
 
-    const handleEditar = (relatorio) => {
-        navigate("/gourmet-inventory/extrair-relatorios", { state: { relatorio } });
-    };
+    
 
     const handleView = (relatorio) => {
         setViewData(relatorio);
@@ -162,11 +189,11 @@ const Relatorios = () => {
                         </div>
                         <div className={styles.resumoRelatorios}>
                             <h3>Relatórios alertas disparados deste Mês</h3>
-                            <button onClick={() => setOpenVizualizarMes(true)}>Extrair</button>
+                            <button onClick={() => handleOpenModalMes('/RelatorioEstoque')}>Extrair</button>
                         </div>
                         <div className={styles.resumoRelatorios}>
                             <h3>Relatórios saída de todos os pratos deste Mês</h3>
-                            {Object.keys(groupedRelatorios).map(monthYear => (
+                            {/* {Object.keys(groupedRelatorios).map(monthYear => (
                                 <div className={styles.monthCard} key={monthYear}>
                                     <h4>{monthYear}</h4>
                                     {groupedRelatorios[monthYear].map(relatorio => (
@@ -182,13 +209,13 @@ const Relatorios = () => {
                                         </div>
                                     ))}
                                 </div>
-                            ))}
-                            <button onClick={() => setOpenVizualizarMes(true)}>Extrair</button>
+                            ))} */}
+                            <button onClick={() => handleOpenModalMes('/RelatorioSaidaMes')}>Extrair</button>
                         </div>
                     </div>
                 </div>
 
-                <ModalMes isOpen={openVizualizarMes} setModalOpen={() => setOpenVizualizarMes(!openVizualizarMes)} titulo={"Visualizar Funcionário"}>
+                <ModalMes isOpen={openVizualizarMes} setModalOpen={() => setOpenVizualizarMes(!openVizualizarMes)} endpoint={modalEndpoint} titulo={"Visualizar Funcionário"}>
                 </ModalMes>
 
                 {openVizualizar && (
@@ -214,7 +241,7 @@ const Relatorios = () => {
                                 </div>
                             </div>
                             <div className={styles.buttonModal}>
-                                <button id={styles.extrair} onClick={() => handleEditar(viewData)}>Extrair</button>
+                                <button id={styles.extrair} onClick={() => handleExtract(viewData.idRelatorio)} >Extrair</button>
                                 <button id={styles.excluir} onClick={() => confirmRemove(viewData.idRelatorio)}>Excluir</button>
                             </div>
                         </div>

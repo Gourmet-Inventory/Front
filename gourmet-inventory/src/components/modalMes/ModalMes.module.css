@@ -1,0 +1,80 @@
+.form{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 45vh;
+    width: 30vw;
+    background-color: #37455D;
+    box-shadow: 4px 4px 13px #2b2b2b;
+    box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+.imgModal{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+}
+
+.imgModal img{
+    margin-right: 0.5rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.corpoModal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+}
+
+.corpoModal span{
+    color: white;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.corpoModal select{
+    width: 80%;
+    height: 2rem;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 0%;
+}
+
+.corpoModal button{
+    width: 7rem;
+    font-size: 1rem;
+    height: 3rem;
+    background-color: #E59E53;
+    font-weight: lighter;
+}
+
+
+.cadastro button:hover{
+background-color: #a77940;
+}
+
+
+
+
+

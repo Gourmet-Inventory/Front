@@ -28,7 +28,7 @@ const Login = () => {
             localStorage.setItem('nome', nome);
             localStorage.setItem('cargo', cargo);
             localStorage.setItem('empresaNome', empresaNome);
-            localStorage.setItem('empresaId', empresaId);
+            localStorage.setItem('idEmpresa', empresaId);
 
 
             navigate('/gourmet-inventory/menu');

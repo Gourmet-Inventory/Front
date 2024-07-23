@@ -78,8 +78,8 @@ const Relatorios = () => {
             ({ closeToast }) => (
                 <div>
                     <p>Tem certeza que deseja excluir este relatório?</p>
-                    <button className={styles["toast-button-yes"]} onClick={() => handleDelete(id, closeToast)}>Sim</button>
-                    <button className={styles["toast-button-no"]} onClick={closeToast}>Não</button>
+                    <button id={styles["excluirSim"]} onClick={() => handleDelete(id, closeToast)}>Sim</button>
+                    <button id={styles["excluirNao"]} onClick={closeToast}>Não</button>
                 </div>
             ),
             {
@@ -228,13 +228,12 @@ const Relatorios = () => {
                         <div className={styles.corpoVizualizar}>
                             <div className={styles.dadosModal}>
                                 <div className={styles.tituloDadosModal}>
-                                    <h3>Quant: {viewData.pratoList.length}</h3>
-                                    <h3>Prato: </h3>
+                                    <h3>Pratos Saída</h3>
                                 </div>
                                 <div className={styles.resumoDadosModal}>
-                                    <div>
+                                    <div className={styles["pratosSaida"]}>
                                         {viewData.pratoList.map((prato, index) => (
-                                            <div key={index}>
+                                            <div key={index} className={styles["pratoNome"]}>
                                                 - {prato.nome}
                                             </div>
                                         ))}

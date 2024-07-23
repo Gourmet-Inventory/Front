@@ -5,7 +5,7 @@ import api from '../../api';
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./PagFuncionarios.module.css";
 import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
-import ModalVizualizar from "../../components/modalVizualizarForn/ModalVizualizarForn";
+import ModalVizualizar from "../../components/modalVizualizarFunc/ModalVizualizarFunc";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,7 +18,6 @@ function PagFuncionarios() {
 
     const [nome, setNome] = useState("");
     const [cargo, setCargo] = useState("");
-    const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
     const [celular, setCelular] = useState("");
     const [senha, setSenha] = useState("");
@@ -67,7 +66,6 @@ function PagFuncionarios() {
         const usuario = {
             nome,
             cargo,
-            cpf,
             email,
             celular,
             senha,
@@ -108,7 +106,6 @@ function PagFuncionarios() {
     const limparCampos = () => {
         setNome("");
         setCargo("");
-        setCpf("");
         setEmail("");
         setCelular("");
         setSenha("");
@@ -118,11 +115,11 @@ function PagFuncionarios() {
         setDataEdit(usuario);
         setNome(usuario.nome);
         setCargo(usuario.cargo);
-        setCpf(usuario.cpf);
         setEmail(usuario.email);
         setCelular(usuario.celular);
         setSenha(usuario.senha);
         setOpenCadastro(true);
+        setOpenVizualizar(false);
     };
 
     const handleView = (usuario) => {
@@ -178,22 +175,17 @@ function PagFuncionarios() {
                                     type="text"
                                     value={nome}
                                     onChange={(e) => setNome(e.target.value)}
+                                    placeholder="Maria"
                                 />
                             </div>
-                            <div className={styles["input"]}>
-                                <span>CPF</span>
-                                <input
-                                    type="text"
-                                    value={cpf}
-                                    onChange={(e) => setCpf(e.target.value)}
-                                />
-                            </div>
+                        
                             <div className={styles["input"]}>
                                 <span>Cargo</span>
                                 <input
                                     type="text"
                                     value={cargo}
                                     onChange={(e) => setCargo(e.target.value)}
+                                    placeholder="normal ou administrador"
                                 />
                             </div>
                             <div className={styles["input"]}>
@@ -202,6 +194,7 @@ function PagFuncionarios() {
                                     type="text"
                                     value={celular}
                                     onChange={(e) => setCelular(e.target.value)}
+                                    placeholder="(00) 0000-0000"
                                 />
                             </div>
                             <div className={styles["input"]}>
@@ -210,6 +203,7 @@ function PagFuncionarios() {
                                     type="text"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="maria@email.com"
                                 />
                             </div>
                             <div className={styles["input"]}>
@@ -218,6 +212,7 @@ function PagFuncionarios() {
                                     type="password"
                                     value={senha}
                                     onChange={(e) => setSenha(e.target.value)}
+                                    placeholder="Minímo 6 caractéres"
                                 />
                             </div>
                         </div>
@@ -225,18 +220,18 @@ function PagFuncionarios() {
                     </div>
                 </ModalCadastro>
 
-                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
-                    <div className={styles["view"]}>
-                        <h3>Visualizar Funcionário</h3>
+                <ModalVizualizar isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)} titulo={"Visualizar Funcionário"}>
+                   <div className={styles["dadosForn"]}>
                         <div className={styles["dados"]}>
                             <span><strong>Nome:</strong> {viewData.nome}</span>
-                            <span><strong>CPF:</strong> {viewData.cpf}</span>
                             <span><strong>Cargo:</strong> {viewData.cargo}</span>
                             <span><strong>Celular:</strong> {viewData.celular}</span>
                             <span><strong>E-mail:</strong> {viewData.email}</span>
                         </div>
-                        <button onClick={() => handleEdit(viewData, viewData.idUsuario)}>Editar</button>
-                        <button onClick={() => handleExcluir(viewData.idUsuario)}>Excluir</button>
+                        <div className={styles["botao"]}>
+                            <button onClick={() => handleEdit(viewData, viewData.idUsuario)} id={styles["editar"]}>Editar</button>
+                            <button onClick={() => handleExcluir(viewData.idUsuario)} id={styles["excluir"]}>Excluir</button>
+                        </div>
                     </div>
                 </ModalVizualizar>
             </div>

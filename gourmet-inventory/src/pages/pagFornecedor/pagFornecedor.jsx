@@ -92,6 +92,7 @@ function PagFornecedor() {
 
   const handleSave = () => {
     if (!nomeFornecedor || !cnpj || !cep || !numeracaoLogradouro || !telefone || !categoria) {
+      return toast.error("Todos os campos são obrigatórios!");
     }
 
     const fornecedor = {
@@ -127,12 +128,12 @@ function PagFornecedor() {
           headers: { Authorization: `Bearer ${localStorage.token}` },
         })
         .then(() => {
-  
+          toast.success("Fornecedor criado com sucesso");
           recuperarFornecedores();
           setOpenCadastro(false);
         })
         .catch(() => {
-
+          toast.error("Erro ao criar fornecedor")
         });
     }
   };

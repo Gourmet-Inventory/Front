@@ -19,16 +19,23 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 5rem;
     align-items: center;
+    flex: 1;
+    
 }
+
+
 
 .sidebar .imgLogo{
     align-self: flex-start;
     display: flex;
     width: 4.5vw;
+    padding: 0.2rem;
     justify-content: center;
+    border-bottom: 1px solid white;
 }
+ 
+
 
  .imgHome{    
     display: flex;
@@ -40,6 +47,7 @@
     justify-content: center;
     height: 10vh;
     width: 5vw;
+    flex: 1;
 }
 
 .imgBorderSelected{
@@ -47,7 +55,7 @@
     flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
-    height: 10vh;
+    height: 13vh;
     width: 5vw;
     background-color: white;
 }
@@ -61,6 +69,7 @@
     z-index: 999;
     background-color: #37455D;
     box-shadow: 0px 0px 5px ;
+    
 }
 
 
@@ -69,56 +78,94 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    padding-top: 1rem;
+    ;
     justify-content: space-around;
 }
 
-.expanded .nomeEmpresa{
+.expanded .dados{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     color: white;
-    font-size:4vh ;
     border-bottom: 1px white solid;
-    height: 8rem;
-    align-items: center;
+    padding: 0.5rem;
 }
+
+.expanded .nomeEmpresa{
+    background-color: #E59E53;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2vw;
+    margin-bottom: 1vh;
+    width: 12vw;
+}
+
+
+.empresa{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.expanded .dados img{
+    width: 1vw;
+    align-self: flex-start;
+}
+
+.expanded .nomeUsuario{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4vw;
+}
+.expanded .nomeCargo{
+    display: flex;
+    flex-direction: column;
+    font-size: 1vw;
+}
+
 
 .expanded .imgHome{
     width: 2.5vw;
+    margin-left: 1vw;
 }
 
 .expanded .imgLogo{
     display: none;
 }
 
-.expanded .imgBox{
-    display: flex;
-    width: 5vw;
-}
 
 .expanded .imgBorderSelected{
     display: flex;
     flex-direction: row;
-    justify-content:space-evenly;
+    justify-content:left;
     align-items: center;
-    height: 10vh;
+    height: 14vh;
     width: 15vw;
     background-color: white;
+    border-radius: 4px;
+
+    
 }
 
 .expanded .imgBorder{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: left;
     align-items: center;
-    height: 10vh;
+    height: 14vh;
     width: 15vw;
     color: white;
+}
+
+.expanded .imgBorder:hover{
+    background-color: #181f2a;
 }
 
 
 .expanded .iconText{
     font-size: 3vh;
+    margin-left: 1vw;
 }
 
 .expanded .botao{

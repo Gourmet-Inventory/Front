@@ -7,7 +7,6 @@ import Empresa from "./pages/areaBackOffice/empresa/Empresa";
 import Cadastro from "./pages/areaBackOffice/cadastroempresa/Cadastro";
 import Fornecedor from "./pages/pagFornecedor/pagFornecedor";
 import Alerta from "./pages/alerta/Alerta";
-import Menu from "./pages/menu/Menu";
 import Estoque from "./pages/estoqueIngrediente/estoque/Estoque";
 import Funcionarios from "./pages/pagFuncionarios/PagFuncionarios"
 import Pratos from "./pages/pratos/pagPratos/PagPratos"
@@ -26,7 +25,6 @@ function Rotas() {
                     <Route path="/empresas" element={<Empresa/>}/>
                     <Route path="/empresas/cadastro" element= {<Cadastro/>}/>
                     <Route path="/gourmet-inventory/fornecedor" element= {<Fornecedor/>}/>
-                    <Route path="/gourmet-inventory/menu" element= {<Menu/>}/>
                     <Route path="/gourmet-inventory/alertas" element= {<Alerta/>}/>
                     <Route path="/gourmet-inventory/estoque" element= {<Estoque/>}/>
                     <Route path="/gourmet-inventory/funcionarios" element= {<Funcionarios/>}/>

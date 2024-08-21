@@ -31,7 +31,7 @@ const Login = () => {
             localStorage.setItem('idEmpresa', empresaId);
 
 
-            navigate('/gourmet-inventory/menu');
+            navigate('/gourmet-inventory/estoque');
         } catch (error) {
             toast.error('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
         }

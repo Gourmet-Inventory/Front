@@ -26,7 +26,7 @@ function PagFuncionarios() {
     const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate("/gourmet-inventory/menu"); // Ajuste o caminho conforme necessário
+        navigate("/gourmet-inventory/estoque");
     };
 
     useEffect(() => {

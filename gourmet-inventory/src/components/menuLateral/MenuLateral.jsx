@@ -3,7 +3,7 @@ import styles from './MenuLateral.module.css'
 import { useLocation,useNavigate } from 'react-router-dom';
 
 import logo from "../../utils/assets/Possíveis Paletas (5) 1.svg";
-import logoExpanded from "../../utils/assets/IconesSidebar/imgBox.svg";
+import fechar from "../../utils/assets/Fechar.svg"
 
 import homeImg from "../../utils/assets/IconesSidebar/home.svg"
 import homeImgSelected from "../../utils/assets/IconesSidebar/homeSelected.svg"
@@ -11,8 +11,8 @@ import homeImgSelected from "../../utils/assets/IconesSidebar/homeSelected.svg"
 import pratosImg from "../../utils/assets/IconesSidebar/prato.svg"
 import pratosImgSelected from "../../utils/assets/IconesSidebar/pratoSelected.svg"
 
-import estoqueImg from "../../utils/assets/IconesSidebar/maca.svg"
-import estoqueImgSelected from "../../utils/assets/IconesSidebar/macaSelected.svg"
+import estoqueImg from "../../utils/assets/IconesSidebar/estoque.svg"
+import estoqueImgSelected from "../../utils/assets/IconesSidebar/estoqueSelected.svg"
 
 import fornecedorImg from "../../utils/assets/IconesSidebar/fornecedor.svg"
 import fornecedorImgSelected from "../../utils/assets/IconesSidebar/fornecedorSelected.svg"
@@ -34,12 +34,16 @@ function MenuLateral() {
     const navigate = useNavigate();
     
     const [nome, setNome] = useState('');
+    const [nomeUsuario, setNomeUsuario] = useState('');
+    const [nomeCargo, setNomeCargo] = useState('');
 
     useEffect(() => {
        const nomeGuardado = localStorage.getItem('empresaNome');
-        if(nomeGuardado){
+       const nomeGuardado1 = localStorage.getItem('nome');
+       const nomeGuardado2 = localStorage.getItem('cargo');
             setNome(nomeGuardado)
-        }
+            setNomeUsuario(nomeGuardado1)
+            setNomeCargo(nomeGuardado2)
     }, []);
 
 
@@ -65,39 +69,37 @@ function MenuLateral() {
             />
             
             {isExpanded && (
-                <span className={styles.nomeEmpresa}>
-                    <p>{nome}</p>
-                    <img className={styles['imgBox']} src={logoExpanded} />
+                <span className={styles.dados}>
+                    <span className={styles.empresa}> <span className={styles.nomeEmpresa}>{nome}</span> <img src={fechar} alt="fechar"/></span>
+                    <span className={styles.nomeUsuario}>{nomeUsuario} </span>
+                    <span className={styles.nomeCargo}>{nomeCargo}</span>
                 </span>
             )}
             <div className={styles["icons"]}>
-                <span className={getClassName('/gourmet-inventory/menu')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/menu')}  >
-                    <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/menu' ? homeImgSelected : homeImg} alt="Home Selected" />
-                    {isExpanded && <span className={styles.iconText}>Menu Início</span>}
-                </span>
-                <span className={getClassName('/gourmet-inventory/estoque')}>
+            
+                <span className={getClassName('/gourmet-inventory/estoque')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/estoque')}>
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/estoque' ? estoqueImgSelected : estoqueImg} alt="Estoque" />
-                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/estoque')} >Estoque </span> }
+                    {isExpanded && <span className={styles.iconText}>Estoque </span> }
                 </span>
-                <span className={getClassName('/gourmet-inventory/pratos')}>
+                <span className={getClassName('/gourmet-inventory/pratos')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/pratos')} >
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/pratos' ? pratosImgSelected : pratosImg} alt="Pratos" />
-                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/pratos')}>Pratos</span>}
+                    {isExpanded && <span className={styles.iconText}>Pratos</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/saida')}>
-                <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/saida' ? saidaImgSelected : saidaImg} alt="Saída" />
-                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/saida-pratos')}>Saída</span>}
+                <span className={getClassName('/gourmet-inventory/saida-pratos')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/saida-pratos')} >
+                    <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/saida-pratos' ? saidaImgSelected : saidaImg} alt="Saida" />
+                    {isExpanded && <span className={styles.iconText}>Saída</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/fornecedor')}>
+                <span className={getClassName('/gourmet-inventory/fornecedor')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/fornecedor')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/fornecedor' ? fornecedorImgSelected : fornecedorImg} alt="Fornecedor" />
-                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/fornecedor')}>Fornecedor</span>}
+                    {isExpanded && <span className={styles.iconText}>Fornecedor</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/alertas')}>
+                <span className={getClassName('/gourmet-inventory/alertas')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/alertas')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/alertas' ? alertaImgSelected : alertaImg} alt="Alertas" />
-                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/alertas')}>Alertas</span>}
+                    {isExpanded && <span className={styles.iconText}>Alertas</span>}
                 </span>
-                <span className={getClassName('/gourmet-inventory/relatorios')}>
+                <span className={getClassName('/gourmet-inventory/relatorios')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/relatorios')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/relatorios' ? relatorioSelected : relatorioImg} alt="Alertas" />
-                    {isExpanded && <span className={styles.iconText} onClick={() => navigate('/gourmet-inventory/relatorios')}>Relatórios</span>}
+                    {isExpanded && <span className={styles.iconText}>Relatórios</span>}
                 </span>
             </div>
         </div>

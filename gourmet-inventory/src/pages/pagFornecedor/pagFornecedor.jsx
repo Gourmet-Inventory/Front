@@ -205,34 +205,30 @@ function PagFornecedor() {
 
   return (
     <>
-      <MenuLateral />
       <div className={styles['body']}>
+      <MenuLateral />
         <div className={styles['cabecalho']}>
           <BarraPesquisa tituloPag={'Fornecedor'} />
-          <button onClick={handleCadastrar}>Cadastrar Fornecedor</button>
+          <ImgConfig />
+          <button className={styles.botaoCadastro} onClick={handleCadastrar}>Cadastrar Fornecedor</button>
         </div>
-        <ImgConfig />
+        
         <div className={styles['form']}>
-          <div className={styles['tituloForm']}>
-            <span>Nome</span>
-            <span>Categoria</span>
-            <span>Telefone</span>
-          </div>
-          <div className={styles['tabelaForn']}>
-            <table>
-            
-              <tbody>
+            <table style={{width:100}} className={styles['tabelaForn']}>
+              <tr className={styles['tituloForm']}>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Telefone</th>
+              </tr>
                 {Array.isArray(fornecedores) &&
                   fornecedores.map((fornecedor) => (
-                    <tr key={fornecedor.idFornecedor} onClick={() => handleView(fornecedor)}>
+                    <tr className={styles['dadosForm']} key={fornecedor.idFornecedor} onClick={() => handleView(fornecedor)}>
                       <td>{fornecedor.nomeFornecedor}</td>
                       <td>{fornecedor.categoria}</td>
                       <td>{fornecedor.telefone}</td>
                     </tr>
                   ))}
-              </tbody>
-            </table>
-          </div>
+          </table>
         </div>
 
         {openCadastro && (

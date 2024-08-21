@@ -9,10 +9,11 @@
 .form{
     display: flex;
     width: 67.5vw;
-    height: 71vh;
+    height: 72vh;
     padding: 1rem;
     overflow-y: auto;
     flex-wrap:wrap;
+
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
@@ -21,50 +22,55 @@
     display: flex;
     align-items: end;
     gap: 20px;
+    margin-bottom: 2vh;
 }
 
-
 .card{
-    width: 23%;
-    height: 63%;
-    border-radius: 2%;
+    padding: 0.5rem;
+    width: 13vw;
+    height: fit-content;
+    border-radius: 5px;
     background-color: #37455D;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-right: 0.5rem;
+    box-shadow: 2px 6px 5px rgba(0, 0, 0, 0.5);
 }
 
-
-.infoCard{
-    height: 90%;
-    width: 85%;
+.nome{
+    border-radius: 2px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    border: 1px solid white;
-    flex-wrap: wrap;
-}
-
-.infoCard span{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    background-color: #E59E53;
     color: white;
-    font-size: 1.1rem;
-    margin-left: 0.5rem;
-    
+}
+.dados{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    color: white;
 }
 
-.infoCard button{
+.titulo{
+    font-size: 3vh;
+}
+
+.card button{
     font-size: 1.1rem;
     align-self: center;
     margin-top: 0.5rem;
-    width: 7rem;
+    width: 100%;
+    height: 4vh;
     font-weight: lighter;
     background-color: #E59E53;
     color: black;
 }
 
-.infoCard button:hover{
+.card button:hover{
     background-color: #a77940;
 }
 
@@ -78,9 +84,12 @@
 }
 
 .saida{
+    padding: 0.3rem;
     width: 90%;
     height: 85%;
     background-color: #37455D;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .tituloSaida{
@@ -88,6 +97,8 @@
     align-items: center;
     justify-content: space-around;
     height: 8%;
+    border-bottom: #E59E53 1px solid;
+
 }
 
 .tituloSaida span{
@@ -105,14 +116,25 @@
 .corpoSaida{
     display: flex;
     flex-direction: column;
-    height: 92%;
-    border-top: #E59E53 1px solid;
+    height: 85%;
     overflow-y: scroll;
+    width: 100%;
 }
 
-.botoes{
+.botoes1{
+    border-top: 1px solid #E59E53;
+    height: 8%;
+    width: 100%;
     display: flex;
-    gap: 2rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.botoes1 button{
+    background-color: #E59E53;
+    width: 6vw;
+    height: 4vh;
+    border-radius: 4px;
 }
 
 #buttonSaida{
@@ -121,7 +143,9 @@
     background-color: #E59E53;
     width: 10rem;
     height: 3rem;
+    border-radius: 4px;
     color: black;
+    box-shadow: 2px 2px 4px  rgba(0, 0, 0, 0.5); 
 }
 
 #buttonRelatorio{
@@ -138,17 +162,24 @@
 }
 
 .cardSaida{
-    width: 90%;
+    border-bottom: #B0D2D3 1px solid;
+    
+    width: 99%;
     margin-top: 0.3rem;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 2rem;
-    font-size: 1.2rem;
+    justify-content: flex-start;
+    font-size: 1.1rem;
+    height: 2.5rem;
+}
+
+.cardSaida .texto{
+margin-left: 1vw;
+ width: 89%;
 }
 
 .cardSaida img{
-    width: 1rem;
+    width: 1vw;
     cursor: pointer;
 }
 
@@ -245,7 +276,7 @@
     border-bottom: #E59E53 3px solid;
 }
 
-.cardSaida{
+.cardSaida1{
     width: 100%;
     margin-top: 0.5rem;
     height: 2rem;

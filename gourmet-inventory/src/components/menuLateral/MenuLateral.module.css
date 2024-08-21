@@ -16,6 +16,7 @@
 }
 
 .sidebar .icons{
+    margin-top: 0.5vh;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -27,9 +28,9 @@
 
 
 .sidebar .imgLogo{
-    align-self: flex-start;
+    align-self: center;
     display: flex;
-    width: 4.5vw;
+    width: 3.5vw;
     padding: 0.2rem;
     justify-content: center;
     border-bottom: 1px solid white;
@@ -55,7 +56,7 @@
     flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
-    height: 13vh;
+    height: 12vh;
     width: 5vw;
     background-color: white;
 }
@@ -78,7 +79,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    ;
     justify-content: space-around;
 }
 
@@ -86,7 +86,6 @@
     display: flex;
     flex-direction: column;
     color: white;
-    border-bottom: 1px white solid;
     padding: 0.5rem;
 }
 
@@ -122,6 +121,7 @@
     display: flex;
     flex-direction: column;
     font-size: 1vw;
+    border-bottom: 1px white solid;
 }
 
 
@@ -140,7 +140,7 @@
     flex-direction: row;
     justify-content:left;
     align-items: center;
-    height: 14vh;
+    height: 13vh;
     width: 15vw;
     background-color: white;
     border-radius: 4px;

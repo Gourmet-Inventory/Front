@@ -35,7 +35,7 @@ const Relatorios = () => {
     }, []);
 
     const recuperarRelatorios = () => {
-        api.get('/relatorio', {
+    api.get(`/relatorio/${localStorage.empresaId}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` },
         })
             .then((response) => {

@@ -119,17 +119,15 @@ function Saida() {
                     <div className={styles["form"]}>
                         {pratos.map(prato => (
                             <div className={styles["card"]} key={prato.idPrato}>
-                                <div className={styles["imgCard"]}>
-                                    {/* Aqui você pode colocar a imagem do prato, se tiver */}
-                                    {/* <img src={prato.imagem} alt={prato.nome} /> */}
+                                <div className={styles["nome"]}>
+                                <span className={styles["titulo"]}> {prato.nome}</span>
+                                <span>Categoria: {prato.categoria}</span>
                                 </div>
-                                <div className={styles["infoCard"]}>
-                                    <span>Nome: {prato.nome}</span>
-                                    <span>Descrição: {prato.descricao}</span>
-                                    <span>Preço: {prato.preco}</span>
-                                    <span>Categoria: {prato.categoria}</span>
-                                    <button onClick={() => adicionarPrato(prato)}>Adicionar</button>
+                                <div className={styles["dados"]}>
+                                <span>Descrição: {prato.descricao}</span>
+                                <span>Preço:R$  {prato.preco}</span>
                                 </div>
+                                <button onClick={() => adicionarPrato(prato)}>Adicionar</button>
                             </div>
                         ))}
                     </div>
@@ -138,18 +136,22 @@ function Saida() {
                         <div className={styles["saida"]}>
                             <div className={styles["tituloSaida"]}>
                                 <span>Pratos</span>
-                                <button onClick={desfazerAdicao}>Desfazer</button>
-                                <button onClick={limparLista}>Limpar Lista</button>
                             </div>
                             <div className={styles["corpoSaida"]}>
                                 {pratosSelecionados.map((prato, index) => (
-                                    <div className={styles["cardSaida"]} key={index}>
+                                    <div className={styles.cardSaida} key={index}>
+                                        <span className={styles.texto}>
                                         <span>{prato.categoria}</span>
                                         <span>{prato.nome}</span>
+                                        </span>
                                         <img src={imgFechar} alt="Remover" onClick={() => removerPrato(index)} />
                                     </div>
                                 ))}
                             </div>
+                            <span className={styles.botoes1}>
+                            <button onClick={desfazerAdicao}>Desfazer</button>
+                            <button onClick={limparLista}>Limpar Lista</button>
+                            </span>
                         </div>
                         <div className={styles["botoes"]}>
                             <button id={styles["buttonSaida"]} onClick={finalizar}>Finalizar</button>
@@ -182,7 +184,7 @@ function Saida() {
                                     <span>Pratos</span>
                                 </div>
                                 {modalPratos.map((prato, index) => (
-                                    <div className={styles["cardSaida"]} key={index}>
+                                    <div className={styles["cardSaida1"]} key={index}>
                                         <div className={styles["quantPrato"]}>
                                             <span>{prato.preco}</span>
                                         </div>

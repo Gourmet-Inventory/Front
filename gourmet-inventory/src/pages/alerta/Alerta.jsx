@@ -137,23 +137,21 @@ const Alerta = () => {
             <div className={styles.body}>
                 <div className={styles.cabecalho}>
                     <BarraPesquisa tituloPag={"Histórico Alertas"}/>
+                    <ImgConfig/>
                 </div>
-                <ImgConfig/>
-
+                
                 <div className={styles.form}>
                     <div className={styles.tabelaForm}>
-                        <div className={styles["tabelaAlertas"]}>
-                            <div className={styles.tituloForm}>
-                                <span>Imagem</span>
-                                <span>Item</span>
-                                <span>Tipo de Alerta</span>
-                                <span>Info</span>
-                                <span>Ação</span>
-                            </div>
                             <div className={styles["tabela"]}>
                                 <table>
                                     <thead>
-                                       
+                                        <tr>
+                                        <th>Icone</th>
+                                        <th>Item</th>
+                                        <th>Tipo de Alerta</th>
+                                        <th>Info</th>
+                                        <th></th>
+                                        </tr>     
                                     </thead>
                                     <tbody>
                                         {itens.map((item, index) => (
@@ -174,7 +172,6 @@ const Alerta = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                            </div>
                         </div>
 
                         <div className={styles["filtro"]}>

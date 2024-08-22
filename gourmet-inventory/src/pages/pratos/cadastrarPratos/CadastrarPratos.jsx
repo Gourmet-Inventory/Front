@@ -136,6 +136,7 @@ function CadastrarPratos() {
                 <div className={styles["form"]}>
                     <div className={styles["formCadastro"]}>
                         <div className={styles["infoCadastro"]}>
+                            <h1>Dados do prato</h1>
                             <div className={styles["dadosCadastro"]}>
                                 <span>Nome:</span>
                                 <div className={styles["input"]}>
@@ -181,7 +182,7 @@ function CadastrarPratos() {
                         </div>
                         <button onClick={handleAddIngrediente}>Adicionar Ingrediente</button>
                     </div>
-                    <div className={styles["ingredientes"]}>
+                    <div className={styles.ingredientes}>
                         {receitaPrato.map((ing, index) => (
                             <CardIngrediente
                                 key={index}

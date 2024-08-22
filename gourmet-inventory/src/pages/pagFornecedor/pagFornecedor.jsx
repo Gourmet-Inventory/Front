@@ -11,6 +11,7 @@ import MenuLateral from '../../components/menuLateral/MenuLateral';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
+
 function PagFornecedor() {
   const [fornecedores, setFornecedores] = useState([]);
   const [openCadastro, setOpenCadastro] = useState(false);
@@ -205,34 +206,36 @@ function PagFornecedor() {
 
   return (
     <>
-      <MenuLateral />
       <div className={styles['body']}>
+      <MenuLateral />
         <div className={styles['cabecalho']}>
           <BarraPesquisa tituloPag={'Fornecedor'} />
-          <button onClick={handleCadastrar}>Cadastrar Fornecedor</button>
+          <ImgConfig />
+          <button className={styles.botaoCadastro} onClick={handleCadastrar}>Cadastrar Fornecedor</button>
         </div>
-        <ImgConfig />
-        <div className={styles['form']}>
-          <div className={styles['tituloForm']}>
-            <span>Nome</span>
-            <span>Categoria</span>
-            <span>Telefone</span>
-          </div>
-          <div className={styles['tabelaForn']}>
+        
+        
+          <div className={styles['tabelaForm']}>
             <table>
-            
+              <thead>
+              <tr className={styles['tituloForm']}>
+                <th className={styles.left}>Nome</th>
+                <th>Categoria</th>
+                <th className={styles.right}>Telefone</th>
+              </tr>
+              </thead>
               <tbody>
                 {Array.isArray(fornecedores) &&
                   fornecedores.map((fornecedor) => (
                     <tr key={fornecedor.idFornecedor} onClick={() => handleView(fornecedor)}>
-                      <td>{fornecedor.nomeFornecedor}</td>
+                      <td >{fornecedor.nomeFornecedor}</td>
                       <td>{fornecedor.categoria}</td>
                       <td>{fornecedor.telefone}</td>
                     </tr>
+                    
                   ))}
-              </tbody>
-            </table>
-          </div>
+                  </tbody>
+          </table>
         </div>
 
         {openCadastro && (

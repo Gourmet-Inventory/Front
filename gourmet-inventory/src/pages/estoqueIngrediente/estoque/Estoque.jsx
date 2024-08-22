@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import BarraPesquisa from "../../../components/barraPesquisa/barraPesquisa";
 import ImgConfig from "../../../components/imgConfig/ImgConfig";
@@ -13,7 +12,6 @@ import styles from "./Estoque.module.css";
 const Estoque = () => {
     const [itens, setItens] = useState([]);
     const [cardsEstoqueData, setCardsEstoqueData] = useState([]);
-    const navigate = useNavigate();
     const [openCadastro, setOpenCadastro] = useState(false);
     const [openVisualizar, setOpenVisualizar] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
@@ -24,7 +22,7 @@ const Estoque = () => {
     const [categoria, setCategoria] = useState("");
     const [tipoMedida, setTipoMedida] = useState("");
     const [valorMedida, setValorMedida] = useState("");
-    const [valorTotal, setValorTotal] = useState(""); 
+    const [valorTotal] = useState(""); 
     const [unitario, setUnitario] = useState("");
     const [localArmazenamento, setLocalArmazenamento] = useState("");
     const [dtaCadastro, setDtaCadastro] = useState("");
@@ -47,14 +45,13 @@ const Estoque = () => {
     };
 
     const handleSave = () => {
-        if (!lote || !nome || !categoria || !tipoMedida || !valorMedida || !localArmazenamento || !dtaCadastro || !dtaAviso) {
+        if (!lote || !nome || !tipoMedida || !categoria || !localArmazenamento || !valorMedida || !localArmazenamento || !dtaCadastro || !dtaAviso) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
         const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, valorTotal, unitario, localArmazenamento, dtaCadastro, dtaAviso };
 
         if (dataEdit.idItem) {
-            // Editar item existente
             api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
@@ -66,7 +63,6 @@ const Estoque = () => {
                 toast.error("Erro ao atualizar o item.");
             });
         } else {
-            // Criar novo item
             api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
@@ -153,7 +149,7 @@ const Estoque = () => {
             <div className={styles.cabecalho}>
                 <BarraPesquisa tituloPag="Estoque" />
                 <ImgConfig />
-                <button onClick={handleCadastrar}>Cadastrar Novo Item</button>
+                <button className={styles.botaoCadastro} onClick={handleCadastrar}>Cadastrar Novo Item</button>
             </div>
             <div className={styles.area}>
                 <div className={styles.card}>
@@ -172,6 +168,7 @@ const Estoque = () => {
                             </div>
                         </div>
                     ))}
+                    
                 </div>
 
                 {openCadastro && (
@@ -188,16 +185,15 @@ const Estoque = () => {
                                 <div className={styles.legendaItem}>
                                     <div className={styles.itens}>
                                         <div className={styles.legenda}>
-                                            <span>Lote:</span>
-                                            <span id={styles.obrigatorio}>*</span>
-                                        </div>
-                                        <div className={styles.legenda}>
                                             <span>Nome:</span>
                                             <span id={styles.obrigatorio}>*</span>
                                         </div>
                                         <div className={styles.legenda}>
-                                            <span>Categoria:</span>
+                                            <span>Lote:</span>
                                             <span id={styles.obrigatorio}>*</span>
+                                        </div>
+                                        <div className={styles.legenda}>
+                                            <span>Categoria:</span>
                                         </div>
                                         <div className={styles.legenda}>
                                             <span>Tipo Medida:</span>
@@ -212,37 +208,35 @@ const Estoque = () => {
                                         </div>
                                         <div className={styles.legenda}>
                                             <span>Local Armazenamento:</span>
-                                            <span id={styles.obrigatorio}>*</span>
-                                        </div>
-                                        <div className={styles.legenda}>
-                                            <span>Data Cadastro:</span>
-                                            <span id={styles.obrigatorio}>*</span>
-                                        </div>
-                                        <div className={styles.legenda}>
-                                            <span>Data de Aviso:</span>
-                                            <span id={styles.obrigatorio}>*</span>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                                 <div className={styles.dadosItem}>
                                     <div className={styles.dados}>
-                                        <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} placeholder="Lote 1"/>
                                         <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Farinha"/>
+                                        <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} placeholder="Lote 1"/>
                                         <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} placeholder="Cereais"/>
                                         <select id="tipoMedida" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
-                                            <option value="">Selecione o tipo de medida</option> 
-                                            <option value="GRAMAS">GRAMAS</option>    
-                                            <option value="UNIDADE">UNIDADE</option>        
+                                            <option value="QUILOGRAMA">Quilogramas (Kg)</option> 
+                                            <option value="GRAMAS">Gramas (gr)</option>    
+                                            <option value="UNIDADE">Unidade</option>        
                                         </select>
                                         <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} placeholder="10"/>
                                         <input type="text" value={unitario} onChange={(e) => setUnitario(e.target.value)} placeholder="Opcional (cadastro de mais de um item)" />
                                         <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} placeholder="Geladeira"/>
-                                        <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)}/>
-                                        <input type="date" value={dtaAviso} onChange={(e) => setDtaAviso(e.target.value)} />
                                     </div>
                                 </div>
                             </div>
-
+                            <div className={styles.datas}>
+                                        <span className={styles.data}>
+                                            <span>Data Cadastro:<span id={styles.obrigatorio}>*</span></span>
+                                            <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)}/>
+                                        </span>
+                                        <span className={styles.data}>
+                                            <span>Data de Aviso:<span id={styles.obrigatorio}>*</span></span>
+                                            <input type="date" value={dtaAviso} onChange={(e) => setDtaAviso(e.target.value)} />
+                                        </span>
+                            </div>
                             <div className={styles.botaoItem}>
                                 <button onClick={handleSave}>Salvar</button>
                             </div>

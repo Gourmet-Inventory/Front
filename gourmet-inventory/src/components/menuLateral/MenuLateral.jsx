@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import styles from './MenuLateral.module.css'
 import { useLocation,useNavigate } from 'react-router-dom';
 
-import logo from "../../utils/assets/Possíveis Paletas (5) 1.svg";
+import logo from "../../utils/assets/Menu.svg";
 import fechar from "../../utils/assets/Fechar.svg"
 
 import homeImg from "../../utils/assets/IconesSidebar/home.svg"

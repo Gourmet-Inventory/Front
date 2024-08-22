@@ -128,10 +128,11 @@ function PagPratos() {
             <div className={styles["body"]}>
                 <div className={styles["cabecalho"]}>
                     <BarraPesquisa tituloPag={"Pratos"} />
-                    <button onClick={handleCadastro}>Cadastrar Pratos</button>
-                    <button onClick={handleRelatorio}>Relatório</button>
+                    <ImgConfig />
+                    <button className={styles.botaoCadastro} onClick={handleCadastro}>Cadastrar Pratos</button>
+                    {/* <button onClick={handleRelatorio}>Relatório</button> */}
                 </div>
-                <ImgConfig />
+                
 
                 <div className={styles["form"]}>
                     {pratos.map(prato => (

@@ -39,21 +39,64 @@
     background-color: #a77940;
 }
 
-/* table */
-
+.tabelaForm{
+    display: flex;
+    height: 72vh;
+    overflow-y: scroll ;
+    box-shadow: 2px 2px 20px rgba(0, 2px, 2px, 1);
+}
 
 .tabelaForm table{
-    width: 100vw;
+    margin-left: 7vw;
+    padding: 1rem;
+    border-radius: 8px;
+    border-collapse: collapse;
+    width: 90%;
+    height: 100%;
+    padding: 1rem;
+    min-width: 400px;
+    box-shadow: 2px 2px 20px rgba(0, 2px, 2px, 1);
+    
 }
 
-.tituloForm{
-    width: 100vw;
-    background-color: #E59E53;
+.tabelaForm thead tr{
+    background-color:#E59E53;
+    text-align: left;
+    border-radius: 10px;
+    font-size: 1.5vw;
+    padding: 12px;
 }
 
-.dadosForm{
-    width: 100vw;
-    background-color: red;
+.tabelaForm .right{
+    border-top-right-radius:8px ;
+}
+.tabelaForm .left{
+    border-top-left-radius:8px ;
+}
+
+.tabelaForm th,
+.tabelaForm td {
+    padding: 12px 12px;
+}
+
+.tabelaForm tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 1.3vw;
+    background-color: #37455D;
+    color: white;
+}
+
+.tabelaForm tbody tr:nth-of-type(even) {
+    background-color: #4b5d7d;
+}
+
+.tabelaForm tbody tr:last-of-type {
+    border-bottom: 2px solid #E59E53;
+}
+
+.tabelaForm tbody tr:hover{
+    cursor: pointer;
+    background-color: #242c3b;
 }
 
 

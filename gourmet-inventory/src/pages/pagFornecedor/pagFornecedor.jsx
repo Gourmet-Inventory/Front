@@ -11,6 +11,7 @@ import MenuLateral from '../../components/menuLateral/MenuLateral';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
+
 function PagFornecedor() {
   const [fornecedores, setFornecedores] = useState([]);
   const [openCadastro, setOpenCadastro] = useState(false);
@@ -213,21 +214,27 @@ function PagFornecedor() {
           <button className={styles.botaoCadastro} onClick={handleCadastrar}>Cadastrar Fornecedor</button>
         </div>
         
-        <div className={styles['form']}>
-            <table style={{width:100}} className={styles['tabelaForn']}>
+        
+          <div className={styles['tabelaForm']}>
+            <table>
+              <thead>
               <tr className={styles['tituloForm']}>
-                <th>Nome</th>
+                <th className={styles.left}>Nome</th>
                 <th>Categoria</th>
-                <th>Telefone</th>
+                <th className={styles.right}>Telefone</th>
               </tr>
+              </thead>
+              <tbody>
                 {Array.isArray(fornecedores) &&
                   fornecedores.map((fornecedor) => (
-                    <tr className={styles['dadosForm']} key={fornecedor.idFornecedor} onClick={() => handleView(fornecedor)}>
-                      <td>{fornecedor.nomeFornecedor}</td>
+                    <tr key={fornecedor.idFornecedor} onClick={() => handleView(fornecedor)}>
+                      <td >{fornecedor.nomeFornecedor}</td>
                       <td>{fornecedor.categoria}</td>
                       <td>{fornecedor.telefone}</td>
                     </tr>
+                    
                   ))}
+                  </tbody>
           </table>
         </div>
 

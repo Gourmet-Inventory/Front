@@ -1,13 +1,19 @@
+.form{
+    width: 100%;
+    background-color: yellow;
+}
+
 .tabelaForm{
+    background-color: red;
     display: flex;
-    width: 100vw;
+    width: 100%;
     height: 75vh;
     margin-left: 6rem;
 }
 
 
 .tabelaAlertas{
-    width: 71%;
+    width: 60%;
 }
 
 .tituloForm{

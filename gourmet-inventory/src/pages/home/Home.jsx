@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import api from '../../api';
+import { toast } from 'react-toastify';
 import styles from "./Home.module.css";
 import logo from "../../utils/assets/Possíveis Paletas (5) 1.svg";
 import NavBar from "../../components/navbar/NavBar";
@@ -19,11 +21,52 @@ import imgFooter from "../../utils/assets/Frame 96.svg"
  
 const Home = () => {
 
+    const [dataEdit, setDataEdit] = useState({});
+    const [viewData, setViewData] = useState({});
+
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [company, setCompany] = useState('');
+
     const scrollToSection = (sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
           section.scrollIntoView({behavior:'smooth'});
         }
+      };
+
+      const handleSave = () => {
+        if (!fullName || !email || !phone || !company) {
+          return toast.error("Todos os campos são obrigatórios!");
+        }
+    
+        const bodyContateNos = {
+          fullName,
+          email,
+          phone,
+          company
+        };
+    
+          api
+            .post('/email/contact', bodyContateNos, {
+              headers: { Authorization: `Bearer ${localStorage.token}` },
+            })
+            .then(() => {
+              toast.success("Email enviado!");
+              limparCampos();
+            })
+            .catch(() => {
+              toast.error("Erro ao enviar email")
+            });
+        };
+    
+    
+      const limparCampos = () => {
+        setFullName('');
+        setPhone('');
+        setEmail('');
+        setCompany('');
       };
 
     return (
@@ -54,7 +97,7 @@ const Home = () => {
                     <p>Em um mundo onde a eficiência e precisão são a chave, o <span>Gourmet Inventory</span> surge como solução para gerenciar seu estoque. </p>
 
                     <p><span>Projetado para simplificar e otimizar o controle de estoque</span>, nosso software combina funcionalidades intuitivas com algoritmos
-                    de análise, <span>garantindo que você tenha sempre a informação ce rta ao seu alcance.</span></p>
+                    de análise, <span>garantindo que você sempre tenha as informações certas ao seu alcance.</span></p>
                  </div>
 
             </div>
@@ -154,19 +197,40 @@ const Home = () => {
                 <div className={styles["corpoContato"]}>
                     <img src={imgContato} />
                     <div className={styles["formContato"]}>
-                        <span>Preencha os dados abaixo e aguarde nosso e-mail!</span>
+                        <span>Preencha os dados abaixo e aguarde o nosso contato!</span>
 
                         <div className={styles["dadosForm"]}>
+
                         <p>Nome Completo:</p>
-                        <input type="text" />
+                        <input
+                        type='text'
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        />
+
                         <p>E-mail:</p>
-                        <input type="text" />
+                        <input
+                        type='text'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        />
+
                         <p>Telefone:</p>
-                        <input type="text" />
+                        <input
+                        type='text'
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        />
+
                         <p>Nome Empresa:</p>
-                        <input type="text" />
+                        <input
+                        type='text'
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        />
+
                         </div>  
-                        <button>Enviar</button>
+                        <button onClick={handleSave}>Enviar</button>
                     </div>
                 </div>
             </div>

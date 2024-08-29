@@ -1,81 +1,92 @@
+.body{
+    height: 100vh;
+    width: 100vw;
+}
+
 .form{
-    width: 100%;
-    background-color: yellow;
-}
-
-.tabelaForm{
-    background-color: red;
     display: flex;
+    flex-direction: row;
     width: 100%;
-    height: 75vh;
-    margin-left: 6rem;
+    height: 81.3%;
+    margin-left: 7%;
+    overflow-y: hidden;
 }
 
-
-.tabelaAlertas{
-    width: 60%;
-}
-
-.tituloForm{
+.cabecalho{
+    width: 100%;
     display: flex;
-    width: 95%;
-    height: 10%;
-    align-items: center;
-    justify-content: space-around;
+    margin-bottom: 2vh;
 }
 
 
 /* table */
 
-.tabela{
+.tabelaForm {
     display: flex;
-    flex-direction: column;
-    height: 90%;
-    width: 100%;
-    flex-wrap:wrap;
-    overflow-y: auto;
+    flex-direction: column; 
+    width: 75%;
+    height: 72vh;
+    overflow-y: auto; 
+    border-radius: 8px;
 }
 
-.tabela table{
+
+.tabelaForm table {
     width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
     border-collapse: collapse;
-    cursor: pointer;
- 
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);}
+
+
+.tabelaForm thead tr {
+    background-color: #E59E53;
+    text-align: left;
+    font-size: 1.5vw;
+    color: white; 
 }
 
-.tabela img{
-    width: 3rem;
-
+.tabelaForm th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd; 
+    color: black;
 }
 
-#imgfechar{
-    width: 1.5rem;
-    margin-right: 1rem;
+
+.tabelaForm td {
+    padding: 12px;
+    text-align: left;
 }
 
-
-.tabela tr {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+/* Estilo das linhas do corpo da tabela */
+.tabelaForm tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 1.3vw;
     background-color: #37455D;
-    margin-top: 0.5rem;
-    height: 4rem;
+    color: white;
 }
 
-.tabela tr:hover{
-    background-color: #263041;
+/* Estilo para as linhas pares */
+.tabelaForm tbody tr:nth-of-type(even) {
+    background-color: #4b5d7d;
 }
-  
-.tabela td {
-    display: flex;
-    font-size: 1.3rem;
-    color: white;
-    font-weight: lighter;
-    align-items: center;
-    justify-content: center; /* Centraliza o conteúdo dentro das células */
-    flex: 1; /* Faz com que todas as células tenham o mesmo tamanho */
-    padding: 1rem; /* Espaçamento interno das células */
+
+.tabelaForm tbody tr:last-of-type {
+    border-bottom: 2px solid #E59E53;
+}
+
+.tabelaForm tbody tr:hover {
+    cursor: pointer;
+    background-color: #53698b; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para o ícone de fechar */
+#imgfechar {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 /* children */
@@ -245,72 +256,6 @@
     border: 1px solid #8ea7a8;
 }
 
-/*  */
-
-.filtrosForm{
-    width: 20.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.filtrosForm h1{
-    font-size: 1.5rem;
-    font-weight: lighter;
-}
-
-.filtros{
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-}
-
-.card{
-    width: 65%;
-    height: 5.5rem;
-    background-color: #37455D;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    cursor: pointer;
-    box-shadow: 1px 2px 7px #000000;
-}
-
-.card span{
-    font-size: 1.2rem;
-}
-
-.legenda{
-    display: flex;
-    width: 90%;
-    height: 3.5rem;
-    align-items: center;
-    justify-content: space-around;
-    
-}
-
-
-.legenda img{
-    height: 2.4rem;
-}
-
-
-
-.tituloForm span{
-    font-size: 20px;
-}
-
-.cabecalho{
-    width: 100%;
-    display: flex;
-    align-items: end;
-    gap: 20px;
-}
-
 
 /* filtro */
 
@@ -318,9 +263,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    width: 23%;
+    width: 20%;
+    height: 100%;
     color: white;
+}
+
+.cards{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .filtro span{
@@ -334,6 +286,7 @@
     background-color: #37455D;
     width: 12rem;
     height: 5rem;
+    border-radius: 8px;
     flex-direction: column;
     align-items: center;
 }
@@ -358,6 +311,11 @@
 
 .infoCard span{
     font-size: 1.4rem;
+}
+
+.filtroCard:hover{
+    cursor: pointer;
+    background-color: #4b5d7d;
 }
 
 #imgCard{

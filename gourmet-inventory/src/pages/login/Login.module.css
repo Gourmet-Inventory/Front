@@ -10,7 +10,7 @@
 }
 
 .bodyLogin img{
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     object-fit: cover;
 }
@@ -18,7 +18,7 @@
 .bannerLogin {
     position: absolute;
     top: 50%; /* Ajuste a posição vertical da frase conforme necessário */
-    left: 30%; /* Ajuste a posição horizontal da frase conforme necessário */
+    left: 35%; /* Ajuste a posição horizontal da frase conforme necessário */
     transform: translate(-50%, -50%); /* Centraliza a frase */
     color: rgb(0, 0, 0); /* Cor do texto */
     font-size: 28px; /* Tamanho da fonte */
@@ -39,10 +39,11 @@
     background-color:#37455D ;
     z-index: 999;
     position: fixed;
-    width: 40%;
+    width: 30%;
     height: 100%;
     top: 0;
     right: 0;
+    justify-content: center;
     align-items: center;
     color: #EAF6F5;
     overflow-y: hidden;

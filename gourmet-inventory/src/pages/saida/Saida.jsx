@@ -141,7 +141,6 @@ function Saida() {
                                 {pratosSelecionados.map((prato, index) => (
                                     <div className={styles.cardSaida} key={index}>
                                         <span className={styles.texto}>
-                                        <span>{prato.categoria}</span>
                                         <span>{prato.nome}</span>
                                         </span>
                                         <img src={imgFechar} alt="Remover" onClick={() => removerPrato(index)} />

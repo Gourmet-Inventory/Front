@@ -135,7 +135,6 @@
     background-color: #37455D;
     display: flex;
     margin: 14px;
-    padding: 1rem;
     flex-direction: column;
     text-align: center;
     box-shadow: 1.5px 6.1px 6px rgba(0, 0, 0, 0.5);
@@ -243,6 +242,7 @@ font-size: 2.5vh;
     border-radius: 2px;
     color: white;
     display: flex;
+    border-radius: 8px;
     flex-direction: column;
 }
 
@@ -267,14 +267,15 @@ font-size: 2.5vh;
     display: flex;
     flex-direction: column;
     background-color: #B0D2D3;
+    border-radius: 8px;
 
 }
 
 
 .descricaoModal {
+    border-radius: 8px;
     width: 40%;
     height: 100%;
-    background-color: #B0D2D3;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -318,7 +319,6 @@ font-size: 2.5vh;
     width: 90%;
     height: 70%;
     border: 0.5px solid #B0D2D3;
-    padding: 1rem;
     overflow: scroll;
 }
 
@@ -327,8 +327,7 @@ font-size: 2.5vh;
     flex-direction: column;
     font-size: 1.3rem;
     color: white;
-    height: 8rem;
-    width: 15rem;
+    width: 100%;
 }
 
 .buttonModal {
@@ -383,6 +382,7 @@ font-size: 2.5vh;
     display: flex;
     flex-direction: column;
     align-self: center;
+    justify-content: left;
     height: 60vh;
     width: 20vw;
     background-color: #37455D;
@@ -397,8 +397,8 @@ font-size: 2.5vh;
     flex-direction: row;
     border-bottom: #E59E53 3px solid;
     width: auto;
-    height: 3.5rem;
-    justify-content: space-around;
+    height: 3rem;
+    justify-content: center;
 
 
     

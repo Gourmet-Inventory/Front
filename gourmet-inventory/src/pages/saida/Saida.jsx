@@ -141,7 +141,6 @@ function Saida() {
                                 {pratosSelecionados.map((prato, index) => (
                                     <div className={styles.cardSaida} key={index}>
                                         <span className={styles.texto}>
-                                        <span>{prato.categoria}</span>
                                         <span>{prato.nome}</span>
                                         </span>
                                         <img src={imgFechar} alt="Remover" onClick={() => removerPrato(index)} />
@@ -178,6 +177,7 @@ function Saida() {
                                     onChange={(e) => setDataRelatorio(e.target.value)}
                                 />
                             </div>
+                            <div> <input  type="checkbox" id="1"  checked={descontarEstoque} onChange={(e) => setDescontarEstoque(e.target.checked)}  /> Descontar do estoque.</div>
                             <div className={styles["corpoModal"]}>
                                 <div className={styles["tituloSaida"]}>
                                     <span>Preço</span>
@@ -192,7 +192,7 @@ function Saida() {
                                     </div>
                                 ))}
                             </div>
-                            <div> <input  type="checkbox" id="1"  checked={descontarEstoque} onChange={(e) => setDescontarEstoque(e.target.checked)}  /> Descontar do estoque.</div>
+                            
                             <div className={styles["buttonModal"]}>
                                 <button id={styles["finalizar"]} onClick={gerarRelatorio}>Finalizar</button>
                                 <button id={styles["cancelar"]} onClick={() => setOpenVizualizar(false)}>Cancelar</button>

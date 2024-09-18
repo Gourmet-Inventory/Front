@@ -16,7 +16,6 @@ const Alerta = () => {
     const [itens, setItens] = useState([]);
     const [openVizualizar, setOpenVizualizar] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [shownMessages, setShownMessages] = useState(new Set());
 
     useEffect(() => {
         const fetchAlertas = async () => {
@@ -28,33 +27,20 @@ const Alerta = () => {
                 if (Array.isArray(response.data)) {
                     const sortedData = response.data.sort((a, b) => new Date(a.estoqueIngrediente.dtaAviso) - new Date(b.estoqueIngrediente.dtaAviso));
                     setItens(sortedData);
-                    if (!shownMessages.has("Alertas carregados com sucesso!")) {
-              
-                        setShownMessages(prev => new Set(prev).add("Alertas carregados com sucesso!"));
-                    }
+                    toast.success("Alertas carregados com sucesso!");
                 } else {
                     console.error('A resposta da API não é um array:', response.data);
                     setItens([]);
-                    if (!shownMessages.has("Erro ao carregar alertas.")) {
-                        toast.error("Erro ao carregar alertas.");
-                        setShownMessages(prev => new Set(prev).add("Erro ao carregar alertas."));
-                    }
+                    toast.error("Erro ao carregar alertas.");
                 }
             } catch (error) {
                 console.error('Erro ao buscar alertas:', error);
                 setItens([]);
-                if (!shownMessages.has("Erro ao buscar alertas.")) {
-                    toast.error("Erro ao buscar alertas.");
-                    setShownMessages(prev => new Set(prev).add("Erro ao buscar alertas."));
-                }
             }
         };
 
         fetchAlertas();
-        const intervalId = setInterval(fetchAlertas, 10000);
-
-        return () => clearInterval(intervalId);
-    }, [shownMessages]);
+    }, []); 
 
     const handleDelete = (idAlerta, e) => {
         e.stopPropagation();
@@ -96,7 +82,6 @@ const Alerta = () => {
         return `${day}-${month}-${year}`;
     };
 
-    // Função para contar o número de alertas de cada tipo
     const contarAlertas = () => {
         const quantidade = {
             estoqueVazioQtd: 0,
@@ -147,8 +132,8 @@ const Alerta = () => {
                                     <thead>
                                         <tr>
                                         <th>Icone</th>
-                                        <th>Item</th>
                                         <th>Tipo de Alerta</th>
+                                        <th>Item</th>
                                         <th>Info</th>
                                         <th></th>
                                         </tr>     
@@ -157,8 +142,8 @@ const Alerta = () => {
                                         {itens.map((item, index) => (
                                             <tr key={index} onClick={() => handleView(item)}>
                                                 <td><img src={getAlertaImage(item.tipoAlerta)} alt={item.tipoAlerta}/></td>
-                                                <td>{item.estoqueIngrediente.nome}</td>
                                                 <td>{item.tipoAlerta}</td>
+                                                <td>{item.estoqueIngrediente.nome}</td>
                                                 <td>{formatDate(item.estoqueIngrediente.dtaAviso)}</td>
                                                 <td>
                                                     <img 
@@ -174,37 +159,7 @@ const Alerta = () => {
                                 </table>
                         </div>
 
-                        <div className={styles["filtro"]}>
-                            <span>Quantidade</span>
-                            <div className={styles["filtroCard"]}>
-                                <span>Dia de Checagem</span>
-                                <div className={styles["infoCard"]}>
-                                    <img src={diaChecagem} alt="" />
-                                    <span>{quantidades.diaChecagemQtd}</span>
-                                </div>
-                            </div>
-                            <div className={styles["filtroCard"]}>
-                                <span>Estoque Vazio</span>
-                                <div className={styles["infoCard"]}>
-                                    <img src={itemVazio} id={styles["imgCard"]}/>
-                                    <span>{quantidades.estoqueVazioQtd}</span>
-                                </div>
-                            </div>
-                            <div className={styles["filtroCard"]}>
-                                <span>Data Próxima</span>
-                                <div className={styles["infoCard"]}>
-                                    <img src={dataProxima} alt="" />
-                                    <span>{quantidades.dataProximaQtd}</span>
-                                </div>
-                            </div>
-                            <div className={styles["filtroCard"]}>
-                                <span>Estoque Acabando</span>
-                                <div className={styles["infoCard"]}>
-                                    <img src={ItemAcabando} id={styles["imgCard"]}/>
-                                    <span>{quantidades.estoqueAcabandoQtd}</span>
-                                </div>
-                            </div>
-                        </div>
+                
 
                         {openVizualizar && selectedItem && (
                             <ModalAlertas isOpen={openVizualizar} setModalOpen={() => setOpenVizualizar(!openVizualizar)}>
@@ -244,6 +199,39 @@ const Alerta = () => {
                         )}
                     
                     </div>
+                    <div className={styles["filtro"]}>
+                            <span>Quantidade</span>
+                            <div className={styles["cards"]}>
+                            <div className={styles["filtroCard"]}>
+                                <span>Dia de Checagem</span>
+                                <div className={styles["infoCard"]}>
+                                    <img src={diaChecagem} alt="" />
+                                    <span>{quantidades.diaChecagemQtd}</span>
+                                </div>
+                            </div>
+                            <div className={styles["filtroCard"]}>
+                                <span>Estoque Vazio</span>
+                                <div className={styles["infoCard"]}>
+                                    <img src={itemVazio} id={styles["imgCard"]}/>
+                                    <span>{quantidades.estoqueVazioQtd}</span>
+                                </div>
+                            </div>
+                            <div className={styles["filtroCard"]}>
+                                <span>Data Próxima</span>
+                                <div className={styles["infoCard"]}>
+                                    <img src={dataProxima} alt="" />
+                                    <span>{quantidades.dataProximaQtd}</span>
+                                </div>
+                            </div>
+                            <div className={styles["filtroCard"]}>
+                                <span>Estoque Acabando</span>
+                                <div className={styles["infoCard"]}>
+                                    <img src={ItemAcabando} id={styles["imgCard"]}/>
+                                    <span>{quantidades.estoqueAcabandoQtd}</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </>

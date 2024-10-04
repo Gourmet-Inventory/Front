@@ -18,9 +18,9 @@ function PagPratos() {
         preco: '',
         alergicosRestricoes: [],
         categoria: '',
-        receitaPrato: []
+        receitaPrato: [],
+        foto: '' // Adicionado campo para a URL da foto
     });
-
 
     const navigate = useNavigate();
 
@@ -71,7 +71,7 @@ function PagPratos() {
     };
 
     const handleView = (prato) => {
-        setViewData(prato);
+        setViewData(prato); // Atualiza o estado com os dados do prato
         setOpenVizualizar(true);
     };
 
@@ -130,25 +130,34 @@ function PagPratos() {
                     <BarraPesquisa tituloPag={"Pratos"} />
                     <ImgConfig />
                     <button className={styles.botaoCadastro} onClick={handleCadastro}>Cadastrar Pratos</button>
-                    {/* <button onClick={handleRelatorio}>Relatório</button> */}
                 </div>
-                
 
                 <div className={styles["form"]}>
                     {pratos.map(prato => (
                         <div className={styles["card"]} key={prato.idPrato}>
-                                <div className={styles["nome"]}>
-                                <span className={styles["titulo"]}> {prato.nome}</span>
+                            <div className={styles["nome"]}>
+                                <span className={styles["titulo"]}>{prato.nome}</span>
                                 <span>Categoria: {prato.categoria}</span>
-                                </div>
-                                <div className={styles["dados"]}>
+                            </div>
+                            <div className={styles["dados"]}>
                                 <span>Descrição: {prato.descricao}</span>
-                                <span>Preço:R$  {prato.preco}</span>
+                                <span>Preço: R$ {prato.preco}</span>
+                            </div>
+                            {/* Exibição da imagem do prato */}
+                            {prato.foto && (
+                                <div className={styles["imagem-container"]}>
+                                    <img
+                                        src={prato.foto}
+                                        alt={`Imagem de ${prato.nome}`}
+                                        className={styles["imagem-prato"]}
+                                    />
                                 </div>
-                                <button onClick={() => handleView(prato)}>Ver Mais</button>
+                            )}
+                            <button onClick={() => handleView(prato)}>Ver Mais</button>
                         </div>
                     ))}
                 </div>
+
                 {viewData && (
                     <ModalPratos
                         isOpen={openVizualizar}
@@ -165,6 +174,16 @@ function PagPratos() {
                                         <span>Descrição: {viewData.descricao}</span>
                                     </div>
                                 </div>
+                                {/* Exibição da imagem no modal */}
+                                {viewData.foto && (
+                                    <div className={styles["imagem-container-modal"]}>
+                                        <img
+                                            src={viewData.foto}
+                                            alt={`Imagem de ${viewData.nome}`}
+                                            className={styles["imagem-prato-modal"]}
+                                        />
+                                    </div>
+                                )}
                                 <div className={styles["ingredientesModal"]}>
                                     <h2>Ingredientes</h2>
                                     <div className={styles["ingredientes"]}>

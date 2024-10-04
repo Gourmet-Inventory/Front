@@ -14,13 +14,14 @@ function CadastrarPratos() {
     const [descricao, setDescricao] = useState("");
     const [preco, setPreco] = useState("");
     const [categoria, setCategoria] = useState("");
-    const [alergicosRestricoes, setalergicosRestricoes] = useState([]);
+    const [alergicosRestricoes, setAlergicosRestricoes] = useState([]);
     const [receitaPrato, setReceitaPrato] = useState([]);
     const [idItem, setIdItem] = useState("");
     const [estoqueNome, setEstoqueNome] = useState("");
     const [valorMedida, setValorMedida] = useState("");
     const [tipoMedida, setTipoMedida] = useState("GRAMAS");
     const [dataEdit, setDataEdit] = useState({});
+    const [imagem, setImagem] = useState(null); // Estado para a imagem
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -33,13 +34,13 @@ function CadastrarPratos() {
             setDescricao(prato.descricao);
             setPreco(prato.preco);
             setCategoria(prato.categoria);
-            setalergicosRestricoes(prato.alergicosRestricoes);
+            setAlergicosRestricoes(prato.alergicosRestricoes);
             setReceitaPrato(prato.receitaPrato.map(ingrediente => ({
                 idItem: ingrediente.idItem || ingrediente.estoqueIngrediente.idItem,
                 nome: ingrediente.nome || ingrediente.estoqueIngrediente.nome,
                 valorMedida: ingrediente.valorMedida,
                 tipoMedida: ingrediente.tipoMedida,
-            })))
+            })));
         }
     }, [location.state]);
 
@@ -55,42 +56,54 @@ function CadastrarPratos() {
         }
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (!nome || !preco || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        const prato = {
-            nome,
-            descricao,
-            preco,
-            categoria,
-            alergicosRestricoes,
-            receitaPrato: receitaPrato.map(ingrediente => ({
+       
+
+
+        const formData = new FormData();
+        formData.append("nome", nome);
+        formData.append("descricao", descricao);
+        formData.append("preco", preco);
+        formData.append("categoria", categoria);
+        // formData.append("alergicosRestricoes", JSON.stringify(alergicosRestricoes));
+        formData.append("receitaPrato", JSON.stringify(
+            receitaPrato.map(ingrediente => ({
                 idItem: ingrediente.idItem,
                 tipoMedida: ingrediente.tipoMedida,
                 valorMedida: ingrediente.valorMedida,
             }))
-        };
-
-        if (dataEdit.idPrato) {
-            api.put(`/pratos/${dataEdit.idPrato}`, prato, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
+        ));
+        console.log("Receita Prato:", JSON.stringify(receitaPrato));
+        
+        if (imagem) {
+            formData.append("imagem", imagem); // Adiciona a imagem ao formulário
+        }
+        try {
+            console.log(formData)
+            if (dataEdit.idPrato) {
+                await api.put(`/pratos/${dataEdit.idPrato}`, formData, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.token}`,
+                    }
+                });
                 toast.success("Prato atualizado com sucesso!");
-                handleBack();
-            }).catch(() => {
-                toast.error("Erro ao atualizar o prato.");
-            });
-        } else {
-            api.post(`/pratos/${localStorage.empresaId}`, prato, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
+            } else {
+                await api.post(`/pratos/${localStorage.empresaId}`, formData, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.token}`,
+                    }
+                });
                 toast.success("Prato cadastrado com sucesso!");
-                handleBack();
-            }).catch(() => {
-                toast.error("Erro ao cadastrar o prato.");
-            });
+                console.log(formData)
+            }
+            handleBack();
+        } catch (error) {
+            console.log(formData)
+            toast.error("Erro ao salvar o prato.");
         }
     };
 
@@ -107,7 +120,7 @@ function CadastrarPratos() {
         setReceitaPrato(prevIngredientes => [...prevIngredientes, novoIngrediente]);
         setIdItem("");
         setValorMedida("");
-        setTipoMedida("GRAMAS"); // Reinicializa o tipo de medida para Gramas
+        setTipoMedida("GRAMAS");
     };
 
     const handleSelectIngrediente = (ingrediente) => {
@@ -122,6 +135,13 @@ function CadastrarPratos() {
 
     const handleBack = () => {
         navigate("/gourmet-inventory/pratos");
+    };
+
+    const handleImagemChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImagem(file);
+        }
     };
 
     return (
@@ -144,7 +164,7 @@ function CadastrarPratos() {
                                 </div>
                                 <span>Preço:</span>
                                 <div className={styles["input"]}>
-                                    <input value={preco}  placeholder="20.00" onChange={(e) => setPreco(e.target.value)} />
+                                    <input value={preco} placeholder="20.00" onChange={(e) => setPreco(e.target.value)} />
                                 </div>
                                 <span>Categoria:</span>
                                 <div className={styles["input"]}>
@@ -152,11 +172,15 @@ function CadastrarPratos() {
                                 </div>
                                 <span>Alérgicos:</span>
                                 <div className={styles["selected"]}>
-                                    <AlergicoSelector selected={alergicosRestricoes} onSelect={setalergicosRestricoes} />
+                                    <AlergicoSelector selected={alergicosRestricoes} onSelect={setAlergicosRestricoes} />
                                 </div>
                                 <div className={styles["inputDescricao"]}>
                                     <span>Descrição:</span>
                                     <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+                                </div>
+                                <div className={styles["inputImagem"]}>
+                                    <span>Imagem do Prato:</span>
+                                    <input type="file" onChange={handleImagemChange} />
                                 </div>
                             </div>
                         </div>
@@ -187,7 +211,7 @@ function CadastrarPratos() {
                             <CardIngrediente
                                 key={index}
                                 id={ing.idItem}
-                                ingrediente={ing.nome }
+                                ingrediente={ing.nome}
                                 valor={ing.valorMedida}
                                 medida={ing.tipoMedida}
                                 onDelete={() => handleRemoveIngrediente(ing.idItem)}

@@ -52,29 +52,6 @@ const Estoque = () => {
 
     const item = { idItem, lote, nome, categoria, tipoMedida, valorMedida, valorTotal, unitario, localArmazenamento, dtaCadastro, dtaAviso };
 
-<<<<<<< HEAD
-        if (dataEdit.idItem) {
-            api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
-                toast.success("Item atualizado com sucesso!");
-                console.log(item);
-                recuperarItens();
-                setOpenCadastro(false);
-            }).catch(() => {
-                toast.error("Erro ao atualizar o item.");
-            });
-        } else {
-            api.post(`/estoque-ingrediente/${localStorage.idEmpresa}`, item, {
-                headers: { 'Authorization': `Bearer ${localStorage.token}` }
-            }).then(() => {
-                toast.success("Item cadastrado com sucesso!");
-                recuperarItens();
-                setOpenCadastro(false);
-            }).catch(() => {
-                toast.error("Erro ao cadastrar o item.");
-            });
-=======
     if (dataEdit.idItem) {
         api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
@@ -92,7 +69,6 @@ const Estoque = () => {
             const key = localStorage.key(i);
             const value = localStorage.getItem(key);
             console.log(`${key}: ${value}`);
->>>>>>> ac7eb2fabb9783469f6e2f71cb1aeb24ad7ba3f9
         }
         console.log(`Enviando para a URL: /estoque-ingrediente/${localStorage.empresaId}`); // Adicione esta linha
         api.post(`/estoque-ingrediente/${localStorage.idEmpresa}`, item, {

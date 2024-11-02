@@ -64,6 +64,7 @@ const Estoque = () => {
         });
     } else {
         // Aqui
+        console.log(`teste ${localStorage}`)
         console.log(`Enviando para a URL: /estoque-ingrediente/${localStorage.empresaId}`); // Adicione esta linha
         api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }

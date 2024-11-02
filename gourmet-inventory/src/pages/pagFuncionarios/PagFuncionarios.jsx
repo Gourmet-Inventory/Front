@@ -34,7 +34,7 @@ function PagFuncionarios() {
     }, []);
 
     const recuperarFuncionarios = () => {
-        api.get(`/usuarios/${localStorage.empresaId}`, {
+        api.get(`/usuarios/${localStorage.idEmpresa}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(response => {
             console.log("Resposta da API:", response.data);  // Adicione este log
@@ -62,14 +62,14 @@ function PagFuncionarios() {
             return toast.error("Todos os campos são obrigatórios!");
         }
 
-        const idEmpresa = Number(localStorage.getItem("empresaId"));
+        const idEmpresa = Number(localStorage.getItem("idEmpresa"));
         const usuario = {
             nome,
             cargo,
             email,
             celular,
             senha,
-            idEmpresa: idEmpresa // Adiciona o empresaId ao objeto
+            idEmpresa: idEmpresa // Adiciona o idEmpresa ao objeto
         };
 
         if (dataEdit.idUsuario) {

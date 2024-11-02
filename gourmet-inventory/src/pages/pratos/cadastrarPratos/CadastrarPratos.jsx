@@ -60,16 +60,12 @@ function CadastrarPratos() {
         if (!nome || !preco || !categoria) {
             return toast.error("Todos os campos são obrigatórios!");
         }
-
-       
-
-
+    
         const formData = new FormData();
         formData.append("nome", nome);
         formData.append("descricao", descricao);
         formData.append("preco", preco);
         formData.append("categoria", categoria);
-        // formData.append("alergicosRestricoes", JSON.stringify(alergicosRestricoes));
         formData.append("receitaPrato", JSON.stringify(
             receitaPrato.map(ingrediente => ({
                 idItem: ingrediente.idItem,
@@ -77,13 +73,12 @@ function CadastrarPratos() {
                 valorMedida: ingrediente.valorMedida,
             }))
         ));
-        console.log("Receita Prato:", JSON.stringify(receitaPrato));
         
         if (imagem) {
-            formData.append("imagem", imagem); // Adiciona a imagem ao formulário
+            formData.append("imagem", imagem);
         }
+    
         try {
-            console.log(formData)
             if (dataEdit.idPrato) {
                 await api.put(`/pratos/${dataEdit.idPrato}`, formData, {
                     headers: {
@@ -92,18 +87,17 @@ function CadastrarPratos() {
                 });
                 toast.success("Prato atualizado com sucesso!");
             } else {
-                await api.post(`/pratos/${localStorage.empresaId}`, formData, {
+                await api.post(`/pratos/${localStorage.idEmpresa}`, formData, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.token}`,
                     }
                 });
                 toast.success("Prato cadastrado com sucesso!");
-                console.log(formData)
             }
             handleBack();
         } catch (error) {
-            console.log(formData)
             toast.error("Erro ao salvar o prato.");
+            console.log(formData);
         }
     };
 

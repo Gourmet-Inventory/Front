@@ -20,7 +20,7 @@ const Alerta = () => {
     useEffect(() => {
         const fetchAlertas = async () => {
             try {
-                const response = await api.get(`/alerta/${localStorage.empresaId}`, {
+                const response = await api.get(`/alerta/${localStorage.idEmpresa}`, {
                     headers: { 'Authorization': `Bearer ${localStorage.token}` }
                 });
 

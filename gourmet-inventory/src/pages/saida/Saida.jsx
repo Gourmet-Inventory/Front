@@ -22,7 +22,7 @@ function Saida() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.get(`/pratos/${localStorage.empresaId}`, {
+        api.get(`/pratos/${localStorage.idEmpresa}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         })
         .then(response => {

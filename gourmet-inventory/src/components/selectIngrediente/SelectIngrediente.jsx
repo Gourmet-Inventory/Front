@@ -11,7 +11,7 @@ const SelectIngredientes = ({ onSelect }) => {
     useEffect(() => {
         const getIngredientes = async () => {
             try {
-                const response = await api.get(`/pratos/ingredientes/${localStorage.empresaId}`, {
+                const response = await api.get(`/pratos/ingredientes/${localStorage.idEmpresa}`, {
                     headers: { 'Authorization': `Bearer ${localStorage.token}` }
                 });
                 const data = response.data;

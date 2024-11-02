@@ -14,7 +14,8 @@ const ImgConfig = () => {
     };
 
     const handleExit = () => {
-        navigate("/login"); // Ajuste o caminho conforme necessário
+        localStorage.clear()
+        navigate("/login"); 
     };
 
     const confirmExit = () => {

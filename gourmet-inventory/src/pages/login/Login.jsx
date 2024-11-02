@@ -20,7 +20,7 @@ const Login = () => {
             const nome = response.data.nome;
             const cargo = response.data.cargo;
             const empresaNome = response.data.empresa.nomeFantasia;
-            const empresaId = response.data.empresa.idEmpresa;
+            const idEmpresa = response.data.empresa.idEmpresa;
 
             localStorage.setItem('token', token);
             localStorage.setItem('idUsuario', idUsuario);
@@ -28,7 +28,7 @@ const Login = () => {
             localStorage.setItem('nome', nome);
             localStorage.setItem('cargo', cargo);
             localStorage.setItem('empresaNome', empresaNome);
-            localStorage.setItem('idEmpresa', empresaId);
+            localStorage.setItem('idEmpresa', idEmpresa);
 
 
             navigate('/gourmet-inventory/estoque');

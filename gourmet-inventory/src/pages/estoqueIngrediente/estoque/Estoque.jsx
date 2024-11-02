@@ -33,7 +33,7 @@ const Estoque = () => {
     }, []);
 
     const recuperarItens = () => {
-        api.get(`/estoque-ingrediente/${localStorage.empresaId}`, {
+        api.get(`/estoque-ingrediente/${localStorage.idEmpresa}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(response => {
             console.log(response);
@@ -63,7 +63,7 @@ const Estoque = () => {
                 toast.error("Erro ao atualizar o item.");
             });
         } else {
-            api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
+            api.post(`/estoque-ingrediente/${localStorage.idEmpresa}`, item, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Item cadastrado com sucesso!");
@@ -129,7 +129,7 @@ const Estoque = () => {
     };
 
     const recuperarValorCard = () => {
-        api.get(`/estoque-ingrediente/${localStorage.empresaId}`, {
+        api.get(`/estoque-ingrediente/${localStorage.idEmpresa}`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then((response) => {
             const { data } = response;

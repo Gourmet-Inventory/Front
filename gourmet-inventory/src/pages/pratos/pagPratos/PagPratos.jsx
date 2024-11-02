@@ -26,7 +26,7 @@ function PagPratos() {
 
     const getPratos = async () => {
         try {
-            const response = await api.get(`/pratos/${localStorage.empresaId}`, {
+            const response = await api.get(`/pratos/${localStorage.idEmpresa}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             });
             if (Array.isArray(response.data)) {
@@ -98,7 +98,7 @@ function PagPratos() {
 
     const handleRelatorio = async () => {
         try {
-            const response = await api.get(`/consulta-nutricao-api/${localStorage.empresaId}`, {
+            const response = await api.get(`/consulta-nutricao-api/${localStorage.idEmpresa}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` },
                 responseType: 'arraybuffer' // Important for handling binary data
             });

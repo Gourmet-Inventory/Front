@@ -83,7 +83,7 @@ function CadastrarPratos() {
                 toast.error("Erro ao atualizar o prato.");
             });
         } else {
-            api.post(`/pratos/${localStorage.empresaId}`, prato, {
+            api.post(`/pratos/${localStorage.idEmpresa}`, prato, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 toast.success("Prato cadastrado com sucesso!");

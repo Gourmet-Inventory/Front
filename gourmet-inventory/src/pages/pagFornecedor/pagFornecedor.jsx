@@ -36,8 +36,7 @@ function PagFornecedor() {
   }, []);
 
   const recuperarFornecedores = () => {
-    api
-      .get('/fornecedores', {
+    api.get(`/fornecedores/${localStorage.idEmpresa}` , {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       })
       .then((response) => {

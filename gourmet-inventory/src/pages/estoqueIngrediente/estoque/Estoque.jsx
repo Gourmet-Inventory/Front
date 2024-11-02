@@ -71,7 +71,7 @@ const Estoque = () => {
             console.log(`${key}: ${value}`);
         }
         console.log(`Enviando para a URL: /estoque-ingrediente/${localStorage.empresaId}`); // Adicione esta linha
-        api.post(`/estoque-ingrediente/${localStorage.empresaId}`, item, {
+        api.post(`/estoque-ingrediente/${localStorage.idEmpresa}`, item, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         }).then(() => {
             toast.success("Item cadastrado com sucesso!");

@@ -1,6 +1,6 @@
 import React, { Children, useEffect, useState } from "react";
 import styles from "./ModalVizualizarForn.module.css";
-import fechar from "../../utils/assets/Fechar.svg"
+import fechar from "../../../utils/assets/Fechar.svg"
 import Editar from "../modalCadastroForn/ModalCadastro"
 
 function ModalVizualizarForn({isOpen, setModalOpen, children, titulo}) {

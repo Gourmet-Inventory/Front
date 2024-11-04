@@ -9,7 +9,7 @@ import styles from "./Alerta.module.css";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
 import fechar from "../../utils/assets/Fechar.svg";
-import ModalAlertas from "../../components/modalAlertas/modalAlertas";
+import ModalAlertas from "../../components/modais/modalAlertas/modalAlertas";
 import api from "../../api";
 
 const Alerta = () => {

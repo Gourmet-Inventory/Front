@@ -1,6 +1,6 @@
 import React, { Children, useEffect, useState } from "react";
 import styles from "./ModalCadastro.module.css";
-import fechar from "../../utils/assets/Fechar.svg"
+import fechar from "../../../utils/assets/Fechar.svg"
 
 function ModalCadastro({isOpen, setModalOpen, children}) {
     

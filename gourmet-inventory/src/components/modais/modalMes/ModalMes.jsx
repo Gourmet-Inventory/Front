@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ModalMes.module.css";
-import fechar from "../../utils/assets/Fechar.svg";
-import api from '../../api';
+import fechar from "../../../utils/assets/Fechar.svg";
+import api from '../../../api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

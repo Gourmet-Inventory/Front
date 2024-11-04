@@ -6,7 +6,7 @@ import styles from "./Saida.module.css";
 import imgFechar from "../../utils/assets/Fechar.svg";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
-import ModalSaida from "../../components/modalSaida/modalSaida";
+import ModalSaida from "../../components/modais/modalSaida/modalSaida";
 import fechar from "../../utils/assets/Fechar.svg";
 import api from "../../api";
 

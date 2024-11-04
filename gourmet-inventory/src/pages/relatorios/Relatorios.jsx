@@ -6,8 +6,8 @@ import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./Relatorios.module.css";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../components/menuLateral/MenuLateral";
-import ModalRelatorios from "../../components/modalRelatorio/ModalRelatorio";
-import ModalMes from "../../components/modalMes/ModalMes";
+import ModalRelatorios from "../../components/modais/modalRelatorio/ModalRelatorio";
+import ModalMes from "../../components/modais/modalMes/ModalMes";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Relatorios = () => {

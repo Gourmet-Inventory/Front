@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ModalRelatorios.module.css";
-import fechar from "../../utils/assets/Fechar.svg";
+import fechar from "../../../utils/assets/Fechar.svg";
 
 const ModalRelatorios = ({ isOpen, setModalOpen, children, tituloModal, categoriaModal, dataModal }) => {
     if (!isOpen) return null;

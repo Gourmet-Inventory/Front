@@ -4,8 +4,8 @@ import BarraPesquisa from "../../components/barraPesquisa/barraPesquisa";
 import api from '../../api';
 import ImgConfig from "../../components/imgConfig/ImgConfig";
 import styles from "./PagFuncionarios.module.css";
-import ModalCadastro from "../../components/modalCadastroForn/ModalCadastro";
-import ModalVizualizar from "../../components/modalVizualizarFunc/ModalVizualizarFunc";
+import ModalCadastro from "../../components/modais/modalCadastroForn/ModalCadastro";
+import ModalVizualizar from "../../components/modais/modalVizualizarFunc/ModalVizualizarFunc";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

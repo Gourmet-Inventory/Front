@@ -5,7 +5,7 @@ import ImgConfig from "../../../components/imgConfig/ImgConfig";
 import styles from "./PagPratos.module.css";
 import { toast } from 'react-toastify';
 import MenuLateral from "../../../components/menuLateral/MenuLateral";
-import ModalPratos from "../../../components/modalPratos/ModalPratos";
+import ModalPratos from "../../../components/modais/modalPratos/ModalPratos";
 import api from "../../../api";
 
 function PagPratos() {
@@ -31,6 +31,7 @@ function PagPratos() {
             });
             if (Array.isArray(response.data)) {
                 setPratos(response.data);
+                console.log(response.data);
             } else {
                 console.error('A resposta da API não é um array:', response.data);
                 setPratos([]);

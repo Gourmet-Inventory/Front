@@ -29,7 +29,8 @@ jobs:
       - name: Build React app
         run: |
           cd gourmet-inventory
-          npm run build
+          CI=false npm run build
+
 
       # Etapa 5: Salvar o build, Dockerfile e default.conf como artefatos
       - name: Upload React build as artifact

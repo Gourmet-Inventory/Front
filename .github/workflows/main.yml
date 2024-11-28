@@ -30,7 +30,9 @@ jobs:
         run: |
           cd gourmet-inventory
           CI=false npm run build
-
+      # Etapa extra: teste ls -la
+      - name: Build React app
+        run: ls -la
 
       # Etapa 5: Salvar o build, Dockerfile e default.conf como artefatos
       - name: Upload React build as artifact
@@ -63,6 +65,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: docker-configs
+
+      # Etapa extra: teste ls -la
+      - name: Build React app
+        run: ls -la
 
       # Etapa 2: Fazer login no Docker Hub
       - name: Log in to Docker Hub

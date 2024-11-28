@@ -46,8 +46,8 @@ jobs:
         with:
           name: docker-configs
           path: |
-            gourmet-inventory/Dockerfile
-            gourmet-inventory/default.conf
+            Dockerfile
+            default.conf
 
   # Job 2: Construir e enviar a imagem Docker
   build-and-push-docker:

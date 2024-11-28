@@ -79,8 +79,8 @@ jobs:
 
       # Etapa 3: Construir a imagem Docker
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest -f Dockerfile ./react-build
+        run: docker build -t voltty/frontend:latest .
 
       # Etapa 4: Enviar a imagem Docker para o Docker Hub
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+        run: docker push voltty/frontend:latest

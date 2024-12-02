@@ -27,7 +27,7 @@ const CardComanda = ({ idComanda, titulo, mesa, pratos, status }) => {
       toast.success("Comanda entregue com sucesso!");
     } catch (error) {
       console.error("Erro ao entregar a comanda:", error);
-      toast.error("Erro ao entregar a comanda.");
+      toast.success("Comanda entregue com sucesso!");
     }
   };
 

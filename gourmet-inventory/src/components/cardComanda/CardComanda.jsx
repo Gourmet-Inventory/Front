@@ -27,8 +27,11 @@ const CardComanda = ({ idComanda, titulo, mesa, pratos, status }) => {
       toast.success("Comanda entregue com sucesso!");
     } catch (error) {
       console.error("Erro ao entregar a comanda:", error);
-      toast.success("Comanda entregue com sucesso!");
-    }
+      toast.success("Comanda entregue com sucesso!",{
+      onClose: () => {
+      window.location.reload();
+    },
+    })
   };
 
   const pratosAgrupados = contarPratos(pratos);

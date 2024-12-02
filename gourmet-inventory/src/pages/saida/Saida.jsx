@@ -14,7 +14,7 @@ function Saida() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.get(`/api/comandas/comandas-enviadas-hoje`, {
+        api.get(`/comandas/comandas-enviadas-hoje`, {
             headers: { 'Authorization': `Bearer ${localStorage.token}` }
         })
             .then(response => {
@@ -51,11 +51,11 @@ function Saida() {
                 <div className={styles["form"]}>
                     {comandas.map((comanda) => (
                         <CardComanda
-                            key={comanda.idComanda}
-                            idComanda={comanda.idComanda}
+                            key={comanda.id}
+                            idComanda={comanda.id}
                             titulo={comanda.titulo}
                             mesa={comanda.mesa}
-                            pratos={comanda.pratos}
+                            pratos={comanda.itens}
                             status={comanda.status}
                         />
                     ))}

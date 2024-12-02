@@ -25,7 +25,7 @@ const Estoque = () => {
     const [categoria, setCategoria] = useState("VEGETAIS_FRESCOS");
     const [tipoMedida, setTipoMedida] = useState("COLHER_DE_SOPA");
     const [valorMedida, setValorMedida] = useState("");
-    const [valorTotal] = useState(""); 
+    const [valorTotal, setValorTotal] = useState("");
     const [unitario, setUnitario] = useState("");
     const [localArmazenamento, setLocalArmazenamento] = useState("");
     const [dtaCadastro, setDtaCadastro] = useState("");
@@ -57,48 +57,48 @@ const Estoque = () => {
             setItens(response.data);
             recuperarValorCard();
         }).catch(() => {
-            
+
         });
     };
 
     const handleSave = () => {
-    console.log("Empresa ID:", localStorage.empresaId); // Adicione esta linha
-    if (!lote || !nome || !tipoMedida || !categoria || !localArmazenamento || !valorMedida || !dtaCadastro || !dtaAviso) {
-        return toast.error("Todos os campos são obrigatórios!");
-    }
-
-    const item = { idItem,manipulado, lote, nome, categoria, marca, tipoMedida, valorMedida, valorTotal, unitario, localArmazenamento, dtaCadastro, dtaAviso };
-
-    if (dataEdit.idItem) {
-        api.put(`/estoque-ingrediente/atualizar-estoque/${dataEdit.idItem}`, item, {
-            headers: { 'Authorization': `Bearer ${localStorage.token}` }
-        }).then(() => {
-            toast.success("Item atualizado com sucesso!");
-            recuperarItens();
-            setOpenCadastro(false);
-        }).catch(() => {
-            toast.error("Erro ao atualizar o item.");
-        });
-    } else {
-        // Aqui
-        console.log("Conteúdo do localStorage:");
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            const value = localStorage.getItem(key);
-            console.log(`${key}: ${value}`);
+        console.log("Empresa ID:", localStorage.idEmpresa); // Adicione esta linha
+        if (!lote || !nome || !tipoMedida || !categoria || !localArmazenamento || !valorMedida || !dtaCadastro || !dtaAviso) {
+            return toast.error("Todos os campos são obrigatórios!");
         }
-        console.log(`Enviando para a URL: /estoque-ingrediente/${localStorage.empresaId}`); 
-        api.post(`/estoque-ingrediente/${localStorage.idEmpresa}`, item, {
-            headers: { 'Authorization': `Bearer ${localStorage.token}` }
-        }).then(() => {
-            toast.success("Item cadastrado com sucesso!");
-            recuperarItens();
-            setOpenCadastro(false);
-        }).catch(() => {
-            toast.error("Erro ao cadastrar o item.");
-        });
-    }
-};
+
+        const item = { idItem, manipulado, lote, nome, categoria, marca, tipoMedida, valorMedida, valorTotal, unitario, localArmazenamento, dtaCadastro, dtaAviso };
+
+        if (dataEdit.idItem) {
+            api.put(`/estoque-ingrediente/${dataEdit.idItem}`, item, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Item atualizado com sucesso!");
+                recuperarItens();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao atualizar o item.");
+            });
+        } else {
+            // Aqui
+            console.log("Conteúdo do localStorage:");
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                console.log(`${key}: ${value}`);
+            }
+            console.log(`Enviando para a URL: /estoque-ingrediente/${localStorage.empresaId}`);
+            api.post(`/estoque-ingrediente/${localStorage.idEmpresa}`, item, {
+                headers: { 'Authorization': `Bearer ${localStorage.token}` }
+            }).then(() => {
+                toast.success("Item cadastrado com sucesso!");
+                recuperarItens();
+                setOpenCadastro(false);
+            }).catch(() => {
+                toast.error("Erro ao cadastrar o item.");
+            });
+        }
+    };
 
     const handleCadastrar = () => {
         setOpenTipoModal(true);
@@ -128,12 +128,13 @@ const Estoque = () => {
         setCategoria(item.categoria);
         setTipoMedida(item.tipoMedida);
         setValorMedida(item.valorMedida);
+        setValorTotal(item.valorTotal);
         setUnitario(item.unitario);
         setLocalArmazenamento(item.localArmazenamento);
         setDtaCadastro(item.dtaCadastro);
         setDtaAviso(item.dtaAviso);
         setOpenCadastro(true);
-        setOpenVisualizar(false); 
+        setOpenVisualizar(false);
     };
 
     const handleView = (item) => {
@@ -143,7 +144,7 @@ const Estoque = () => {
 
     const handleExcluir = (idItem) => {
         if (window.confirm("Tem certeza de que deseja excluir este item?")) {
-            api.delete(`/estoque-ingrediente/deletar-item/${idItem}`, {
+            api.delete(`/estoque-ingrediente/${idItem}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.token}` }
             }).then(() => {
                 recuperarItens();
@@ -179,7 +180,7 @@ const Estoque = () => {
                 <button className={styles.botaoCadastro} onClick={handleCadastrar}>Cadastrar Novo Item</button>
             </div>
             <div className={styles.area}>
-            {openTipoModal && (
+                {openTipoModal && (
                     <div className={styles.modalTipoProduto}>
                         <div className={styles.tituloModal3}>
                             <span>Escolha o Tipo de Produto</span>
@@ -207,7 +208,7 @@ const Estoque = () => {
                             </div>
                         </div>
                     ))}
-                    
+
                 </div>
 
                 {openCadastro && (
@@ -248,76 +249,89 @@ const Estoque = () => {
                                         <div className={styles.legenda}>
                                             <span>Quantidade Unitária:</span>
                                         </div>
+                                        {dataEdit.idItem && (
+                                            <div className={styles.legenda}>
+                                                <span>Valor Total:</span>
+                                            </div>
+                                        )}
                                         <div className={styles.legenda}>
                                             <span>Local Armazenamento:</span>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.dadosItem}>
                                     <div className={styles.dados}>
-                                        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Farinha"/>
-                                        <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} placeholder="Lote 1"/>
-                                        <input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} placeholder="Marca Genérica"/>
+                                        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Farinha" />
+                                        <input type="text" value={lote} onChange={(e) => setLote(e.target.value)} placeholder="Lote 1" />
+                                        <input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} placeholder="Marca Genérica" />
                                         <select id="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-    <option value="VEGETAIS_FRESCOS">Vegetais Frescos</option>
-    <option value="FRUTAS_FRESCAS">Frutas Frescas</option>
-    <option value="LEGUMES">Legumes</option>
-    <option value="CARNES_VERMELHAS">Carnes Vermelhas</option>
-    <option value="AVES">Aves</option>
-    <option value="PEIXES_E_FRUTOS_DO_MAR">Peixes e Frutos do Mar</option>
-    <option value="GRAOS_E_CEREAIS">Grãos e Cereais</option>
-    <option value="LATICINIOS_E_DERIVADOS">Laticínios e Derivados</option>
-    <option value="OVOS">Ovos</option>
-    <option value="OLEAGINOSAS">Oleaginosas (Nozes, Castanhas, Amêndoas)</option>
-    <option value="LEGUMINOSAS_SECAS">Leguminosas Secas</option>
-    <option value="ERVAS_FRESCAS">Ervas Frescas</option>
-    <option value="ESPECIARIAS_SECAS">Especiarias Secas</option>
-    <option value="OLEOS_E_GORDURAS">Óleos e Gorduras</option>
-    <option value="MASSAS">Massas</option>
-    <option value="ENLATADOS_E_CONSERVAS">Enlatados e Conservas</option>
-    <option value="BEBIDAS">Bebidas</option>
-    <option value="RAIZES_E_TUBERCULOS">Raízes e Tubérculos</option>
-    <option value="CONGELADOS">Congelados</option>
-    <option value="DOCES_E_SOBREMESAS">Doces e Sobremesas</option>
-    <option value="MOLHOS_E_CONDIMENTOS">Molhos e Condimentos</option>
-    <option value="PRODUTOS_INDUSTRIALIZADOS">Produtos Industrializados</option>
-    <option value="FARINHAS_E_AMIDOS">Farinhas e Amidos</option>
-    <option value="PAES_E_BOLOS">Pães e Bolos</option>
-    <option value="QUEIJOS_E_FRIOS">Queijos e Frios</option>
-    <option value="ACUCARES_E_ADOCANTES">Açúcares e Adoçantes</option>
-    <option value="SUPLEMENTOS_E_INGREDIENTES_ESPECIAIS">Suplementos e Ingredientes Especiais</option>
-    <option value="PRODUTOS_DE_PADARIA_E_CONFEITARIA">Produtos de Padaria e Confeitaria</option>
-    <option value="FERMENTOS_E_LEVEDURAS">Fermentos e Leveduras</option>
-    <option value="INGREDIENTES_PARA_BEBIDAS">Ingredientes para Bebidas</option>
-    <option value="OUTROS">Outros</option>
-</select>
-                                        <select id="tipoMedida" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
-                                        <option value="COLHER_DE_SOPA">Colher de Sopa</option>
-                                        <option value="COLHER_DE_CHA">Colher de Chá</option>
-                                        <option value="XICARA">Xícara</option>
-    <option value="GRAMAS">Gramas</option>
-    <option value="QUILOGRAMA">Quilograma</option>
-    <option value="MILILITROS">Mililitros</option>
-    <option value="LITRO">Litro</option>
-    <option value="A_GOSTO">A Gosto</option>
-    <option value="PITADA">Pitada</option>
-    <option value="UNIDADE">Unidade</option>    
+                                            <option value="VEGETAIS_FRESCOS">Vegetais Frescos</option>
+                                            <option value="FRUTAS_FRESCAS">Frutas Frescas</option>
+                                            <option value="LEGUMES">Legumes</option>
+                                            <option value="CARNES_VERMELHAS">Carnes Vermelhas</option>
+                                            <option value="AVES">Aves</option>
+                                            <option value="PEIXES_E_FRUTOS_DO_MAR">Peixes e Frutos do Mar</option>
+                                            <option value="GRAOS_E_CEREAIS">Grãos e Cereais</option>
+                                            <option value="LATICINIOS_E_DERIVADOS">Laticínios e Derivados</option>
+                                            <option value="OVOS">Ovos</option>
+                                            <option value="OLEAGINOSAS">Oleaginosas (Nozes, Castanhas, Amêndoas)</option>
+                                            <option value="LEGUMINOSAS_SECAS">Leguminosas Secas</option>
+                                            <option value="ERVAS_FRESCAS">Ervas Frescas</option>
+                                            <option value="ESPECIARIAS_SECAS">Especiarias Secas</option>
+                                            <option value="OLEOS_E_GORDURAS">Óleos e Gorduras</option>
+                                            <option value="MASSAS">Massas</option>
+                                            <option value="ENLATADOS_E_CONSERVAS">Enlatados e Conservas</option>
+                                            <option value="BEBIDAS">Bebidas</option>
+                                            <option value="RAIZES_E_TUBERCULOS">Raízes e Tubérculos</option>
+                                            <option value="CONGELADOS">Congelados</option>
+                                            <option value="DOCES_E_SOBREMESAS">Doces e Sobremesas</option>
+                                            <option value="MOLHOS_E_CONDIMENTOS">Molhos e Condimentos</option>
+                                            <option value="PRODUTOS_INDUSTRIALIZADOS">Produtos Industrializados</option>
+                                            <option value="FARINHAS_E_AMIDOS">Farinhas e Amidos</option>
+                                            <option value="PAES_E_BOLOS">Pães e Bolos</option>
+                                            <option value="QUEIJOS_E_FRIOS">Queijos e Frios</option>
+                                            <option value="ACUCARES_E_ADOCANTES">Açúcares e Adoçantes</option>
+                                            <option value="SUPLEMENTOS_E_INGREDIENTES_ESPECIAIS">Suplementos e Ingredientes Especiais</option>
+                                            <option value="PRODUTOS_DE_PADARIA_E_CONFEITARIA">Produtos de Padaria e Confeitaria</option>
+                                            <option value="FERMENTOS_E_LEVEDURAS">Fermentos e Leveduras</option>
+                                            <option value="INGREDIENTES_PARA_BEBIDAS">Ingredientes para Bebidas</option>
+                                            <option value="OUTROS">Outros</option>
                                         </select>
-                                        <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} placeholder="10"/>
+                                        <select id="tipoMedida" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
+                                            <option value="COLHER_DE_SOPA">Colher de Sopa</option>
+                                            <option value="COLHER_DE_CHA">Colher de Chá</option>
+                                            <option value="XICARA">Xícara</option>
+                                            <option value="GRAMAS">Gramas</option>
+                                            <option value="QUILOGRAMA">Quilograma</option>
+                                            <option value="MILILITROS">Mililitros</option>
+                                            <option value="LITRO">Litro</option>
+                                            <option value="A_GOSTO">A Gosto</option>
+                                            <option value="PITADA">Pitada</option>
+                                            <option value="UNIDADE">Unidade</option>
+                                        </select>
+                                        <input type="text" value={valorMedida} onChange={(e) => setValorMedida(e.target.value)} placeholder="10" />
                                         <input type="text" value={unitario} onChange={(e) => setUnitario(e.target.value)} placeholder="Opcional (cadastro de mais de um item)" />
-                                        <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} placeholder="Geladeira"/>
+                                        {dataEdit.idItem && (
+                                            <input
+                                                type="text"
+                                                value={valorTotal}
+                                                onChange={(e) => setValorTotal(e.target.value)}
+                                                placeholder="0.00"
+                                            />
+                                        )}
+                                        <input type="text" value={localArmazenamento} onChange={(e) => setLocalArmazenamento(e.target.value)} placeholder="Geladeira" />
                                     </div>
                                 </div>
                             </div>
                             <div className={styles.datas}>
-                                        <span className={styles.data}>
-                                            <span>Data Cadastro:<span id={styles.obrigatorio}>*</span></span>
-                                            <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)}/>
-                                        </span>
-                                        <span className={styles.data}>
-                                            <span>Data de Aviso:<span id={styles.obrigatorio}>*</span></span>
-                                            <input type="date" value={dtaAviso} onChange={(e) => setDtaAviso(e.target.value)} />
-                                        </span>
+                                <span className={styles.data}>
+                                    <span>Data Cadastro:<span id={styles.obrigatorio}>*</span></span>
+                                    <input type="date" value={dtaCadastro} onChange={(e) => setDtaCadastro(e.target.value)} />
+                                </span>
+                                <span className={styles.data}>
+                                    <span>Data de Aviso:<span id={styles.obrigatorio}>*</span></span>
+                                    <input type="date" value={dtaAviso} onChange={(e) => setDtaAviso(e.target.value)} />
+                                </span>
                             </div>
                             <div className={styles.botaoItem}>
                                 <button onClick={handleSave}>Salvar</button>

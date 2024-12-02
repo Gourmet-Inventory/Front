@@ -16,7 +16,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 75vh;
+    height: fit-content;
     width: 45vw;
     background-color: white;
     box-shadow: 4px 4px 13px #2b2b2b;

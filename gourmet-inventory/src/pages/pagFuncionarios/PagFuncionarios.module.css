@@ -3,11 +3,15 @@
 }
 
 .form{
-    width: 71.5vw;
-    height: 25rem;
+    margin-top: 2vh;
+    width: 80vw;
+    height: 70vh;
     margin-left: 100px;
     flex-direction: column; 
     overflow-y: scroll;
+    border-radius: 8px;
+    border: #000000 solid 1px;
+    box-shadow: 10px  10px #37455D;
 }
 
 /* voltar botão */

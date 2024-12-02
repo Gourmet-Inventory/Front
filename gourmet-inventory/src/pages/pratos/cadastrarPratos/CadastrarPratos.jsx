@@ -21,7 +21,8 @@
         const [valorMedida, setValorMedida] = useState("");
         const [tipoMedida, setTipoMedida] = useState("GRAMAS");
         const [dataEdit, setDataEdit] = useState({});
-        const [imagem, setImagem] = useState(null); // Estado para a imagem
+        const [imagem, setImagem] = useState(null); 
+        const [isBebida, setIsBebida] = useState(false);
 
         const navigate = useNavigate();
         const location = useLocation();
@@ -35,6 +36,7 @@
                 setPreco(prato.preco);
                 setCategoria(prato.categoria);
                 setAlergicosRestricoes(prato.alergicosRestricoes);
+                setIsBebida(prato.isBebida)
                 setReceitaPrato(prato.receitaPrato.map(ingrediente => ({
                     idItem: ingrediente.idItem || ingrediente.estoqueIngrediente.idItem,
                     nome: ingrediente.nome || ingrediente.estoqueIngrediente.nome,
@@ -66,6 +68,7 @@
             formData.append("descricao", descricao);
             formData.append("preco", preco);
             formData.append("categoria", categoria);
+            formData.append("isBebida", isBebida);
             formData.append("alergicosRestricoes", JSON.stringify(alergicosRestricoes));
             formData.append("receita", JSON.stringify(
                 receitaPrato.map(ingrediente => ({

@@ -187,9 +187,9 @@ function PagPratos() {
                                 <div className={styles["ingredientesModal"]}>
                                     <h2>Ingredientes</h2>
                                     <div className={styles["ingredientes"]}>
-                                        {viewData.receitaPrato?.map((item, index) => (
+                                        {viewData.receitaPrato.receita?.map((item, index) => (
                                             <div key={index}>
-                                                - {item.estoqueIngrediente.nome}: {item.valorMedida} {item.tipoMedida}
+                                                - {item.nome}: {item.valorMedida} {item.tipoMedida}
                                             </div>
                                         ))}
                                     </div>

@@ -9,8 +9,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.5);
-}
+    border-radius: 8px;
+    border: #000000 solid 1px;
+    box-shadow: 10px  10px #37455D;}
 
 .titulo{
     font-size: 3vh;

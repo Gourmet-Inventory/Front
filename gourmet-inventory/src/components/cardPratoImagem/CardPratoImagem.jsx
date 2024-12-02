@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styles from "./CardComanda.module.css";
+import styles from "./CardPratoImagem.module.css";
 import api from "../../api";
 import { toast } from "react-toastify";
 
-const CardComanda = ({ idComanda, titulo, mesa, pratos, status }) => {
+const CardPrato = ({ idPrato, nome,categoria, descricao,preco, imagem }) => {
   const [exibirTodos, setExibirTodos] = useState(false); // Estado para alternar entre "Ver Mais" e "Mostrar Menos"
 
   const contarPratos = (pratos = []) => {

@@ -1,20 +1,7 @@
-.formPratos{
-    display: flex;
-    width: 95vw;
-    height: 77vh;
-    margin-left: 6rem;
-    overflow-y: hidden;
-}
-
-.form{
-    display: flex;
-    width: 67.5vw;
-    height: 72vh;
-    padding: 1rem;
-    overflow-y: auto;
-    flex-wrap:wrap;
-
-    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+.body{
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
 }
 
 .cabecalho{
@@ -25,17 +12,56 @@
     margin-bottom: 2vh;
 }
 
-.card{
-    padding: 0.5rem;
-    width: 13vw;
-    height: fit-content;
-    border-radius: 5px;
-    background-color: #37455D;
+.cabecalho h1{
+    margin-left: 7%;
+    font-weight: lighter;
+}
+
+.formPratos{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    box-shadow: 2px 6px 5px rgba(0, 0, 0, 0.5);
+    width: 94.5vw;
+    height: 86vh;
+    margin-left: 5.6rem;
+    overflow-y: hidden;
 }
+
+.formPratos .botoes button{
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    background-color: #E59E53;
+    width: 10%;
+    height: 5vh;
+    font-weight: bold;
+}
+
+.botoes{
+    display: flex;
+    gap: 2px;
+    margin-left: 1%;
+}
+.botao1:hover{
+    background-color: #a77940;
+}
+
+.botao2:hover{
+    background-color: #a77940;
+}
+
+.form{
+    display: flex;
+    width: 90vw;
+    height: 72vh;
+    padding: 1rem;
+    overflow-y: auto;
+    flex-wrap:wrap;
+    border: #2b2b2b solid 1px;
+    border-radius: 8px;
+    box-shadow: 10px  10px #37455D;
+    gap: 3%;
+}
+
+
 
 .nome{
     border-radius: 2px;
@@ -59,6 +85,27 @@
     font-size: 3vh;
 }
 
+.form1{
+    display: none;
+    width: 90vw;
+    height: 72vh;
+    padding: 1rem;
+    overflow-y: auto;
+    flex-wrap:wrap;
+    border: #2b2b2b solid 1px;
+    border-radius: 8px;
+    box-shadow: 10px  10px #37455D;
+    gap: 3%;
+}
+
+.selecionado1{
+    background-color: #a77940;
+}
+
+.selecionado2{
+    background-color: #a77940;
+}
+
 .card button{
     font-size: 1.1rem;
     align-self: center;
@@ -75,6 +122,7 @@
 }
 
 .saidaPratos{
+    background-color: #37455D;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -119,23 +167,10 @@
     height: 85%;
     overflow-y: scroll;
     width: 100%;
+    background-color: yellow;
 }
 
-.botoes1{
-    border-top: 1px solid #E59E53;
-    height: 8%;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
 
-.botoes1 button{
-    background-color: #E59E53;
-    width: 6vw;
-    height: 4vh;
-    border-radius: 4px;
-}
 
 #buttonSaida{
     margin-top: 1rem;

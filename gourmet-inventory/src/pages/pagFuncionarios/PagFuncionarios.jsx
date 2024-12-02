@@ -26,7 +26,7 @@ function PagFuncionarios() {
     const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate("/gourmet-inventory/estoque");
+        navigate("/gourmet-inventory/saida-pratos");
     };
 
     useEffect(() => {

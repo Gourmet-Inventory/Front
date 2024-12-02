@@ -144,7 +144,6 @@ function PagPratos() {
                                 <span>Descrição: {prato.descricao}</span>
                                 <span>Preço: R$ {prato.preco}</span>
                             </div>
-                            {/* Exibição da imagem do prato */}
                             {prato.foto && (
                                 <div className={styles["imagem-container"]}>
                                     <img

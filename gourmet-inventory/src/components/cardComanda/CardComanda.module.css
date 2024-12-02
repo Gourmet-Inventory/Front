@@ -1,0 +1,67 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 20vw;
+    box-shadow: 1px 2px 4px;
+    border-radius: 8px;
+}
+
+.rectangle{
+    height: fit-content;
+    border-top-right-radius:8px ;
+    border-top-left-radius:8px ;
+    background-color: #37455D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    color: white;
+}
+
+.rectangle span{
+    font-size: 3vh;
+}
+
+.pratosList{
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+    font-size: 3vh;
+    gap: 0.5rem;
+}
+
+.pratoItem{
+    border-bottom: rgb(169, 165, 165) solid 1px ;
+}
+
+.botaoVerMais{
+    background-color: #37455D;
+    color: white;
+    width: fit-content;
+    align-self: left;
+    height: 5vh;
+    font-size: 3vh;
+    padding: 0.5    rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.botaoEntregar{
+    background-color: #E59E53;
+    height: 4rem;
+    border-radius: 8px;
+    font-size: 1.5vw;
+    font-weight: bolder;
+}
+
+.botaoVerMenos{
+    background-color: #37455D;
+    color: white;
+    padding: 0.5rem;
+    width: fit-content;
+    align-self: left;
+    height: 5vh;
+    font-size: 3vh;
+    border-radius: 8px;
+    text-align: center;
+}

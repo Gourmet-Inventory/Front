@@ -76,7 +76,10 @@ function MenuLateral() {
                 </span>
             )}
             <div className={styles["icons"]}>
-            
+            <span className={getClassName('/gourmet-inventory/saida-pratos')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/saida-pratos')} >
+                    <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/saida-pratos' ? saidaImgSelected : saidaImg} alt="Saida" />
+                    {isExpanded && <span className={styles.iconText}>Comandas</span>}
+                </span>
                 <span className={getClassName('/gourmet-inventory/estoque')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/estoque')}>
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/estoque' ? estoqueImgSelected : estoqueImg} alt="Estoque" />
                     {isExpanded && <span className={styles.iconText}>Estoque </span> }
@@ -84,10 +87,6 @@ function MenuLateral() {
                 <span className={getClassName('/gourmet-inventory/pratos')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/pratos')} >
                     <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/pratos' ? pratosImgSelected : pratosImg} alt="Pratos" />
                     {isExpanded && <span className={styles.iconText}>Pratos</span>}
-                </span>
-                <span className={getClassName('/gourmet-inventory/saida-pratos')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/saida-pratos')} >
-                    <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/saida-pratos' ? saidaImgSelected : saidaImg} alt="Saida" />
-                    {isExpanded && <span className={styles.iconText}>Saída</span>}
                 </span>
                 <span className={getClassName('/gourmet-inventory/fornecedor')} onClick={!isExpanded ? null : () => navigate('/gourmet-inventory/fornecedor')}>
                 <img className={styles["imgHome"]} src={location.pathname === '/gourmet-inventory/fornecedor' ? fornecedorImgSelected : fornecedorImg} alt="Fornecedor" />

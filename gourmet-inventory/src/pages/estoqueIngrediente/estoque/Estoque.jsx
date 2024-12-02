@@ -22,8 +22,8 @@ const Estoque = () => {
     const [lote, setLote] = useState("");
     const [nome, setNome] = useState("");
     const [marca, setMarca] = useState("");
-    const [categoria, setCategoria] = useState("");
-    const [tipoMedida, setTipoMedida] = useState("QUILOGRAMAS");
+    const [categoria, setCategoria] = useState("VEGETAIS_FRESCOS");
+    const [tipoMedida, setTipoMedida] = useState("COLHER_DE_SOPA");
     const [valorMedida, setValorMedida] = useState("");
     const [valorTotal] = useState(""); 
     const [unitario, setUnitario] = useState("");
@@ -294,7 +294,7 @@ const Estoque = () => {
                                         <select id="tipoMedida" value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
                                         <option value="COLHER_DE_SOPA">Colher de Sopa</option>
                                         <option value="COLHER_DE_CHA">Colher de Chá</option>
-    <option value="XICARA">Xícara</option>
+                                        <option value="XICARA">Xícara</option>
     <option value="GRAMAS">Gramas</option>
     <option value="QUILOGRAMA">Quilograma</option>
     <option value="MILILITROS">Mililitros</option>

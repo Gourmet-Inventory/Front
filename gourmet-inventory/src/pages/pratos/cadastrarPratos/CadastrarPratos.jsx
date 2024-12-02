@@ -156,6 +156,10 @@
                             <div className={styles["infoCadastro"]}>
                                 <h1>Dados do prato</h1>
                                 <div className={styles["dadosCadastro"]}>
+                                <div className={styles["inputImagem"]}>
+                                        <span>Imagem do Prato:</span>
+                                        <input type="file" onChange={handleImagemChange} />
+                                    </div>
                                     <span>Nome:</span>
                                     <div className={styles["input"]}>
                                         <input type="text" value={nome} placeholder="Nome do Prato" onChange={(e) => setNome(e.target.value)} />
@@ -176,10 +180,7 @@
                                         <span>Descrição:</span>
                                         <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                                     </div>
-                                    {/* <div className={styles["inputImagem"]}>
-                                        <span>Imagem do Prato:</span>
-                                        <input type="file" onChange={handleImagemChange} />
-                                    </div> */}
+                                     
                                 </div>
                             </div>
                         </div>
@@ -199,7 +200,7 @@
                                 <span>Tipo Medida:</span>
                                 <select value={tipoMedida} onChange={(e) => setTipoMedida(e.target.value)}>
                                 <option value="COLHER_DE_SOPA">Colher de Sopa</option>
-    <option value="COLHER_DE_CHA">Colher de Chá</option>
+                                <option value="COLHER_DE_CHA">Colher de Chá</option>
     <option value="XICARA">Xícara</option>
     <option value="GRAMAS">Gramas</option>
     <option value="QUILOGRAMA">Quilograma</option>
